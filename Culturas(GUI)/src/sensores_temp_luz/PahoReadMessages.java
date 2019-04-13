@@ -20,9 +20,9 @@ public class PahoReadMessages extends Thread implements MqttCallback {
 
 		try {
 
-			String topic        = "iscte_sid_2019_S1";
-			String broker       = "tcp://iot.eclipse.org:1883";
-			String clientId     = "QaRDj";
+			String topic = "iscte_sid_2019_S1";
+			String broker = "tcp://iot.eclipse.org:1883";
+			String clientId = "QaRDj";
 			MemoryPersistence persistence = new MemoryPersistence();
 
 			try {

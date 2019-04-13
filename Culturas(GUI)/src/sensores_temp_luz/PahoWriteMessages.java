@@ -15,11 +15,11 @@ public class PahoWriteMessages extends Thread {
 	
 	public void run() {
 		
-		String topic        = "iscte_sid_2019_S1";
-		String content		= "{\"tmp\":\"25.10\",\"hum\":\"61.30\",\"dat\":\"9/4/2019\",\"tim\":\"14:59:32\",\"cell\":\"3138\"\"sens\":\"wifi\"}";
-		int qos				= 0;
-		String broker       = "tcp://iot.eclipse.org:1883";
-		String clientId     = "QaRDj";
+		String topic = "iscte_sid_2019_S1";
+		String content = "{\"tmp\":\"25.10\",\"hum\":\"61.30\",\"dat\":\"9/4/2019\",\"tim\":\"14:59:32\",\"cell\":\"3138\"\"sens\":\"wifi\"}";
+		int qos	= 0;
+		String broker = "tcp://iot.eclipse.org:1883";
+		String clientId = "QaRDj";
 		MemoryPersistence persistence = new MemoryPersistence();
 
 		try {
