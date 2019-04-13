@@ -6,10 +6,15 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-public class PahoWriteMessages {
+public class PahoWriteMessages extends Thread {
 
 	public static void main(String[] args) {
 
+		
+	}
+	
+	public void run() {
+		
 		String topic        = "iscte_sid_2019_S1";
 		String content		= "{\"tmp\":\"25.10\",\"hum\":\"61.30\",\"dat\":\"9/4/2019\",\"tim\":\"14:59:32\",\"cell\":\"3138\"\"sens\":\"wifi\"}";
 		int qos				= 0;
@@ -32,6 +37,7 @@ public class PahoWriteMessages {
 			sampleClient.publish(topic, message);
 			sampleClient.disconnect();
 			System.out.println("Disconnected");
+			notify();
 			System.exit(0);
 		} catch(MqttException me) {
 			System.out.println("reason "+me.getReasonCode());

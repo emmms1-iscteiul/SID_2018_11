@@ -8,38 +8,49 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-public class PahoReadMessages implements MqttCallback {
+public class PahoReadMessages extends Thread implements MqttCallback {
 
 	public static void main(String[] args) {
 
-		new PahoReadMessages().read();
+
 	}
 
-	private void read() {
+	public void run() {
 		// TODO Auto-generated method stub
-		String topic        = "iscte_sid_2019_S1";
-		String broker       = "tcp://iot.eclipse.org:1883";
-		String clientId     = "QaRDj";
-		MemoryPersistence persistence = new MemoryPersistence();
 
 		try {
-			MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
-			MqttConnectOptions connOpts = new MqttConnectOptions();
-			connOpts.setCleanSession(true);
-			System.out.println("Connecting to broker: "+broker);
-			sampleClient.connect(connOpts);
-			System.out.println("Connected");
-			sampleClient.setCallback(this);
-			sampleClient.subscribe(topic, 0);
-		} catch(MqttException me) {
-			me.printStackTrace();
+
+			String topic        = "iscte_sid_2019_S1";
+			String broker       = "tcp://iot.eclipse.org:1883";
+			String clientId     = "QaRDj";
+			MemoryPersistence persistence = new MemoryPersistence();
+
+			try {
+				while (true) {
+					MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
+					MqttConnectOptions connOpts = new MqttConnectOptions();
+					connOpts.setCleanSession(true);
+					System.out.println("Connecting to broker: "+broker);
+					sampleClient.connect(connOpts);
+					System.out.println("Connected");
+					sampleClient.setCallback(this);
+					sampleClient.subscribe(topic, 0);
+					wait();
+
+				}
+			} catch(MqttException me) {
+				me.printStackTrace();
+			} 
+
+		} catch(InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public void connectionLost(Throwable cause) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -51,6 +62,6 @@ public class PahoReadMessages implements MqttCallback {
 	@Override
 	public void deliveryComplete(IMqttDeliveryToken token) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
