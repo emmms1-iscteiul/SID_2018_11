@@ -9,7 +9,7 @@ import com.mongodb.MongoClientURI;
 public class MongoRead   {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
-		MongoClient mongoClient1 = new MongoClient( new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=myset"));
+		MongoClient mongoClient1 = new MongoClient( new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicademo"));
 
 		DB db = mongoClient1.getDB("db_demo");
 		DBCollection table = db.getCollection("collection_demo");

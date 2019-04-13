@@ -1,13 +1,10 @@
 package sensores_temp_luz;
 
-import java.util.Arrays;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import com.mongodb.ServerAddress;
 
 public class MongoWrite   {
 	@SuppressWarnings("deprecation")
@@ -18,7 +15,7 @@ public class MongoWrite   {
 //		ServerAddress mongotest2 = new ServerAddress("127.0.0.1", 23017);
 		MongoClient mongoClient1 = new MongoClient( 
 		   //new MongoClientURI("mongodb://TOSHIBA:27017,TOSHIBA:25017,TOSHIBA:23017/?replicaSet=replicaDemo&autoConnectRetry=true"));
-				new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=myset"));
+				new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicademo"));
 		   //Arrays.asList(mongotest0,mongotest1,mongotest2));
 		DB db = mongoClient1.getDB("db_demo");
 		i=1;
