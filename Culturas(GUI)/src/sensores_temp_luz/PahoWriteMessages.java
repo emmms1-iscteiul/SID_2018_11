@@ -37,7 +37,6 @@ public class PahoWriteMessages extends Thread {
 			sampleClient.publish(topic, message);
 			sampleClient.disconnect();
 			System.out.println("Disconnected");
-			notify();
 			System.exit(0);
 		} catch(MqttException me) {
 			System.out.println("reason "+me.getReasonCode());

@@ -25,26 +25,31 @@ public class PahoReadMessages extends Thread implements MqttCallback {
 			String clientId = "QaRDj";
 			MemoryPersistence persistence = new MemoryPersistence();
 
-			try {
-				while (true) {
-					MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
-					MqttConnectOptions connOpts = new MqttConnectOptions();
-					connOpts.setCleanSession(true);
-					System.out.println("Connecting to broker: "+broker);
-					sampleClient.connect(connOpts);
-					System.out.println("Connected");
-					sampleClient.setCallback(this);
-					sampleClient.subscribe(topic, 0);
-					wait();
+			MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
+			MqttConnectOptions connOpts = new MqttConnectOptions();
+			connOpts.setCleanSession(true);
+			System.out.println("Connecting to broker: "+broker);
 
+			sampleClient.connect(connOpts);
+
+			System.out.println("Connected");
+
+			while (true) {
+
+				sampleClient.setCallback(this);
+				sampleClient.subscribe(topic, 0);
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException  e) {
+					Thread.currentThread().interrupt();
 				}
-			} catch(MqttException me) {
-				me.printStackTrace();
-			} 
+			}
 
-		} catch(InterruptedException e) {
+		} catch (MqttException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	@Override
