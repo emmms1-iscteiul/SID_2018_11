@@ -39,7 +39,7 @@ public class PahoReadMessages extends Thread implements MqttCallback {
 				sampleClient.setCallback(this);
 				sampleClient.subscribe(topic, 0);
 				try {
-					Thread.sleep(3000);
+					wait();
 				} catch (InterruptedException  e) {
 					Thread.currentThread().interrupt();
 				}
