@@ -8,13 +8,15 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class PahoWriteMessages extends Thread {
 
-	public static void main(String[] args) {
+	PahoReadMessages pahoR;
 
-		
+	public PahoWriteMessages(PahoReadMessages read) {
+		// TODO Auto-generated constructor stub
+		pahoR = read;
 	}
-	
+
 	public void run() {
-		
+
 		String topic = "iscte_sid_2019_S1";
 		String content = "{\"tmp\":\"25.10\",\"hum\":\"61.30\",\"dat\":\"9/4/2019\",\"tim\":\"14:59:32\",\"cell\":\"3138\"\"sens\":\"wifi\"}";
 		int qos	= 0;
@@ -23,28 +25,30 @@ public class PahoWriteMessages extends Thread {
 		MemoryPersistence persistence = new MemoryPersistence();
 
 		try {
-			MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
-			MqttConnectOptions connOpts = new MqttConnectOptions();
-			connOpts.setCleanSession(true);
-			System.out.println("Connecting to broker: "+broker);
-			sampleClient.connect(connOpts);
-			System.out.println("Connected");
-			System.out.println("Publishing message: "+content);
-			//sampleClient.subscribe(topic);
-			MqttMessage message = new MqttMessage(content.getBytes());
-			message.setQos(qos);
-			message.setRetained(true);
-			sampleClient.publish(topic, message);
-			sampleClient.disconnect();
-			System.out.println("Disconnected");
-			if (!sampleClient.isConnected()) {
+
+			for (int i = 0; i<5; i++) {
 				
-				synchronized () {
-					servidor.ListaDeDWW.notifyAll();
+				System.out.println("PahoWrite a funcionar.");
+				
+				MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
+				MqttConnectOptions connOpts = new MqttConnectOptions();
+				connOpts.setCleanSession(true);
+				System.out.println("Connecting to broker: "+broker);
+				sampleClient.connect(connOpts);
+				System.out.println("Connected");
+				System.out.println("Publishing message: "+content);
+				//sampleClient.subscribe(topic);
+				MqttMessage message = new MqttMessage(content.getBytes());
+				message.setQos(qos);
+				//message.setRetained(true);
+				sampleClient.publish(topic, message);
+				sampleClient.disconnect();
+				System.out.println("Disconnected");
+				//System.exit(0);
+				if (!sampleClient.isConnected()) { 
+					pahoR.notify();
 				}
 			}
-			notify();
-			System.exit(0);
 		} catch(MqttException me) {
 			System.out.println("reason "+me.getReasonCode());
 			System.out.println("msg "+me.getMessage());

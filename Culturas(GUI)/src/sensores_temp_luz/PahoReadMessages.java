@@ -10,6 +10,13 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class PahoReadMessages extends Thread implements MqttCallback {
 
+	PahoWriteMessages pahoW;
+	
+	public PahoReadMessages(PahoWriteMessages write) {
+		// TODO Auto-generated constructor stub
+		pahoW = write;
+	}
+
 	public static void main(String[] args) {
 
 
@@ -24,7 +31,7 @@ public class PahoReadMessages extends Thread implements MqttCallback {
 			String broker = "tcp://iot.eclipse.org:1883";
 			String clientId = "QaRDj";
 			MemoryPersistence persistence = new MemoryPersistence();
-
+			
 			MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
 			MqttConnectOptions connOpts = new MqttConnectOptions();
 			connOpts.setCleanSession(true);
@@ -36,13 +43,19 @@ public class PahoReadMessages extends Thread implements MqttCallback {
 
 			while (true) {
 
+				System.out.println("PahoRead a funcionar.");
+				try {
+					while (!pahoW.isInterrupted()) {
+						wait();
+					}
+				} catch (InterruptedException  e) {
+					System.out.println("Foi interrompido");
+					//Thread.currentThread().interrupt();
+				}
 				sampleClient.setCallback(this);
 				sampleClient.subscribe(topic, 0);
-				try {
-					wait();
-				} catch (InterruptedException  e) {
-					Thread.currentThread().interrupt();
-				}
+				//notify();
+				
 			}
 
 		} catch (MqttException e) {

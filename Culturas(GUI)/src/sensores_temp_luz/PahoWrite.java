@@ -8,11 +8,10 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class PahoWrite {
 
-	
-	public static void main() {
+	public static void main(String[] args) {
 		
 		String topic = "iscte_sid_2019_S1";
-		String content = "{\"tmp\":\"20.00\",\"hum\":\"61.30\",\"dat\":\"9/4/2019\",\"tim\":\"14:59:32\",\"cell\":\"3138\"\"sens\":\"wifi\"}";
+		String content = "{\"tmp\":\"20.10\",\"hum\":\"61.30\",\"dat\":\"9/4/2019\",\"tim\":\"14:59:32\",\"cell\":\"3138\"\"sens\":\"wifi\"}";
 		int qos	= 0;
 		String broker = "tcp://iot.eclipse.org:1883";
 		String clientId = "QaRDj";
