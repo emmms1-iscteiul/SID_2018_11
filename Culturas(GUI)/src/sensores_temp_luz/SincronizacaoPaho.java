@@ -6,6 +6,7 @@ public class SincronizacaoPaho {
 	private boolean pahoR;
 	
 	
+	
 	public SincronizacaoPaho() {
 		this.pahoW = false;
 		this.pahoR = true;

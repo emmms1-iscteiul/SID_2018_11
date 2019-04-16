@@ -6,19 +6,11 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-public class PahoWriteMessages extends Thread {
+public class PahoW {
 
-	PahoReadMessages pahoR;
-	SincronizacaoPaho pahoSinc = new SincronizacaoPaho();
-
-	public PahoWriteMessages(PahoReadMessages read) {
-		// TODO Auto-generated constructor stub
-		pahoR = read;
-	}
-
-	public void run() {
-
-
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
 		String topic = "iscte_sid_2019";
 		String content = "{\"tmp\":\"25.10\",\"hum\":\"61.30\",\"dat\":\"9/4/2019\",\"tim\":\"14:59:32\",\"cell\":\"3138\"\"sens\":\"wifi\"}";
 		int qos	= 0;
@@ -27,8 +19,6 @@ public class PahoWriteMessages extends Thread {
 		MemoryPersistence persistence = new MemoryPersistence();
 
 		try {
-
-			for (int i = 0; i<5; i++) {
 				
 				System.out.println("PahoWrite a funcionar.");
 
@@ -49,7 +39,7 @@ public class PahoWriteMessages extends Thread {
 
 
 				//System.exit(0);
-			}
+			
 
 		} catch(MqttException me) {
 			System.out.println("reason "+me.getReasonCode());
@@ -61,4 +51,5 @@ public class PahoWriteMessages extends Thread {
 		}
 
 	}
+
 }
