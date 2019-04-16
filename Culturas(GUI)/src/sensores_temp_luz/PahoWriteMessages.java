@@ -1,54 +1,43 @@
 package sensores_temp_luz;
 
+import org.eclipse.paho.client.mqttv3.IMqttClient;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class PahoWriteMessages extends Thread {
-
-	PahoReadMessages pahoR;
-	SincronizacaoPaho pahoSinc = new SincronizacaoPaho();
-
-	public PahoWriteMessages(PahoReadMessages read) {
-		// TODO Auto-generated constructor stub
-		pahoR = read;
-	}
 
 	public void run() {
 
 
-		String topic = "iscte_sid_2019_S1";
-		String content = "{\"tmp\":\"25.10\",\"hum\":\"61.30\",\"dat\":\"9/4/2019\",\"tim\":\"14:59:32\",\"cell\":\"3138\"\"sens\":\"wifi\"}";
-		int qos	= 0;
+		//String content = "{\"tmp\":\"25.10\",\"hum\":\"61.30\",\"dat\":\"9/4/2019\",\"tim\":\"14:59:32\",\"cell\":\"3138\"\"sens\":\"wifi\"}";
 		String broker = "tcp://iot.eclipse.org:1883";
-		String clientId = "QaRDj";
-		MemoryPersistence persistence = new MemoryPersistence();
+		String clientId = "PSBOS";
+		//MemoryPersistence persistence = new MemoryPersistence();
 
 		try {
 
+			IMqttClient publisher = new MqttClient(broker, clientId);
+			MqttConnectOptions connOpts = new MqttConnectOptions();
+			connOpts.setCleanSession(true);
+			connOpts.setAutomaticReconnect(true);
+			connOpts.setConnectionTimeout(3);
+			System.out.println("Connecting to broker: "+broker);
+			publisher.connect(connOpts);
+			System.out.println("Connected");
+			
+			Sensor sensorDummy = new Sensor(publisher);
+
 			for (int i = 0; i<5; i++) {
 				
-				System.out.println("PahoWrite a funcionar.");
-
-				MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
-				MqttConnectOptions connOpts = new MqttConnectOptions();
-				connOpts.setCleanSession(true);
-				System.out.println("Connecting to broker: "+broker);
-				sampleClient.connect(connOpts);
-				System.out.println("Connected");
-				System.out.println("Publishing message: "+content);
-				//sampleClient.subscribe(topic);
-				MqttMessage message = new MqttMessage(content.getBytes());
-				message.setQos(qos);
-				//message.setRetained(true);
-				sampleClient.publish(topic, message);
-				sampleClient.disconnect();
-				System.out.println("Disconnected");
-
-
-				//System.exit(0);
+				try {
+					sensorDummy.call();
+					sleep(3000);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 
 		} catch(MqttException me) {
