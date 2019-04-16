@@ -8,25 +8,26 @@ import com.mongodb.MongoClientURI;
 
 public class MongoWrite extends Thread {
 	
-	public static void main(String[] args) {
-		
-	}
-	
 	@SuppressWarnings("deprecation")
-	public void run() {
+	public static void main(String[] args) {
 		int i;
-		MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicademo"));
+		MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
 		DB db = mongoClient.getDB("db_demo");
 		i=1;
 		DBCollection table = db.getCollection("collection_demo");
 		while(i<6) {
 			
 			BasicDBObject document = new BasicDBObject();
-			document.put("Nome",i);
+			document.put("NomeVariavel", i);
 			try { table.insert(document);} catch (Exception e) {}
 			i++;
-			try{Thread.sleep(5000);} catch (InterruptedException  e) {Thread.currentThread().interrupt();}
+			try{Thread.sleep(2000);} catch (InterruptedException  e) {Thread.currentThread().interrupt();}
 		}
-		mongoClient.close();		
+		mongoClient.close();	
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void run() {
+			
 	}
 }	
