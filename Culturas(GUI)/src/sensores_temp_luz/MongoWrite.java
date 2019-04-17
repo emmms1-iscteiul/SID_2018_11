@@ -1,5 +1,7 @@
 package sensores_temp_luz;
 
+import java.sql.Date;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -10,21 +12,25 @@ public class MongoWrite extends Thread {
 	
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
-		int i;
-		MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
-		DB db = mongoClient.getDB("db_demo");
-		i=1;
-		DBCollection table = db.getCollection("collection_demo");
-		while(i<6) {
-			
-			BasicDBObject document = new BasicDBObject();
-			document.put("_id", i);
-			document.append("NomeVariavel", i);
-			try { table.insert(document);} catch (Exception e) {}
-			i++;
-			try{Thread.sleep(2000);} catch (InterruptedException  e) {Thread.currentThread().interrupt();}
-		}
-		mongoClient.close();	
+		
+		
+	
+		
+//		int i;
+//		MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
+//		DB db = mongoClient.getDB("db_demo");
+//		i=1;
+//		DBCollection table = db.getCollection("collection_demo");
+//		while(i<6) {
+//			
+//			BasicDBObject document = new BasicDBObject();
+//			document.put("_id", i);
+//			document.append("NomeVariavel", i);
+//			try { table.insert(document);} catch (Exception e) {}
+//			i++;
+//			try{Thread.sleep(2000);} catch (InterruptedException  e) {Thread.currentThread().interrupt();}
+//		}
+//		mongoClient.close();	
 	}
 	
 	@SuppressWarnings("deprecation")
