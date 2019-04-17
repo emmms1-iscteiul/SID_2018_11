@@ -18,7 +18,8 @@ public class MongoWrite extends Thread {
 		while(i<6) {
 			
 			BasicDBObject document = new BasicDBObject();
-			document.put("NomeVariavel", i);
+			document.put("_id", i);
+			document.append("NomeVariavel", i);
 			try { table.insert(document);} catch (Exception e) {}
 			i++;
 			try{Thread.sleep(2000);} catch (InterruptedException  e) {Thread.currentThread().interrupt();}
