@@ -16,7 +16,7 @@ public class MongoRead extends Thread {
 	public void run() {
 
 		try {
-			MongoClient mongoClient = new MongoClient( new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicademo"));
+			MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicademo"));
 
 			DB db = mongoClient.getDB("db_demo");
 			DBCollection table = db.getCollection("collection_demo");

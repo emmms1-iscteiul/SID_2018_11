@@ -8,7 +8,7 @@ public class ServidorPaho {
 
 	public static void main(String[] args) {
 		read = new PahoReadMessages();
-		write = new PahoWriteMessages(read);
+		write = new PahoWriteMessages();
 		
 		read.start();
 		write.start();
