@@ -13,8 +13,8 @@ public class MongoRead extends Thread {
 
 		MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
 
-		DB db = mongoClient.getDB("db_demo");
-		DBCollection table = db.getCollection("collection_demo");
+		DB db = mongoClient.getDB("Sensores");
+		DBCollection table = db.getCollection("Medicoes");
 		DBCursor cursor = table.find();
 		while(cursor.hasNext()) {
 			System.out.println(cursor.next());
