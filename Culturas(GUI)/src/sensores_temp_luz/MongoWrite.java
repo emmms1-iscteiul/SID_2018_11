@@ -28,61 +28,59 @@ public class MongoWrite extends Thread {
 		sms=pahoReader.getSMS();
 	}
 	
-//	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public void write()	{
 		
 		//Falta ir buscar a mensagem do Paho
-	//	MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
+		MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
 		for(MqttMessage message:sms)	{
 			
 		String smsString = String.valueOf(message);
 		System.out.println("Mensagem: "+smsString);
-//		String[] s = smsString.split(",");
-//		String[] temp = s[0].split(":");
-//		String tempV = temp[1].substring(1, 6);
-//		double temperatura = Double.parseDouble(tempV);
-//		System.out.println(temperatura);
-//
-//		String[] date = s[2].split(":");
-//		String dateV = date[1].substring(1, 9);
-//		String[] dateF = dateV.split("/");
-//		String dateFF = dateF[2] + "-" + dateF[1] + "-" + dateF[0];
-//
-//		String timeV = s[3].substring(7, 15);
-//
-//		String cellV = s[4].substring(8, 12);
-//		double cell = Double.parseDouble(cellV);
-//
-//		String data = dateFF + " " + timeV;
-//		
-//		int i;
-//		
-//		DB db = mongoClient.getDB("Sensores");
-//		i=1;
-//		DBCollection table = db.getCollection("Medicoes");
-//			
-//			BasicDBObject document = new BasicDBObject();
-//			document.put("_id", i);
-//			document.append("Timestamp", data);
-//			document.append("Temperatura", temperatura);
-//			document.append("Luminosidade", cell);
-//			try { table.insert(document);} catch (Exception e) {}
-//			i++;
-//			try{Thread.sleep(4000);} catch (InterruptedException  e) {Thread.currentThread().interrupt();}
-//	
-//		}
-//		mongoClient.close();	
-//
-//		
+		String[] s = smsString.split(",");
+		String[] temp = s[0].split(":");
+		String tempV = temp[1].substring(1, 6);
+		double temperatura = Double.parseDouble(tempV);
+		System.out.println(temperatura);
+
+		String[] date = s[2].split(":");
+		String dateV = date[1].substring(1, 9);
+		String[] dateF = dateV.split("/");
+		String dateFF = dateF[2] + "-" + dateF[1] + "-" + dateF[0];
+
+		String timeV = s[3].substring(7, 15);
+
+		String cellV = s[4].substring(8, 12);
+		double cell = Double.parseDouble(cellV);
+
+		String data = dateFF + " " + timeV;
+		
+		int i;
+		
+		DB db = mongoClient.getDB("Sensores");
+		i=1;
+		DBCollection table = db.getCollection("Medicoes");
+			
+			BasicDBObject document = new BasicDBObject();
+			document.put("_id", i);
+			document.append("Timestamp", data);
+			document.append("Temperatura", temperatura);
+			document.append("Luminosidade", cell);
+			try { table.insert(document);} catch (Exception e) {}
+			i++;
+			try{Thread.sleep(4000);} catch (InterruptedException  e) {Thread.currentThread().interrupt();}
+	
 		}
+		mongoClient.close();	
+
 		
 	}
 
-//	
-//	@SuppressWarnings("deprecation")
-//	public void run() {
-//			
-//	}
+	
+	@SuppressWarnings("deprecation")
+	public void run() {
+			
+	}
 	
 	public static void main(String[] args) {
 		MongoWrite mW=new MongoWrite();
