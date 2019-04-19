@@ -22,20 +22,18 @@ public class MongoMigration {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		//Conectar à base de dados monotorizacao_de_culturas
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
-			Map<Integer, Integer> medicoesTemp = new HashMap<Integer,Integer>();
-			Map<Integer, Integer> medicoesLum = new HashMap<Integer,Integer>();
-			Map<Integer, String> medicoesTimeStamp = new HashMap<Integer, String>();
+			Map<Integer, Double> medicoesTemp = new HashMap<Integer,Double>();
+			Map<Integer, Double> medicoesLum = new HashMap<Integer,Double>();
+			Map<Integer, String> medicoesTimeStamp = new HashMap<Integer,String>();
 
 			MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
 
 			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/monotorizacao_de_culturas", "root", "root");
 			System.out.println("Connected successfully!");
 
-			System.out.println("Inserção completa");
 
 			DB db = mongoClient.getDB("Sensores");
 			DBCollection table = db.getCollection("Medicoes");
@@ -44,9 +42,9 @@ public class MongoMigration {
 			while(cursor.hasNext()) {
 				
 				int id = (int) cursor.next().get("_id");
-				int temperat = (int) cursor.curr().get("Temperatura");
-				int lumin = (int) cursor.curr().get("Luminosidade");
-				String dateS = (String) cursor.curr().get("Timestamp");
+				double temperat = (double) cursor.curr().get("Temperatura");
+				double lumin = (double) cursor.curr().get("Luminosidade");
+				String dateS = (String) cursor.curr().get("DataHoraMedicao");
 				System.out.println("ID: " + id + " Temperatura: " + temperat + " Luminosidade: " + lumin + " Timestamp:" + dateS);
 
 				medicoesTemp.put(id, temperat);
@@ -67,14 +65,13 @@ public class MongoMigration {
 					String sqlQuery = "insert into medicoes_luminosidade_e_temperatura(DataHoraMedicaoLuminosidadeTemperatura, ValorMedicaoTemperatura, ValorMedicaoLuminosidade) values (?, "+medicoesTemp.get(myRs.getInt("IDMedicaoLuminosidadeTemperatura"))+", "+medicoesLum.get(myRs.getInt("IDMedicaoLuminosidadeTemperatura"))+")";
 
 					PreparedStatement stmt = myConn.prepareStatement(sqlQuery);
-					java.sql.Timestamp dateSS = Timestamp.valueOf(medicoesTimeStamp.get(myRs.getInt("IDMedicaoLuminosidadeTemperatura")))
-;					stmt.setTimestamp(1, dateSS);
+					java.sql.Timestamp dateSS = Timestamp.valueOf(medicoesTimeStamp.get(myRs.getInt("IDMedicaoLuminosidadeTemperatura")));
+					stmt.setTimestamp(1, dateSS);
 					stmt.executeUpdate();
 					System.out.println("Insert success!");
-				}
+				} 
 			}
 
-			//medicoes.clear();
 			mongoClient.close();
 
 		} catch (ClassNotFoundException e) {

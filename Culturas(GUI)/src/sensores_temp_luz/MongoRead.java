@@ -1,11 +1,5 @@
 package sensores_temp_luz;
 
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-
 public class MongoRead extends Thread {
 
 	@SuppressWarnings("deprecation")

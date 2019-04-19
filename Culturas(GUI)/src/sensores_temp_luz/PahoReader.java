@@ -53,7 +53,7 @@ public class PahoReader extends Thread {
 					MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
 					for(MqttMessage s:sms)	{
 						String smsString = String.valueOf(s);
-						sleep(3000);
+						//sleep(3000);
 						System.out.println("Mensagem: "+smsString);
 						String[] stringSplitted = smsString.split(",");
 						String[] temp = stringSplitted[0].split(":");
@@ -73,31 +73,33 @@ public class PahoReader extends Thread {
 						}
 
 						double temperatura = Double.parseDouble(tempV);
-						System.out.println(temperatura);
+						//System.out.println(temperatura);
 
 						String cellV = "";
-						if (stringSplitted[4].length() == 28) {
+						System.out.println(stringSplitted[4].length());
+						if (stringSplitted[4].length() == 29) {
 							cellV = stringSplitted[4].substring(8, 13);
 							System.out.println("Cell: " + cellV);
 						}
-						else if (stringSplitted[4].length() == 27) {
+						else if (stringSplitted[4].length() == 28) {
 							cellV = stringSplitted[4].substring(8, 12);
 							System.out.println("Cell: " + cellV);
 						}
-						else if (stringSplitted[4].length() == 26) {
+						else if (stringSplitted[4].length() == 27) {
 							cellV = stringSplitted[4].substring(8, 11);
 							System.out.println("Cell: " + cellV);
 						}
-						else if(stringSplitted[4].length() == 25)	{
+						else if(stringSplitted[4].length() == 26)	{
 							cellV = stringSplitted[4].substring(8, 10);
 							System.out.println("Cell: " + cellV);
 						}
-						else if(stringSplitted[4].length() == 24) {
+						else if(stringSplitted[4].length() == 25) {
 							cellV = stringSplitted[4].substring(8, 9);
 							System.out.println("Cell: " + cellV);
 						}
 
 						double cell = Double.parseDouble(cellV);
+						System.out.println("Cell: " + cell);
 
 						String[] date = stringSplitted[2].split(":");
 						String dateV = date[1].substring(1, 9);
@@ -107,6 +109,7 @@ public class PahoReader extends Thread {
 						String timeV = stringSplitted[3].substring(7, 15);
 
 						String data = dateFF + " " + timeV;
+						
 
 						int i;
 
@@ -119,12 +122,13 @@ public class PahoReader extends Thread {
 						document.append("DataHoraMedicao", data);
 						document.append("Temperatura", temperatura);
 						document.append("Luminosidade", cell);
-						try { table.insert(document);} catch (Exception e) {}
+						try { table.insert(document); System.out.println("Insert success.");} catch (Exception e) {}
 						i++;
 						try{Thread.sleep(4000);} catch (InterruptedException  e) {Thread.currentThread().interrupt();}
 
 					}
 					mongoClient.close();
+				
 				}
 
 				@Override
