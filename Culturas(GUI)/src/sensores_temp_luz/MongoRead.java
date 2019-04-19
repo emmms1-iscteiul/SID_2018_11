@@ -11,18 +11,13 @@ public class MongoRead extends Thread {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 
-		MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
-
-		DB db = mongoClient.getDB("Sensores");
-		DBCollection table = db.getCollection("Medicoes");
-		DBCursor cursor = table.find();
-		while(cursor.hasNext()) {
-			System.out.println(cursor.next());
-		}
-		mongoClient.close();
+		String string = "{\"tmp\":\"22.40\",\"hum\":\"61.30\",\"dat\":\"9/4/2019\",\"tim\":\"14:59:32\",\"cell\":\"10008\"\"sens\":\"wifi\"}";
+		
+		String[] stringSplitted = string.split(",");
+		//System.out.println(stringSplitted[4].length());
+		
 	}
 
-	@SuppressWarnings("deprecation")
 	public void run() {
 
 		try {
