@@ -33,16 +33,16 @@ public class MongoWrite extends Thread {
 		
 		//Falta ir buscar a mensagem do Paho
 		//MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
-		for(MqttMessage message:sms)	{
-			
-		String smsString = String.valueOf(message);
-		System.out.println("Mensagem: "+smsString);
-		String[] s = smsString.split(",");
-		String[] temp = s[0].split(":");
-		//System.out.println(temp[1].length());
-				
-		double temperatura = Double.valueOf(tempV);
-		System.out.println(temperatura);
+//		for(MqttMessage message:sms)	{
+//			
+//		String smsString = String.valueOf(message);
+//		System.out.println("Mensagem: "+smsString);
+//		String[] s = smsString.split(",");
+//		String[] temp = s[0].split(":");
+//		//System.out.println(temp[1].length());
+//				
+//		double temperatura = Double.valueOf(tempV);
+//		System.out.println(temperatura);
 
 //		String[] date = s[2].split(":");
 //		String dateV = date[1].substring(1, 9);
