@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,18 +17,58 @@ import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
-public class MongoMigration {
+public class MongoMigration extends Thread {
+	
+	Map<Integer, Double> medicoesTemp = new HashMap<Integer,Double>();
+	Map<Integer, Double> medicoesLum = new HashMap<Integer,Double>();
+	Map<Integer, String> medicoesTimeStamp = new HashMap<Integer,String>();
+	private ArrayList<Double> valoresTemperatura=new ArrayList<Double>();
+	private ArrayList<Double> valoresLuminosidade=new ArrayList<Double>();
+	private ArrayList<Double> medias=new ArrayList<Double>();
+	private double valorSuperiorTemperatura=0;
+	private double valorInferiorTemperatura=0;
+	private double valorSuperiorLuminosidade=0;
+	private double valorInferiorLuminosidade=0;
+	
+	Connection myConn;
+	
 
+
+	public void media(ArrayList<Double> medicoes) {
+		for(int i=0;i<medicoes.size();i++)	{
+			if(i == 0){
+				medias.set(i, medicoes.get(i));
+			}else{
+				double mediaIterativa=(medicoes.get(i)+medias.get(i))/2;
+				medias.set(i, mediaIterativa);
+			}
+		}
+	}
+	
+	public void checkAlerta(double limite) {
+		for(int i=0;i < medias.size();i++)	{
+			if(medias.get(medias.size()-1)>=valorSuperiorTemperatura-3) {
+				
+			}
+			if(medias.get(medias.size()-1)>=valorSuperiorLuminosidade-3) {
+				
+			}
+			if(medias.get(medias.size()-1)<=valorInferiorTemperatura+3) {
+				
+			}
+			if(medias.get(medias.size()-1)<=valorInferiorLuminosidade+3) {
+				
+			}
+		}
+	}
+	
+	
 	@SuppressWarnings("deprecation")
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public void run() {
+		
 		try {
+			sleep(5000);
 			Class.forName("com.mysql.jdbc.Driver");
-
-			Map<Integer, Double> medicoesTemp = new HashMap<Integer,Double>();
-			Map<Integer, Double> medicoesLum = new HashMap<Integer,Double>();
-			Map<Integer, String> medicoesTimeStamp = new HashMap<Integer,String>();
 
 			MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
 
@@ -43,7 +84,9 @@ public class MongoMigration {
 				
 				int id = (int) cursor.next().get("_id");
 				double temperat = (double) cursor.curr().get("Temperatura");
+				valoresTemperatura.add(temperat);
 				double lumin = (double) cursor.curr().get("Luminosidade");
+				valoresLuminosidade.add(lumin);
 				String dateS = (String) cursor.curr().get("DataHoraMedicao");
 				System.out.println("ID: " + id + " Temperatura: " + temperat + " Luminosidade: " + lumin + " Timestamp:" + dateS);
 
@@ -56,12 +99,28 @@ public class MongoMigration {
 			}
 
 			Statement myStmt = myConn.createStatement();
+			Statement limitesS = myConn.createStatement();
+			
+			ResultSet limites = limitesS.executeQuery("select LimiteInferiorTemperatura, LimiteSuperiorTemperatura, LimiteSuperiorLuz, LimiteInferiorLuz from sistema");
 
 			ResultSet myRs = myStmt.executeQuery("select IDMedicaoLuminosidadeTemperatura from medicoes_luminosidade_e_temperatura");
 			
+			while (limites.next()) {
+				valorSuperiorTemperatura = limites.getDouble("LimiteSuperiorTemperatura");
+				valorInferiorTemperatura = limites.getDouble("LimiteInferiorTemperatura");
+				valorSuperiorLuminosidade = limites.getDouble("LimiteSuperiorLuz");
+				valorInferiorLuminosidade = limites.getDouble("LimiteInferiorLuz");
+			}
+			
 			while (myRs.next()) {
+				if(valoresTemperatura.size()>1)	{
+					media(valoresTemperatura);
 				
-				if (!medicoesTemp.containsKey(myRs.getInt("IDMedicaoLuminosidadeTemperatura")) && !medicoesLum.containsKey(myRs.getInt("IDMedicaoLuminosidadeTemperatura"))) {
+				}
+				if(valoresLuminosidade.size()>1)	{
+					media(valoresLuminosidade);
+				}
+				//if (!medicoesTemp.containsKey(myRs.getInt("IDMedicaoLuminosidadeTemperatura")) && !medicoesLum.containsKey(myRs.getInt("IDMedicaoLuminosidadeTemperatura"))) {
 					String sqlQuery = "insert into medicoes_luminosidade_e_temperatura(DataHoraMedicaoLuminosidadeTemperatura, ValorMedicaoTemperatura, ValorMedicaoLuminosidade) values (?, "+medicoesTemp.get(myRs.getInt("IDMedicaoLuminosidadeTemperatura"))+", "+medicoesLum.get(myRs.getInt("IDMedicaoLuminosidadeTemperatura"))+")";
 
 					PreparedStatement stmt = myConn.prepareStatement(sqlQuery);
@@ -69,7 +128,7 @@ public class MongoMigration {
 					stmt.setTimestamp(1, dateSS);
 					stmt.executeUpdate();
 					System.out.println("Insert success!");
-				} 
+				//} 
 			}
 
 			mongoClient.close();
@@ -79,10 +138,13 @@ public class MongoMigration {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
-
-
 	}
+	
+
 
 }
 

@@ -25,6 +25,10 @@ public class PahoReader extends Thread {
 	private static final MemoryPersistence persistence = new MemoryPersistence();
 
 	private ArrayList<MqttMessage>sms=new ArrayList<MqttMessage>();
+	private ArrayList<Double> valoresTemperatura=new ArrayList<Double>();
+	private ArrayList<Double> valoresLuminosidade=new ArrayList<Double>();
+
+	
 
 	public void read() {
 		try {
@@ -50,7 +54,7 @@ public class PahoReader extends Thread {
 				@Override
 				public void messageArrived(String topic, MqttMessage message) throws Exception {
 					sms.add(message);
-					MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
+		//			MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
 					for(MqttMessage s:sms)	{
 						String smsString = String.valueOf(s);
 						//sleep(3000);
@@ -61,46 +65,58 @@ public class PahoReader extends Thread {
 						String tempV = "";
 						if (temp[1].length() == 7) {
 							tempV = temp[1].substring(1, 6);
-							System.out.println("Temperatura: " + tempV);
+			//				System.out.println("Temperatura: " + tempV);
 						}
 						else if (temp[1].length() == 6) {
 							tempV = temp[1].substring(1, 5);
-							System.out.println("Temperatura: " + tempV);
+			//				System.out.println("Temperatura: " + tempV);
 						}
 						else if(temp[1].length() == 8)	{
 							tempV = temp[1].substring(1, 7);
-							System.out.println("Temperatura: " + tempV);
+				//			System.out.println("Temperatura: " + tempV);
 						}
 
 						double temperatura = Double.parseDouble(tempV);
+						valoresTemperatura.add(temperatura);
+						
+						for(double d:valoresTemperatura)	{
+							System.out.println("Temp: "+d);
+						}
+						
 						//System.out.println(temperatura);
 
 						String cellV = "";
-						System.out.println(stringSplitted[4].length());
+				//		System.out.println(stringSplitted[4].length());
 						if (stringSplitted[4].length() == 29) {
 							cellV = stringSplitted[4].substring(8, 13);
-							System.out.println("Cell: " + cellV);
+				//			System.out.println("Cell: " + cellV);
 						}
 						else if (stringSplitted[4].length() == 28) {
 							cellV = stringSplitted[4].substring(8, 12);
-							System.out.println("Cell: " + cellV);
+			//				System.out.println("Cell: " + cellV);
 						}
 						else if (stringSplitted[4].length() == 27) {
 							cellV = stringSplitted[4].substring(8, 11);
-							System.out.println("Cell: " + cellV);
+			//				System.out.println("Cell: " + cellV);
 						}
 						else if(stringSplitted[4].length() == 26)	{
 							cellV = stringSplitted[4].substring(8, 10);
-							System.out.println("Cell: " + cellV);
+			//				System.out.println("Cell: " + cellV);
 						}
 						else if(stringSplitted[4].length() == 25) {
 							cellV = stringSplitted[4].substring(8, 9);
-							System.out.println("Cell: " + cellV);
+			//				System.out.println("Cell: " + cellV);
 						}
 
 						double cell = Double.parseDouble(cellV);
-						System.out.println("Cell: " + cell);
+			//			System.out.println("Cell: " + cell);
 
+						valoresLuminosidade.add(cell);
+						
+						for(double d:valoresLuminosidade)	{
+							System.out.println("Lum: "+d);
+						}
+						
 						String[] date = stringSplitted[2].split(":");
 						String dateV = date[1].substring(1, 9);
 						String[] dateF = dateV.split("/");
@@ -113,21 +129,20 @@ public class PahoReader extends Thread {
 
 						int i;
 
-						DB db = mongoClient.getDB("Sensores");
-						i=1;
-						DBCollection table = db.getCollection("Medicoes");
-
-						BasicDBObject document = new BasicDBObject();
-						document.put("_id", i);
-						document.append("DataHoraMedicao", data);
-						document.append("Temperatura", temperatura);
-						document.append("Luminosidade", cell);
-						try { table.insert(document); System.out.println("Insert success.");} catch (Exception e) {}
-						i++;
-						try{Thread.sleep(4000);} catch (InterruptedException  e) {Thread.currentThread().interrupt();}
+//						DB db = mongoClient.getDB("Sensores");
+//						i=1;
+//						DBCollection table = db.getCollection("Medicoes");
+//
+//						BasicDBObject document = new BasicDBObject();
+//						document.put("_id", i);
+//						document.append("DataHoraMedicao", data);
+//						document.append("Temperatura", temperatura);
+//						document.append("Luminosidade", cell);
+//						try { table.insert(document); System.out.println("Insert success.");} catch (Exception e) {}
+//						i++;
 
 					}
-					mongoClient.close();
+//					mongoClient.close();
 				
 				}
 
