@@ -75,7 +75,7 @@ public class MongoWrite extends Thread {
 		//mongoClient.close();	
 
 		
-	}
+	
 
 	
 	@SuppressWarnings("deprecation")
