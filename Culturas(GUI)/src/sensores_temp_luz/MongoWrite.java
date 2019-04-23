@@ -25,7 +25,7 @@ public class MongoWrite extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		sms=pahoReader.getSMS();
+		//sms=pahoReader.getSMS();
 	}
 	
 	@SuppressWarnings("deprecation")
