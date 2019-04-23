@@ -12,13 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
-public class LoginGui {
+public class RegistGui {
 
 	private JFrame frame;
 
-	public LoginGui(String frameTitle) {
+	public RegistGui(String frameTitle) {
 		frame = new JFrame(frameTitle);
-		frame.setSize(550, 170);
+		frame.setSize(550, 300);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
@@ -38,27 +38,27 @@ public class LoginGui {
 		JPanel centerPanel = new JPanel();
 		JPanel bottomPanel = new JPanel();
 
-		JLabel loginLabel = new JLabel("Login");
-		loginLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 30));
+		JLabel registerLabel = new JLabel("Register");
+		registerLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 30));
 
-		topPanel.add(loginLabel);
+		topPanel.add(registerLabel);
 
 		
-		JLabel usernameLabel = new JLabel("Username: ");
-		usernameLabel.setFont(new Font("Arial", Font.BOLD, 13));
-		JTextArea usernameText = new JTextArea("", 1, 10);
-		JLabel passwordLabel = new JLabel("Password: ");
-		passwordLabel.setFont(new Font("Arial", Font.BOLD, 13));
+		JLabel adminName = new JLabel("Username: ");
+		adminName.setFont(new Font("Arial", Font.BOLD, 13));
+		JTextArea adminNameText = new JTextArea("", 1, 10);
+		JLabel adminPassLabel = new JLabel("Password: ");
+		adminPassLabel.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextArea passwordText = new JTextArea("", 1, 10);
 		
-		Font font = usernameText.getFont();
+		Font font = adminNameText.getFont();
 		float size = font.getSize() + 4.0f;
-		usernameText.setFont( font.deriveFont(size) );
+		adminNameText.setFont( font.deriveFont(size) );
 		passwordText.setFont( font.deriveFont(size) );
 
-		centerPanel.add(usernameLabel);
-		centerPanel.add(usernameText);
-		centerPanel.add(passwordLabel);
+		centerPanel.add(adminName);
+		centerPanel.add(adminNameText);
+		centerPanel.add(adminPassLabel);
 		centerPanel.add(passwordText);
 
 		JButton loginButton = new JButton("Login");
@@ -80,7 +80,9 @@ public class LoginGui {
 	}
 
 	public static void main(String[] args) {
-		LoginGui frame = new LoginGui("Monotorização de Culturas");
+		RegistGui frame = new RegistGui("Monotorização de Culturas");
 		frame.open();
 	}
+	
+	
 }
