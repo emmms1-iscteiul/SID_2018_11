@@ -58,6 +58,7 @@ public class LoginGui {
 		centerPanel.add(usernameText);
 		centerPanel.add(passwordLabel);
 		centerPanel.add(passwordText);
+		
 	
 
 		JButton loginButton=new JButton("Login");
