@@ -57,6 +57,7 @@ public class LoginGui {
 		centerPanel.add(usernameLabel);
 		centerPanel.add(usernameText);
 		centerPanel.add(passwordLabel);
+		
 		centerPanel.add(passwordText);
 		
 	
