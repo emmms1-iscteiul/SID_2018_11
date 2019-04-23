@@ -67,7 +67,8 @@ public class MongoMigration extends Thread {
 	public void run() {
 		
 		try {
-			sleep(5000);
+			sleep(4000);
+			
 			Class.forName("com.mysql.jdbc.Driver");
 
 			MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
