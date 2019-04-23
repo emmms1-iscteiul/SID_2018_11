@@ -32,6 +32,7 @@ public class MongoWrite extends Thread {
 	public void write()	{
 		
 		//Falta ir buscar a mensagem do Paho
+
 		MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
 		for(MqttMessage message:sms)	{
 			
@@ -68,13 +69,61 @@ public class MongoWrite extends Thread {
 			document.append("Luminosidade", cell);
 			try { table.insert(document);} catch (Exception e) {}
 			i++;
-			try{Thread.sleep(4000);} catch (InterruptedException  e) {Thread.currentThread().interrupt();}
+			try{Thread.sleep(4000);} catch (InterruptedException  e) {Thread.currentThread().interrupt();
+			
+			}
+			}
 	
-		}
-		mongoClient.close();	
+
+		//MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
+//		for(MqttMessage message:sms)	{
+//			
+//		String smsString = String.valueOf(message);
+//		System.out.println("Mensagem: "+smsString);
+//		String[] s = smsString.split(",");
+//		String[] temp = s[0].split(":");
+//		//System.out.println(temp[1].length());
+//				
+//		double temperatura = Double.valueOf(tempV);
+//		System.out.println(temperatura);
+
+//		String[] date = s[2].split(":");
+//		String dateV = date[1].substring(1, 9);
+//		String[] dateF = dateV.split("/");
+//		String dateFF = dateF[2] + "-" + dateF[1] + "-" + dateF[0];
+//
+//		String timeV = s[3].substring(7, 15);
+//
+//		String cellV = s[4].substring(8, 12);
+//		double cell = Double.parseDouble(cellV);
+//
+//		String data = dateFF + " " + timeV;
+//		
+//		int i;
+		
+//		DB db = mongoClient.getDB("Sensores");
+//		i=1;
+//		DBCollection table = db.getCollection("Medicoes");
+//			
+//			BasicDBObject document = new BasicDBObject();
+//			document.put("_id", i);
+//			document.append("Timestamp", data);
+//			document.append("Temperatura", temperatura);
+//			document.append("Luminosidade", cell);
+//			try { table.insert(document);} catch (Exception e) {}
+//			i++;
+//			try{Thread.sleep(4000);} catch (InterruptedException  e) {Thread.currentThread().interrupt();}
+//	
+
+	//	mongoClient.close();	
 
 		
 	}
+
+		//mongoClient.close();	
+
+		
+
 
 	
 	@SuppressWarnings("deprecation")
