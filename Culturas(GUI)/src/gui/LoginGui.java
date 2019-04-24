@@ -4,12 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 public class LoginGui {
@@ -46,13 +49,14 @@ public class LoginGui {
 		
 		JLabel usernameLabel = new JLabel("Username: ");
 		usernameLabel.setFont(new Font("Arial", Font.BOLD, 13));
-		JTextArea usernameText = new JTextArea("", 1, 10);
+		JTextField usernameText = new JTextField("", 10);
+		
 		JLabel passwordLabel = new JLabel("Password: ");
 		passwordLabel.setFont(new Font("Arial", Font.BOLD, 13));
-		JTextArea passwordText = new JTextArea("", 1, 10);
+		JPasswordField passwordText = new JPasswordField("", 10);
 		
 		Font font = usernameText.getFont();
-		float size = font.getSize() + 4.0f;
+		float size = font.getSize() + 1.0f;
 		usernameText.setFont( font.deriveFont(size) );
 		passwordText.setFont( font.deriveFont(size) );
 
@@ -62,10 +66,32 @@ public class LoginGui {
 		centerPanel.add(passwordText);
 
 		JButton loginButton = new JButton("Login");
-
+		
+		loginButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				InvestigadorGui investigadorFrame = new InvestigadorGui("Monotorização de Culturas");
+				frame.dispose();
+				investigadorFrame.open();
+				
+			}
+		});
+		
 		centerPanel.add(loginButton);
 		
 		JButton registerButton = new JButton("Register");
+		
+		registerButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				RegistGui registFrame = new RegistGui("Monotorização de Culturas");
+				frame.dispose();
+				registFrame.open();
+				
+			}
+		});
 		
 		bottomPanel.add(registerButton);
 

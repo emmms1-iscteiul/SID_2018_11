@@ -9,7 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 public class RegistGui {
@@ -18,7 +19,7 @@ public class RegistGui {
 
 	public RegistGui(String frameTitle) {
 		frame = new JFrame(frameTitle);
-		frame.setSize(550, 300);
+		frame.setSize(250, 240);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
@@ -44,27 +45,44 @@ public class RegistGui {
 		topPanel.add(registerLabel);
 
 		
-		JLabel adminName = new JLabel("Username: ");
+		JLabel adminName = new JLabel("Username:     ");
 		adminName.setFont(new Font("Arial", Font.BOLD, 13));
-		JTextArea adminNameText = new JTextArea("", 1, 10);
-		JLabel adminPassLabel = new JLabel("Password: ");
+		JTextField adminNameText = new JTextField("",10);
+		
+		JLabel adminEmail = new JLabel("Email:            ");
+		adminEmail.setFont(new Font("Arial", Font.BOLD, 13));
+		JTextField adminEmailText = new JTextField("",10);
+		
+		
+		JLabel adminPassLabel = new JLabel("Password:     ");
 		adminPassLabel.setFont(new Font("Arial", Font.BOLD, 13));
-		JTextArea passwordText = new JTextArea("", 1, 10);
+		JPasswordField passwordText = new JPasswordField("",10);
+		
+		JLabel adminPassConfLabel = new JLabel("Confirm Pass:");
+		adminPassConfLabel.setFont(new Font("Arial", Font.BOLD, 13));
+		JPasswordField passwordConfText = new JPasswordField("", 10);
+		
 		
 		Font font = adminNameText.getFont();
-		float size = font.getSize() + 4.0f;
+		float size = font.getSize() + 1.0f;
 		adminNameText.setFont( font.deriveFont(size) );
 		passwordText.setFont( font.deriveFont(size) );
+		adminEmailText.setFont( font.deriveFont(size) );
+		passwordConfText.setFont( font.deriveFont(size) );
 
 		centerPanel.add(adminName);
 		centerPanel.add(adminNameText);
+		
+		centerPanel.add(adminEmail);
+		centerPanel.add(adminEmailText);
+		
 		centerPanel.add(adminPassLabel);
 		centerPanel.add(passwordText);
-
-		JButton loginButton = new JButton("Login");
-
-		centerPanel.add(loginButton);
 		
+		centerPanel.add(adminPassConfLabel);
+		centerPanel.add(passwordConfText);
+	
+
 		JButton registerButton = new JButton("Register");
 		
 		bottomPanel.add(registerButton);
