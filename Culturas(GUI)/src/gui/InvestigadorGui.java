@@ -5,7 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -57,17 +58,39 @@ public class InvestigadorGui {
 		consultarComboBox.addItem("Variável");
 		consultarComboBox.addItem("Variável Medida");
 		
+		consultarComboBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 String option = (String) consultarComboBox.getSelectedItem();
+				 
+				 switch (option) {
+				case "Cultura":
+					System.out.println("Consultar culturas");
+					break;
+				case "Medição":
+					System.out.println("Consultar medição");
+					break;	
+				case "Variável":
+					System.out.println("Consultar variável");
+					break;
+				default:
+					System.out.println("Consultar variável medida");
+					break;
+				}
+				
+			}
+		});
+		
 
 		JComboBox<String> criarComboBox=new JComboBox<String>();
 		criarComboBox.addItem("Cultura");
 		criarComboBox.addItem("Medição");
-		criarComboBox.addItem("Variável");
 		criarComboBox.addItem("Variável Medida");
 		
 		JComboBox<String> editarComboBox=new JComboBox<String>();
 		editarComboBox.addItem("Cultura");
 		editarComboBox.addItem("Medição");
-		editarComboBox.addItem("Variável");
 		editarComboBox.addItem("Variável Medida");
 		
 		JComboBox<String> apagarComboBox=new JComboBox<String>();
