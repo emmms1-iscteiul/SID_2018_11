@@ -6,7 +6,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 
-import javax.swing.JButton;
+
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,7 +20,7 @@ public class InvestigadorGui {
 
 	public InvestigadorGui(String frameTitle) {
 		frame = new JFrame(frameTitle);
-		frame.setSize(350, 350);
+		frame.setSize(450, 200);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
@@ -42,20 +43,45 @@ public class InvestigadorGui {
 		frameLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
 
 		topPanel.add(frameLabel);
+	
+		JPanel centerPanel=new JPanel(new GridLayout(4,1));
 		
-		JPanel centerPanel=new JPanel(new GridLayout(4,2));
+		JLabel consultarLabel=new JLabel("Consultar tabela: ");
+		JLabel criarLabel=new JLabel("Criar tabela: ");
+		JLabel editarLabel=new JLabel("Editar tabela: ");
+		JLabel apagarLabel=new JLabel("Apagar tabela: ");
 		
-		centerPanel.add(new JButton("Consultar Cultura"));
-		centerPanel.add(new JButton("Consultar Medição"));
-		centerPanel.add(new JButton("Criar Cultura"));
-		centerPanel.add(new JButton("Criar Medição"));
+		JComboBox<String> consultarComboBox=new JComboBox<String>();
+		consultarComboBox.addItem("Cultura");
+		consultarComboBox.addItem("Medição");
+		consultarComboBox.addItem("Variável");
+		consultarComboBox.addItem("Variável Medida");
 		
 
-		centerPanel.add(new JButton("Editar Cultura"));
-		centerPanel.add(new JButton("Editar Medição"));
-		centerPanel.add(new JButton("Apagar Cultura"));
-		centerPanel.add(new JButton("Apagar Medição"));
+		JComboBox<String> criarComboBox=new JComboBox<String>();
+		criarComboBox.addItem("Cultura");
+		criarComboBox.addItem("Medição");
+		criarComboBox.addItem("Variável");
+		criarComboBox.addItem("Variável Medida");
 		
+		JComboBox<String> editarComboBox=new JComboBox<String>();
+		editarComboBox.addItem("Cultura");
+		editarComboBox.addItem("Medição");
+		editarComboBox.addItem("Variável");
+		editarComboBox.addItem("Variável Medida");
+		
+		JComboBox<String> apagarComboBox=new JComboBox<String>();
+		apagarComboBox.addItem("Cultura");
+	
+		
+		centerPanel.add(consultarLabel);
+		centerPanel.add(consultarComboBox);
+		centerPanel.add(criarLabel);
+		centerPanel.add(criarComboBox);
+		centerPanel.add(editarLabel);
+		centerPanel.add(editarComboBox);
+		centerPanel.add(apagarLabel);
+		centerPanel.add(apagarComboBox);
 		
 		frame.add(topPanel,BorderLayout.NORTH);
 		frame.add(centerPanel,BorderLayout.CENTER);
