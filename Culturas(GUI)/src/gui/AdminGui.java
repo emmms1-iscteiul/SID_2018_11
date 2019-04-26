@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import buttonTable.ConsultarTabelaGui;
+import buttonTable.SelecionarTabelaGui;
 
 public class AdminGui {
 
@@ -72,35 +72,8 @@ consultarComboBox.addActionListener(new ActionListener() {
 				 case "":
 					 JOptionPane.showMessageDialog(null, "Tem que escolher umas das tabelas definidas!");
 						break;
-				case "Cultura":
-					final ConsultarTabelaGui guiConsulta = new ConsultarTabelaGui("Consultar Utilizador");
-					javax.swing.SwingUtilities.invokeLater(new Runnable() {
-						public void run() {
-							guiConsulta.addContent();
-							guiConsulta.open();
-						}
-					});
-					break;
-				case "Medição":
-					final ConsultarTabelaGui guiMedicao = new ConsultarTabelaGui("Consultar Medição");
-					javax.swing.SwingUtilities.invokeLater(new Runnable() {
-						public void run() {
-							guiMedicao.addContent();
-							guiMedicao.open();
-						}
-					});
-					break;	
-				case "Variável Medida":
-					final ConsultarTabelaGui guiVariavelMedida = new ConsultarTabelaGui("Consultar Variável Medida");
-					javax.swing.SwingUtilities.invokeLater(new Runnable() {
-						public void run() {
-							guiVariavelMedida.addContent();
-							guiVariavelMedida.open();
-						}
-					});
-					break;
 				case "Utilizador":
-					final ConsultarTabelaGui guiUtilizador = new ConsultarTabelaGui("Consultar Utilizador");
+					final SelecionarTabelaGui guiUtilizador = new SelecionarTabelaGui("Tabela Utilizador");
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiUtilizador.addContent();
@@ -108,8 +81,17 @@ consultarComboBox.addActionListener(new ActionListener() {
 						}
 					});
 					break;	
+				case "Variável":
+					final SelecionarTabelaGui guiVariavel = new SelecionarTabelaGui("Tabela Variável");
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiVariavel.addContent();
+							guiVariavel.open();
+						}
+					});
+					break;		
 				default:
-					System.out.println("Erro");
+					System.out.println("Falta o Guilherme fazer");
 					break;
 				}
 				

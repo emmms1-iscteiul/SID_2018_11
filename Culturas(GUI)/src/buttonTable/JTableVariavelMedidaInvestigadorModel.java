@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-public class JTableVariavelMedidaModel  extends AbstractTableModel{
+public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		private static final long serialVersionUID = 1L;
-		private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior", "Editar" };
+		private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior","Criar", "Editar" };
 
 		@Override
 		public int getColumnCount() {
@@ -33,14 +33,23 @@ public class JTableVariavelMedidaModel  extends AbstractTableModel{
 			case 1:
 				return "LimiteSuperior";
 			case 2:
-				final JButton button = new JButton(COLUMN_NAMES[columnIndex]);
-				button.addActionListener(new ActionListener() {
+				final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
+				botaoCriar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						System.out.println("Linha " + rowIndex + " criada!");
+
+					}
+				});
+				return botaoCriar;
+			case 3:
+				final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
+				botaoEditar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						System.out.println("Linha " + rowIndex + " editada!");
 
 					}
 				});
-				return button;
+				return botaoEditar;
 			default:
 				return "Error";
 			}

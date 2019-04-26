@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-	public class JTableMedicaoModel  extends AbstractTableModel{
+	public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 		private static final long serialVersionUID = 1L;
-		private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medição",	"Valor Medição", "Editar" };
+		private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medição",	"Valor Medição","Criar", "Editar" };
 
 		@Override
 		public int getColumnCount() {
@@ -33,14 +33,23 @@ import javax.swing.table.AbstractTableModel;
 			case 1:
 				return "Valor Medição";
 			case 2:
-				final JButton button = new JButton(COLUMN_NAMES[columnIndex]);
-				button.addActionListener(new ActionListener() {
+				final JButton botãoCriar = new JButton(COLUMN_NAMES[columnIndex]);
+				botãoCriar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						System.out.println("Linha " + rowIndex + " criada!");
+
+					}
+				});
+				return botãoCriar;
+			case 3:
+				final JButton botãoApagar = new JButton(COLUMN_NAMES[columnIndex]);
+				botãoApagar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						System.out.println("Linha " + rowIndex + " editada!");
 
 					}
 				});
-				return button;
+				return botãoApagar;
 			default:
 				return "Error";
 			}

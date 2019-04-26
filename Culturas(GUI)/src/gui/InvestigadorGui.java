@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import buttonTable.ConsultarTabelaGui;
+import buttonTable.SelecionarTabelaGui;
 
 
 public class InvestigadorGui {
@@ -66,7 +66,7 @@ public class InvestigadorGui {
 				 
 				 switch (option) {
 				case "Cultura":
-					final ConsultarTabelaGui guiConsulta = new ConsultarTabelaGui("Consultar Utilizador");
+					final SelecionarTabelaGui guiConsulta = new SelecionarTabelaGui("Tabela Cultura");
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiConsulta.addContent();
@@ -75,7 +75,7 @@ public class InvestigadorGui {
 					});
 					break;
 				case "Medição":
-					final ConsultarTabelaGui guiMedicao = new ConsultarTabelaGui("Consultar Medição");
+					final SelecionarTabelaGui guiMedicao = new SelecionarTabelaGui("Tabela Medição");
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiMedicao.addContent();
@@ -84,7 +84,7 @@ public class InvestigadorGui {
 					});
 					break;	
 				case "Variável Medida":
-					final ConsultarTabelaGui guiVariavelMedida = new ConsultarTabelaGui("Consultar Variável Medida");
+					final SelecionarTabelaGui guiVariavelMedida = new SelecionarTabelaGui("Tabela Variável Medida");
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiVariavelMedida.addContent();
@@ -93,7 +93,7 @@ public class InvestigadorGui {
 					});
 					break;
 				default:
-					System.out.println("Erro");
+					System.out.println("Falta o Guilherme Fazer");
 					break;
 				}
 				

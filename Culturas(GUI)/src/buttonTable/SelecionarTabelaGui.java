@@ -12,14 +12,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
-public class ConsultarTabelaGui {
+public class SelecionarTabelaGui {
 
 	private JFrame frame;
 	private String frameTitle;
 
-	public ConsultarTabelaGui(String frameTitle) {
+	public SelecionarTabelaGui(String frameTitle) {
 		frame = new JFrame(frameTitle);
-		this.frameTitle=frameTitle;
+		this.frameTitle = frameTitle;
 		frame.setSize(800, 500);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
@@ -37,106 +37,110 @@ public class ConsultarTabelaGui {
 		frameLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
 
 		topPanel.add(frameLabel);
-		
-		JPanel centerPanel = new JPanel();
-		
-		if(frameTitle=="Consultar Utilizador")	{
-		JTable table = new JTable(new JTableUtilizadorModel());
-		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(700, 400));
-		table.setFillsViewportHeight(true);
-		
-		TableCellRenderer buttonRenderer = new JTableButtonRenderer();
-		table.getColumn("Editar").setCellRenderer(buttonRenderer);
-		table.getColumn("Apagar").setCellRenderer(buttonRenderer);
-		table.addMouseListener(new JTableButtonMouseListener(table));
 
-		centerPanel.add(scrollPane);
+		JPanel centerPanel = new JPanel();
+
+		if (frameTitle == "Tabela Utilizador") {
+			JTable table = new JTable(new JTableUtilizadorAdminModel());
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setPreferredSize(new Dimension(700, 400));
+			table.setFillsViewportHeight(true);
+
+			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+			table.getColumn("Criar").setCellRenderer(buttonRenderer);
+			table.getColumn("Editar").setCellRenderer(buttonRenderer);
+			table.getColumn("Apagar").setCellRenderer(buttonRenderer);
+			table.addMouseListener(new JTableButtonMouseListener(table));
+
+			centerPanel.add(scrollPane);
 		}
-		
-		if(frameTitle=="Consultar Variável")	{
+
+		if (frameTitle == "Tabela Variável") {
 			frame.setSize(500, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
-			JTable table = new JTable(new JTableVariavelModel());
+
+			JTable table = new JTable(new JTableVariavelAdminModel());
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(400, 400));
 			table.setFillsViewportHeight(true);
-			
+
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+
+			table.getColumn("Criar").setCellRenderer(buttonRenderer);
 			table.getColumn("Editar").setCellRenderer(buttonRenderer);
 			table.getColumn("Apagar").setCellRenderer(buttonRenderer);
 			table.addMouseListener(new JTableButtonMouseListener(table));
 
 			centerPanel.add(scrollPane);
-			}
-		
-		if(frameTitle=="Consultar Cultura")	{
+		}
+
+		if (frameTitle == "Tabela Cultura") {
 			frame.setSize(600, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
-			JTable table = new JTable(new JTableCulturaModel());
+
+			JTable table = new JTable(new JTableCulturaInvestigadorModel());
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(500, 400));
 			table.setFillsViewportHeight(true);
-			
+
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+			table.getColumn("Criar").setCellRenderer(buttonRenderer);
 			table.getColumn("Editar").setCellRenderer(buttonRenderer);
 			table.getColumn("Apagar").setCellRenderer(buttonRenderer);
 			table.addMouseListener(new JTableButtonMouseListener(table));
 
 			centerPanel.add(scrollPane);
-			}
+		}
 
-		
-		if(frameTitle=="Consultar Medição")	{
+		if (frameTitle == "Tabela Medição") {
 			frame.setSize(500, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
-			JTable table = new JTable(new JTableMedicaoModel());
+
+			JTable table = new JTable(new JTableMedicaoInvestigadorModel());
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(400, 400));
 			table.setFillsViewportHeight(true);
-			
+
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+			table.getColumn("Criar").setCellRenderer(buttonRenderer);
 			table.getColumn("Editar").setCellRenderer(buttonRenderer);
 			table.addMouseListener(new JTableButtonMouseListener(table));
 
 			centerPanel.add(scrollPane);
-			}
-		
-		if(frameTitle=="Consultar Variável Medida")	{
+		}
+
+		if (frameTitle == "Tabela Variável Medida") {
 			frame.setSize(500, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
-			JTable table = new JTable(new JTableVariavelMedidaModel());
+
+			JTable table = new JTable(new JTableVariavelMedidaInvestigadorModel());
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(400, 400));
 			table.setFillsViewportHeight(true);
-			
+
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+			table.getColumn("Criar").setCellRenderer(buttonRenderer);
 			table.getColumn("Editar").setCellRenderer(buttonRenderer);
 			table.addMouseListener(new JTableButtonMouseListener(table));
 
 			centerPanel.add(scrollPane);
-			}
-		
+		}
 
 		frame.add(topPanel, BorderLayout.NORTH);
 		frame.add(centerPanel, BorderLayout.CENTER);
@@ -146,8 +150,6 @@ public class ConsultarTabelaGui {
 	public void open() {
 		frame.setVisible(true);
 	}
-
-	
 
 //	public static void main(String[] args) {
 ////		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Utilizador");

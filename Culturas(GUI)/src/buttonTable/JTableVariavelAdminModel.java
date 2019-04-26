@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-public class JTableVariavelModel extends AbstractTableModel {
+public class JTableVariavelAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "Nome Variável","Editar","Apagar" };
+	private static final String[] COLUMN_NAMES = new String[] { "Nome Variável","Criar","Editar","Apagar" };
 
 
 	@Override
@@ -32,23 +32,32 @@ public class JTableVariavelModel extends AbstractTableModel {
 		case 0:
 			return "Nome Variável";
 		case 1: 
-			final JButton button = new JButton(COLUMN_NAMES[columnIndex]);
-			button.addActionListener(new ActionListener() {
+			final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
+			botaoCriar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					System.out.println("Linha " + rowIndex+" criada!");
+						
+				}
+			});
+			return botaoCriar;	
+		case 2: 
+			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
+			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					System.out.println("Linha " + rowIndex+" editada!");
 						
 				}
 			});
-			return button;
-		case 2:
-			final JButton button2 = new JButton(COLUMN_NAMES[columnIndex]);
-			button2.addActionListener(new ActionListener() {
+			return botaoEditar;
+		case 3:
+			final JButton botaoApagar = new JButton(COLUMN_NAMES[columnIndex]);
+			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					System.out.println("Linha " + rowIndex+" apagada!");
 						
 				}
 			});
-			return button2;
+			return botaoApagar;
 		default:
 			return "Error";
 		}

@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-public class JTableCulturaModel  extends AbstractTableModel{
+public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura", "Tipo Cultura", "Editar", "Apagar" };
+	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura", "Tipo Cultura", "Criar","Editar", "Apagar" };
 
 	@Override
 	public int getColumnCount() {
@@ -35,23 +35,32 @@ public class JTableCulturaModel  extends AbstractTableModel{
 		case 2:
 			return "Tipo Cultura";
 		case 3:
-			final JButton button = new JButton(COLUMN_NAMES[columnIndex]);
-			button.addActionListener(new ActionListener() {
+			final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
+			botaoCriar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					System.out.println("Linha " + rowIndex + " criada!");
+
+				}
+			});
+			return botaoCriar;
+		case 4:
+			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
+			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					System.out.println("Linha " + rowIndex + " editada!");
 
 				}
 			});
-			return button;
-		case 4:
-			final JButton button2 = new JButton(COLUMN_NAMES[columnIndex]);
-			button2.addActionListener(new ActionListener() {
+			return botaoEditar;
+		case 5:
+			final JButton botaoApagar = new JButton(COLUMN_NAMES[columnIndex]);
+			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					System.out.println("Linha " + rowIndex + " apagada!");
 
 				}
 			});
-			return button2;
+			return botaoApagar;	
 		default:
 			return "Error";
 		}
