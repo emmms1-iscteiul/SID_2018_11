@@ -5,12 +5,17 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+
+import buttonTable.ConsultarTabelaGui;
 
 public class AdminGui {
 
@@ -43,12 +48,12 @@ public class AdminGui {
 
 		JPanel centerPanel = new JPanel(new GridLayout(4, 1));
 
-		JLabel consultarLabel = new JLabel("Consultar tabela: ");
-		JLabel criarLabel = new JLabel("Criar tabela: ");
-		JLabel editarLabel = new JLabel("Editar tabela: ");
-		JLabel apagarLabel = new JLabel("Apagar tabela: ");
+		JLabel selecionarTabela = new JLabel("Selecionar Tabela : ");
+		selecionarTabela.setFont(new Font("Arial", Font.PLAIN, 12));
+		
 
 		JComboBox<String> consultarComboBox = new JComboBox<String>();
+		consultarComboBox.addItem("");
 		consultarComboBox.addItem("Cultura");
 		consultarComboBox.addItem("Tipo de Cultura");
 		consultarComboBox.addItem("Medição");
@@ -56,27 +61,65 @@ public class AdminGui {
 		consultarComboBox.addItem("Variável Medida");
 		consultarComboBox.addItem("Utilizador");
 		consultarComboBox.addItem("Tipo de Utilizador");
+		
+consultarComboBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 String option = (String) consultarComboBox.getSelectedItem();
+				 
+				 switch (option) {
+				 case "":
+					 JOptionPane.showMessageDialog(null, "Tem que escolher umas das tabelas definidas!");
+						break;
+				case "Cultura":
+					final ConsultarTabelaGui guiConsulta = new ConsultarTabelaGui("Consultar Utilizador");
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiConsulta.addContent();
+							guiConsulta.open();
+						}
+					});
+					break;
+				case "Medição":
+					final ConsultarTabelaGui guiMedicao = new ConsultarTabelaGui("Consultar Medição");
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiMedicao.addContent();
+							guiMedicao.open();
+						}
+					});
+					break;	
+				case "Variável Medida":
+					final ConsultarTabelaGui guiVariavelMedida = new ConsultarTabelaGui("Consultar Variável Medida");
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiVariavelMedida.addContent();
+							guiVariavelMedida.open();
+						}
+					});
+					break;
+				case "Utilizador":
+					final ConsultarTabelaGui guiUtilizador = new ConsultarTabelaGui("Consultar Utilizador");
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiUtilizador.addContent();
+							guiUtilizador.open();
+						}
+					});
+					break;	
+				default:
+					System.out.println("Erro");
+					break;
+				}
+				
+			}
+		});
 
-		JComboBox<String> criarComboBox = new JComboBox<String>();
-		criarComboBox.addItem("Utilizador");
-		criarComboBox.addItem("Variável");
 
-		JComboBox<String> editarComboBox = new JComboBox<String>();
-		editarComboBox.addItem("Utilizador");
-		editarComboBox.addItem("Variável");
-
-		JComboBox<String> apagarComboBox = new JComboBox<String>();
-		apagarComboBox.addItem("Utilizador");
-		apagarComboBox.addItem("Variável");
-
-		centerPanel.add(consultarLabel);
+		centerPanel.add(selecionarTabela);
 		centerPanel.add(consultarComboBox);
-		centerPanel.add(criarLabel);
-		centerPanel.add(criarComboBox);
-		centerPanel.add(editarLabel);
-		centerPanel.add(editarComboBox);
-		centerPanel.add(apagarLabel);
-		centerPanel.add(apagarComboBox);
+		
 
 		frame.add(topPanel, BorderLayout.NORTH);
 		frame.add(centerPanel, BorderLayout.CENTER);

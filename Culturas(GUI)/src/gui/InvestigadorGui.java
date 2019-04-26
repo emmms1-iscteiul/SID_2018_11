@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import buttonTable.ConsultarTabelaGui;
+
 
 public class InvestigadorGui {
 
@@ -47,12 +49,10 @@ public class InvestigadorGui {
 	
 		JPanel centerPanel=new JPanel(new GridLayout(4,1));
 		
-		JLabel consultarLabel=new JLabel("Consultar tabela: ");
-		JLabel criarLabel=new JLabel("Criar tabela: ");
-		JLabel editarLabel=new JLabel("Editar tabela: ");
-		JLabel apagarLabel=new JLabel("Apagar tabela: ");
+		JLabel selecionarTabela=new JLabel("Selecionar Tabela ");
 		
 		JComboBox<String> consultarComboBox=new JComboBox<String>();
+		consultarComboBox.addItem("");
 		consultarComboBox.addItem("Cultura");
 		consultarComboBox.addItem("Medição");
 		consultarComboBox.addItem("Variável");
@@ -66,16 +66,34 @@ public class InvestigadorGui {
 				 
 				 switch (option) {
 				case "Cultura":
-					System.out.println("Consultar culturas");
+					final ConsultarTabelaGui guiConsulta = new ConsultarTabelaGui("Consultar Utilizador");
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiConsulta.addContent();
+							guiConsulta.open();
+						}
+					});
 					break;
 				case "Medição":
-					System.out.println("Consultar medição");
+					final ConsultarTabelaGui guiMedicao = new ConsultarTabelaGui("Consultar Medição");
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiMedicao.addContent();
+							guiMedicao.open();
+						}
+					});
 					break;	
-				case "Variável":
-					System.out.println("Consultar variável");
+				case "Variável Medida":
+					final ConsultarTabelaGui guiVariavelMedida = new ConsultarTabelaGui("Consultar Variável Medida");
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiVariavelMedida.addContent();
+							guiVariavelMedida.open();
+						}
+					});
 					break;
 				default:
-					System.out.println("Consultar variável medida");
+					System.out.println("Erro");
 					break;
 				}
 				
@@ -83,28 +101,10 @@ public class InvestigadorGui {
 		});
 		
 
-		JComboBox<String> criarComboBox=new JComboBox<String>();
-		criarComboBox.addItem("Cultura");
-		criarComboBox.addItem("Medição");
-		criarComboBox.addItem("Variável Medida");
 		
-		JComboBox<String> editarComboBox=new JComboBox<String>();
-		editarComboBox.addItem("Cultura");
-		editarComboBox.addItem("Medição");
-		editarComboBox.addItem("Variável Medida");
-		
-		JComboBox<String> apagarComboBox=new JComboBox<String>();
-		apagarComboBox.addItem("Cultura");
-	
-		
-		centerPanel.add(consultarLabel);
+		centerPanel.add(selecionarTabela);
 		centerPanel.add(consultarComboBox);
-		centerPanel.add(criarLabel);
-		centerPanel.add(criarComboBox);
-		centerPanel.add(editarLabel);
-		centerPanel.add(editarComboBox);
-		centerPanel.add(apagarLabel);
-		centerPanel.add(apagarComboBox);
+		
 		
 		frame.add(topPanel,BorderLayout.NORTH);
 		frame.add(centerPanel,BorderLayout.CENTER);

@@ -26,10 +26,10 @@ public class ConsultarTabelaGui {
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 		frame.setLocation(x, y);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 
-	public void addContentUtilizador() {
+	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
 		JPanel topPanel = new JPanel();
@@ -54,9 +54,89 @@ public class ConsultarTabelaGui {
 
 		centerPanel.add(scrollPane);
 		}
+		
+		if(frameTitle=="Consultar Variável")	{
+			frame.setSize(500, 500);
+			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+			frame.setLocation(x, y);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			
+			JTable table = new JTable(new JTableVariavelModel());
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setPreferredSize(new Dimension(400, 400));
+			table.setFillsViewportHeight(true);
+			
+			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+			table.getColumn("Editar").setCellRenderer(buttonRenderer);
+			table.getColumn("Apagar").setCellRenderer(buttonRenderer);
+			table.addMouseListener(new JTableButtonMouseListener(table));
+
+			centerPanel.add(scrollPane);
+			}
+		
+		if(frameTitle=="Consultar Cultura")	{
+			frame.setSize(600, 500);
+			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+			frame.setLocation(x, y);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			
+			JTable table = new JTable(new JTableCulturaModel());
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setPreferredSize(new Dimension(500, 400));
+			table.setFillsViewportHeight(true);
+			
+			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+			table.getColumn("Editar").setCellRenderer(buttonRenderer);
+			table.getColumn("Apagar").setCellRenderer(buttonRenderer);
+			table.addMouseListener(new JTableButtonMouseListener(table));
+
+			centerPanel.add(scrollPane);
+			}
 
 		
+		if(frameTitle=="Consultar Medição")	{
+			frame.setSize(500, 500);
+			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+			frame.setLocation(x, y);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			
+			JTable table = new JTable(new JTableMedicaoModel());
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setPreferredSize(new Dimension(400, 400));
+			table.setFillsViewportHeight(true);
+			
+			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+			table.getColumn("Editar").setCellRenderer(buttonRenderer);
+			table.addMouseListener(new JTableButtonMouseListener(table));
 
+			centerPanel.add(scrollPane);
+			}
+		
+		if(frameTitle=="Consultar Variável Medida")	{
+			frame.setSize(500, 500);
+			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+			frame.setLocation(x, y);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			
+			JTable table = new JTable(new JTableVariavelMedidaModel());
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setPreferredSize(new Dimension(400, 400));
+			table.setFillsViewportHeight(true);
+			
+			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+			table.getColumn("Editar").setCellRenderer(buttonRenderer);
+			table.addMouseListener(new JTableButtonMouseListener(table));
+
+			centerPanel.add(scrollPane);
+			}
 		
 
 		frame.add(topPanel, BorderLayout.NORTH);
@@ -71,10 +151,14 @@ public class ConsultarTabelaGui {
 	
 
 	public static void main(String[] args) {
-		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Utilizador");
+//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Utilizador");
+//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Variável");
+//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Cultura");
+//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Medição");
+		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Variável Medida");
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				example.addContentUtilizador();
+				example.addContent();
 				example.open();
 			}
 		});
