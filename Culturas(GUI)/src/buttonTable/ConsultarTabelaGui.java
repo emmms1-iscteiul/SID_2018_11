@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.WindowConstants;
 import javax.swing.table.TableCellRenderer;
 
 public class ConsultarTabelaGui {
@@ -150,17 +149,17 @@ public class ConsultarTabelaGui {
 
 	
 
-	public static void main(String[] args) {
-//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Utilizador");
-//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Variável");
-//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Cultura");
-//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Medição");
-		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Variável Medida");
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				example.addContent();
-				example.open();
-			}
-		});
-	}
+//	public static void main(String[] args) {
+////		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Utilizador");
+////		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Variável");
+////		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Cultura");
+////		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Medição");
+//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Variável Medida");
+//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+//			public void run() {
+//				example.addContent();
+//				example.open();
+//			}
+//		});
+//	}
 }
