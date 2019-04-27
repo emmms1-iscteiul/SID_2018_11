@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
+import gui.CriarVariaveisGUI;
+
 public class JTableVariavelAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Variável","Criar","Editar","Apagar" };
@@ -35,7 +37,8 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 			final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoCriar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					System.out.println("Linha " + rowIndex+" criada!");
+					CriarVariaveisGUI frame = new CriarVariaveisGUI("Inserir Variavel");
+					frame.open();
 						
 				}
 			});
