@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
@@ -65,8 +66,11 @@ public class InvestigadorGui {
 				 String option = (String) consultarComboBox.getSelectedItem();
 				 
 				 switch (option) {
+				 case "":
+					 JOptionPane.showMessageDialog(null, "Tem que escolher umas das tabelas definidas!");
+						break;
 				case "Cultura":
-					final SelecionarTabelaGui guiConsulta = new SelecionarTabelaGui("Tabela Cultura");
+					final SelecionarTabelaGui guiConsulta = new SelecionarTabelaGui("Tabela Cultura-Investigador");
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiConsulta.addContent();
@@ -92,8 +96,17 @@ public class InvestigadorGui {
 						}
 					});
 					break;
+				case "Variável":
+					final SelecionarTabelaGui guiVariavel = new SelecionarTabelaGui("Tabela Variavel-Investigador");
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiVariavel.addContent();
+							guiVariavel.open();
+						}
+					});
+					break;
 				default:
-					System.out.println("Falta o Guilherme Fazer");
+					System.out.println("Erro");
 					break;
 				}
 				

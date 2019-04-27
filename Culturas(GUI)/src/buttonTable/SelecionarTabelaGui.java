@@ -78,7 +78,7 @@ public class SelecionarTabelaGui {
 			centerPanel.add(scrollPane);
 		}
 
-		if (frameTitle == "Tabela Cultura") {
+		if (frameTitle == "Tabela Cultura-Investigador") {
 			frame.setSize(600, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
@@ -141,7 +141,104 @@ public class SelecionarTabelaGui {
 
 			centerPanel.add(scrollPane);
 		}
+		
+		if (frameTitle == "Tabela Cultura-Admin") {
+			frame.setSize(500, 500);
+			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+			frame.setLocation(x, y);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+			JTable table = new JTable(new JTableCulturaAdminModel());
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setPreferredSize(new Dimension(400, 400));
+			table.setFillsViewportHeight(true);
+
+			centerPanel.add(scrollPane);
+		}
+		
+		if (frameTitle == "Tabela Tipo Cultura") {
+			frame.setSize(300, 500);
+			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+			frame.setLocation(x, y);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			JTable table = new JTable(new JTableTipoCulturaModel());
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setPreferredSize(new Dimension(200, 400));
+			table.setFillsViewportHeight(true);
+
+			centerPanel.add(scrollPane);
+		}
+		
+		if (frameTitle == "Tabela Medição-Admin") {
+			frame.setSize(500, 500);
+			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+			frame.setLocation(x, y);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			JTable table = new JTable(new JTableMedicaoAdminModel());
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setPreferredSize(new Dimension(400, 400));
+			table.setFillsViewportHeight(true);
+
+			centerPanel.add(scrollPane);
+		}
+		
+		if (frameTitle == "Tabela Variavel Medida-Admin") {
+			frame.setSize(500, 500);
+			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+			frame.setLocation(x, y);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			JTable table = new JTable(new JTableVariavelMedidaAdminModel());
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setPreferredSize(new Dimension(400, 400));
+			table.setFillsViewportHeight(true);
+
+			centerPanel.add(scrollPane);
+		}
+		
+		if (frameTitle == "Tabela Tipo Utilizador") {
+			frame.setSize(300, 500);
+			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+			frame.setLocation(x, y);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			JTable table = new JTable(new JTableTipoUtilizadorModel());
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setPreferredSize(new Dimension(200, 400));
+			table.setFillsViewportHeight(true);
+
+			centerPanel.add(scrollPane);
+		}
+		
+
+		if (frameTitle == "Tabela Variavel-Investigador") {
+			frame.setSize(300, 500);
+			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+			frame.setLocation(x, y);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			JTable table = new JTable(new JTableVariavelInvesigadorModel());
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setPreferredSize(new Dimension(200, 400));
+			table.setFillsViewportHeight(true);
+
+			centerPanel.add(scrollPane);
+		}
+		
 		frame.add(topPanel, BorderLayout.NORTH);
 		frame.add(centerPanel, BorderLayout.CENTER);
 

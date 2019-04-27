@@ -90,6 +90,51 @@ consultarComboBox.addActionListener(new ActionListener() {
 						}
 					});
 					break;		
+				case "Cultura":
+					final SelecionarTabelaGui guiCulturaAdmin = new SelecionarTabelaGui("Tabela Cultura-Admin");
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiCulturaAdmin.addContent();
+							guiCulturaAdmin.open();
+						}
+					});
+					break;
+				case "Tipo de Cultura":
+					final SelecionarTabelaGui guiTipoCultura = new SelecionarTabelaGui("Tabela Tipo Cultura");
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiTipoCultura.addContent();
+							guiTipoCultura.open();
+						}
+					});
+					break;	
+				case "Medição":
+					final SelecionarTabelaGui guiMedicaoAdmin = new SelecionarTabelaGui("Tabela Medição-Admin");
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiMedicaoAdmin.addContent();
+							guiMedicaoAdmin.open();
+						}
+					});
+					break;		
+				case "Variável Medida":
+					final SelecionarTabelaGui guiVariavelMedidaAdmin = new SelecionarTabelaGui("Tabela Variavel Medida-Admin");
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiVariavelMedidaAdmin.addContent();
+							guiVariavelMedidaAdmin.open();
+						}
+					});
+					break;		
+				case "Tipo de Utilizador":
+					final SelecionarTabelaGui guiTipoUtilizador = new SelecionarTabelaGui("Tabela Tipo Utilizador");
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiTipoUtilizador.addContent();
+							guiTipoUtilizador.open();
+						}
+					});
+					break;			
 				default:
 					System.out.println("Falta o Guilherme fazer");
 					break;
