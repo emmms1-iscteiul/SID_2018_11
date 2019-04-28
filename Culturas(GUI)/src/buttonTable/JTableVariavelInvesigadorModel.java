@@ -2,11 +2,17 @@ package buttonTable;
 
 import javax.swing.table.AbstractTableModel;
 
+import gui.FuncionalidadesInvestigador;
+
 public class JTableVariavelInvesigadorModel  extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Variável" };
 
+
+	public JTableVariavelInvesigadorModel(FuncionalidadesInvestigador funcInv) {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public int getColumnCount() {

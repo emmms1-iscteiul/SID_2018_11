@@ -6,10 +6,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
+import gui.FuncionalidadesAdmin;
+
 public class JTableUtilizadorAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Utilizador", "Mail", "Tipo Utilizador",
 			"Password", "Criar", "Editar", "Apagar" };
+
+	public JTableUtilizadorAdminModel(FuncionalidadesAdmin funcAdmin) {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public int getColumnCount() {

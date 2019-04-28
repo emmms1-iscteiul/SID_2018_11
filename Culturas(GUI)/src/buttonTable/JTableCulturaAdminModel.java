@@ -3,9 +3,15 @@ package buttonTable;
 
 import javax.swing.table.AbstractTableModel;
 
+import gui.FuncionalidadesAdmin;
+
 public class JTableCulturaAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura", "Tipo Cultura" };
+
+	public JTableCulturaAdminModel(FuncionalidadesAdmin funcAdmin) {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public int getColumnCount() {

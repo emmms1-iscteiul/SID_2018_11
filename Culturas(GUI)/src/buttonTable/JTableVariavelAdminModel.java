@@ -7,11 +7,16 @@ import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
 import gui.CriarVariaveisGUI;
+import gui.FuncionalidadesAdmin;
 
 public class JTableVariavelAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Variável","Criar","Editar","Apagar" };
 
+
+	public JTableVariavelAdminModel(FuncionalidadesAdmin funcAdmin) {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public int getColumnCount() {

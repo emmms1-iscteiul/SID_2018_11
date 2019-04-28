@@ -20,8 +20,11 @@ import buttonTable.SelecionarTabelaGui;
 public class AdminGui {
 
 	private JFrame frame;
+	FuncionalidadesAdmin funcAdmin;
+	FuncionalidadesInvestigador funcInv = null;
 
-	public AdminGui(String frameTitle) {
+	public AdminGui(String frameTitle, FuncionalidadesAdmin funcAdmin) {
+		this.funcAdmin=funcAdmin;
 		frame = new JFrame(frameTitle);
 		frame.setSize(450, 200);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -50,30 +53,28 @@ public class AdminGui {
 
 		JLabel selecionarTabela = new JLabel("Selecionar Tabela : ");
 		selecionarTabela.setFont(new Font("Arial", Font.PLAIN, 12));
-		
+
 
 		JComboBox<String> consultarComboBox = new JComboBox<String>();
 		consultarComboBox.addItem("");
 		consultarComboBox.addItem("Cultura");
-		consultarComboBox.addItem("Tipo de Cultura");
 		consultarComboBox.addItem("Medição");
 		consultarComboBox.addItem("Variável");
 		consultarComboBox.addItem("Variável Medida");
 		consultarComboBox.addItem("Utilizador");
-		consultarComboBox.addItem("Tipo de Utilizador");
-		
-consultarComboBox.addActionListener(new ActionListener() {
-			
+
+		consultarComboBox.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 String option = (String) consultarComboBox.getSelectedItem();
+				String option = (String) consultarComboBox.getSelectedItem();
 				 
 				 switch (option) {
 				 case "":
 					 JOptionPane.showMessageDialog(null, "Tem que escolher umas das tabelas definidas!");
 						break;
 				case "Utilizador":
-					final SelecionarTabelaGui guiUtilizador = new SelecionarTabelaGui("Tabela Utilizador");
+					final SelecionarTabelaGui guiUtilizador = new SelecionarTabelaGui("Tabela Utilizador", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiUtilizador.addContent();
@@ -82,7 +83,7 @@ consultarComboBox.addActionListener(new ActionListener() {
 					});
 					break;	
 				case "Variável":
-					final SelecionarTabelaGui guiVariavel = new SelecionarTabelaGui("Tabela Variável");
+					final SelecionarTabelaGui guiVariavel = new SelecionarTabelaGui("Tabela Variável", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiVariavel.addContent();
@@ -91,7 +92,7 @@ consultarComboBox.addActionListener(new ActionListener() {
 					});
 					break;		
 				case "Cultura":
-					final SelecionarTabelaGui guiCulturaAdmin = new SelecionarTabelaGui("Tabela Cultura-Admin");
+					final SelecionarTabelaGui guiCulturaAdmin = new SelecionarTabelaGui("Tabela Cultura-Admin", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiCulturaAdmin.addContent();
@@ -99,17 +100,17 @@ consultarComboBox.addActionListener(new ActionListener() {
 						}
 					});
 					break;
-				case "Tipo de Cultura":
-					final SelecionarTabelaGui guiTipoCultura = new SelecionarTabelaGui("Tabela Tipo Cultura");
-					javax.swing.SwingUtilities.invokeLater(new Runnable() {
-						public void run() {
-							guiTipoCultura.addContent();
-							guiTipoCultura.open();
-						}
-					});
-					break;	
+//				case "Tipo de Cultura":
+//					final SelecionarTabelaGui guiTipoCultura = new SelecionarTabelaGui("Tabela Tipo Cultura");
+//					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+//						public void run() {
+//							guiTipoCultura.addContent();
+//							guiTipoCultura.open();
+//						}
+//					});
+//					break;	
 				case "Medição":
-					final SelecionarTabelaGui guiMedicaoAdmin = new SelecionarTabelaGui("Tabela Medição-Admin");
+					final SelecionarTabelaGui guiMedicaoAdmin = new SelecionarTabelaGui("Tabela Medição-Admin", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiMedicaoAdmin.addContent();
@@ -118,7 +119,7 @@ consultarComboBox.addActionListener(new ActionListener() {
 					});
 					break;		
 				case "Variável Medida":
-					final SelecionarTabelaGui guiVariavelMedidaAdmin = new SelecionarTabelaGui("Tabela Variavel Medida-Admin");
+					final SelecionarTabelaGui guiVariavelMedidaAdmin = new SelecionarTabelaGui("Tabela Variavel Medida-Admin", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiVariavelMedidaAdmin.addContent();
@@ -126,15 +127,15 @@ consultarComboBox.addActionListener(new ActionListener() {
 						}
 					});
 					break;		
-				case "Tipo de Utilizador":
-					final SelecionarTabelaGui guiTipoUtilizador = new SelecionarTabelaGui("Tabela Tipo Utilizador");
-					javax.swing.SwingUtilities.invokeLater(new Runnable() {
-						public void run() {
-							guiTipoUtilizador.addContent();
-							guiTipoUtilizador.open();
-						}
-					});
-					break;			
+//				case "Tipo de Utilizador":
+//					final SelecionarTabelaGui guiTipoUtilizador = new SelecionarTabelaGui("Tabela Tipo Utilizador");
+//					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+//						public void run() {
+//							guiTipoUtilizador.addContent();
+//							guiTipoUtilizador.open();
+//						}
+//					});
+//					break;			
 				default:
 					System.out.println("Falta o Guilherme fazer");
 					break;
@@ -146,7 +147,7 @@ consultarComboBox.addActionListener(new ActionListener() {
 
 		centerPanel.add(selecionarTabela);
 		centerPanel.add(consultarComboBox);
-		
+
 
 		frame.add(topPanel, BorderLayout.NORTH);
 		frame.add(centerPanel, BorderLayout.CENTER);
@@ -155,11 +156,6 @@ consultarComboBox.addActionListener(new ActionListener() {
 
 	public void open() {
 		frame.setVisible(true);
-	}
-
-	public static void main(String[] args) {
-		AdminGui frame = new AdminGui("Monotorização de Culturas");
-		frame.open();
 	}
 
 }

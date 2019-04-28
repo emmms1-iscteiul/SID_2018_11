@@ -12,12 +12,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
+import gui.FuncionalidadesAdmin;
+import gui.FuncionalidadesInvestigador;
+
 public class SelecionarTabelaGui {
 
 	private JFrame frame;
 	private String frameTitle;
+	
+	FuncionalidadesAdmin funcAdmin;
+	FuncionalidadesInvestigador funcInv;
 
-	public SelecionarTabelaGui(String frameTitle) {
+	public SelecionarTabelaGui(String frameTitle, FuncionalidadesAdmin funcAdmin, FuncionalidadesInvestigador funcInv) {
+		this.funcAdmin=funcAdmin;
+		this.funcInv=funcInv;
 		frame = new JFrame(frameTitle);
 		this.frameTitle = frameTitle;
 		frame.setSize(800, 500);
@@ -41,7 +49,7 @@ public class SelecionarTabelaGui {
 		JPanel centerPanel = new JPanel();
 
 		if (frameTitle == "Tabela Utilizador") {
-			JTable table = new JTable(new JTableUtilizadorAdminModel());
+			JTable table = new JTable(new JTableUtilizadorAdminModel(funcAdmin));
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(700, 400));
 			table.setFillsViewportHeight(true);
@@ -63,7 +71,7 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableVariavelAdminModel());
+			JTable table = new JTable(new JTableVariavelAdminModel(funcAdmin));
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(400, 400));
 			table.setFillsViewportHeight(true);
@@ -86,7 +94,7 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableCulturaInvestigadorModel());
+			JTable table = new JTable(new JTableCulturaInvestigadorModel(funcInv));
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(500, 400));
 			table.setFillsViewportHeight(true);
@@ -108,7 +116,7 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableMedicaoInvestigadorModel());
+			JTable table = new JTable(new JTableMedicaoInvestigadorModel(funcInv));
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(400, 400));
 			table.setFillsViewportHeight(true);
@@ -129,7 +137,7 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableVariavelMedidaInvestigadorModel());
+			JTable table = new JTable(new JTableVariavelMedidaInvestigadorModel(funcInv));
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(400, 400));
 			table.setFillsViewportHeight(true);
@@ -150,7 +158,7 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableCulturaAdminModel());
+			JTable table = new JTable(new JTableCulturaAdminModel(funcAdmin));
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(400, 400));
 			table.setFillsViewportHeight(true);
@@ -182,7 +190,7 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableMedicaoAdminModel());
+			JTable table = new JTable(new JTableMedicaoAdminModel(funcAdmin));
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(400, 400));
 			table.setFillsViewportHeight(true);
@@ -198,7 +206,7 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableVariavelMedidaAdminModel());
+			JTable table = new JTable(new JTableVariavelMedidaAdminModel(funcAdmin));
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(400, 400));
 			table.setFillsViewportHeight(true);
@@ -231,7 +239,7 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableVariavelInvesigadorModel());
+			JTable table = new JTable(new JTableVariavelInvesigadorModel(funcInv));
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(200, 400));
 			table.setFillsViewportHeight(true);

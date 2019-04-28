@@ -22,7 +22,11 @@ public class InvestigadorGui {
 
 	private JFrame frame;
 
-	public InvestigadorGui(String frameTitle) {
+	FuncionalidadesInvestigador funcInv;
+	FuncionalidadesAdmin funcAdmin = null;
+
+	public InvestigadorGui(String frameTitle, FuncionalidadesInvestigador funcInv) {
+		this.funcInv = funcInv;
 		frame = new JFrame(frameTitle);
 		frame.setSize(450, 200);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -40,37 +44,37 @@ public class InvestigadorGui {
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
-		
+
 		JPanel topPanel=new JPanel();
-		
+
 		JLabel frameLabel = new JLabel("Manutenção De Culturas e Medições");
 		frameLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
 
 		topPanel.add(frameLabel);
-	
+
 		JPanel centerPanel=new JPanel(new GridLayout(4,1));
-		
+
 		JLabel selecionarTabela=new JLabel("Selecionar Tabela ");
-		
+
 		JComboBox<String> consultarComboBox=new JComboBox<String>();
 		consultarComboBox.addItem("");
 		consultarComboBox.addItem("Cultura");
 		consultarComboBox.addItem("Medição");
 		consultarComboBox.addItem("Variável");
 		consultarComboBox.addItem("Variável Medida");
-		
+
 		consultarComboBox.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 String option = (String) consultarComboBox.getSelectedItem();
-				 
-				 switch (option) {
-				 case "":
-					 JOptionPane.showMessageDialog(null, "Tem que escolher umas das tabelas definidas!");
-						break;
+				String option = (String) consultarComboBox.getSelectedItem();
+
+				switch (option) {
+				case "":
+					JOptionPane.showMessageDialog(null, "Tem que escolher umas das tabelas definidas!");
+					break;
 				case "Cultura":
-					final SelecionarTabelaGui guiConsulta = new SelecionarTabelaGui("Tabela Cultura-Investigador");
+					final SelecionarTabelaGui guiConsulta = new SelecionarTabelaGui("Tabela Cultura-Investigador", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiConsulta.addContent();
@@ -79,7 +83,7 @@ public class InvestigadorGui {
 					});
 					break;
 				case "Medição":
-					final SelecionarTabelaGui guiMedicao = new SelecionarTabelaGui("Tabela Medição");
+					final SelecionarTabelaGui guiMedicao = new SelecionarTabelaGui("Tabela Medição", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiMedicao.addContent();
@@ -88,7 +92,7 @@ public class InvestigadorGui {
 					});
 					break;	
 				case "Variável Medida":
-					final SelecionarTabelaGui guiVariavelMedida = new SelecionarTabelaGui("Tabela Variável Medida");
+					final SelecionarTabelaGui guiVariavelMedida = new SelecionarTabelaGui("Tabela Variável Medida", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiVariavelMedida.addContent();
@@ -97,7 +101,7 @@ public class InvestigadorGui {
 					});
 					break;
 				case "Variável":
-					final SelecionarTabelaGui guiVariavel = new SelecionarTabelaGui("Tabela Variavel-Investigador");
+					final SelecionarTabelaGui guiVariavel = new SelecionarTabelaGui("Tabela Variavel-Investigador", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiVariavel.addContent();
@@ -109,16 +113,15 @@ public class InvestigadorGui {
 					System.out.println("Erro");
 					break;
 				}
-				
+
 			}
 		});
-		
 
-		
+
 		centerPanel.add(selecionarTabela);
 		centerPanel.add(consultarComboBox);
-		
-		
+
+
 		frame.add(topPanel,BorderLayout.NORTH);
 		frame.add(centerPanel,BorderLayout.CENTER);
 
@@ -126,11 +129,6 @@ public class InvestigadorGui {
 
 	public void open() {
 		frame.setVisible(true);
-	}
-
-	public static void main(String[] args) {
-		InvestigadorGui frame = new InvestigadorGui("Monotorização de Culturas");
-		frame.open();
 	}
 
 }

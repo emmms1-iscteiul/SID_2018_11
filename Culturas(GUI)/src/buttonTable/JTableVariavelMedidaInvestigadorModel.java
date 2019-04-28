@@ -6,9 +6,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
+import gui.FuncionalidadesInvestigador;
+
 public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		private static final long serialVersionUID = 1L;
 		private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior","Criar", "Editar" };
+
+		public JTableVariavelMedidaInvestigadorModel(FuncionalidadesInvestigador funcInv) {
+			// TODO Auto-generated constructor stub
+		}
 
 		@Override
 		public int getColumnCount() {

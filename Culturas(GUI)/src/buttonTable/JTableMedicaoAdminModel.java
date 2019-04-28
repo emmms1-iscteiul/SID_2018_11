@@ -2,10 +2,16 @@ package buttonTable;
 
 import javax.swing.table.AbstractTableModel;
 
+import gui.FuncionalidadesAdmin;
+
 public class JTableMedicaoAdminModel  extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medição",	"Valor Medição"};
+
+	public JTableMedicaoAdminModel(FuncionalidadesAdmin funcAdmin) {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public int getColumnCount() {

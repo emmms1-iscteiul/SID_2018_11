@@ -18,6 +18,8 @@ import javax.swing.WindowConstants;
 public class LoginGui {
 
 	private JFrame frame;
+	FuncionalidadesAdmin funcAdmin = new FuncionalidadesAdmin();
+	FuncionalidadesInvestigador funcInv = new FuncionalidadesInvestigador();
 
 	public LoginGui(String frameTitle) {
 		frame = new JFrame(frameTitle);
@@ -71,10 +73,10 @@ public class LoginGui {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				InvestigadorGui investigadorFrame = new InvestigadorGui("Monotorização de Culturas");
+				funcAdmin.login(usernameText, passwordText);
+				AdminGui adminFrame = new AdminGui("Monotorização de Culturas", funcAdmin);
 				frame.dispose();
-				investigadorFrame.open();
-				
+				adminFrame.open();
 			}
 		});
 		
@@ -86,7 +88,7 @@ public class LoginGui {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				RegistGui registFrame = new RegistGui("Monotorização de Culturas");
+				RegistGui registFrame = new RegistGui("Monotorização de Culturas", funcAdmin);
 				frame.dispose();
 				registFrame.open();
 				

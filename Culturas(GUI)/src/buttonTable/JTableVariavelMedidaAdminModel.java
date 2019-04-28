@@ -3,9 +3,15 @@ package buttonTable;
 
 import javax.swing.table.AbstractTableModel;
 
+import gui.FuncionalidadesAdmin;
+
 public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior" };
+
+	public JTableVariavelMedidaAdminModel(FuncionalidadesAdmin funcAdmin) {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public int getColumnCount() {
