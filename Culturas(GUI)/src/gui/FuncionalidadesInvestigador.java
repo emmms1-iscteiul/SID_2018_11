@@ -287,29 +287,29 @@ public class FuncionalidadesInvestigador {
 		}
 	}
 	
-	public void filtrarVariaveisMedidasTudo() {
+	public ResultSet filtrarVariaveisMedidasTudo() {
 
+		ResultSet variaveisMedidasT = null;
+		
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call filtrarVariaveisMedidasTudo()}");
 			cs.execute();
 
-			ResultSet myRs = cs.getResultSet();
-
-			while(myRs.next()) {
-				System.out.println(myRs.getString("LimiteInferior"));
-				System.out.println(myRs.getString("LimiteSuperior"));
-				System.out.println(myRs.getString("NomeCultura"));
-				System.out.println(myRs.getString("NomeVariavel"));
-			}
+			variaveisMedidasT = cs.getResultSet();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return variaveisMedidasT;
 	}
 	
 
-	public void filtrarVariaveisMedidas(JTextField nomeC, JTextField nomeVar) {
+	public ResultSet filtrarVariaveisMedidas(JTextField nomeC, JTextField nomeVar) {
 
+		ResultSet variaveisMedidas = null;
+		
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call filtrarVariaveisMedidas(?,?)}");
@@ -317,100 +317,93 @@ public class FuncionalidadesInvestigador {
 			cs.setString(2, nomeVar.getText());
 			cs.execute();
 
-			ResultSet myRs = cs.getResultSet();
+			variaveisMedidas = cs.getResultSet();
 
-			while(myRs.next()) {
-				System.out.println(myRs.getString("LimiteInferior"));
-				System.out.println(myRs.getString("LimiteSuperior"));
-				System.out.println(myRs.getString("NomeCultura"));
-				System.out.println(myRs.getString("NomeVariavel"));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return variaveisMedidas;
 	}
 	
-	public void consultarVariaveisInvestigador() {
+	public ResultSet consultarVariaveisInvestigador() {
 
+		ResultSet variaveisInv = null;
+		
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call consultarVariaveisInv()}");
 			cs.execute();
 
-			ResultSet myRs = cs.getResultSet();
+			variaveisInv = cs.getResultSet();
 
-			while(myRs.next()) {
-				System.out.println(myRs.getString("NomeVariavel"));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return variaveisInv;
 	}
 	
-	public void filtrarCulturaTudo() {
+	public ResultSet filtrarCulturaTudo() {
 
+		ResultSet culturaT = null;
+		
 		try {
-
+			
 			CallableStatement cs = myConn.prepareCall("{call filtrarCulturaTudo()}");
 			cs.execute();
 
-			ResultSet myRs = cs.getResultSet();
+			culturaT = cs.getResultSet();
 
-			while(myRs.next()) {
-				System.out.println(myRs.getString("NomeCultura"));
-				System.out.println(myRs.getString("DescricaoCultura"));
-				System.out.println(myRs.getString("NomeUtilizador"));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return culturaT;
 	}
 	
-	public void filtrarCultura(JTextField nomeC) {
+	public ResultSet filtrarCultura(JTextField nomeC) {
 
+		ResultSet cultura = null;
+		
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call filtrarCultura(?)}");
 			cs.setString(1, nomeC.getText());
 			cs.execute();
 
-			ResultSet myRs = cs.getResultSet();
+			cultura = cs.getResultSet();
 
-			while(myRs.next()) {
-				System.out.println(myRs.getString("NomeCultura"));
-				System.out.println(myRs.getString("DescricaoCultura"));
-				System.out.println(myRs.getString("NomeUtilizador"));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return cultura;
 	}
 	
-	public void filtrarMedicaoTudo() {
+	public ResultSet filtrarMedicaoTudo() {
 
+		ResultSet medicaoT = null;
+		
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call filtrarMedicaoTudo()}");
 			cs.execute();
 
-			ResultSet myRs = cs.getResultSet();
+			medicaoT = cs.getResultSet();
 
-			while(myRs.next()) {
-				System.out.println(myRs.getString("NomeCultura"));
-				System.out.println(myRs.getString("NomeVariavel"));
-				System.out.println(myRs.getString("DataHoraMedicao"));
-				System.out.println(myRs.getString("ValorMedicao"));
-				System.out.println(myRs.getString("LimiteInferior"));
-				System.out.println(myRs.getString("LimiteSuperior"));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return medicaoT;
 	}
 	
 	
-	public void filtrarMedicao(JTextField nomeC, JTextField nomeVar) {
+	public ResultSet filtrarMedicao(JTextField nomeC, JTextField nomeVar) {
 
+		ResultSet medicao = null;
+		
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call filtrarMedicao(?,?)}");
@@ -418,21 +411,13 @@ public class FuncionalidadesInvestigador {
 			cs.setString(2, nomeVar.getText());
 			cs.execute();
 
-			ResultSet myRs = cs.getResultSet();
+			medicao = cs.getResultSet();
 
-			while(myRs.next()) {
-				System.out.println(myRs.getString("NomeCultura"));
-				System.out.println(myRs.getString("NomeVariavel"));
-				System.out.println(myRs.getString("DataHoraMedicao"));
-				System.out.println(myRs.getString("ValorMedicao"));
-				System.out.println(myRs.getString("LimiteInferior"));
-				System.out.println(myRs.getString("LimiteSuperior"));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return medicao;
 	}
 	
-
-
 }

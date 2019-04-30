@@ -221,96 +221,91 @@ public class FuncionalidadesAdmin {
 
 	public ResultSet consultarUtilizadores() {
 
-		ResultSet myRs = null;
+		ResultSet utilizadores = null;
 
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call consultarUtilizadores()}");
 			cs.execute();
 
-			myRs = cs.getResultSet();
+			utilizadores = cs.getResultSet();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return myRs;
+		return utilizadores;
 	}
 
-	public void consultarVariaveis() {
+	public ResultSet consultarVariaveis() {
 
+		ResultSet variaveis = null;
+		
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call consultarVariaveis()}");
 			cs.execute();
 
-			ResultSet myRs = cs.getResultSet();
+			variaveis = cs.getResultSet();
 
-			while(myRs.next()) {
-				System.out.println(myRs.getString("NomeVariavel"));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return variaveis;
 	}
 
-	public void consultarVariaveisMedidas() {
+	public ResultSet consultarVariaveisMedidas() {
 
+		ResultSet variaveisMedidas = null;
+		
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call consultarVariaveisMedidas()}");
 			cs.execute();
 
-			ResultSet myRs = cs.getResultSet();
+			variaveisMedidas = cs.getResultSet();
 
-			while(myRs.next()) {
-				System.out.println(myRs.getDouble("LimiteInferior"));
-				System.out.println(myRs.getDouble("LimiteSuperior"));
-				System.out.println(myRs.getString("NomeCultura"));
-				System.out.println(myRs.getString("NomeVariavel"));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return variaveisMedidas;
 	}
 
-	public void consultarMedicoes() {
+	public ResultSet consultarMedicoes() {
+		
+		ResultSet medicoes = null;
 
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call consultarMedicoes()}");
 			cs.execute();
 
-			ResultSet myRs = cs.getResultSet();
+			medicoes = cs.getResultSet();
 
-			while(myRs.next()) {
-				System.out.println(myRs.getString("DataHoraMedicao"));
-				System.out.println(myRs.getDouble("ValorMedicao"));
-				System.out.println(myRs.getString("NomeCultura"));
-				System.out.println(myRs.getString("NomeVariavel"));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return medicoes;
 	}
 
-	public void consultarCulturas() {
+	public ResultSet consultarCulturas() {
 
+		ResultSet culturas = null;
+		
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call consultarCulturas()}");
 			cs.execute();
 
-			ResultSet myRs = cs.getResultSet();
+			culturas = cs.getResultSet();
 
-			while(myRs.next()) {
-				System.out.println(myRs.getString("NomeCultura"));
-				System.out.println(myRs.getString("DescricaoCultura"));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return culturas;
 	}
-
-
 }

@@ -69,7 +69,6 @@ public class MongoMigration extends Thread {
 			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/monotorizacao_de_culturas", "root", "root");
 			System.out.println("Connected successfully!");
 
-
 			DB db = mongoClient.getDB("Sensores");
 			DBCollection table = db.getCollection("Medicoes");
 			DBCursor cursor = table.find();
