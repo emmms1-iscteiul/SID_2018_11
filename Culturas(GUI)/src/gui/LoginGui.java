@@ -6,6 +6,11 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -73,51 +78,80 @@ public class LoginGui {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (/*se for administrador*/) {
+				if (checkUser().equals("Administrador")) {
 					funcAdmin.login(usernameText, passwordText);
 					AdminGui adminFrame = new AdminGui("Monotorização de Culturas", funcAdmin);
 					frame.dispose();
 					adminFrame.open();
+				}
+				else if (checkUser().equals("Investigador")) {
+					funcInv.login(usernameText, passwordText);
+					InvestigadorGui investigadorFrame = new InvestigadorGui("Monotorização de Culturas", funcInv);
+					frame.dispose();
+					investigadorFrame.open();
+				}
+				else {
+					
+				}
+
 			}
-			else if (/*se for investigador*/) {
-				funcInv.login(usernameText, passwordText);
-				InvestigadorGui investigadorFrame = new InvestigadorGui("Monotorização de Culturas", funcInv);
+		});
+
+		centerPanel.add(loginButton);
+
+		JButton registerButton = new JButton("Register");
+
+		registerButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				RegistGui registFrame = new RegistGui("Monotorização de Culturas", funcAdmin);
 				frame.dispose();
-				investigadorFrame.open();
+				registFrame.open();
+
 			}
+		});
 
+		bottomPanel.add(registerButton);
+
+		frame.add(topPanel, BorderLayout.PAGE_START);
+		frame.add(centerPanel, BorderLayout.CENTER);
+		frame.add(bottomPanel,BorderLayout.SOUTH);
+
+	}
+
+	public void open() {
+		frame.setVisible(true);
+	}
+
+	public String checkUser() {
+		
+		String tipo = "";
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/monotorizacao_de_culturas", "root", "root");
+			System.out.println("Connected successfully!");
+
+			CallableStatement cs = myConn.prepareCall("{call obterTipoUtilizador(?)}");
+			cs.execute();
+			
+			ResultSet tipoU = cs.getResultSet();
+			tipo = tipoU.getString("TipoUtilizador");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	});
 
-				centerPanel.add(loginButton);
+		return tipo;
+	}
 
-				JButton registerButton = new JButton("Register");
-
-				registerButton.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						RegistGui registFrame = new RegistGui("Monotorização de Culturas", funcAdmin);
-						frame.dispose();
-						registFrame.open();
-
-					}
-				});
-
-				bottomPanel.add(registerButton);
-
-				frame.add(topPanel, BorderLayout.PAGE_START);
-				frame.add(centerPanel, BorderLayout.CENTER);
-				frame.add(bottomPanel,BorderLayout.SOUTH);
-
-}
-
-public void open() {
-	frame.setVisible(true);
-}
-
-public static void main(String[] args) {
-	LoginGui frame = new LoginGui("Monotorização de Culturas");
-	frame.open();
-}
+	public static void main(String[] args) {
+		LoginGui frame = new LoginGui("Monotorização de Culturas");
+		frame.open();
+	}
 }
