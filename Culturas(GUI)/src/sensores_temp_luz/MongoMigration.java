@@ -19,9 +19,6 @@ import com.mongodb.MongoClientURI;
 
 public class MongoMigration extends Thread {
 	
-	Map<Integer, Double> medicoesTemp = new HashMap<Integer,Double>();
-	Map<Integer, Double> medicoesLum = new HashMap<Integer,Double>();
-	Map<Integer, String> medicoesTimeStamp = new HashMap<Integer,String>();
 	private ArrayList<Double> valoresTemperatura=new ArrayList<Double>();
 	private ArrayList<Double> valoresLuminosidade=new ArrayList<Double>();
 	private ArrayList<Double> medias=new ArrayList<Double>();
@@ -89,47 +86,22 @@ public class MongoMigration extends Thread {
 				double lumin = (double) cursor.curr().get("Luminosidade");
 				valoresLuminosidade.add(lumin);
 				String dateS = (String) cursor.curr().get("DataHoraMedicao");
-				System.out.println("ID: " + id + " Temperatura: " + temperat + " Luminosidade: " + lumin + " Timestamp:" + dateS);
+				boolean exported = (boolean) cursor.curr().get("Exportado");
+				System.out.println("Temperatura: " + temperat + " Luminosidade: " + lumin + " DataHoraMedicao: " + dateS + " Exportado: " + exported);
 
-				medicoesTemp.put(id, temperat);
-				medicoesLum.put(id, lumin);
-				medicoesTimeStamp.put(id, dateS);
-
-				System.out.println("Inserção no hashmap com sucesso!");
-
-			}
-
-			Statement myStmt = myConn.createStatement();
-			Statement limitesS = myConn.createStatement();
-			
-			ResultSet limites = limitesS.executeQuery("select LimiteInferiorTemperatura, LimiteSuperiorTemperatura, LimiteSuperiorLuz, LimiteInferiorLuz from sistema");
-
-			ResultSet myRs = myStmt.executeQuery("select IDMedicaoLuminosidadeTemperatura from medicoes_luminosidade_e_temperatura");
-			
-			while (limites.next()) {
-				valorSuperiorTemperatura = limites.getDouble("LimiteSuperiorTemperatura");
-				valorInferiorTemperatura = limites.getDouble("LimiteInferiorTemperatura");
-				valorSuperiorLuminosidade = limites.getDouble("LimiteSuperiorLuz");
-				valorInferiorLuminosidade = limites.getDouble("LimiteInferiorLuz");
-			}
-			
-			while (myRs.next()) {
-				if(valoresTemperatura.size()>1)	{
-					media(valoresTemperatura);
-				
-				}
-				if(valoresLuminosidade.size()>1)	{
-					media(valoresLuminosidade);
-				}
-				//if (!medicoesTemp.containsKey(myRs.getInt("IDMedicaoLuminosidadeTemperatura")) && !medicoesLum.containsKey(myRs.getInt("IDMedicaoLuminosidadeTemperatura"))) {
-					String sqlQuery = "insert into medicoes_luminosidade_e_temperatura(DataHoraMedicaoLuminosidadeTemperatura, ValorMedicaoTemperatura, ValorMedicaoLuminosidade) values (?, "+medicoesTemp.get(myRs.getInt("IDMedicaoLuminosidadeTemperatura"))+", "+medicoesLum.get(myRs.getInt("IDMedicaoLuminosidadeTemperatura"))+")";
+				if (!exported) {
+					String sqlQuery = "insert into medicoes_luminosidade_e_temperatura(DataHoraMedicaoLuminosidadeTemperatura, ValorMedicaoTemperatura, ValorMedicaoLuminosidade) values (?, "+temperat+", "+lumin+")";
 
 					PreparedStatement stmt = myConn.prepareStatement(sqlQuery);
-					java.sql.Timestamp dateSS = Timestamp.valueOf(medicoesTimeStamp.get(myRs.getInt("IDMedicaoLuminosidadeTemperatura")));
+					java.sql.Timestamp dateSS = Timestamp.valueOf(dateS);
 					stmt.setTimestamp(1, dateSS);
 					stmt.executeUpdate();
-					System.out.println("Insert success!");
-				//} 
+					
+					
+					cursor.curr().put("Exportado", true);
+				}
+				
+
 			}
 
 			mongoClient.close();

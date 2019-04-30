@@ -210,23 +210,22 @@ public class FuncionalidadesAdmin {
 
 	}
 
-	public void consultarUtilizadores() {
+	public ResultSet consultarUtilizadores() {
 
+		ResultSet myRs = null;
+		
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call consultarUtilizadores()}");
 			cs.execute();
 
-			ResultSet myRs = cs.getResultSet();
+			myRs = cs.getResultSet();
 
-			while(myRs.next()) {
-				System.out.println(myRs.getString("Email"));
-				System.out.println(myRs.getString("NomeUtilizador"));
-				System.out.println(myRs.getString("Passwor"));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return myRs;
 	}
 
 	public void consultarVariaveis() {
