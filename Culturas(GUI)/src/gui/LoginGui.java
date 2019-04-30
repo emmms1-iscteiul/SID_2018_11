@@ -48,15 +48,15 @@ public class LoginGui {
 
 		topPanel.add(loginLabel);
 
-		
+
 		JLabel usernameLabel = new JLabel("Username: ");
 		usernameLabel.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField usernameText = new JTextField("", 10);
-		
+
 		JLabel passwordLabel = new JLabel("Password: ");
 		passwordLabel.setFont(new Font("Arial", Font.BOLD, 13));
 		JPasswordField passwordText = new JPasswordField("", 10);
-		
+
 		Font font = usernameText.getFont();
 		float size = font.getSize() + 1.0f;
 		usernameText.setFont( font.deriveFont(size) );
@@ -68,47 +68,56 @@ public class LoginGui {
 		centerPanel.add(passwordText);
 
 		JButton loginButton = new JButton("Login");
-		
+
 		loginButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				funcAdmin.login(usernameText, passwordText);
-				AdminGui adminFrame = new AdminGui("Monotorização de Culturas", funcAdmin);
-				frame.dispose();
-				adminFrame.open();
+				if (/*se for administrador*/) {
+					funcAdmin.login(usernameText, passwordText);
+					AdminGui adminFrame = new AdminGui("Monotorização de Culturas", funcAdmin);
+					frame.dispose();
+					adminFrame.open();
 			}
-		});
-		
-		centerPanel.add(loginButton);
-		
-		JButton registerButton = new JButton("Register");
-		
-		registerButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				RegistGui registFrame = new RegistGui("Monotorização de Culturas", funcAdmin);
+			else if (/*se for investigador*/) {
+				funcInv.login(usernameText, passwordText);
+				InvestigadorGui investigadorFrame = new InvestigadorGui("Monotorização de Culturas", funcInv);
 				frame.dispose();
-				registFrame.open();
-				
+				investigadorFrame.open();
 			}
-		});
-		
-		bottomPanel.add(registerButton);
 
-		frame.add(topPanel, BorderLayout.PAGE_START);
-		frame.add(centerPanel, BorderLayout.CENTER);
-		frame.add(bottomPanel,BorderLayout.SOUTH);
+		}
+	});
 
-	}
+				centerPanel.add(loginButton);
 
-	public void open() {
-		frame.setVisible(true);
-	}
+				JButton registerButton = new JButton("Register");
 
-	public static void main(String[] args) {
-		LoginGui frame = new LoginGui("Monotorização de Culturas");
-		frame.open();
-	}
+				registerButton.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						RegistGui registFrame = new RegistGui("Monotorização de Culturas", funcAdmin);
+						frame.dispose();
+						registFrame.open();
+
+					}
+				});
+
+				bottomPanel.add(registerButton);
+
+				frame.add(topPanel, BorderLayout.PAGE_START);
+				frame.add(centerPanel, BorderLayout.CENTER);
+				frame.add(bottomPanel,BorderLayout.SOUTH);
+
+}
+
+public void open() {
+	frame.setVisible(true);
+}
+
+public static void main(String[] args) {
+	LoginGui frame = new LoginGui("Monotorização de Culturas");
+	frame.open();
+}
 }
