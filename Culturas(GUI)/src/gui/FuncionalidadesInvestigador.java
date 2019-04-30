@@ -25,13 +25,7 @@ public class FuncionalidadesInvestigador {
 
 			Class.forName("com.mysql.jdbc.Driver");
 
-			String userU = usernameText.getText();
-			String password = passwordText.getText();
-
-			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/monotorizacao_de_culturas?noAccessToProcedureBodies=true", userU, password);
-
-			System.out.println("Connected successfully!");
-
+			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/monotorizacao_de_culturas?noAccessToProcedureBodies=true", usernameText.getText(), passwordText.getText());
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

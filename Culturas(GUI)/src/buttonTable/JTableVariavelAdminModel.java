@@ -6,16 +6,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-import gui.CriarVariaveisGUI;
+import gui.CriarVariavelGUI;
 import gui.FuncionalidadesAdmin;
 
 public class JTableVariavelAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Variável","Criar","Editar","Apagar" };
 
-
+	FuncionalidadesAdmin funcAdmin;
+	
 	public JTableVariavelAdminModel(FuncionalidadesAdmin funcAdmin) {
 		// TODO Auto-generated constructor stub
+		this.funcAdmin = funcAdmin;
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 			final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoCriar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					CriarVariaveisGUI frame = new CriarVariaveisGUI("Inserir Variavel");
+					CriarVariavelGUI frame = new CriarVariavelGUI("Inserir Variavel", funcAdmin);
 					frame.open();
 						
 				}

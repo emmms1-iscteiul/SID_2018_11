@@ -56,7 +56,6 @@ public class FuncionalidadesAdmin {
 			Class.forName("com.mysql.jdbc.Driver");
 
 			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/monotorizacao_de_culturas", "root", "root");
-			System.out.println("Connected successfully!");
 
 			CallableStatement cs = myConn.prepareCall("{call inserirAdmin(?,?,?)}");			
 			cs.setString(1, adminEmailText.getText());

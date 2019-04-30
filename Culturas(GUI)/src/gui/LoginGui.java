@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -78,20 +79,20 @@ public class LoginGui {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (checkUser().equals("Administrador")) {
+				if (checkUser(usernameText).equals("Administrador")) {
 					funcAdmin.login(usernameText, passwordText);
 					AdminGui adminFrame = new AdminGui("Monotorização de Culturas", funcAdmin);
 					frame.dispose();
 					adminFrame.open();
 				}
-				else if (checkUser().equals("Investigador")) {
+				else if (checkUser(usernameText).equals("Investigador")) {
 					funcInv.login(usernameText, passwordText);
 					InvestigadorGui investigadorFrame = new InvestigadorGui("Monotorização de Culturas", funcInv);
 					frame.dispose();
 					investigadorFrame.open();
 				}
 				else {
-					
+					JOptionPane.showMessageDialog(frame, "Utilizador não existe", "ERRO - NECESSÁRIO REGISTAR PRIMEIRO", JOptionPane.ERROR_MESSAGE);  
 				}
 
 			}
@@ -124,7 +125,7 @@ public class LoginGui {
 		frame.setVisible(true);
 	}
 
-	public String checkUser() {
+	public String checkUser(JTextField usernameText) {
 		
 		String tipo = "";
 		
@@ -132,13 +133,15 @@ public class LoginGui {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/monotorizacao_de_culturas", "root", "root");
-			System.out.println("Connected successfully!");
 
 			CallableStatement cs = myConn.prepareCall("{call obterTipoUtilizador(?)}");
+			cs.setString(1, usernameText.getText());
 			cs.execute();
 			
 			ResultSet tipoU = cs.getResultSet();
-			tipo = tipoU.getString("TipoUtilizador");
+			while (tipoU.next()) {
+				tipo = tipoU.getString("TipoUtilizador");
+			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
