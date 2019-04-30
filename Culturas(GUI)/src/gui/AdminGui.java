@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -50,7 +51,6 @@ public class AdminGui {
 
 		JLabel selecionarTabela = new JLabel("Selecionar Tabela : ");
 		selecionarTabela.setFont(new Font("Arial", Font.PLAIN, 12));
-		
 
 		JComboBox<String> consultarComboBox = new JComboBox<String>();
 		consultarComboBox.addItem("");
@@ -61,17 +61,17 @@ public class AdminGui {
 		consultarComboBox.addItem("Variável Medida");
 		consultarComboBox.addItem("Utilizador");
 		consultarComboBox.addItem("Tipo de Utilizador");
-		
-consultarComboBox.addActionListener(new ActionListener() {
-			
+
+		consultarComboBox.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 String option = (String) consultarComboBox.getSelectedItem();
-				 
-				 switch (option) {
-				 case "":
-					 JOptionPane.showMessageDialog(null, "Tem que escolher umas das tabelas definidas!");
-						break;
+				String option = (String) consultarComboBox.getSelectedItem();
+
+				switch (option) {
+				case "":
+					JOptionPane.showMessageDialog(null, "Tem que escolher umas das tabelas definidas!");
+					break;
 				case "Utilizador":
 					final SelecionarTabelaGui guiUtilizador = new SelecionarTabelaGui("Tabela Utilizador");
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -80,7 +80,7 @@ consultarComboBox.addActionListener(new ActionListener() {
 							guiUtilizador.open();
 						}
 					});
-					break;	
+					break;
 				case "Variável":
 					final SelecionarTabelaGui guiVariavel = new SelecionarTabelaGui("Tabela Variável");
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -89,7 +89,7 @@ consultarComboBox.addActionListener(new ActionListener() {
 							guiVariavel.open();
 						}
 					});
-					break;		
+					break;
 				case "Cultura":
 					final SelecionarTabelaGui guiCulturaAdmin = new SelecionarTabelaGui("Tabela Cultura-Admin");
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -107,7 +107,7 @@ consultarComboBox.addActionListener(new ActionListener() {
 							guiTipoCultura.open();
 						}
 					});
-					break;	
+					break;
 				case "Medição":
 					final SelecionarTabelaGui guiMedicaoAdmin = new SelecionarTabelaGui("Tabela Medição-Admin");
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -116,16 +116,17 @@ consultarComboBox.addActionListener(new ActionListener() {
 							guiMedicaoAdmin.open();
 						}
 					});
-					break;		
+					break;
 				case "Variável Medida":
-					final SelecionarTabelaGui guiVariavelMedidaAdmin = new SelecionarTabelaGui("Tabela Variavel Medida-Admin");
+					final SelecionarTabelaGui guiVariavelMedidaAdmin = new SelecionarTabelaGui(
+							"Tabela Variavel Medida-Admin");
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiVariavelMedidaAdmin.addContent();
 							guiVariavelMedidaAdmin.open();
 						}
 					});
-					break;		
+					break;
 				case "Tipo de Utilizador":
 					final SelecionarTabelaGui guiTipoUtilizador = new SelecionarTabelaGui("Tabela Tipo Utilizador");
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -134,22 +135,36 @@ consultarComboBox.addActionListener(new ActionListener() {
 							guiTipoUtilizador.open();
 						}
 					});
-					break;			
+					break;
 				default:
 					System.out.println("Falta o Guilherme fazer");
 					break;
 				}
-				
+
 			}
 		});
 
+		JButton logoutButton = new JButton("Logout");
+		
+		logoutButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Admin Logout");
+				System.exit(0);
+			}
+		});
 
 		centerPanel.add(selecionarTabela);
 		centerPanel.add(consultarComboBox);
-		
+
+		JPanel bottomPanel = new JPanel();
+
+		bottomPanel.add(logoutButton);
 
 		frame.add(topPanel, BorderLayout.NORTH);
 		frame.add(centerPanel, BorderLayout.CENTER);
+		frame.add(bottomPanel, BorderLayout.SOUTH);
 
 	}
 

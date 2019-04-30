@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -114,13 +115,29 @@ public class InvestigadorGui {
 		});
 		
 
+	JButton logoutButton = new JButton("Logout");
+		
+		logoutButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Investigador Logout");
+				System.exit(0);
+			}
+		});
 		
 		centerPanel.add(selecionarTabela);
 		centerPanel.add(consultarComboBox);
 		
 		
+		JPanel bottomPanel = new JPanel();
+
+		bottomPanel.add(logoutButton);
+		
+		
 		frame.add(topPanel,BorderLayout.NORTH);
 		frame.add(centerPanel,BorderLayout.CENTER);
+		frame.add(bottomPanel, BorderLayout.SOUTH);
 
 	}
 
