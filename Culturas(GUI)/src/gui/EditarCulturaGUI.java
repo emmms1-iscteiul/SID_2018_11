@@ -21,8 +21,9 @@ public class EditarCulturaGUI {
 	private JFrame frame;
 	
 	FuncionalidadesInvestigador funcInv;
+	int idC = 0;
 
-	public EditarCulturaGUI(String frameTitle, FuncionalidadesInvestigador funcInv) {
+	public EditarCulturaGUI(String frameTitle, FuncionalidadesInvestigador funcInv, int rowIndex) {
 		this.funcInv = funcInv;
 		frame = new JFrame(frameTitle);
 		frame.setSize(350, 240);
@@ -88,11 +89,11 @@ public class EditarCulturaGUI {
 					JOptionPane.showMessageDialog(frame, "Ambos os campos Nome tem que ser preenchidos", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
 				}else{
 					if(!descricaoC.getText().isEmpty() && !nomeCA.getText().isEmpty()) {
-						funcInv.alterarCulturaDescricao(nomeCA, descricaoC);
+						funcInv.alterarCulturaDescricao(nomeCA, descricaoC, idC);
 					}
 
 					if(!nomeC.getText().isEmpty()) {
-						funcInv.alterarCulturaNome(nomeCA, nomeC);
+						funcInv.alterarCulturaNome(nomeCA, nomeC, idC);
 					}
 					JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
 					frame.dispose();

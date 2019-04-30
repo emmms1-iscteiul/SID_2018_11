@@ -101,13 +101,13 @@ public class FuncionalidadesInvestigador {
 		}
 	}
 
-	public void alterarCulturaNome(JTextField nomeCA,  JTextField nomeC) {
+	public void alterarCulturaNome(JTextField nomeCA,  JTextField nomeC, int idC) {
 
 		try {
 
-			CallableStatement cs = myConn.prepareCall("{call alterarCulturaNome(?)}");
+			CallableStatement cs = myConn.prepareCall("{call alterarCulturaNome(?,?)}");
 			cs.setString(1, nomeC.getText());
-			cs.setString(2, nomeCA.getText());
+			cs.setInt(2, idC);
 
 			cs.execute();
 			System.out.println("Change success!");
@@ -119,12 +119,12 @@ public class FuncionalidadesInvestigador {
 
 	}
 
-	public void alterarCulturaDescricao(JTextField nomeC,  JTextField descrC) {
+	public void alterarCulturaDescricao(JTextField nomeC, JTextField descrC, int idC) {
 
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call alterarCulturaDescricao(?,?)}");
-			cs.setString(1, nomeC.getText());
+			cs.setInt(1, idC);
 			cs.setString(2, descrC.getText());
 
 			cs.execute();

@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
 import gui.CriarCulturaGUI;
+import gui.EditarCulturaGUI;
 import gui.FuncionalidadesInvestigador;
 
 public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
@@ -54,7 +55,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					System.out.println("Linha " + rowIndex + " editada!");
+					EditarCulturaGUI frameE = new EditarCulturaGUI("Editar Cultura", funcInv, rowIndex);
 
 				}
 			});
