@@ -11,7 +11,7 @@ import gui.FuncionalidadesInvestigador;
 
 public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura", "Nome Utilizador Responsável", "Criar","Editar", "Apagar" };
+	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura", "Criar","Editar", "Apagar" };
 	private FuncionalidadesInvestigador funcInv;
 
 	public JTableCulturaInvestigadorModel(FuncionalidadesInvestigador funcInv) {
@@ -42,8 +42,6 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 		case 1:
 			return "Descrição Cultura";
 		case 2:
-			return "Nome Utilizador Responsável";
-		case 3:
 			final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoCriar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -52,7 +50,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 				}
 			});
 			return botaoCriar;
-		case 4:
+		case 3:
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -61,7 +59,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 				}
 			});
 			return botaoEditar;
-		case 5:
+		case 4:
 			final JButton botaoApagar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {

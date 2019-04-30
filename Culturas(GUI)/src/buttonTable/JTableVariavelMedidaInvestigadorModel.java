@@ -11,7 +11,7 @@ import gui.FuncionalidadesInvestigador;
 
 public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		private static final long serialVersionUID = 1L;
-		private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior", "Nome Cultura", "Nome Variavel","Criar", "Editar" };
+		private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior","Criar", "Editar" };
 		FuncionalidadesInvestigador funcInv;
 
 		public JTableVariavelMedidaInvestigadorModel(FuncionalidadesInvestigador funcInv) {
@@ -42,10 +42,6 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 			case 1:
 				return "LimiteSuperior";
 			case 2:
-				return "Nome Cultura";
-			case 3:
-				return "Nome Variavel";
-			case 4:
 				final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
 				botaoCriar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -54,7 +50,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 					}
 				});
 				return botaoCriar;
-			case 5:
+			case 3:
 				final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 				botaoEditar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {

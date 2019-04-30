@@ -11,7 +11,7 @@ import gui.FuncionalidadesInvestigador;
 
 	public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 		private static final long serialVersionUID = 1L;
-		private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medição",	"Valor Medição", "Nome Cultura", "Nome Variavel", "Criar", "Editar" };
+		private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medição",	"Valor Medição", "Criar", "Editar" };
 		
 		FuncionalidadesInvestigador funcInv;
 
@@ -43,10 +43,6 @@ import gui.FuncionalidadesInvestigador;
 			case 1:
 				return "Valor Medição";
 			case 2:
-				return "Nome Cultura";
-			case 3:
-				return "Nome Variavel";
-			case 4:
 				final JButton botãoCriar = new JButton(COLUMN_NAMES[columnIndex]);
 				botãoCriar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -56,7 +52,7 @@ import gui.FuncionalidadesInvestigador;
 					}
 				});
 				return botãoCriar;
-			case 5:
+			case 3:
 				final JButton botãoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 				botãoEditar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
