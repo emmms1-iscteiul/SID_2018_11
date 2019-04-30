@@ -6,14 +6,17 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
+import gui.CriarCulturaGUI;
 import gui.FuncionalidadesInvestigador;
 
 public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura", "Tipo Cultura", "Criar","Editar", "Apagar" };
+	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura", "Nome Utilizador Responsável", "Criar","Editar", "Apagar" };
+	private FuncionalidadesInvestigador funcInv;
 
 	public JTableCulturaInvestigadorModel(FuncionalidadesInvestigador funcInv) {
 		// TODO Auto-generated constructor stub
+		this.funcInv = funcInv;
 	}
 
 	@Override
@@ -39,13 +42,13 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 		case 1:
 			return "Descrição Cultura";
 		case 2:
-			return "Tipo Cultura";
+			return "Nome Utilizador Responsável";
 		case 3:
 			final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoCriar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					System.out.println("Linha " + rowIndex + " criada!");
-
+					CriarCulturaGUI frameC = new CriarCulturaGUI("Criar Cultura", funcInv);
+					frameC.open();
 				}
 			});
 			return botaoCriar;

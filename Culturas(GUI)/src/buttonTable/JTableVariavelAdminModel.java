@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
 import gui.CriarVariavelGUI;
+import gui.EditarVariaveisGUI;
 import gui.FuncionalidadesAdmin;
 
 public class JTableVariavelAdminModel extends AbstractTableModel {
@@ -44,8 +45,8 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 			final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoCriar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					CriarVariavelGUI frame = new CriarVariavelGUI("Inserir Variavel", funcAdmin);
-					frame.open();
+					CriarVariavelGUI frameC = new CriarVariavelGUI("Inserir Variavel", funcAdmin);
+					frameC.open();
 						
 				}
 			});
@@ -54,8 +55,8 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					System.out.println("Linha " + rowIndex+" editada!");
-						
+					EditarVariaveisGUI frameE = new EditarVariaveisGUI("Editar Variavel", funcAdmin);
+					frameE.open();
 				}
 			});
 			return botaoEditar;

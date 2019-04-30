@@ -4,14 +4,16 @@ import javax.swing.table.AbstractTableModel;
 
 import gui.FuncionalidadesInvestigador;
 
-public class JTableVariavelInvesigadorModel  extends AbstractTableModel {
+public class JTableVariavelInvestigadorModel  extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Variável" };
+	FuncionalidadesInvestigador funcInv;
 
 
-	public JTableVariavelInvesigadorModel(FuncionalidadesInvestigador funcInv) {
+	public JTableVariavelInvestigadorModel(FuncionalidadesInvestigador funcInv) {
 		// TODO Auto-generated constructor stub
+		this.funcInv = funcInv;
 	}
 
 	@Override

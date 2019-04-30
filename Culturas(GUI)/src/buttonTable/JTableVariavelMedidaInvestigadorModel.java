@@ -6,14 +6,17 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
+import gui.CriarVariaveisMedidasGUI;
 import gui.FuncionalidadesInvestigador;
 
 public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		private static final long serialVersionUID = 1L;
-		private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior","Criar", "Editar" };
+		private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior", "Nome Cultura", "Nome Variavel","Criar", "Editar" };
+		FuncionalidadesInvestigador funcInv;
 
 		public JTableVariavelMedidaInvestigadorModel(FuncionalidadesInvestigador funcInv) {
 			// TODO Auto-generated constructor stub
+			this.funcInv = funcInv;
 		}
 
 		@Override
@@ -39,15 +42,19 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 			case 1:
 				return "LimiteSuperior";
 			case 2:
+				return "Nome Cultura";
+			case 3:
+				return "Nome Variavel";
+			case 4:
 				final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
 				botaoCriar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						System.out.println("Linha " + rowIndex + " criada!");
-
+						CriarVariaveisMedidasGUI frameC = new CriarVariaveisMedidasGUI("Criar Variaveis Medidas", funcInv);
+						frameC.open();
 					}
 				});
 				return botaoCriar;
-			case 3:
+			case 5:
 				final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 				botaoEditar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {

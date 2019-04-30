@@ -6,15 +6,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
+import gui.CriarUtilizadorGUI;
 import gui.FuncionalidadesAdmin;
 
 public class JTableUtilizadorAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "Nome Utilizador", "Mail", "Tipo Utilizador",
+	private static final String[] COLUMN_NAMES = new String[] { "Nome Utilizador", "Mail",
 			"Password", "Criar", "Editar", "Apagar" };
+	FuncionalidadesAdmin funcAdmin;
 
 	public JTableUtilizadorAdminModel(FuncionalidadesAdmin funcAdmin) {
 		// TODO Auto-generated constructor stub
+		this.funcAdmin=funcAdmin;
 	}
 
 	@Override
@@ -40,19 +43,17 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 		case 1:
 			return "Mail";
 		case 2:
-			return "Tipo Utilizador";
-		case 3:
 			return "Password";
-		case 4:
+		case 3:
 			final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoCriar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					System.out.println("Linha " + rowIndex + " criada!");
-
+					CriarUtilizadorGUI frameC = new CriarUtilizadorGUI("Criar Utilizador", funcAdmin);
+					frameC.open();
 				}
 			});
 			return botaoCriar;
-		case 5:
+		case 4:
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {

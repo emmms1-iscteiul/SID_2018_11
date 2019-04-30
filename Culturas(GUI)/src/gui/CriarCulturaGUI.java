@@ -19,8 +19,10 @@ import javax.swing.WindowConstants;
 public class CriarCulturaGUI {
 
 	private JFrame frame;
+	FuncionalidadesInvestigador funcInv;
 
-	public CriarCulturaGUI(String frameTitle) {
+	public CriarCulturaGUI(String frameTitle, FuncionalidadesInvestigador funcInv) {
+		this.funcInv = funcInv;
 		frame = new JFrame(frameTitle);
 		frame.setSize(250, 240);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -80,8 +82,7 @@ public class CriarCulturaGUI {
 				}else if(DescricaoCulturaText.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "Campo DESCRIÇÃO CULTURA não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else{
-				FuncionalidadesInvestigador func = new FuncionalidadesInvestigador();
-				func.inserirCultura(NomeCulturaText, DescricaoCulturaText);
+				funcInv.inserirCultura(NomeCulturaText, DescricaoCulturaText);
 				JOptionPane.showMessageDialog(frame, "Criação com sucesso");
 				frame.dispose();
 
@@ -100,11 +101,5 @@ public class CriarCulturaGUI {
 	public void open() {
 		frame.setVisible(true);
 	}
-
-	public static void main(String[] args) {
-		CriarCulturaGUI frame = new CriarCulturaGUI("Criar Cultura");
-		frame.open();
-	}
-	
 	
 }

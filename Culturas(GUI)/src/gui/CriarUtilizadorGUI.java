@@ -20,8 +20,10 @@ import javax.swing.WindowConstants;
 public class CriarUtilizadorGUI {
 
 	private JFrame frame;
+	FuncionalidadesAdmin funcAdmin;
 
-	public CriarUtilizadorGUI(String frameTitle) {
+	public CriarUtilizadorGUI(String frameTitle, FuncionalidadesAdmin funcAdmin) {
+		this.funcAdmin=funcAdmin;
 		frame = new JFrame(frameTitle);
 		frame.setSize(250, 240);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -103,10 +105,10 @@ public class CriarUtilizadorGUI {
 				}else if(!passwordText.getText().equals(passwordConfText.getText()))	{
 					JOptionPane.showMessageDialog(frame, "Password não coincidem", "ERRO - PASSWORDS DO NOT MATCH", JOptionPane.ERROR_MESSAGE);
 				}else{
+				
+				funcAdmin.inserirInvestigador(nomeUser, eMailUser, passwordText);
 				JOptionPane.showMessageDialog(frame, "Criação com sucesso");
 				frame.dispose();
-				FuncionalidadesAdmin func = new FuncionalidadesAdmin();
-				func.inserirInvestigador(nomeUser, eMailUser, passwordText);
 				}
 			}
 		});
@@ -122,11 +124,5 @@ public class CriarUtilizadorGUI {
 	public void open() {
 		frame.setVisible(true);
 	}
-
-	public static void main(String[] args) {
-		CriarUtilizadorGUI frame = new CriarUtilizadorGUI("Criar Utilizador");
-		frame.open();
-	}
-	
 	
 }
