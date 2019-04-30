@@ -41,6 +41,15 @@ public class FuncionalidadesInvestigador {
 			e.printStackTrace();
 		}
 	}
+	
+	public void logout() {
+		
+		try {
+			myConn.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void inserirCultura(JTextField nomeCultura, JTextField descricaoCultura) {
 

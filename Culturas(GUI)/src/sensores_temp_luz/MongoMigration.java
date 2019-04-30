@@ -3,13 +3,9 @@ package sensores_temp_luz;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -80,7 +76,6 @@ public class MongoMigration extends Thread {
 			
 			while(cursor.hasNext()) {
 				
-				int id = (int) cursor.next().get("_id");
 				double temperat = (double) cursor.curr().get("Temperatura");
 				valoresTemperatura.add(temperat);
 				double lumin = (double) cursor.curr().get("Luminosidade");
@@ -97,11 +92,8 @@ public class MongoMigration extends Thread {
 					stmt.setTimestamp(1, dateSS);
 					stmt.executeUpdate();
 					
-					
 					cursor.curr().put("Exportado", true);
 				}
-				
-
 			}
 
 			mongoClient.close();
@@ -116,9 +108,6 @@ public class MongoMigration extends Thread {
 			e.printStackTrace();
 		} 
 	}
-	
-
-
 }
 
 

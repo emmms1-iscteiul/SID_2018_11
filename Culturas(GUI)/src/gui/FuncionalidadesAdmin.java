@@ -38,6 +38,15 @@ public class FuncionalidadesAdmin {
 		}
 	}
 
+	public void logout() {
+
+		try {
+			myConn.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	@SuppressWarnings("deprecation")
 	public void inserirAdmin(JTextField usernameText, JTextField adminEmailText, JPasswordField passwordText) {
@@ -213,7 +222,7 @@ public class FuncionalidadesAdmin {
 	public ResultSet consultarUtilizadores() {
 
 		ResultSet myRs = null;
-		
+
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call consultarUtilizadores()}");
@@ -224,7 +233,7 @@ public class FuncionalidadesAdmin {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return myRs;
 	}
 
@@ -264,7 +273,7 @@ public class FuncionalidadesAdmin {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void consultarMedicoes() {
 
 		try {
@@ -284,7 +293,7 @@ public class FuncionalidadesAdmin {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void consultarCulturas() {
 
 		try {
@@ -302,6 +311,6 @@ public class FuncionalidadesAdmin {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+
 }
