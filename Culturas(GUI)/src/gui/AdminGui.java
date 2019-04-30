@@ -21,8 +21,11 @@ import buttonTable.SelecionarTabelaGui;
 public class AdminGui {
 
 	private JFrame frame;
+	FuncionalidadesAdmin funcAdmin;
+	FuncionalidadesInvestigador funcInv = null;
 
-	public AdminGui(String frameTitle) {
+	public AdminGui(String frameTitle, FuncionalidadesAdmin funcAdmin) {
+		this.funcAdmin=funcAdmin;
 		frame = new JFrame(frameTitle);
 		frame.setSize(450, 200);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -172,9 +175,5 @@ public class AdminGui {
 		frame.setVisible(true);
 	}
 
-	public static void main(String[] args) {
-		AdminGui frame = new AdminGui("Monotorização de Culturas");
-		frame.open();
-	}
 
 }

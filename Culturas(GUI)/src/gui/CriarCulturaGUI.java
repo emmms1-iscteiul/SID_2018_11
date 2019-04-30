@@ -16,21 +16,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-public class CriarVariaveisGUI {
+public class CriarCulturaGUI {
 
 	private JFrame frame;
-	private JTextField nomeVariavelText = new JTextField("",10);
 
-	public CriarVariaveisGUI(String frameTitle) {
+	public CriarCulturaGUI(String frameTitle) {
 		frame = new JFrame(frameTitle);
-		frame.setSize(300, 250);
+		frame.setSize(250, 240);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 		frame.setLocation(x, y);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		addContent();
-		getName();
 	}
 
 	public JFrame getFrame() {
@@ -44,35 +42,49 @@ public class CriarVariaveisGUI {
 		JPanel centerPanel = new JPanel(new GridLayout(4,1));
 		JPanel bottomPanel = new JPanel();
 
-		JLabel registerLabel = new JLabel("Criar Variável");
+		JLabel registerLabel = new JLabel("Criar Cultura");
 		registerLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 30));
 
 		topPanel.add(registerLabel);
 
 		
-		JLabel nomeVariavel = new JLabel("Nome Variável:");
-		nomeVariavel.setFont(new Font("Arial", Font.BOLD, 13));
-//		JTextField nomeVariavelText = new JTextField("",10);
+		JLabel NomeCultura = new JLabel("Nome Cultura:");
+		NomeCultura.setFont(new Font("Arial", Font.BOLD, 13));
+		JTextField NomeCulturaText = new JTextField("",10);
+		
+		JLabel DescricaoCultura = new JLabel("Descricão Cultura:");
+		DescricaoCultura.setFont(new Font("Arial", Font.BOLD, 13));
+		JTextField DescricaoCulturaText = new JTextField("",50);
 		
 		
-		Font font = nomeVariavel.getFont();
+		
+		Font font = NomeCulturaText.getFont();
 		float size = font.getSize() + 1.0f;
-		nomeVariavel.setFont( font.deriveFont(size) );
+		NomeCulturaText.setFont( font.deriveFont(size) );
+		DescricaoCulturaText.setFont( font.deriveFont(size) );
 
-		centerPanel.add(nomeVariavel);
-		centerPanel.add(nomeVariavelText);
-	
+		centerPanel.add(NomeCultura);
+		centerPanel.add(NomeCulturaText);
+		
+		centerPanel.add(DescricaoCultura);
+		centerPanel.add(DescricaoCulturaText);
 
-		JButton registerButton = new JButton("Inserir");
+
+		JButton registerButton = new JButton("Criar");
 		registerButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(nomeVariavelText.getText().equals("")) {
-					JOptionPane.showMessageDialog(frame, "Campo NOME VARIAVEL não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
+				if(NomeCulturaText.getText().equals("")) {
+					JOptionPane.showMessageDialog(frame, "Campo NOME CULTURA não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
+				}else if(DescricaoCulturaText.getText().equals("")) {
+					JOptionPane.showMessageDialog(frame, "Campo DESCRIÇÃO CULTURA não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else{
-				JOptionPane.showMessageDialog(frame, "Inserção com sucesso");
+				FuncionalidadesInvestigador func = new FuncionalidadesInvestigador();
+				func.inserirCultura(NomeCulturaText, DescricaoCulturaText);
+				JOptionPane.showMessageDialog(frame, "Criação com sucesso");
 				frame.dispose();
+
 				}
 			}
 		});
@@ -85,16 +97,12 @@ public class CriarVariaveisGUI {
 
 	}
 
-	public String getName() {
-		return nomeVariavelText.getText();
-	}
-
 	public void open() {
 		frame.setVisible(true);
 	}
 
 	public static void main(String[] args) {
-		CriarVariaveisGUI frame = new CriarVariaveisGUI("Inserir Variavel");
+		CriarCulturaGUI frame = new CriarCulturaGUI("Criar Cultura");
 		frame.open();
 	}
 	

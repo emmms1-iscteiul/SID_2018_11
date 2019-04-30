@@ -22,8 +22,11 @@ import buttonTable.SelecionarTabelaGui;
 public class InvestigadorGui {
 
 	private JFrame frame;
+	FuncionalidadesInvestigador funcInv;
+	FuncionalidadesAdmin funcAdmin = null;
 
-	public InvestigadorGui(String frameTitle) {
+	public InvestigadorGui(String frameTitle, FuncionalidadesInvestigador funcInv) {
+		this.funcInv = funcInv;
 		frame = new JFrame(frameTitle);
 		frame.setSize(450, 200);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -145,9 +148,6 @@ public class InvestigadorGui {
 		frame.setVisible(true);
 	}
 
-	public static void main(String[] args) {
-		InvestigadorGui frame = new InvestigadorGui("Monotorização de Culturas");
-		frame.open();
-	}
+
 
 }
