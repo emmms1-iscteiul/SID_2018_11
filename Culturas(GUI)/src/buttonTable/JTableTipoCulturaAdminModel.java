@@ -2,7 +2,7 @@ package buttonTable;
 
 import javax.swing.table.AbstractTableModel;
 
-public class JTableTipoCulturaModel  extends AbstractTableModel { 
+public class JTableTipoCulturaAdminModel  extends AbstractTableModel { 
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Tipo Cultura" };
 

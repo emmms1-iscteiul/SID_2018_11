@@ -58,12 +58,10 @@ public class AdminGui {
 		JComboBox<String> consultarComboBox = new JComboBox<String>();
 		consultarComboBox.addItem("");
 		consultarComboBox.addItem("Cultura");
-		consultarComboBox.addItem("Tipo de Cultura");
 		consultarComboBox.addItem("Medição");
 		consultarComboBox.addItem("Variável");
 		consultarComboBox.addItem("Variável Medida");
 		consultarComboBox.addItem("Utilizador");
-		consultarComboBox.addItem("Tipo de Utilizador");
 
 		consultarComboBox.addActionListener(new ActionListener() {
 
@@ -121,7 +119,7 @@ public class AdminGui {
 					});
 					break;
 				default:
-					System.out.println("Falta o Guilherme fazer");
+					System.out.println("Error");
 					break;
 				}
 
