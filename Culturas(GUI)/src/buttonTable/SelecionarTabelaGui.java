@@ -12,12 +12,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
+import gui.FuncionalidadesAdmin;
+import gui.FuncionalidadesInvestigador;
+
 public class SelecionarTabelaGui {
 
 	private JFrame frame;
 	private String frameTitle;
+	
+	FuncionalidadesAdmin funcAdmin;
+	FuncionalidadesInvestigador funcInv;
 
-	public SelecionarTabelaGui(String frameTitle) {
+	public SelecionarTabelaGui(String frameTitle, FuncionalidadesAdmin funcAdmin, FuncionalidadesInvestigador funcInv) {
+		this.funcAdmin=funcAdmin;
+		this.funcInv=funcInv;
 		frame = new JFrame(frameTitle);
 		this.frameTitle = frameTitle;
 		frame.setSize(800, 500);
@@ -158,22 +166,6 @@ public class SelecionarTabelaGui {
 			centerPanel.add(scrollPane);
 		}
 		
-		if (frameTitle == "Tabela Tipo Cultura") {
-			frame.setSize(300, 500);
-			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-			frame.setLocation(x, y);
-			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-			JTable table = new JTable(new JTableTipoCulturaModel());
-			JScrollPane scrollPane = new JScrollPane(table);
-			scrollPane.setPreferredSize(new Dimension(200, 400));
-			table.setFillsViewportHeight(true);
-
-			centerPanel.add(scrollPane);
-		}
-		
 		if (frameTitle == "Tabela Medição-Admin") {
 			frame.setSize(500, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -204,24 +196,7 @@ public class SelecionarTabelaGui {
 			table.setFillsViewportHeight(true);
 
 			centerPanel.add(scrollPane);
-		}
-		
-		if (frameTitle == "Tabela Tipo Utilizador") {
-			frame.setSize(300, 500);
-			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-			frame.setLocation(x, y);
-			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-			JTable table = new JTable(new JTableTipoUtilizadorModel());
-			JScrollPane scrollPane = new JScrollPane(table);
-			scrollPane.setPreferredSize(new Dimension(200, 400));
-			table.setFillsViewportHeight(true);
-
-			centerPanel.add(scrollPane);
-		}
-		
+		}		
 
 		if (frameTitle == "Tabela Variavel-Investigador") {
 			frame.setSize(300, 500);
@@ -248,17 +223,17 @@ public class SelecionarTabelaGui {
 		frame.setVisible(true);
 	}
 
-//	public static void main(String[] args) {
-////		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Utilizador");
-////		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Variável");
-////		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Cultura");
-////		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Medição");
+	public static void main(String[] args) {
+		final SelecionarTabelaGui example = new SelecionarTabelaGui("Tabela Cultura-Admin",null,null);
+//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Variável");
+//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Cultura");
+//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Medição");
 //		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Variável Medida");
-//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-//			public void run() {
-//				example.addContent();
-//				example.open();
-//			}
-//		});
-//	}
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				example.addContent();
+				example.open();
+			}
+		});
+	}
 }
