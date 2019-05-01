@@ -80,7 +80,7 @@ public class LoginGui {
 			public void actionPerformed(ActionEvent e) {
 				if (checkUser().equals("Administrador")) {
 					funcAdmin.login(usernameText, passwordText);
-					AdminGui adminFrame = new AdminGui("Monotorização de Culturas", funcAdmin);
+					InvestigadorGui adminFrame = new InvestigadorGui("Monotorização de Culturas", funcInv);
 					frame.dispose();
 					adminFrame.open();
 				}

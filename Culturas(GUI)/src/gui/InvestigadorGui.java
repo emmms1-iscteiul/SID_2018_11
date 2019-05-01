@@ -148,6 +148,10 @@ public class InvestigadorGui {
 		frame.setVisible(true);
 	}
 
+	public static void main(String[] args) {
+		InvestigadorGui gui=new InvestigadorGui("Admin", null);
+		gui.open();
+	}
 
 
 }
