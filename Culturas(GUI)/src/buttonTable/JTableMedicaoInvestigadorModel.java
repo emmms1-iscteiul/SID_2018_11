@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
 import gui.CriarMedicaoGUI;
-import gui.EditarVariaveisMedidasGUI;
 import gui.FuncionalidadesInvestigador;
 
 	public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{

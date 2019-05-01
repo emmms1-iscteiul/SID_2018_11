@@ -59,7 +59,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					EditarUtilizadorGUI frameE = new EditarUtilizadorGUI("Editar Utilizador", funcAdmin, rowIndex);
-
+					frameE.open();
 				}
 			});
 			return botaoEditar;
