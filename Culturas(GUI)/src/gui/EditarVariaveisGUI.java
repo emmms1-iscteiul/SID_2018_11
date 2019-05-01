@@ -20,9 +20,11 @@ public class EditarVariaveisGUI {
 	private JFrame frame;
 	
 	FuncionalidadesAdmin funcAdmin;
+	int idV = 0;
 
-	public EditarVariaveisGUI(String frameTitle, FuncionalidadesAdmin funcAdmin) {
+	public EditarVariaveisGUI(String frameTitle, FuncionalidadesAdmin funcAdmin, int rowIndex) {
 		this.funcAdmin = funcAdmin;
+		this.idV = rowIndex;
 		frame = new JFrame(frameTitle);
 		frame.setSize(350, 200);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -81,7 +83,7 @@ public class EditarVariaveisGUI {
 				}else{
 					
 					if(!newVar.getText().isEmpty()) {
-						funcAdmin.alterarVariavelNome(oldVar, newVar);
+						funcAdmin.alterarVariavelNome(newVar, idV);
 					}
 					JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
 					frame.dispose();

@@ -79,7 +79,6 @@ public class FuncionalidadesInvestigador {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("cultura não existe");
 			e.printStackTrace();
 		}
 	}
@@ -101,7 +100,7 @@ public class FuncionalidadesInvestigador {
 		}
 	}
 
-	public void alterarCulturaNome(JTextField nomeCA,  JTextField nomeC, int idC) {
+	public void alterarCulturaNome(JTextField nomeC, int idC) {
 
 		try {
 
@@ -119,13 +118,13 @@ public class FuncionalidadesInvestigador {
 
 	}
 
-	public void alterarCulturaDescricao(JTextField nomeC, JTextField descrC, int idC) {
+	public void alterarCulturaDescricao(JTextField descrC, int idC) {
 
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call alterarCulturaDescricao(?,?)}");
-			cs.setInt(1, idC);
-			cs.setString(2, descrC.getText());
+			cs.setString(1, descrC.getText());
+			cs.setInt(2, idC);
 
 			cs.execute();
 			System.out.println("Change success!");
@@ -137,13 +136,13 @@ public class FuncionalidadesInvestigador {
 
 	}
 
-	public void alterarCulturaUtilizador(JTextField nomeC,  JTextField utilNome) {
+	public void alterarCulturaUtilizador(JTextField utilNome, int idC) {
 
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call alterarCulturaUtilizador(?,?)}");
 			cs.setString(1, utilNome.getText());
-			cs.setString(2, nomeC.getText());
+			cs.setInt(2, idC);
 
 			cs.execute();
 			System.out.println("Change success!");
@@ -174,13 +173,12 @@ public class FuncionalidadesInvestigador {
 		}
 	}
 
-	public void apagarVariavelMedida(JTextField nomeC, JTextField nomeV) {
+	public void apagarVariavelMedida(int idVM) {
 
 		try {
 
-			CallableStatement cs = myConn.prepareCall("{call apagarVariavelMedida(?,?)}");
-			cs.setString(1, nomeV.getText());
-			cs.setString(2, nomeC.getText());
+			CallableStatement cs = myConn.prepareCall("{call apagarVariavelMedida(?)}");
+			cs.setInt(1, idVM);
 
 			cs.execute();
 			System.out.println("Insert success!");
@@ -191,31 +189,13 @@ public class FuncionalidadesInvestigador {
 		}
 	}
 
-	public void apagarMedicao(JTextField nomeC, JTextField nomeV) {
+	public void alterarVariavelMedidaLimiteInferior(JTextField limiteIText, int idVM) {
 
 		try {
 
-			CallableStatement cs = myConn.prepareCall("{call apagarMedicao(?,?)}");
-			cs.setString(1, nomeV.getText());
-			cs.setString(2, nomeC.getText());
-
-			cs.execute();
-			System.out.println("Insert success!");
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public void alterarVariavelMedidaLimiteInferior(JTextField limiteIText, JTextField nomeC, JTextField nomeV) {
-
-		try {
-
-			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaLimiteInferior(?,?,?)}");
+			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaLimiteInferior(?,?)}");
 			cs.setString(1, limiteIText.getText());
-			cs.setString(2, nomeC.getText());
-			cs.setString(3, nomeV.getText());
+			cs.setInt(2, idVM);
 
 			cs.execute();
 			System.out.println("Change success!");
@@ -226,14 +206,13 @@ public class FuncionalidadesInvestigador {
 		}
 	}
 
-	public void alterarVariavelMedidaLimiteSuperior(JTextField limiteSText, JTextField nomeC, JTextField nomeV) {
+	public void alterarVariavelMedidaLimiteSuperior(JTextField limiteSText, int idVM) {
 
 		try {
 
-			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaLimiteSuperior(?,?,?)}");
+			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaLimiteSuperior(?,?)}");
 			cs.setString(1, limiteSText.getText());
-			cs.setString(2, nomeC.getText());
-			cs.setString(3, nomeV.getText());
+			cs.setInt(2, idVM);
 
 			cs.execute();
 			System.out.println("Change success!");
@@ -244,14 +223,13 @@ public class FuncionalidadesInvestigador {
 		}
 	}
 	
-	public void alterarVariavelMedidaCultura(JTextField nomeCA, JTextField nomeC, JTextField nomeV) {
+	public void alterarVariavelMedidaCultura(JTextField nomeCA, int idVM) {
 
 		try {
 
-			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaCultura(?,?,?)}");
-			cs.setString(1, nomeC.getText());
-			cs.setString(2, nomeCA.getText());
-			cs.setString(3, nomeV.getText());
+			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaCultura(?,?)}");
+			cs.setString(1, nomeCA.getText());
+			cs.setInt(2, idVM);
 
 			cs.execute();
 			System.out.println("Change success!");
@@ -263,14 +241,13 @@ public class FuncionalidadesInvestigador {
 	}
 	
 	
-	public void alterarVariavelMedidaVariavel(JTextField nomeVA, JTextField nomeC, JTextField nomeV) {
+	public void alterarVariavelMedidaVariavel(JTextField nomeVA, int idVM) {
 
 		try {
 
-			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaVariavel(?,?,?)}");
-			cs.setString(1, nomeV.getText());
-			cs.setString(2, nomeVA.getText());
-			cs.setString(3, nomeC.getText());
+			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaVariavel(?,?)}");
+			cs.setString(1, nomeVA.getText());
+			cs.setInt(2, idVM);
 
 			cs.execute();
 			System.out.println("Change success!");

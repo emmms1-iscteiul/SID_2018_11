@@ -2,16 +2,19 @@ package buttonTable;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
 import gui.CriarVariaveisMedidasGUI;
+import gui.EditarVariaveisMedidasGUI;
 import gui.FuncionalidadesInvestigador;
 
 public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		private static final long serialVersionUID = 1L;
-		private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior","Criar", "Editar" };
+		private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior", "Nome Cultura", "Nome Variavel","Criar", "Editar" };
 		FuncionalidadesInvestigador funcInv;
 
 		public JTableVariavelMedidaInvestigadorModel(FuncionalidadesInvestigador funcInv) {
@@ -38,10 +41,62 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		public Object getValueAt(final int rowIndex, final int columnIndex) {
 			switch (columnIndex) {
 			case 0:
-				return "LimiteInferior"	;	
+//				return "LimiteInferior"	;
+				ResultSet variaveisMedidasLI = funcInv.filtrarVariaveisMedidasTudo();
+				try {
+					while (variaveisMedidasLI.next()) {
+						int idVM = Integer.valueOf(variaveisMedidasLI.getObject("IDVariavelMedida").toString());
+						if (idVM == rowIndex) {
+							return variaveisMedidasLI.getObject("LimiteInferior").toString();
+						}
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			case 1:
-				return "LimiteSuperior";
+//				return "LimiteSuperior";
+				ResultSet variaveisMedidasLS = funcInv.filtrarVariaveisMedidasTudo();
+				try {
+					while (variaveisMedidasLS.next()) {
+						int idVM = Integer.valueOf(variaveisMedidasLS.getObject("IDVariavelMedida").toString());
+						if (idVM == rowIndex) {
+							return variaveisMedidasLS.getObject("LimiteSuperior").toString();
+						}
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			case 2:
+//				return "Nome Cultura";
+				ResultSet variaveisMedidasC = funcInv.filtrarVariaveisMedidasTudo();
+				try {
+					while (variaveisMedidasC.next()) {
+						int idVM = Integer.valueOf(variaveisMedidasC.getObject("IDVariavelMedida").toString());
+						if (idVM == rowIndex) {
+							return variaveisMedidasC.getObject("NomeCultura").toString();
+						}
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			case 3:
+//				return "Nome Variavel";
+				ResultSet variaveisMedidasV = funcInv.filtrarVariaveisMedidasTudo();
+				try {
+					while (variaveisMedidasV.next()) {
+						int idVM = Integer.valueOf(variaveisMedidasV.getObject("IDVariavelMedida").toString());
+						if (idVM == rowIndex) {
+							return variaveisMedidasV.getObject("NomeCultura").toString();
+						}
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			case 4:
 				final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
 				botaoCriar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -50,12 +105,12 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 					}
 				});
 				return botaoCriar;
-			case 3:
+			case 5:
 				final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 				botaoEditar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						System.out.println("Linha " + rowIndex + " editada!");
-
+						EditarVariaveisMedidasGUI frameE = new EditarVariaveisMedidasGUI("Editar Variavel Medida", funcInv, rowIndex);
+						frameE.open();
 					}
 				});
 				return botaoEditar;

@@ -20,9 +20,11 @@ public class EditarVariaveisMedidasGUI {
 	private JFrame frame;
 	
 	FuncionalidadesInvestigador funcInv;
+	int idVM = 0;
 
-	public EditarVariaveisMedidasGUI(String frameTitle, FuncionalidadesInvestigador funcInv) {
+	public EditarVariaveisMedidasGUI(String frameTitle, FuncionalidadesInvestigador funcInv, int rowIndex) {
 		this.funcInv = funcInv;
+		this.idVM = rowIndex;
 		frame = new JFrame(frameTitle);
 		frame.setSize(450, 300);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -117,16 +119,16 @@ public class EditarVariaveisMedidasGUI {
 				}else{
 					
 					if(!newInf.getText().isEmpty() && !nomeCultura.getText().isEmpty() && !nomeVariavel.getText().isEmpty()) {
-						funcInv.alterarVariavelMedidaLimiteInferior(newInf, nomeC, nomeV);
+						funcInv.alterarVariavelMedidaLimiteInferior(newInf, idVM);
 					}
 					if(!newSup.getText().isEmpty() && !nomeCultura.getText().isEmpty() && !nomeVariavel.getText().isEmpty()) {
-						funcInv.alterarVariavelMedidaLimiteSuperior(newSup, nomeC, nomeV);
+						funcInv.alterarVariavelMedidaLimiteSuperior(newSup, idVM);
 					}
 					if(!newC.getText().isEmpty() && !nomeCultura.getText().isEmpty() && !nomeVariavel.getText().isEmpty()) {
-						funcInv.alterarVariavelMedidaLimiteSuperior(newC, nomeC, nomeV);
+						funcInv.alterarVariavelMedidaCultura(nomeC, idVM);
 					}
 					if(!newV.getText().isEmpty() && !nomeCultura.getText().isEmpty() && !nomeVariavel.getText().isEmpty()) {
-						funcInv.alterarVariavelMedidaLimiteSuperior(newV, nomeC, nomeV);
+						funcInv.alterarVariavelMedidaVariavel(nomeC, idVM);
 					}
 					JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
 					frame.dispose();

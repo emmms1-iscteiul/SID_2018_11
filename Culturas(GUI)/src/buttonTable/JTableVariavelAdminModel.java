@@ -47,7 +47,6 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 				public void actionPerformed(ActionEvent arg0) {
 					CriarVariavelGUI frameC = new CriarVariavelGUI("Inserir Variavel", funcAdmin);
 					frameC.open();
-						
 				}
 			});
 			return botaoCriar;	
@@ -55,7 +54,7 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					EditarVariaveisGUI frameE = new EditarVariaveisGUI("Editar Variavel", funcAdmin);
+					EditarVariaveisGUI frameE = new EditarVariaveisGUI("Editar Variavel", funcAdmin, rowIndex);
 					frameE.open();
 				}
 			});

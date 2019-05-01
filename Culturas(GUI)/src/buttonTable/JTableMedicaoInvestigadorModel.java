@@ -7,11 +7,12 @@ import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
 import gui.CriarMedicaoGUI;
+import gui.EditarVariaveisMedidasGUI;
 import gui.FuncionalidadesInvestigador;
 
 	public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 		private static final long serialVersionUID = 1L;
-		private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medição",	"Valor Medição", "Criar", "Editar" };
+		private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medição",	"Valor Medição", "Nome Cultura", "Nome Variavel","Criar"};
 		
 		FuncionalidadesInvestigador funcInv;
 
@@ -43,24 +44,18 @@ import gui.FuncionalidadesInvestigador;
 			case 1:
 				return "Valor Medição";
 			case 2:
+				return "Nome Cultura";
+			case 3:
+				return "Nome Variavel";
+			case 4:
 				final JButton botãoCriar = new JButton(COLUMN_NAMES[columnIndex]);
 				botãoCriar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						CriarMedicaoGUI frameC = new CriarMedicaoGUI("Criar Medicao", funcInv);
 						frameC.open();
-
 					}
 				});
 				return botãoCriar;
-			case 3:
-				final JButton botãoEditar = new JButton(COLUMN_NAMES[columnIndex]);
-				botãoEditar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						System.out.println("Linha " + rowIndex + " editada!");
-
-					}
-				});
-				return botãoEditar;
 			default:
 				return "Error";
 			}

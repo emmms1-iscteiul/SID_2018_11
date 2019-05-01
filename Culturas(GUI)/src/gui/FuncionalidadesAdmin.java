@@ -111,13 +111,13 @@ public class FuncionalidadesAdmin {
 		}
 	}
 
-	public void alterarUtilizadorEmail(JTextField nomeUser, JTextField eMailUser) {
+	public void alterarUtilizadorEmail(JTextField nomeUser, int idU) {
 
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call alterarUtilizadorEmail(?)}");
-			cs.setString(1, eMailUser.getText());
-			cs.setString(2, nomeUser.getText());
+			cs.setString(1, nomeUser.getText());
+			cs.setInt(2, idU);
 
 			cs.execute();
 			System.out.println("Change success!");
@@ -129,13 +129,13 @@ public class FuncionalidadesAdmin {
 	}
 
 
-	public void alterarUtilizadorNome(JTextField nomeUserA, JTextField nomeUser) {
+	public void alterarUtilizadorNome(JTextField nomeUserA, int idU) {
 
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call alterarUtilizadorNome(?,?)}");
-			cs.setString(1, nomeUser.getText());
-			cs.setString(2, nomeUserA.getText());
+			cs.setString(1, nomeUserA.getText());
+			cs.setInt(2, idU);
 
 			cs.execute();
 			System.out.println("Change success!");
@@ -147,14 +147,13 @@ public class FuncionalidadesAdmin {
 	}
 
 
-	@SuppressWarnings("deprecation")
-	public void alterarUtilizadorPass(JTextField user, JPasswordField passwordText) {
+	public void alterarUtilizadorPass(JTextField pass, int idU) {
 
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call alterarUtilizadorPass(?,?)}");
-			cs.setString(1, user.getText());
-			cs.setString(2, passwordText.getText());
+			cs.setString(1, pass.getText());
+			cs.setInt(2, idU);
 
 			cs.execute();
 			System.out.println("Change success!");
@@ -200,13 +199,13 @@ public class FuncionalidadesAdmin {
 		}
 	}
 
-	public void alterarVariavelNome(JTextField nomeVarA, JTextField nomeVar) {
+	public void alterarVariavelNome(JTextField nomeVarA, int idV) {
 
 		try {
 
-			CallableStatement cs = myConn.prepareCall("{call alterarVariavel(?,?)}");			
-			cs.setString(1, nomeVar.getText());
-			cs.setString(2, nomeVarA.getText());
+			CallableStatement cs = myConn.prepareCall("{call alterarVariavel(?,?)}");
+			cs.setString(1, nomeVarA.getText());
+			cs.setInt(2, idV);
 
 			cs.execute();
 			System.out.println("Change success!");

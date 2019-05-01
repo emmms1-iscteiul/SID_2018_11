@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
 import gui.CriarUtilizadorGUI;
+import gui.EditarUtilizadorGUI;
 import gui.FuncionalidadesAdmin;
 
 public class JTableUtilizadorAdminModel extends AbstractTableModel {
@@ -57,7 +58,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					System.out.println("Linha " + rowIndex + " editada!");
+					EditarUtilizadorGUI frameE = new EditarUtilizadorGUI("Editar Utilizador", funcAdmin, rowIndex);
 
 				}
 			});

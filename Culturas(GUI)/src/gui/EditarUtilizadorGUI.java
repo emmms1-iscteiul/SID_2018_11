@@ -21,7 +21,12 @@ import javax.swing.WindowConstants;
 public class EditarUtilizadorGUI {
 	private JFrame frame;
 
-	public EditarUtilizadorGUI(String frameTitle) {
+	FuncionalidadesAdmin funcAdmin;
+	int idU = 0;
+
+	public EditarUtilizadorGUI(String frameTitle, FuncionalidadesAdmin funcAdmin, int rowIndex) {
+		this.funcAdmin=funcAdmin;
+		this.idU = rowIndex;
 		frame = new JFrame(frameTitle);
 		frame.setSize(400, 300);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -37,7 +42,7 @@ public class EditarUtilizadorGUI {
 	}
 
 	public void addContent() {
-			
+
 		frame.setLayout(new BorderLayout());
 
 		JPanel topPanel = new JPanel();
@@ -46,42 +51,42 @@ public class EditarUtilizadorGUI {
 
 		JLabel registerLabel = new JLabel("Editar Utilizador");
 		registerLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 30));
-		
+
 		topPanel.add(registerLabel);
-		
+
 		JLabel nomeAntigo = new JLabel("Current Name:");
 		nomeAntigo.setFont(new Font("Arial", Font.BOLD,13));
 		JTextField nomeAntigoUser = new JTextField("", 10);
-		
+
 		JLabel passwordAntiga = new JLabel("Current Password:");
 		passwordAntiga.setFont(new Font("Arial", Font.BOLD,13));
 		JTextField passwordAntigaUser = new JTextField("", 10);
-		
+
 		JLabel tipoU = new JLabel("New Tipo:");
 		tipoU.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField tipoUser = new JTextField("",10);
-		
+
 		JLabel eMail = new JLabel("New Email:");
 		eMail.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField eMailUser = new JTextField("",10);
-		
+
 		JLabel nomeUtilizador = new JLabel("New NomeUtilizador:");
 		nomeUtilizador.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField nomeUser = new JTextField("",10);
-		
+
 		JLabel userPass = new JLabel("New Password:");
 		userPass.setFont(new Font("Arial", Font.BOLD, 13));
 		JPasswordField passwordText = new JPasswordField("",10);
-		
+
 		JLabel userPassConf = new JLabel("Confirm Pass:");
 		userPassConf.setFont(new Font("Arial", Font.BOLD, 13));
 		JPasswordField passwordConfText = new JPasswordField("", 10);
-		
+
 		JLabel apagarU = new JLabel("Apagar Utilizador:");
 		apagarU.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField apagarUser = new JTextField("", 50);
-		
-		
+
+
 		Font font = eMailUser.getFont();
 		float size = font.getSize() + 1.0f;
 		passwordAntigaUser.setFont(font.deriveFont(size));
@@ -95,65 +100,57 @@ public class EditarUtilizadorGUI {
 
 		centerPanel.add(nomeAntigo);
 		centerPanel.add(nomeAntigoUser);
-		
+
 		centerPanel.add(passwordAntiga);
 		centerPanel.add(passwordAntigaUser);
-		
+
 		centerPanel.add(tipoU);
 		centerPanel.add(tipoUser);
-				
+
 		centerPanel.add(eMail);
 		centerPanel.add(eMailUser);
-		
+
 		centerPanel.add(nomeUtilizador);
 		centerPanel.add(nomeUser);
-		
+
 		centerPanel.add(userPass);
 		centerPanel.add(passwordText);
-		
+
 		centerPanel.add(userPassConf);
 		centerPanel.add(passwordConfText);
-		
+
 		centerPanel.add(apagarU);
 		centerPanel.add(apagarUser);
-	
+
 
 		JButton registerButton = new JButton("Criar");
 		registerButton.addActionListener(new ActionListener() {
-			
+
 			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(nomeAntigoUser.getText().equals("")) {
-					JOptionPane.showMessageDialog(frame, "Campo Current User Name não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
-				}else if(passwordAntigaUser.getText().equals("")) {
+				if(passwordAntigaUser.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "Campo Current Password não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}
 				if(!passwordText.getText().equals(passwordConfText.getText()))	{
 					JOptionPane.showMessageDialog(frame, "Passwords não coincidem", "ERRO - PASSWORDS DO NOT MATCH", JOptionPane.ERROR_MESSAGE);
 				}else{
-				JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
-				frame.dispose();
-				FuncionalidadesAdmin func = new FuncionalidadesAdmin();
-				if(!eMailUser.getText().isEmpty()) {
-					func.alterarUtilizadorEmail(nomeAntigoUser, eMailUser);	
-				}
-				if(!nomeUser.getText().isEmpty()) {
-					func.alterarUtilizadorNome(nomeAntigoUser, nomeUser);
-				}
-				if(!passwordText.getText().isEmpty() && nomeUtilizador.getText().isEmpty()) {
-					func.alterarUtilizadorPass(nomeAntigoUser, passwordText);
-				}
-				else if(!passwordText.getText().isEmpty() && !nomeUtilizador.getText().isEmpty()) {
-					func.alterarUtilizadorPass(nomeUser, passwordText);
-				}
-				if (!apagarUser.getText().isEmpty()) {
-					func.apagarUtilizador(apagarUser, nomeAntigoUser);
-				}
+					funcAdmin = new FuncionalidadesAdmin();
+					if(!eMailUser.getText().isEmpty()) {
+						funcAdmin.alterarUtilizadorEmail(eMailUser, idU);	
+					}
+					if(!nomeUser.getText().isEmpty()) {
+						funcAdmin.alterarUtilizadorNome(nomeUser, idU);
+					}
+					if(!passwordText.getText().isEmpty() && nomeUtilizador.getText().isEmpty()) {
+						funcAdmin.alterarUtilizadorPass(passwordText, idU);
+					}
+					JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
+					frame.dispose();
 				}
 			}
 		});
-		
+
 		bottomPanel.add(registerButton);
 
 		frame.add(topPanel, BorderLayout.PAGE_START);
@@ -164,10 +161,5 @@ public class EditarUtilizadorGUI {
 
 	public void open() {
 		frame.setVisible(true);
-	}
-
-	public static void main(String[] args) {
-		EditarUtilizadorGUI frame = new EditarUtilizadorGUI("Editar Utilizador");
-		frame.open();
 	}
 }

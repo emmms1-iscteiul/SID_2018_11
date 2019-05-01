@@ -42,19 +42,26 @@ public class JTableCulturaAdminModel extends AbstractTableModel {
 			ResultSet cultura = funcAdmin.consultarCulturas();
 			try {
 				while(cultura.next()) {
-					return cultura.getObject(rowIndex);
+					int idC = Integer.valueOf(cultura.getObject("IDCultura").toString());
+					if (idC == rowIndex) {
+						return cultura.getObject("NomeCultura").toString();
+					}
+					
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		case 1:
 			//return "Descrição Cultura";
 			ResultSet culturaD = funcAdmin.consultarCulturas();
 			try {
 				while(culturaD.next()) {
-					return culturaD.getObject(rowIndex);
+					int idC = Integer.valueOf(culturaD.getObject("IDCultura").toString());
+					if (idC == rowIndex) {
+						return culturaD.getObject("DescricaoCultura").toString();
+					}
+					
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -65,7 +72,10 @@ public class JTableCulturaAdminModel extends AbstractTableModel {
 			ResultSet culturaU = funcAdmin.consultarCulturas();
 			try {
 				while(culturaU.next()) {
-					return culturaU.getObject(rowIndex);
+					int idC = Integer.valueOf(culturaU.getObject("IDCultura").toString());
+					if (idC == rowIndex) {
+						return culturaU.getObject("NomeUtilizador").toString();
+					}
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
