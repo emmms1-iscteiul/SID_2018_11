@@ -85,7 +85,6 @@ public class CriarCulturaGUI {
 				funcInv.inserirCultura(NomeCulturaText, DescricaoCulturaText);
 				JOptionPane.showMessageDialog(frame, "Criação com sucesso");
 				frame.dispose();
-
 				}
 			}
 		});
@@ -101,5 +100,4 @@ public class CriarCulturaGUI {
 	public void open() {
 		frame.setVisible(true);
 	}
-	
 }

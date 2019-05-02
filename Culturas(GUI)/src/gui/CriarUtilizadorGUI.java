@@ -105,7 +105,6 @@ public class CriarUtilizadorGUI {
 				}else if(!passwordText.getText().equals(passwordConfText.getText()))	{
 					JOptionPane.showMessageDialog(frame, "Password não coincidem", "ERRO - PASSWORDS DO NOT MATCH", JOptionPane.ERROR_MESSAGE);
 				}else{
-				
 				funcAdmin.inserirInvestigador(nomeUser, eMailUser, passwordText);
 				JOptionPane.showMessageDialog(frame, "Criação com sucesso");
 				frame.dispose();
@@ -124,5 +123,4 @@ public class CriarUtilizadorGUI {
 	public void open() {
 		frame.setVisible(true);
 	}
-	
 }

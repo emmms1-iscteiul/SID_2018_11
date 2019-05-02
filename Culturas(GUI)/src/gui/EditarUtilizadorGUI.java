@@ -19,8 +19,8 @@ import javax.swing.WindowConstants;
 
 
 public class EditarUtilizadorGUI {
-	private JFrame frame;
 
+	private JFrame frame;
 	FuncionalidadesAdmin funcAdmin;
 	int idU = 0;
 
@@ -129,13 +129,6 @@ public class EditarUtilizadorGUI {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(passwordAntigaUser.getText().equals("")) {
-					JOptionPane.showMessageDialog(frame, "Campo Current Password não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
-				}
-				if(!passwordText.getText().equals(passwordConfText.getText()))	{
-					JOptionPane.showMessageDialog(frame, "Passwords não coincidem", "ERRO - PASSWORDS DO NOT MATCH", JOptionPane.ERROR_MESSAGE);
-				}else{
-					funcAdmin = new FuncionalidadesAdmin();
 					if(!eMailUser.getText().isEmpty()) {
 						funcAdmin.alterarUtilizadorEmail(eMailUser, idU);	
 					}
@@ -147,7 +140,6 @@ public class EditarUtilizadorGUI {
 					}
 					JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
 					frame.dispose();
-				}
 			}
 		});
 

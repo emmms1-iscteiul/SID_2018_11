@@ -109,5 +109,5 @@ public class CriarMedicaoGUI {
 	public void open() {
 		frame.setVisible(true);
 	}
-	
+
 }

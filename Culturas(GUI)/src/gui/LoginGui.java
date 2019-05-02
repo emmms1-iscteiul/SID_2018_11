@@ -92,9 +92,8 @@ public class LoginGui {
 					investigadorFrame.open();
 				}
 				else {
-					JOptionPane.showMessageDialog(frame, "Utilizador não existe", "ERRO - NECESSÁRIO REGISTAR PRIMEIRO", JOptionPane.ERROR_MESSAGE);  
+					JOptionPane.showMessageDialog(frame, "Utilizador não existe", "ERRO - NECESSÁRIO REGISTAR PRIMEIRO", JOptionPane.ERROR_MESSAGE);
 				}
-
 			}
 		});
 
@@ -126,18 +125,18 @@ public class LoginGui {
 	}
 
 	public String checkUser(JTextField usernameText) {
-		
+
 		String tipo = "";
-		
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			
+
 			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/monotorizacao_de_culturas", "root", "root");
 
 			CallableStatement cs = myConn.prepareCall("{call obterTipoUtilizador(?)}");
 			cs.setString(1, usernameText.getText());
 			cs.execute();
-			
+
 			ResultSet tipoU = cs.getResultSet();
 			while (tipoU.next()) {
 				tipo = tipoU.getString("TipoUtilizador");

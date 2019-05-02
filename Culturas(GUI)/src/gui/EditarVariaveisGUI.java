@@ -75,20 +75,12 @@ public class EditarVariaveisGUI {
 		JButton registerButton = new JButton("Alterar");
 		registerButton.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(!oldVar.getText().isEmpty() && newVar.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(frame, "Ambos os campos Nome tem que ser preenchidos", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
-				}else if(oldVar.getText().isEmpty() && !newVar.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(frame, "Ambos os campos Nome tem que ser preenchidos", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
-				}else{
-					
+			public void actionPerformed(ActionEvent e) {					
 					if(!newVar.getText().isEmpty()) {
 						funcAdmin.alterarVariavelNome(newVar, idV);
 					}
 					JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
-					frame.dispose();
-				}
-					
+					frame.dispose();	
 			}
 		});
 
@@ -103,6 +95,4 @@ public class EditarVariaveisGUI {
 	public void open() {
 		frame.setVisible(true);
 	}
-
-	
 }

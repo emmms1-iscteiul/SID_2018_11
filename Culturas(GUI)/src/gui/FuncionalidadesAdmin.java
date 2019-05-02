@@ -183,12 +183,12 @@ public class FuncionalidadesAdmin {
 	}
 
 
-	public void apagarVariavel(JTextField nomeVar) {
+	public void apagarVariavel(int rowIndex) {
 
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call apagarVariavel(?)}");			
-			cs.setString(1, nomeVar.getText());
+			cs.setInt(1, rowIndex);
 
 			cs.execute();
 			System.out.println("Delete success!");
@@ -208,13 +208,82 @@ public class FuncionalidadesAdmin {
 			cs.setInt(2, idV);
 
 			cs.execute();
+			System.out.println("Insert success!");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void alterarUtilizadorEmail(JTextField nomeUser, JTextField eMailUser) {
+
+		try {
+
+			CallableStatement cs = myConn.prepareCall("{call alterarUtilizadorEmail(?)}");
+			cs.setString(1, eMailUser.getText());
+			cs.setString(2, nomeUser.getText());
+
+			cs.execute();
 			System.out.println("Change success!");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
 
+
+	public void alterarUtilizadorNome(JTextField nomeUserA, JTextField nomeUser) {
+
+		try {
+
+			CallableStatement cs = myConn.prepareCall("{call alterarUtilizadorNome(?,?)}");
+			cs.setString(1, nomeUser.getText());
+			cs.setString(2, nomeUserA.getText());
+
+			cs.execute();
+			System.out.println("Change success!");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+	@SuppressWarnings("deprecation")
+	public void alterarUtilizadorPass(JTextField user, JPasswordField passwordText) {
+
+		try {
+
+			CallableStatement cs = myConn.prepareCall("{call alterarUtilizadorPass(?,?)}");
+			cs.setString(1, user.getText());
+			cs.setString(2, passwordText.getText());
+
+			cs.execute();
+			System.out.println("Change success!");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void apagarVariavel(JTextField nomeVar) {
+
+		try {
+
+			CallableStatement cs = myConn.prepareCall("{call apagarVariavel(?)}");			
+			cs.setString(1, nomeVar.getText());
+
+			cs.execute();
+			System.out.println("Delete success!");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public ResultSet consultarUtilizadores() {

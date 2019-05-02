@@ -44,35 +44,35 @@ public class InvestigadorGui {
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
-		
+
 		JPanel topPanel=new JPanel();
-		
+
 		JLabel frameLabel = new JLabel("Manutenção De Culturas e Medições");
 		frameLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
 
 		topPanel.add(frameLabel);
-	
+
 		JPanel centerPanel=new JPanel(new GridLayout(4,1));
-		
+
 		JLabel selecionarTabela=new JLabel("Selecionar Tabela ");
-		
+
 		JComboBox<String> consultarComboBox=new JComboBox<String>();
 		consultarComboBox.addItem("");
 		consultarComboBox.addItem("Cultura");
 		consultarComboBox.addItem("Medição");
 		consultarComboBox.addItem("Variável");
 		consultarComboBox.addItem("Variável Medida");
-		
+
 		consultarComboBox.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 String option = (String) consultarComboBox.getSelectedItem();
-				 
-				 switch (option) {
-				 case "":
-					 JOptionPane.showMessageDialog(null, "Tem que escolher umas das tabelas definidas!");
-						break;
+				String option = (String) consultarComboBox.getSelectedItem();
+
+				switch (option) {
+				case "":
+					JOptionPane.showMessageDialog(null, "Tem que escolher umas das tabelas definidas!");
+					break;
 				case "Cultura":
 					final SelecionarTabelaGui guiConsulta = new SelecionarTabelaGui("Tabela Cultura-Investigador", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -113,31 +113,31 @@ public class InvestigadorGui {
 					System.out.println("Erro");
 					break;
 				}
-				
+
 			}
 		});
-		
 
-	JButton logoutButton = new JButton("Logout");
-		
+
+		JButton logoutButton = new JButton("Logout");
+
 		logoutButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				funcInv.logout();
 				System.exit(0);
 			}
 		});
-		
+
 		centerPanel.add(selecionarTabela);
 		centerPanel.add(consultarComboBox);
-		
-		
+
+
 		JPanel bottomPanel = new JPanel();
 
 		bottomPanel.add(logoutButton);
-		
-		
+
+
 		frame.add(topPanel,BorderLayout.NORTH);
 		frame.add(centerPanel,BorderLayout.CENTER);
 		frame.add(bottomPanel, BorderLayout.SOUTH);
@@ -147,7 +147,4 @@ public class InvestigadorGui {
 	public void open() {
 		frame.setVisible(true);
 	}
-
-
-
 }

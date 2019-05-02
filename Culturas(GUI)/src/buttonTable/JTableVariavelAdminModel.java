@@ -63,8 +63,7 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 			final JButton botaoApagar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					System.out.println("Linha " + rowIndex+" apagada!");
-						
+					funcAdmin.apagarVariavel(rowIndex);
 				}
 			});
 			return botaoApagar;

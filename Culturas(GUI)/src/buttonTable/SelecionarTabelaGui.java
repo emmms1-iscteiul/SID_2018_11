@@ -223,17 +223,17 @@ public class SelecionarTabelaGui {
 		frame.setVisible(true);
 	}
 
-//	public static void main(String[] args) {
-////		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Utilizador");
-////		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Variável");
-////		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Cultura");
-////		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Medição");
+	public static void main(String[] args) {
+		final SelecionarTabelaGui example = new SelecionarTabelaGui("Tabela Cultura-Admin",null,null);
+//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Variável");
+//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Cultura");
+//		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Medição");
 //		final ConsultarTabelaGui example = new ConsultarTabelaGui("Consultar Variável Medida");
-//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-//			public void run() {
-//				example.addContent();
-//				example.open();
-//			}
-//		});
-//	}
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				example.addContent();
+				example.open();
+			}
+		});
+	}
 }
