@@ -165,16 +165,13 @@ public class FuncionalidadesAdmin {
 	}
 
 
-	public void apagarUtilizador(JTextField emailUtil, JTextField nomeUtil) {
+	public void apagarUtilizador(int rowIndex) {
 
 		try {
 
-			CallableStatement cs = myConn.prepareCall("{call apagarUtilizador(?,?)}");
-			cs.setString(1, emailUtil.getText());
-			cs.setString(2, nomeUtil.getText());
-
+			CallableStatement cs = myConn.prepareCall("{call apagarUtilizador(?)}");
+			cs.setInt(1, rowIndex);
 			cs.execute();
-			System.out.println("Delete success!");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -189,9 +186,7 @@ public class FuncionalidadesAdmin {
 
 			CallableStatement cs = myConn.prepareCall("{call apagarVariavel(?)}");			
 			cs.setInt(1, rowIndex);
-
 			cs.execute();
-			System.out.println("Delete success!");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -223,9 +218,7 @@ public class FuncionalidadesAdmin {
 			CallableStatement cs = myConn.prepareCall("{call alterarUtilizadorEmail(?)}");
 			cs.setString(1, eMailUser.getText());
 			cs.setString(2, nomeUser.getText());
-
 			cs.execute();
-			System.out.println("Change success!");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

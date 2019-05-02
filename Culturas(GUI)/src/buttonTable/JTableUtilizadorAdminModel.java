@@ -2,6 +2,8 @@ package buttonTable;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
@@ -40,11 +42,56 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		switch (columnIndex) {
 		case 0:
-			return "Nome Utilizador";
+//			return "Nome Utilizador";
+			ResultSet utilizadores = funcAdmin.consultarUtilizadores();
+			try {
+				while (utilizadores.next()) {
+					int id = Integer.valueOf(utilizadores.getObject("IDUtilizador").toString());
+					if (id == rowIndex) {
+						return utilizadores.getObject("NomeUtilizador").toString();
+					}
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		case 1:
-			return "Mail";
+//			return "Mail";
+			ResultSet utilizadoresM = funcAdmin.consultarUtilizadores();
+			try {
+				while (utilizadoresM.next()) {
+					int id = Integer.valueOf(utilizadoresM.getObject("IDUtilizador").toString());
+					if (id == rowIndex) {
+						return utilizadoresM.getObject("Email").toString();
+					}
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		case 2:
-			return "Password";
+//			return "Password";
+			ResultSet utilizadoresP = funcAdmin.consultarUtilizadores();
+			try {
+				while (utilizadoresP.next()) {
+					int id = Integer.valueOf(utilizadoresP.getObject("IDUtilizador").toString());
+					if (id == rowIndex) {
+						return utilizadoresP.getObject("Passwor").toString();
+					}
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		case 3:
 			final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoCriar.addActionListener(new ActionListener() {
@@ -67,8 +114,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			final JButton botaoApagar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					System.out.println("Linha " + rowIndex + " apagada!");
-
+					funcAdmin.apagarUtilizador(rowIndex);
 				}
 			});
 			return botaoApagar;

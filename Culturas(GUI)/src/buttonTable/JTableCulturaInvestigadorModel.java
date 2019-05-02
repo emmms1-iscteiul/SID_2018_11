@@ -113,7 +113,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 			final JButton botaoApagar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					System.out.println("Linha " + rowIndex + " apagada!");
+					funcInv.apagarCultura(rowIndex);
 				}
 			});
 			return botaoApagar;	

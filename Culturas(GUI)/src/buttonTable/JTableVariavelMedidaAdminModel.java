@@ -1,6 +1,9 @@
 package buttonTable;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.table.AbstractTableModel;
 
 import gui.FuncionalidadesAdmin;
@@ -34,13 +37,73 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		switch (columnIndex) {
 		case 0:
-			return "LimiteInferior"	;	
+//			return "LimiteInferior"	;
+			ResultSet variaveisMedidas = funcAdmin.consultarVariaveisMedidas();
+			try {
+				while (variaveisMedidas.next()) {
+					int id = Integer.valueOf(variaveisMedidas.getObject("IDVariavelMedida").toString());
+					if (id == rowIndex) {
+						return variaveisMedidas.getObject("LimiteInferior").toString();
+					}
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		case 1:
-			return "LimiteSuperior";
+//			return "LimiteSuperior";
+			ResultSet variaveisMedidasLS = funcAdmin.consultarVariaveisMedidas();
+			try {
+				while (variaveisMedidasLS.next()) {
+					int id = Integer.valueOf(variaveisMedidasLS.getObject("IDVariavelMedida").toString());
+					if (id == rowIndex) {
+						return variaveisMedidasLS.getObject("LimiteSuperior").toString();
+					}
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		case 2:
-			return "Nome Cultura";
+//			return "Nome Cultura";
+			ResultSet variaveisMedidasC = funcAdmin.consultarVariaveisMedidas();
+			try {
+				while (variaveisMedidasC.next()) {
+					int id = Integer.valueOf(variaveisMedidasC.getObject("IDVariavelMedida").toString());
+					if (id == rowIndex) {
+						return variaveisMedidasC.getObject("NomeCultura").toString();
+					}
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		case 3:
-			return "Nome Variavel";
+//			return "Nome Variavel";
+			ResultSet variaveisMedidasV = funcAdmin.consultarVariaveisMedidas();
+			try {
+				while (variaveisMedidasV.next()) {
+					int id = Integer.valueOf(variaveisMedidasV.getObject("IDVariavelMedida").toString());
+					if (id == rowIndex) {
+						return variaveisMedidasV.getObject("NomeVariavel").toString();
+					}
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		default:
 			return "Error";
 		}

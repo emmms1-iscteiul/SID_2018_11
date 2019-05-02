@@ -84,15 +84,13 @@ public class FuncionalidadesInvestigador {
 	}
 
 
-	public void apagarCultura(String nomeCult) {
+	public void apagarCultura(int rowIndex) {
 
 		try {
 
 			CallableStatement cs = myConn.prepareCall("{call apagarCultura(?)}");
-			cs.setString(1, nomeCult);
-
+			cs.setInt(1, rowIndex);
 			cs.execute();
-			System.out.println("Delete success!");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

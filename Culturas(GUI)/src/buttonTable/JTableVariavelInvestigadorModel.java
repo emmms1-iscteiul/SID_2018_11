@@ -1,5 +1,8 @@
 package buttonTable;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.table.AbstractTableModel;
 
 import gui.FuncionalidadesInvestigador;
@@ -35,7 +38,22 @@ public class JTableVariavelInvestigadorModel  extends AbstractTableModel {
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		switch (columnIndex) {
 		case 0:
-			return "Nome Variável";
+//			return "Nome Variável";
+			ResultSet variaveis = funcInv.consultarVariaveisInvestigador();
+			try {
+				while (variaveis.next()) {
+					int id = Integer.valueOf(variaveis.getObject("IDVariavel").toString());
+					if (id == rowIndex) {
+						return variaveis.getObject("NomeVariavel").toString();
+					}
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		default:
 			return "Error";
 		}
