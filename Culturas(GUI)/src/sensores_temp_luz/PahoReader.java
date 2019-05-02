@@ -16,15 +16,34 @@ import com.mongodb.MongoClient;
 
 public class PahoReader extends Thread {
 
-	private static final String TOPIC = "iscte_sid_2019_SIDEx2";
-	private static final String BROKER = "tcp://iot.eclipse.org:1883";
-	private static final String CLIENTID = "SID2";
-	private int id = 1;
+	private static final String TOPIC = "iscte_sid_lab_2019";
+	private static final String BROKER = "tcp://broker.mqtt-dashboard.com:1883";
+	private static final String CLIENTID = "sid_lab_2019";
 	private static final MemoryPersistence persistence = new MemoryPersistence();
+	private boolean exported = false; //
 
 
 	public void run() {
 		read();
+	}
+
+	//{"tmp":"22.40","hum":"61.30","dat":"9/4/2019","tim":"14:59:32","cell":"3138""sens":"wifi"}
+
+	public boolean checkParametersOfMessage(MqttMessage message)	{
+		boolean fiveParamters=true;
+		String messageString = String.valueOf(message);
+		String[] messageSplitted = messageString.split(",");
+		System.out.println(messageSplitted.length);
+		if(messageSplitted.length!=5)	{
+			fiveParamters=false;
+		}
+		return fiveParamters;
+	}
+
+	public boolean checkFormatOfMessage(MqttMessage message)	{
+		boolean formatIsCorrect=false;
+		String messageString = String.valueOf(message);
+		return formatIsCorrect;
 	}
 
 	public void read() {
@@ -53,9 +72,10 @@ public class PahoReader extends Thread {
 
 					sleep(3000);
 					MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
-					
+
 					String smsString = String.valueOf(message);
-					
+					checkParametersOfMessage(message);
+
 					System.out.println("Mensagem: "+smsString);
 					String[] stringSplitted = smsString.split(",");
 					String[] temp = stringSplitted[0].split(":");
@@ -106,15 +126,13 @@ public class PahoReader extends Thread {
 					DBCollection table = db.getCollection("Medicoes");
 
 					BasicDBObject document = new BasicDBObject();
-					document.put("_id", id);
 					document.append("DataHoraMedicao", data);
 					document.append("Temperatura", temperatura);
 					document.append("Luminosidade", cell);
+					document.append("Exportado", exported);
 					try { table.insert(document); System.out.println("Insert success.");} catch (Exception e) {}
-					id++;
 
 					mongoClient.close();
-
 				}
 
 				@Override
