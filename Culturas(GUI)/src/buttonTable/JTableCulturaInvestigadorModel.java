@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura", "Tipo Cultura", "Criar","Editar", "Apagar" };
+	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura", "Tipo Cultura", "Editar", "Apagar" };
 
 	@Override
 	public int getColumnCount() {
@@ -35,15 +35,6 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 		case 2:
 			return "Tipo Cultura";
 		case 3:
-			final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
-			botaoCriar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					System.out.println("Linha " + rowIndex + " criada!");
-
-				}
-			});
-			return botaoCriar;
-		case 4:
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -52,7 +43,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 				}
 			});
 			return botaoEditar;
-		case 5:
+		case 4:
 			final JButton botaoApagar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {

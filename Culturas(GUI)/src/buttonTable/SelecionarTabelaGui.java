@@ -4,7 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -47,20 +50,34 @@ public class SelecionarTabelaGui {
 		topPanel.add(frameLabel);
 
 		JPanel centerPanel = new JPanel();
+		
+		JPanel bottomPanel = new JPanel();
 
 		if (frameTitle == "Tabela Utilizador") {
 			JTable table = new JTable(new JTableUtilizadorAdminModel());
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(700, 400));
 			table.setFillsViewportHeight(true);
+			
 
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
-			table.getColumn("Criar").setCellRenderer(buttonRenderer);
 			table.getColumn("Editar").setCellRenderer(buttonRenderer);
 			table.getColumn("Apagar").setCellRenderer(buttonRenderer);
 			table.addMouseListener(new JTableButtonMouseListener(table));
 
 			centerPanel.add(scrollPane);
+			
+			JButton createButton=new JButton("Criar");
+			bottomPanel.add(createButton);
+			
+			createButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("Criar");
+					
+				}
+			});
 		}
 
 		if (frameTitle == "Tabela Variável") {
@@ -78,12 +95,24 @@ public class SelecionarTabelaGui {
 
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
 
-			table.getColumn("Criar").setCellRenderer(buttonRenderer);
+			
 			table.getColumn("Editar").setCellRenderer(buttonRenderer);
 			table.getColumn("Apagar").setCellRenderer(buttonRenderer);
 			table.addMouseListener(new JTableButtonMouseListener(table));
 
 			centerPanel.add(scrollPane);
+			
+			JButton createButton=new JButton("Criar");
+			bottomPanel.add(createButton);
+			
+			createButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("Criar");
+					
+				}
+			});
 		}
 
 		if (frameTitle == "Tabela Cultura-Investigador") {
@@ -100,12 +129,23 @@ public class SelecionarTabelaGui {
 			table.setFillsViewportHeight(true);
 
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
-			table.getColumn("Criar").setCellRenderer(buttonRenderer);
 			table.getColumn("Editar").setCellRenderer(buttonRenderer);
 			table.getColumn("Apagar").setCellRenderer(buttonRenderer);
 			table.addMouseListener(new JTableButtonMouseListener(table));
 
 			centerPanel.add(scrollPane);
+			
+			JButton createButton=new JButton("Criar");
+			bottomPanel.add(createButton);
+			
+			createButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("Criar");
+					
+				}
+			});
 		}
 
 		if (frameTitle == "Tabela Medição") {
@@ -122,11 +162,23 @@ public class SelecionarTabelaGui {
 			table.setFillsViewportHeight(true);
 
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
-			table.getColumn("Criar").setCellRenderer(buttonRenderer);
 			table.getColumn("Editar").setCellRenderer(buttonRenderer);
 			table.addMouseListener(new JTableButtonMouseListener(table));
 
 			centerPanel.add(scrollPane);
+			
+
+			JButton createButton=new JButton("Criar");
+			bottomPanel.add(createButton);
+			
+			createButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("Criar");
+					
+				}
+			});
 		}
 
 		if (frameTitle == "Tabela Variável Medida") {
@@ -143,11 +195,25 @@ public class SelecionarTabelaGui {
 			table.setFillsViewportHeight(true);
 
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
-			table.getColumn("Criar").setCellRenderer(buttonRenderer);
 			table.getColumn("Editar").setCellRenderer(buttonRenderer);
 			table.addMouseListener(new JTableButtonMouseListener(table));
 
 			centerPanel.add(scrollPane);
+			
+
+			JButton createButton=new JButton("Criar");
+			bottomPanel.add(createButton);
+			
+			createButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("Criar");
+					
+				}
+			});
+			
+			
 		}
 		
 		if (frameTitle == "Tabela Cultura-Admin") {
@@ -216,6 +282,7 @@ public class SelecionarTabelaGui {
 		
 		frame.add(topPanel, BorderLayout.NORTH);
 		frame.add(centerPanel, BorderLayout.CENTER);
+		frame.add(bottomPanel,BorderLayout.SOUTH);
 
 	}
 

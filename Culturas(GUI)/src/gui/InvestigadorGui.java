@@ -149,7 +149,7 @@ public class InvestigadorGui {
 	}
 
 	public static void main(String[] args) {
-		InvestigadorGui gui=new InvestigadorGui("Admin", null);
+		InvestigadorGui gui=new InvestigadorGui("Investigador", null);
 		gui.open();
 	}
 

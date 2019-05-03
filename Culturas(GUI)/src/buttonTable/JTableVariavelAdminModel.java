@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-import gui.CriarVariavelGUI;
+
 
 public class JTableVariavelAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "Nome Variável","Criar","Editar","Apagar" };
+	private static final String[] COLUMN_NAMES = new String[] { "Nome Variável","Editar","Apagar" };
 	
 
 	@Override
@@ -34,16 +34,6 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 		case 0:
 			return "Nome Variável";
 		case 1: 
-			final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
-			botaoCriar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					CriarVariavelGUI frame = new CriarVariavelGUI("Inserir Variavel", null);
-					frame.open();
-						
-				}
-			});
-			return botaoCriar;	
-		case 2: 
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -52,7 +42,7 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 				}
 			});
 			return botaoEditar;
-		case 3:
+		case 2:
 			final JButton botaoApagar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {

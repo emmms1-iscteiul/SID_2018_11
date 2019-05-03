@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		private static final long serialVersionUID = 1L;
-		private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior","Criar", "Editar" };
+		private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior", "Editar" };
 
 		@Override
 		public int getColumnCount() {
@@ -33,15 +33,6 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 			case 1:
 				return "LimiteSuperior";
 			case 2:
-				final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
-				botaoCriar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						System.out.println("Linha " + rowIndex + " criada!");
-
-					}
-				});
-				return botaoCriar;
-			case 3:
 				final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 				botaoEditar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {

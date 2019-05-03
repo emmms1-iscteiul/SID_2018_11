@@ -155,7 +155,7 @@ public class AdminGui {
 	}
 
 	public static void main(String[] args) {
-		AdminGui gui=new AdminGui("Gui", null);
+		AdminGui gui=new AdminGui("Admin", null);
 		gui.open();
 	}
 }
