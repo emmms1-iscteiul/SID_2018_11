@@ -161,7 +161,7 @@ public class FuncionalidadesAdmin {
 	public void alterarVariavelNome(JTextField nomeVarA, int idV) {
 
 		try {
-			CallableStatement cs = myConn.prepareCall("{call alterarVariavel(?,?)}");
+			CallableStatement cs = myConn.prepareCall("{call alterarVariavelNome(?,?)}");
 			cs.setString(1, nomeVarA.getText());
 			cs.setInt(2, idV);
 			cs.execute();

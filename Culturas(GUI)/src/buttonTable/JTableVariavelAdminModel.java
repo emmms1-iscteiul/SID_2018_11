@@ -16,7 +16,7 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Variável","Editar","Apagar" };
 
 	FuncionalidadesAdmin funcAdmin;
-	
+
 	public JTableVariavelAdminModel(FuncionalidadesAdmin funcAdmin) {
 		// TODO Auto-generated constructor stub
 		this.funcAdmin = funcAdmin;
@@ -41,21 +41,26 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		switch (columnIndex) {
 		case 0:
-//			return "Nome Variável";
-			ResultSet variaveis = funcAdmin.consultarVariaveis();
-			try {
-				while (variaveis.next()) {
-					int id = Integer.valueOf(variaveis.getObject("IdVariavel").toString());
-					if (id == rowIndex) {
-						return variaveis.getObject("NomeVariavel").toString();
+			//			return "Nome Variável";
+			if (rowIndex == 0) {
+				return "Não existe variável para este id";
+			}
+			else {
+				ResultSet variaveis = funcAdmin.consultarVariaveis();
+				try {
+					while (variaveis.next()) {
+						int id = Integer.valueOf(variaveis.getObject("IdVariavel").toString());
+						if (id == rowIndex) {
+							return variaveis.getObject("NomeVariavel").toString();
+						}
 					}
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		case 1: 
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
