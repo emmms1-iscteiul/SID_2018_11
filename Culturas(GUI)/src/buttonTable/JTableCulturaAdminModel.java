@@ -42,7 +42,7 @@ public class JTableCulturaAdminModel extends AbstractTableModel {
 			ResultSet cultura = funcAdmin.consultarCulturas();
 			try {
 				while(cultura.next()) {
-					int idC = Integer.valueOf(cultura.getObject("IDCultura").toString());
+					int idC = Integer.valueOf(cultura.getObject("IdCultura").toString());
 					if (idC == rowIndex) {
 						return cultura.getObject("NomeCultura").toString();
 					}
@@ -57,7 +57,7 @@ public class JTableCulturaAdminModel extends AbstractTableModel {
 			ResultSet culturaD = funcAdmin.consultarCulturas();
 			try {
 				while(culturaD.next()) {
-					int idC = Integer.valueOf(culturaD.getObject("IDCultura").toString());
+					int idC = Integer.valueOf(culturaD.getObject("IdCultura").toString());
 					if (idC == rowIndex) {
 						return culturaD.getObject("DescricaoCultura").toString();
 					}
@@ -72,7 +72,7 @@ public class JTableCulturaAdminModel extends AbstractTableModel {
 			ResultSet culturaU = funcAdmin.consultarCulturas();
 			try {
 				while(culturaU.next()) {
-					int idC = Integer.valueOf(culturaU.getObject("IDCultura").toString());
+					int idC = Integer.valueOf(culturaU.getObject("IdCultura").toString());
 					if (idC == rowIndex) {
 						return culturaU.getObject("NomeUtilizador").toString();
 					}

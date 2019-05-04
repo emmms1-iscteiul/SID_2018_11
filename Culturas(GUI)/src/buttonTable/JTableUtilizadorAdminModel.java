@@ -45,7 +45,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			ResultSet utilizadores = funcAdmin.consultarUtilizadores();
 			try {
 				while (utilizadores.next()) {
-					int id = Integer.valueOf(utilizadores.getObject("IDUtilizador").toString());
+					int id = Integer.valueOf(utilizadores.getObject("IdUtilizador").toString());
 					if (id == rowIndex) {
 						return utilizadores.getObject("NomeUtilizador").toString();
 					}
@@ -62,7 +62,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			ResultSet utilizadoresM = funcAdmin.consultarUtilizadores();
 			try {
 				while (utilizadoresM.next()) {
-					int id = Integer.valueOf(utilizadoresM.getObject("IDUtilizador").toString());
+					int id = Integer.valueOf(utilizadoresM.getObject("IdUtilizador").toString());
 					if (id == rowIndex) {
 						return utilizadoresM.getObject("Email").toString();
 					}
@@ -79,7 +79,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			ResultSet utilizadoresP = funcAdmin.consultarUtilizadores();
 			try {
 				while (utilizadoresP.next()) {
-					int id = Integer.valueOf(utilizadoresP.getObject("IDUtilizador").toString());
+					int id = Integer.valueOf(utilizadoresP.getObject("IdUtilizador").toString());
 					if (id == rowIndex) {
 						return utilizadoresP.getObject("Passwor").toString();
 					}

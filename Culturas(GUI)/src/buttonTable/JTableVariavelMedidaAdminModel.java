@@ -41,7 +41,7 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 			ResultSet variaveisMedidas = funcAdmin.consultarVariaveisMedidas();
 			try {
 				while (variaveisMedidas.next()) {
-					int id = Integer.valueOf(variaveisMedidas.getObject("IDVariavelMedida").toString());
+					int id = Integer.valueOf(variaveisMedidas.getObject("IdVariavelMedida").toString());
 					if (id == rowIndex) {
 						return variaveisMedidas.getObject("LimiteInferior").toString();
 					}
@@ -58,7 +58,7 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 			ResultSet variaveisMedidasLS = funcAdmin.consultarVariaveisMedidas();
 			try {
 				while (variaveisMedidasLS.next()) {
-					int id = Integer.valueOf(variaveisMedidasLS.getObject("IDVariavelMedida").toString());
+					int id = Integer.valueOf(variaveisMedidasLS.getObject("IdVariavelMedida").toString());
 					if (id == rowIndex) {
 						return variaveisMedidasLS.getObject("LimiteSuperior").toString();
 					}
@@ -75,7 +75,7 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 			ResultSet variaveisMedidasC = funcAdmin.consultarVariaveisMedidas();
 			try {
 				while (variaveisMedidasC.next()) {
-					int id = Integer.valueOf(variaveisMedidasC.getObject("IDVariavelMedida").toString());
+					int id = Integer.valueOf(variaveisMedidasC.getObject("IdVariavelMedida").toString());
 					if (id == rowIndex) {
 						return variaveisMedidasC.getObject("NomeCultura").toString();
 					}
@@ -92,7 +92,7 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 			ResultSet variaveisMedidasV = funcAdmin.consultarVariaveisMedidas();
 			try {
 				while (variaveisMedidasV.next()) {
-					int id = Integer.valueOf(variaveisMedidasV.getObject("IDVariavelMedida").toString());
+					int id = Integer.valueOf(variaveisMedidasV.getObject("IdVariavelMedida").toString());
 					if (id == rowIndex) {
 						return variaveisMedidasV.getObject("NomeVariavel").toString();
 					}

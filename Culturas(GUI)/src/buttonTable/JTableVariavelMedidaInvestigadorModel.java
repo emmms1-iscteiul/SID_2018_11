@@ -44,7 +44,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 				ResultSet variaveisMedidasLI = funcInv.filtrarVariaveisMedidasTudo();
 				try {
 					while (variaveisMedidasLI.next()) {
-						int idVM = Integer.valueOf(variaveisMedidasLI.getObject("IDVariavelMedida").toString());
+						int idVM = Integer.valueOf(variaveisMedidasLI.getObject("IdVariavelMedida").toString());
 						if (idVM == rowIndex) {
 							return variaveisMedidasLI.getObject("LimiteInferior").toString();
 						}
@@ -58,7 +58,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 				ResultSet variaveisMedidasLS = funcInv.filtrarVariaveisMedidasTudo();
 				try {
 					while (variaveisMedidasLS.next()) {
-						int idVM = Integer.valueOf(variaveisMedidasLS.getObject("IDVariavelMedida").toString());
+						int idVM = Integer.valueOf(variaveisMedidasLS.getObject("IdVariavelMedida").toString());
 						if (idVM == rowIndex) {
 							return variaveisMedidasLS.getObject("LimiteSuperior").toString();
 						}
@@ -72,7 +72,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 				ResultSet variaveisMedidasC = funcInv.filtrarVariaveisMedidasTudo();
 				try {
 					while (variaveisMedidasC.next()) {
-						int idVM = Integer.valueOf(variaveisMedidasC.getObject("IDVariavelMedida").toString());
+						int idVM = Integer.valueOf(variaveisMedidasC.getObject("IdVariavelMedida").toString());
 						if (idVM == rowIndex) {
 							return variaveisMedidasC.getObject("NomeCultura").toString();
 						}
@@ -86,7 +86,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 				ResultSet variaveisMedidasV = funcInv.filtrarVariaveisMedidasTudo();
 				try {
 					while (variaveisMedidasV.next()) {
-						int idVM = Integer.valueOf(variaveisMedidasV.getObject("IDVariavelMedida").toString());
+						int idVM = Integer.valueOf(variaveisMedidasV.getObject("IdVariavelMedida").toString());
 						if (idVM == rowIndex) {
 							return variaveisMedidasV.getObject("NomeCultura").toString();
 						}

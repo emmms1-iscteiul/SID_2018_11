@@ -42,7 +42,7 @@ public class JTableVariavelInvestigadorModel  extends AbstractTableModel {
 			ResultSet variaveis = funcInv.consultarVariaveisInvestigador();
 			try {
 				while (variaveis.next()) {
-					int id = Integer.valueOf(variaveis.getObject("IDVariavel").toString());
+					int id = Integer.valueOf(variaveis.getObject("IdVariavel").toString());
 					if (id == rowIndex) {
 						return variaveis.getObject("NomeVariavel").toString();
 					}

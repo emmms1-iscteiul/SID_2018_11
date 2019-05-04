@@ -41,7 +41,7 @@ import gui.FuncionalidadesInvestigador;
 				ResultSet medicoesDH = funcInv.filtrarMedicaoTudo();
 				try {
 					while (medicoesDH.next()) {
-						int id = Integer.valueOf(medicoesDH.getObject("IDMedicao").toString());
+						int id = Integer.valueOf(medicoesDH.getObject("IdMedicao").toString());
 						if (id == rowIndex) {
 							return medicoesDH.getObject("DataHoraMedicao").toString();
 						}
@@ -58,7 +58,7 @@ import gui.FuncionalidadesInvestigador;
 				ResultSet medicoesVM = funcInv.filtrarMedicaoTudo();
 				try {
 					while (medicoesVM.next()) {
-						int id = Integer.valueOf(medicoesVM.getObject("IDMedicao").toString());
+						int id = Integer.valueOf(medicoesVM.getObject("IdMedicao").toString());
 						if (id == rowIndex) {
 							return medicoesVM.getObject("ValorMedicao").toString();
 						}
@@ -75,7 +75,7 @@ import gui.FuncionalidadesInvestigador;
 				ResultSet medicoesC = funcInv.filtrarMedicaoTudo();
 				try {
 					while (medicoesC.next()) {
-						int id = Integer.valueOf(medicoesC.getObject("IDMedicao").toString());
+						int id = Integer.valueOf(medicoesC.getObject("IdMedicao").toString());
 						if (id == rowIndex) {
 							return medicoesC.getObject("NomeCultura").toString();
 						}
@@ -92,7 +92,7 @@ import gui.FuncionalidadesInvestigador;
 				ResultSet medicoesV = funcInv.filtrarMedicaoTudo();
 				try {
 					while (medicoesV.next()) {
-						int id = Integer.valueOf(medicoesV.getObject("IDMedicao").toString());
+						int id = Integer.valueOf(medicoesV.getObject("IdMedicao").toString());
 						if (id == rowIndex) {
 							return medicoesV.getObject("NomeVariavel").toString();
 						}

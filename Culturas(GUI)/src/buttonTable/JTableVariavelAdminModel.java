@@ -45,7 +45,7 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 			ResultSet variaveis = funcAdmin.consultarVariaveis();
 			try {
 				while (variaveis.next()) {
-					int id = Integer.valueOf(variaveis.getObject("IDVariavel").toString());
+					int id = Integer.valueOf(variaveis.getObject("IdVariavel").toString());
 					if (id == rowIndex) {
 						return variaveis.getObject("NomeVariavel").toString();
 					}

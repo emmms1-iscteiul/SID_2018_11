@@ -44,7 +44,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 			ResultSet cultura = funcInv.filtrarCulturaTudo();
 			try {
 				while (cultura.next()) {
-					int idC = Integer.valueOf(cultura.getObject("IDCultura").toString());
+					int idC = Integer.valueOf(cultura.getObject("IdCultura").toString());
 					if (idC == rowIndex) {
 						return cultura.getObject("NomeCultura").toString();
 					}
@@ -61,7 +61,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 			ResultSet culturaD = funcInv.filtrarCulturaTudo();
 			try {
 				while (culturaD.next()) {
-					int idC = Integer.valueOf(culturaD.getObject("IDCultura").toString());
+					int idC = Integer.valueOf(culturaD.getObject("IdCultura").toString());
 					if (idC == rowIndex) {
 						return culturaD.getObject("DescricaoCultura").toString();
 					}
@@ -78,7 +78,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 			ResultSet culturaU = funcInv.filtrarCulturaTudo();
 			try {
 				while (culturaU.next()) {
-					int idC = Integer.valueOf(culturaU.getObject("IDCultura").toString());
+					int idC = Integer.valueOf(culturaU.getObject("IdCultura").toString());
 					if (idC == rowIndex) {
 						return culturaU.getObject("NomeUtilizador").toString();
 					}

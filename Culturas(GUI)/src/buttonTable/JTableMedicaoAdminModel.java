@@ -42,7 +42,7 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 			ResultSet medicoes = funcAdmin.consultarMedicoes();
 			try {
 				while (medicoes.next()) {
-					int id = Integer.valueOf(medicoes.getObject("IDMedicao").toString());
+					int id = Integer.valueOf(medicoes.getObject("IdMedicao").toString());
 					if (id == rowIndex) {
 						return medicoes.getObject("DataHoraMedicao").toString();
 					}
@@ -59,7 +59,7 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 			ResultSet medicoesVM = funcAdmin.consultarMedicoes();
 			try {
 				while (medicoesVM.next()) {
-					int id = Integer.valueOf(medicoesVM.getObject("IDMedicao").toString());
+					int id = Integer.valueOf(medicoesVM.getObject("IdMedicao").toString());
 					if (id == rowIndex) {
 						return medicoesVM.getObject("ValorMedicao").toString();
 					}
@@ -76,7 +76,7 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 			ResultSet medicoesC = funcAdmin.consultarMedicoes();
 			try {
 				while (medicoesC.next()) {
-					int id = Integer.valueOf(medicoesC.getObject("IDMedicao").toString());
+					int id = Integer.valueOf(medicoesC.getObject("IdMedicao").toString());
 					if (id == rowIndex) {
 						return medicoesC.getObject("NomeCultura").toString();
 					}
@@ -93,7 +93,7 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 			ResultSet medicoesV = funcAdmin.consultarMedicoes();
 			try {
 				while (medicoesV.next()) {
-					int id = Integer.valueOf(medicoesV.getObject("IDMedicao").toString());
+					int id = Integer.valueOf(medicoesV.getObject("IdMedicao").toString());
 					if (id == rowIndex) {
 						return medicoesV.getObject("NomeVariavel").toString();
 					}
