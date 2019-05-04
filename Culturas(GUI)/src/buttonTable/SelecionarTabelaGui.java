@@ -100,7 +100,6 @@ public class SelecionarTabelaGui {
 
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
 
-			
 			table.getColumn("Editar").setCellRenderer(buttonRenderer);
 			table.getColumn("Apagar").setCellRenderer(buttonRenderer);
 			table.addMouseListener(new JTableButtonMouseListener(table));
