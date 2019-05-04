@@ -18,7 +18,7 @@ import javax.swing.WindowConstants;
 
 public class EditarVariaveisMedidasGUI {
 	private JFrame frame;
-	
+
 	FuncionalidadesInvestigador funcInv;
 	int idVM = 0;
 
@@ -38,7 +38,7 @@ public class EditarVariaveisMedidasGUI {
 	public JFrame getFrame() {
 		return frame;
 	}
-	
+
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
@@ -47,93 +47,65 @@ public class EditarVariaveisMedidasGUI {
 		JPanel bottomPanel = new JPanel();
 		JLabel registerLabel = new JLabel("Editar Variaveis Medidas");
 		registerLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 30));
-		
+
 		topPanel.add(registerLabel);
-		
+
 		JLabel newVI = new JLabel("Limite Inferior:");
 		newVI.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField newInf = new JTextField("",10);
-		
+
 		JLabel newVS = new JLabel("Limite Superior:");
 		newVS.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField newSup = new JTextField("",10);
-		
-		JLabel nomeCultura = new JLabel("Nome cultura a modificar:");
-		nomeCultura.setFont(new Font("Arial", Font.BOLD, 13));
-		JTextField nomeC = new JTextField("",10);
-		
-		JLabel nomeVariavel = new JLabel("Nome variavel a modificar:");
-		nomeVariavel.setFont(new Font("Arial", Font.BOLD, 13));
-		JTextField nomeV = new JTextField("",10);
-		
+
 		JLabel newVariavel = new JLabel("Novo nome variavel a modificar:");
 		newVariavel.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField newV = new JTextField("",10);
-		
+
 		JLabel newCultura = new JLabel("Novo nome variavel a modificar:");
 		newCultura.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField newC = new JTextField("",10);
-		
+
 		Font font = newInf.getFont();
 		float size = font.getSize() + 1.0f;
 		newInf.setFont(font.deriveFont(size));
 		newSup.setFont(font.deriveFont(size));
-		nomeC.setFont(font.deriveFont(size));
-		nomeV.setFont(font.deriveFont(size));
 		newC.setFont(font.deriveFont(size));
 		newV.setFont(font.deriveFont(size));
 
 		centerPanel.add(newVI);
 		centerPanel.add(newInf);
-		
+
 		centerPanel.add(newVS);
 		centerPanel.add(newSup);
-		
-		centerPanel.add(nomeCultura);
-		centerPanel.add(nomeC);
-		
-		centerPanel.add(nomeVariavel);
-		centerPanel.add(nomeV);
-		
+
 		centerPanel.add(newCultura);
 		centerPanel.add(newC);
-		
+
 		centerPanel.add(newVariavel);
 		centerPanel.add(newV);
-		
-		
+
+
 		JButton registerButton = new JButton("Alterar");
 		registerButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("hello");
-				if(!newInf.getText().isEmpty() && nomeC.getText().isEmpty() && nomeV.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(frame, "Ambos os campos Nome Cultura e Nome Variavel tem que ser preenchidos", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE); 
-				}else if(!newSup.getText().isEmpty() && nomeC.getText().isEmpty() && nomeV.getText().isEmpty() ) {
-					JOptionPane.showMessageDialog(frame, "Ambos os campos Nome Cultura e Nome Variavel tem que ser preenchidos", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
-				}else if(!newC.getText().isEmpty() && nomeC.getText().isEmpty() && nomeV.getText().isEmpty() ) {
-					JOptionPane.showMessageDialog(frame, "Ambos os campos Nome Cultura e Nome Variavel tem que ser preenchidos", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
-				}else if(!newV.getText().isEmpty() && nomeC.getText().isEmpty() && nomeV.getText().isEmpty() ) {
-					JOptionPane.showMessageDialog(frame, "Ambos os campos Nome Cultura e Nome Variavel tem que ser preenchidos", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
-				}else{
-					
-					if(!newInf.getText().isEmpty() && !nomeCultura.getText().isEmpty() && !nomeVariavel.getText().isEmpty()) {
-						funcInv.alterarVariavelMedidaLimiteInferior(newInf, idVM);
-					}
-					if(!newSup.getText().isEmpty() && !nomeCultura.getText().isEmpty() && !nomeVariavel.getText().isEmpty()) {
-						funcInv.alterarVariavelMedidaLimiteSuperior(newSup, idVM);
-					}
-					if(!newC.getText().isEmpty() && !nomeCultura.getText().isEmpty() && !nomeVariavel.getText().isEmpty()) {
-						funcInv.alterarVariavelMedidaCultura(nomeC, idVM);
-					}
-					if(!newV.getText().isEmpty() && !nomeCultura.getText().isEmpty() && !nomeVariavel.getText().isEmpty()) {
-						funcInv.alterarVariavelMedidaVariavel(nomeC, idVM);
-					}
-					JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
-					frame.dispose();
+
+				if(!newInf.getText().isEmpty()) {
+					funcInv.alterarVariavelMedidaLimiteInferior(newInf, idVM);
 				}
-					
+				if(!newSup.getText().isEmpty()) {
+					funcInv.alterarVariavelMedidaLimiteSuperior(newSup, idVM);
+				}
+				if(!newC.getText().isEmpty()) {
+					funcInv.alterarVariavelMedidaCultura(newC, idVM);
+				}
+				if(!newV.getText().isEmpty()) {
+					funcInv.alterarVariavelMedidaVariavel(newV, idVM);
+				}
+				JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
+				frame.dispose();
 			}
 		});
 
@@ -148,5 +120,5 @@ public class EditarVariaveisMedidasGUI {
 	public void open() {
 		frame.setVisible(true);
 	}
-	
+
 }

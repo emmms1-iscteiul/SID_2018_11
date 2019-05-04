@@ -54,18 +54,6 @@ public class EditarUtilizadorGUI {
 
 		topPanel.add(registerLabel);
 
-		JLabel nomeAntigo = new JLabel("Current Name:");
-		nomeAntigo.setFont(new Font("Arial", Font.BOLD,13));
-		JTextField nomeAntigoUser = new JTextField("", 10);
-
-		JLabel passwordAntiga = new JLabel("Current Password:");
-		passwordAntiga.setFont(new Font("Arial", Font.BOLD,13));
-		JTextField passwordAntigaUser = new JTextField("", 10);
-
-		JLabel tipoU = new JLabel("New Tipo:");
-		tipoU.setFont(new Font("Arial", Font.BOLD, 13));
-		JTextField tipoUser = new JTextField("",10);
-
 		JLabel eMail = new JLabel("New Email:");
 		eMail.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField eMailUser = new JTextField("",10);
@@ -82,30 +70,13 @@ public class EditarUtilizadorGUI {
 		userPassConf.setFont(new Font("Arial", Font.BOLD, 13));
 		JPasswordField passwordConfText = new JPasswordField("", 10);
 
-		JLabel apagarU = new JLabel("Apagar Utilizador:");
-		apagarU.setFont(new Font("Arial", Font.BOLD, 13));
-		JTextField apagarUser = new JTextField("", 50);
-
 
 		Font font = eMailUser.getFont();
 		float size = font.getSize() + 1.0f;
-		passwordAntigaUser.setFont(font.deriveFont(size));
-		nomeAntigoUser.setFont(font.deriveFont(size));
 		eMailUser.setFont( font.deriveFont(size) );
 		passwordText.setFont( font.deriveFont(size) );
 		nomeUser.setFont( font.deriveFont(size) );
 		passwordConfText.setFont( font.deriveFont(size) );
-		tipoUser.setFont(font.deriveFont(size));
-		apagarUser.setFont(font.deriveFont(size));
-
-		centerPanel.add(nomeAntigo);
-		centerPanel.add(nomeAntigoUser);
-
-		centerPanel.add(passwordAntiga);
-		centerPanel.add(passwordAntigaUser);
-
-		centerPanel.add(tipoU);
-		centerPanel.add(tipoUser);
 
 		centerPanel.add(eMail);
 		centerPanel.add(eMailUser);
@@ -118,9 +89,6 @@ public class EditarUtilizadorGUI {
 
 		centerPanel.add(userPassConf);
 		centerPanel.add(passwordConfText);
-
-		centerPanel.add(apagarU);
-		centerPanel.add(apagarUser);
 
 
 		JButton registerButton = new JButton("Criar");

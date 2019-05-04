@@ -90,7 +90,7 @@ public class CriarMedicaoGUI {
 				}else if(NomeVariavelText.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "Campo NOME VARIÁVEL não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else{
-				funcInv.inserirMedicao(ValorMedicaoText, NomeCulturaText, NomeVariavelText);
+				funcInv.inserirMedicao(ValorMedicaoText, NomeCulturaText, NomeVariavelText, frame);
 				JOptionPane.showMessageDialog(frame, "Inserção com sucesso");
 				frame.dispose();
 

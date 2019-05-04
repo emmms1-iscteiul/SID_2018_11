@@ -50,23 +50,15 @@ public class EditarVariaveisGUI {
 		
 		topPanel.add(registerLabel);
 		
-		JLabel oldV = new JLabel("Nome Variavel antiga:");
-		oldV.setFont(new Font("Arial", Font.BOLD, 13));
-		JTextField oldVar = new JTextField("",10);
-		
 		JLabel newV = new JLabel("Nome Variavel nova:");
 		newV.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField newVar = new JTextField("",10);
 		
 		
-		Font font = oldVar.getFont();
+		Font font = newVar.getFont();
 		float size = font.getSize() + 1.0f;
-		oldVar.setFont(font.deriveFont(size));
 		newVar.setFont(font.deriveFont(size));
 
-		
-		centerPanel.add(oldV);
-		centerPanel.add(oldVar);
 		
 		centerPanel.add(newV);
 		centerPanel.add(newVar);

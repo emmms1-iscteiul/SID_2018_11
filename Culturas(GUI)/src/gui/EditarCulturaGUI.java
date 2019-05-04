@@ -19,7 +19,7 @@ import javax.swing.WindowConstants;
 public class EditarCulturaGUI {
 
 	private JFrame frame;
-	
+
 	FuncionalidadesInvestigador funcInv;
 	int idC = 0;
 
@@ -51,15 +51,15 @@ public class EditarCulturaGUI {
 
 		topPanel.add(registerLabel);
 
-		JLabel nomeCAntiga = new JLabel("Nome da Cultura atual:");
-		nomeCAntiga.setFont(new Font("Arial", Font.BOLD, 13));
-		JTextField nomeCA = new JTextField("",10);
+		JLabel nomeUtilizador = new JLabel("Nome do Utilizador:");
+		nomeUtilizador.setFont(new Font("Arial", Font.BOLD, 13));
+		JTextField nomeUtil = new JTextField("",10);
 
 		JLabel nomeCultura = new JLabel("Novo nome da Cultura:");
 		nomeCultura.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField nomeC = new JTextField("",10);
 
-		JLabel descricaoCultura = new JLabel("Descricao:");
+		JLabel descricaoCultura = new JLabel("Descricao nova:");
 		descricaoCultura.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField descricaoC = new JTextField("",10);
 
@@ -69,8 +69,8 @@ public class EditarCulturaGUI {
 		nomeC.setFont( font.deriveFont(size) );
 		descricaoC.setFont( font.deriveFont(size) );
 
-		centerPanel.add(nomeCAntiga);
-		centerPanel.add(nomeCA);
+		centerPanel.add(nomeUtilizador);
+		centerPanel.add(nomeUtil);
 
 		centerPanel.add(nomeCultura);
 		centerPanel.add(nomeC);
@@ -83,22 +83,18 @@ public class EditarCulturaGUI {
 		registerButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!nomeCA.getText().isEmpty() && nomeC.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(frame, "Ambos os campos Nome tem que ser preenchidos", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
+				if(!descricaoC.getText().isEmpty()) {
+					funcInv.alterarCulturaDescricao(descricaoC, idC);
 				}
-				if(nomeCA.getText().isEmpty() && !nomeC.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(frame, "Ambos os campos Nome tem que ser preenchidos", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
-				}else{
-					if(!descricaoC.getText().isEmpty() && !nomeCA.getText().isEmpty()) {
-						funcInv.alterarCulturaDescricao(descricaoC, idC);
-					}
 
-					if(!nomeC.getText().isEmpty()) {
-						funcInv.alterarCulturaNome(nomeC, idC);
-					}
-					JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
-					frame.dispose();
+				if(!nomeC.getText().isEmpty()) {
+					funcInv.alterarCulturaNome(nomeC, idC);
 				}
+				if(!nomeUtil.getText().isEmpty()) {
+					funcInv.alterarCulturaUtilizador(nomeUtil, idC);
+				}
+				JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
+				frame.dispose();
 			}
 		});
 		bottomPanel.add(registerButton);
