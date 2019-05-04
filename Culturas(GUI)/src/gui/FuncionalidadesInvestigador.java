@@ -126,7 +126,7 @@ public class FuncionalidadesInvestigador {
 
 	}
 
-	public void inserirVariavelMedida(JTextField limiteInferiorText, JTextField limiteSuperiorText, JTextField nomeCulturaText, JTextField nomeVariavelText) {
+	public void inserirVariavelMedida(JTextField limiteInferiorText, JTextField limiteSuperiorText, JTextField nomeCulturaText, JTextField nomeVariavelText, JFrame frame) {
 
 		try {
 			CallableStatement cs = myConn.prepareCall("{call inserirVariavelMedida(?,?,?,?)}");
@@ -137,7 +137,7 @@ public class FuncionalidadesInvestigador {
 			cs.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Precisa existir cultura e variavél primeiro", "ERRO - NECESSÁRIO EXISTENCIA DE VARIAVEL E CULTURA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

@@ -102,11 +102,9 @@ public class CriarVariaveisMedidasGUI {
 				}else if(NomeVariavelText.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "Campo NOME VARIÁVEL não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else{
-				funcInv.inserirVariavelMedida(LimiteInferiorText, LimiteSuperiorText, NomeCulturaText, NomeVariavelText);
+				funcInv.inserirVariavelMedida(LimiteInferiorText, LimiteSuperiorText, NomeCulturaText, NomeVariavelText, frame);
 				JOptionPane.showMessageDialog(frame, "Inserção com sucesso");
 				frame.dispose();
-				InvestigadorGui frame = new InvestigadorGui("Monotorização de Culturas", funcInv);
-				frame.open();
 				}
 			}
 		});
