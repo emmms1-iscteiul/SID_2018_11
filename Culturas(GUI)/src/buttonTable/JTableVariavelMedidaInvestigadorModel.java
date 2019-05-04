@@ -8,13 +8,12 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-import gui.CriarVariaveisMedidasGUI;
 import gui.EditarVariaveisMedidasGUI;
 import gui.FuncionalidadesInvestigador;
 
 public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		private static final long serialVersionUID = 1L;
-		private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior", "Nome Cultura", "Nome Variavel","Criar", "Editar" };
+		private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior", "Nome Cultura", "Nome Variavel","Editar" };
 		FuncionalidadesInvestigador funcInv;
 
 		public JTableVariavelMedidaInvestigadorModel(FuncionalidadesInvestigador funcInv) {
@@ -97,15 +96,6 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 					e.printStackTrace();
 				}
 			case 4:
-				final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
-				botaoCriar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						CriarVariaveisMedidasGUI frameC = new CriarVariaveisMedidasGUI("Criar Variaveis Medidas", funcInv);
-						frameC.open();
-					}
-				});
-				return botaoCriar;
-			case 5:
 				final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 				botaoEditar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {

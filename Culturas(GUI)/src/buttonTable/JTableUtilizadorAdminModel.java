@@ -8,14 +8,13 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-import gui.CriarUtilizadorGUI;
 import gui.EditarUtilizadorGUI;
 import gui.FuncionalidadesAdmin;
 
 public class JTableUtilizadorAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Utilizador", "Mail",
-			"Password", "Criar", "Editar", "Apagar" };
+			"Password", "Editar", "Apagar" };
 	FuncionalidadesAdmin funcAdmin;
 
 	public JTableUtilizadorAdminModel(FuncionalidadesAdmin funcAdmin) {
@@ -93,15 +92,6 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 				e.printStackTrace();
 			}
 		case 3:
-			final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
-			botaoCriar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					CriarUtilizadorGUI frameC = new CriarUtilizadorGUI("Criar Utilizador", funcAdmin);
-					frameC.open();
-				}
-			});
-			return botaoCriar;
-		case 4:
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -110,7 +100,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 				}
 			});
 			return botaoEditar;
-		case 6:
+		case 4:
 			final JButton botaoApagar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {

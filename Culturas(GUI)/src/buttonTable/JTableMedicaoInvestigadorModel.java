@@ -1,17 +1,15 @@
 package buttonTable;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-import gui.CriarMedicaoGUI;
 import gui.FuncionalidadesInvestigador;
 
 	public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 		private static final long serialVersionUID = 1L;
-		private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medição",	"Valor Medição", "Nome Cultura", "Nome Variavel","Criar"};
+		private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medição",	"Valor Medição", "Nome Cultura", "Nome Variavel"};
 		
 		FuncionalidadesInvestigador funcInv;
 
@@ -39,22 +37,73 @@ import gui.FuncionalidadesInvestigador;
 		public Object getValueAt(final int rowIndex, final int columnIndex) {
 			switch (columnIndex) {
 			case 0:
-				return "Data e Hora Medição";	
-			case 1:
-				return "Valor Medição";
-			case 2:
-				return "Nome Cultura";
-			case 3:
-				return "Nome Variavel";
-			case 4:
-				final JButton botãoCriar = new JButton(COLUMN_NAMES[columnIndex]);
-				botãoCriar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						CriarMedicaoGUI frameC = new CriarMedicaoGUI("Criar Medicao", funcInv);
-						frameC.open();
+//				return "Data e Hora Medição";
+				ResultSet medicoesDH = funcInv.filtrarMedicaoTudo();
+				try {
+					while (medicoesDH.next()) {
+						int id = Integer.valueOf(medicoesDH.getObject("IDMedicao").toString());
+						if (id == rowIndex) {
+							return medicoesDH.getObject("DataHoraMedicao").toString();
+						}
 					}
-				});
-				return botãoCriar;
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			case 1:
+//				return "Valor Medição";
+				ResultSet medicoesVM = funcInv.filtrarMedicaoTudo();
+				try {
+					while (medicoesVM.next()) {
+						int id = Integer.valueOf(medicoesVM.getObject("IDMedicao").toString());
+						if (id == rowIndex) {
+							return medicoesVM.getObject("ValorMedicao").toString();
+						}
+					}
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			case 2:
+//				return "Nome Cultura";
+				ResultSet medicoesC = funcInv.filtrarMedicaoTudo();
+				try {
+					while (medicoesC.next()) {
+						int id = Integer.valueOf(medicoesC.getObject("IDMedicao").toString());
+						if (id == rowIndex) {
+							return medicoesC.getObject("NomeCultura").toString();
+						}
+					}
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			case 3:
+//				return "Nome Variavel";
+				ResultSet medicoesV = funcInv.filtrarMedicaoTudo();
+				try {
+					while (medicoesV.next()) {
+						int id = Integer.valueOf(medicoesV.getObject("IDMedicao").toString());
+						if (id == rowIndex) {
+							return medicoesV.getObject("NomeVariavel").toString();
+						}
+					}
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			default:
 				return "Error";
 			}

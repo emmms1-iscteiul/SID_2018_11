@@ -8,13 +8,12 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-import gui.CriarCulturaGUI;
 import gui.EditarCulturaGUI;
 import gui.FuncionalidadesInvestigador;
 
 public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura", "Criar","Editar", "Apagar" };
+	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura","Editar", "Apagar" };
 	private FuncionalidadesInvestigador funcInv;
 
 	public JTableCulturaInvestigadorModel(FuncionalidadesInvestigador funcInv) {
@@ -92,15 +91,6 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 				e.printStackTrace();
 			}
 		case 3:
-			final JButton botaoCriar = new JButton(COLUMN_NAMES[columnIndex]);
-			botaoCriar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					CriarCulturaGUI frameC = new CriarCulturaGUI("Criar Cultura", funcInv);
-					frameC.open();
-				}
-			});
-			return botaoCriar;
-		case 4:
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -109,7 +99,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 				}
 			});
 			return botaoEditar;
-		case 5:
+		case 4:
 			final JButton botaoApagar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
