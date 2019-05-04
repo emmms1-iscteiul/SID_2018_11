@@ -10,7 +10,7 @@ import gui.FuncionalidadesAdmin;
 
 public class JTableCulturaAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura", "Nome Utilizador Responsável" };
+	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura" };
 	
 	FuncionalidadesAdmin funcAdmin;
 
@@ -39,6 +39,7 @@ public class JTableCulturaAdminModel extends AbstractTableModel {
 		switch (columnIndex) {
 		case 0:
 			//return "Nome Cultura";
+			
 			ResultSet cultura = funcAdmin.consultarCulturas();
 			try {
 				while(cultura.next()) {
@@ -61,28 +62,13 @@ public class JTableCulturaAdminModel extends AbstractTableModel {
 					if (idC == rowIndex) {
 						return culturaD.getObject("DescricaoCultura").toString();
 					}
-					
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		case 2:
-			//return "Tipo Cultura";
-			ResultSet culturaU = funcAdmin.consultarCulturas();
-			try {
-				while(culturaU.next()) {
-					int idC = Integer.valueOf(culturaU.getObject("IdCultura").toString());
-					if (idC == rowIndex) {
-						return culturaU.getObject("NomeUtilizador").toString();
-					}
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		default:
-			return "Error";
+			return "Vazio";
 		}
 	}
 }
