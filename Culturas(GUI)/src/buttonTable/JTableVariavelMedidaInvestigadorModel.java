@@ -105,7 +105,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 				});
 				return botaoEditar;
 			default:
-				return "Error";
+				return "Vazio";
 			}
 		}
 }

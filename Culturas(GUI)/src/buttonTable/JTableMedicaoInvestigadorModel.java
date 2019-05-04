@@ -105,7 +105,7 @@ import gui.FuncionalidadesInvestigador;
 					e.printStackTrace();
 				}
 			default:
-				return "Error";
+				return "Vazio";
 			}
 		}
 }

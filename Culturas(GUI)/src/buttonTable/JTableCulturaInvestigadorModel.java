@@ -74,23 +74,6 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 				e.printStackTrace();
 			}
 		case 2:
-//			return "Nome Utilizador Responsável";
-			ResultSet culturaU = funcInv.filtrarCulturaTudo();
-			try {
-				while (culturaU.next()) {
-					int idC = Integer.valueOf(culturaU.getObject("IdCultura").toString());
-					if (idC == rowIndex) {
-						return culturaU.getObject("NomeUtilizador").toString();
-					}
-				}
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		case 3:
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -99,7 +82,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 				}
 			});
 			return botaoEditar;
-		case 4:
+		case 3:
 			final JButton botaoApagar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -108,7 +91,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 			});
 			return botaoApagar;	
 		default:
-			return "Error";
+			return "Vazio";
 		}
 	}
 }

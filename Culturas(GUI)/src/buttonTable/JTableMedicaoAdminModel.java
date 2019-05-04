@@ -106,7 +106,7 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 				e.printStackTrace();
 			}
 		default:
-			return "Error";
+			return "Vazio";
 		}
 	}
 }

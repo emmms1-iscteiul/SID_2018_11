@@ -55,7 +55,7 @@ public class JTableVariavelInvestigadorModel  extends AbstractTableModel {
 				e.printStackTrace();
 			}
 		default:
-			return "Error";
+			return "Vazio";
 		}
 	}
 	

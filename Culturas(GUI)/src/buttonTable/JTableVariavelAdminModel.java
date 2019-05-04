@@ -80,7 +80,7 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 			});
 			return botaoApagar;
 		default:
-			return "Error";
+			return "Vazio";
 		}
 	}
 }
