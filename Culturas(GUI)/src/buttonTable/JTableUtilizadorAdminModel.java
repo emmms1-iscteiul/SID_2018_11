@@ -16,6 +16,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Utilizador", "Mail",
 			"Password", "Editar", "Apagar" };
 	FuncionalidadesAdmin funcAdmin;
+	int id = 0;
 
 	public JTableUtilizadorAdminModel(FuncionalidadesAdmin funcAdmin) {
 		// TODO Auto-generated constructor stub
@@ -49,11 +50,9 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			else {
 				try {
 					while (utilizadores.next()) {
-						int id = Integer.valueOf(utilizadores.getObject("IdUtilizador").toString());
-						if (id == rowIndex) {
+						id = Integer.valueOf(utilizadores.getObject("IdUtilizador").toString());
+						if (utilizadores.getRow() == rowIndex) {
 							return utilizadores.getObject("NomeUtilizador").toString();
-						} else {
-							return "";
 						}
 					}
 				} catch (NumberFormatException e) {
@@ -71,8 +70,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			} else {
 				try {
 					while (utilizadores.next()) {
-						int id = Integer.valueOf(utilizadores.getObject("IdUtilizador").toString());
-						if (id == rowIndex) {
+						if (utilizadores.getRow() == rowIndex) {
 							return utilizadores.getObject("Email").toString();
 						} else {
 							return "";
@@ -93,8 +91,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			} else {
 				try {
 					while (utilizadores.next()) {
-						int id = Integer.valueOf(utilizadores.getObject("IdUtilizador").toString());
-						if (id == rowIndex) {
+						if (utilizadores.getRow() == rowIndex) {
 							return utilizadores.getObject("Passwor").toString();
 						} else {
 							return "";

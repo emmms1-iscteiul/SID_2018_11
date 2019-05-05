@@ -39,7 +39,6 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
-		ResultSet cultura = funcInv.filtrarCulturaTudo();
 		switch (columnIndex) {
 		case 0:
 			//			return "Nome Cultura";
@@ -47,12 +46,11 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 				return "Não existe cultura para este id";
 			} else {
 				try {
+					ResultSet cultura = funcInv.filtrarCulturaTudo();
 					while (cultura.next()) {
 						id = Integer.valueOf(cultura.getObject("IdCultura").toString());
 						if (cultura.getRow() == rowIndex) {
 							return cultura.getObject("NomeCultura").toString();
-						} else {
-							return "";
 						}
 					}
 				} catch (SQLException e1) {
@@ -67,11 +65,10 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 				return "Não existe descrição de cultura para este id";
 			} else {
 				try {
-					while (cultura.next()) {
-						if (cultura.getRow() == rowIndex) {
-							return cultura.getObject("DescricaoCultura").toString();
-						} else {
-							return "";
+					ResultSet culturaD = funcInv.filtrarCulturaTudo();
+					while (culturaD.next()) {
+						if (culturaD.getRow() == rowIndex) {
+							return culturaD.getObject("DescricaoCultura").toString();
 						}
 					}
 				} catch (NumberFormatException e) {
