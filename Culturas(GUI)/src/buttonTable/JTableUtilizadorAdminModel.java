@@ -39,6 +39,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		ResultSet utilizadores = funcAdmin.consultarUtilizadores();
 		switch (columnIndex) {
 		case 0:
 			//			return "Nome Utilizador";
@@ -46,7 +47,6 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 				return "Não existe utilizador para este id";
 			}
 			else {
-				ResultSet utilizadores = funcAdmin.consultarUtilizadores();
 				try {
 					while (utilizadores.next()) {
 						int id = Integer.valueOf(utilizadores.getObject("IdUtilizador").toString());
@@ -69,12 +69,11 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			if (rowIndex == 0) {
 				return "Não existe mail para este id";
 			} else {
-				ResultSet utilizadoresM = funcAdmin.consultarUtilizadores();
 				try {
-					while (utilizadoresM.next()) {
-						int id = Integer.valueOf(utilizadoresM.getObject("IdUtilizador").toString());
+					while (utilizadores.next()) {
+						int id = Integer.valueOf(utilizadores.getObject("IdUtilizador").toString());
 						if (id == rowIndex) {
-							return utilizadoresM.getObject("Email").toString();
+							return utilizadores.getObject("Email").toString();
 						} else {
 							return "";
 						}
@@ -92,12 +91,11 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			if (rowIndex == 0) {
 				return "Não existe password para este id";
 			} else {
-				ResultSet utilizadoresP = funcAdmin.consultarUtilizadores();
 				try {
-					while (utilizadoresP.next()) {
-						int id = Integer.valueOf(utilizadoresP.getObject("IdUtilizador").toString());
+					while (utilizadores.next()) {
+						int id = Integer.valueOf(utilizadores.getObject("IdUtilizador").toString());
 						if (id == rowIndex) {
-							return utilizadoresP.getObject("Passwor").toString();
+							return utilizadores.getObject("Passwor").toString();
 						} else {
 							return "";
 						}
