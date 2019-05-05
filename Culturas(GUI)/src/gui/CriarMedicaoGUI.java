@@ -48,7 +48,6 @@ public class CriarMedicaoGUI {
 		registerLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 30));
 
 		topPanel.add(registerLabel);
-
 		
 		JLabel ValorMedicao = new JLabel("Valor Medição:");
 		ValorMedicao.setFont(new Font("Arial", Font.BOLD, 13));
@@ -91,9 +90,6 @@ public class CriarMedicaoGUI {
 					JOptionPane.showMessageDialog(frame, "Campo NOME VARIÁVEL não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else{
 				funcInv.inserirMedicao(ValorMedicaoText, NomeCulturaText, NomeVariavelText, frame);
-				JOptionPane.showMessageDialog(frame, "Inserção com sucesso");
-				frame.dispose();
-
 				}
 			}
 		});

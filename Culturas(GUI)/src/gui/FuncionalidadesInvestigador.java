@@ -44,16 +44,19 @@ public class FuncionalidadesInvestigador {
 		}
 	}
 
-	public void inserirCultura(JTextField nomeCultura, JTextField descricaoCultura) {
+	public void inserirCultura(JTextField nomeCultura, JTextField descricaoCultura, JTextField idCulturaText, JFrame frame) {
 
 		try {
-			CallableStatement cs = myConn.prepareCall("{call inserirCultura(?,?)}");
+			CallableStatement cs = myConn.prepareCall("{call inserirCultura(?,?,?)}");
 			cs.setString(1, nomeCultura.getText());
 			cs.setString(2, descricaoCultura.getText());
+			cs.setString(3, idCulturaText.getText());
 			cs.execute();
+			JOptionPane.showMessageDialog(frame, "Criação com sucesso");
+			frame.dispose();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "O ID escrito já existe", "ERRO - NECESSÁRIO ESCREVER OUTRO", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -65,6 +68,8 @@ public class FuncionalidadesInvestigador {
 			cs.setString(2, nomeCulturaText.getText());
 			cs.setString(3, nomeVariavelText.getText());
 			cs.execute();
+			JOptionPane.showMessageDialog(frame, "Inserção com sucesso");
+			frame.dispose();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(frame, "Tem de ter uma variável medida com a resptiva cultura e variável", "ERRO - NECESSÁRIO PREENCHER UMA VARIAVEL MEDIDA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
@@ -126,7 +131,7 @@ public class FuncionalidadesInvestigador {
 
 	}
 
-	public void inserirVariavelMedida(JTextField limiteInferiorText, JTextField limiteSuperiorText, JTextField nomeCulturaText, JTextField nomeVariavelText, JFrame frame) {
+	public void inserirVariavelMedida(JTextField limiteInferiorText, JTextField limiteSuperiorText, JTextField nomeCulturaText, JTextField nomeVariavelText, JTextField idVariavelMedidaText, JFrame frame) {
 
 		try {
 			CallableStatement cs = myConn.prepareCall("{call inserirVariavelMedida(?,?,?,?)}");
@@ -134,10 +139,13 @@ public class FuncionalidadesInvestigador {
 			cs.setString(2, nomeCulturaText.getText());
 			cs.setString(3, limiteInferiorText.getText());
 			cs.setString(4, limiteSuperiorText.getText());
+			cs.setString(5, idVariavelMedidaText.getText());
 			cs.execute();
+			JOptionPane.showMessageDialog(frame, "Inserção com sucesso");
+			frame.dispose();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(frame, "Precisa existir cultura e variavél primeiro", "ERRO - NECESSÁRIO EXISTENCIA DE VARIAVEL E CULTURA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frame, "Precisa existir cultura e variável primeiro", "ERRO - NECESSÁRIO EXISTENCIA DE VARIAVEL E CULTURA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -232,7 +240,7 @@ public class FuncionalidadesInvestigador {
 		ResultSet variaveisInv = null;
 		
 		try {
-			CallableStatement cs = myConn.prepareCall("{call consultarVariaveisInv()}");
+			CallableStatement cs = myConn.prepareCall("{call consultarVariaveisInvestigador()}");
 			cs.execute();
 			variaveisInv = cs.getResultSet();
 		} catch (SQLException e) {

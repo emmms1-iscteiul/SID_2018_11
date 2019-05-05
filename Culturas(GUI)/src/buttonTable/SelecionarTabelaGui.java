@@ -165,10 +165,6 @@ public class SelecionarTabelaGui {
 			scrollPane.setPreferredSize(new Dimension(400, 400));
 			table.setFillsViewportHeight(true);
 
-			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
-			table.getColumn("Editar").setCellRenderer(buttonRenderer);
-			table.addMouseListener(new JTableButtonMouseListener(table));
-
 			centerPanel.add(scrollPane);
 			
 

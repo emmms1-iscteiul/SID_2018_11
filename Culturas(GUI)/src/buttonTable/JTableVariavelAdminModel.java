@@ -29,7 +29,7 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return 10;
+		return 20;
 	}
 
 	@Override
@@ -52,6 +52,8 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 						int id = Integer.valueOf(variaveis.getObject("IdVariavel").toString());
 						if (id == rowIndex) {
 							return variaveis.getObject("NomeVariavel").toString();
+						} else {
+							return "";
 						}
 					}
 				} catch (NumberFormatException e) {
@@ -80,7 +82,7 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 			});
 			return botaoApagar;
 		default:
-			return "Vazio";
+			return "";
 		}
 	}
 }

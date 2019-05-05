@@ -125,7 +125,9 @@ public class InvestigadorGui {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				funcInv.logout();
-				System.exit(0);
+				frame.dispose();
+				LoginGui login = new LoginGui("Monotorização de Culturas");
+				login.open();
 			}
 		});
 

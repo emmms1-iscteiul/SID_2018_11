@@ -42,14 +42,13 @@ public class CriarUtilizadorGUI {
 		frame.setLayout(new BorderLayout());
 
 		JPanel topPanel = new JPanel();
-		JPanel centerPanel = new JPanel(new GridLayout(4,1));
+		JPanel centerPanel = new JPanel(new GridLayout(5,1));
 		JPanel bottomPanel = new JPanel();
 
 		JLabel registerLabel = new JLabel("Criar User");
 		registerLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 30));
 
 		topPanel.add(registerLabel);
-
 		
 		JLabel eMail = new JLabel("Email:");
 		eMail.setFont(new Font("Arial", Font.BOLD, 13));
@@ -67,6 +66,10 @@ public class CriarUtilizadorGUI {
 		userPassConf.setFont(new Font("Arial", Font.BOLD, 13));
 		JPasswordField passwordConfText = new JPasswordField("", 10);
 		
+		JLabel idUtilizador = new JLabel("ID Utilizador:");
+		idUtilizador.setFont(new Font("Arial", Font.BOLD, 13));
+		JTextField idUtilizadorText = new JTextField("", 10);
+		
 		
 		Font font = eMailUser.getFont();
 		float size = font.getSize() + 1.0f;
@@ -74,6 +77,7 @@ public class CriarUtilizadorGUI {
 		passwordText.setFont( font.deriveFont(size) );
 		nomeUser.setFont( font.deriveFont(size) );
 		passwordConfText.setFont( font.deriveFont(size) );
+		idUtilizadorText.setFont( font.deriveFont(size) );
 
 		centerPanel.add(eMail);
 		centerPanel.add(eMailUser);
@@ -86,6 +90,9 @@ public class CriarUtilizadorGUI {
 		
 		centerPanel.add(userPassConf);
 		centerPanel.add(passwordConfText);
+		
+		centerPanel.add(idUtilizador);
+		centerPanel.add(idUtilizadorText);
 	
 
 		JButton registerButton = new JButton("Criar");
@@ -104,8 +111,10 @@ public class CriarUtilizadorGUI {
 					JOptionPane.showMessageDialog(frame, "Campo CONFIRM PASSWORD não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else if(!passwordText.getText().equals(passwordConfText.getText()))	{
 					JOptionPane.showMessageDialog(frame, "Password não coincidem", "ERRO - PASSWORDS DO NOT MATCH", JOptionPane.ERROR_MESSAGE);
+				}else if(!passwordText.getText().equals(passwordConfText.getText()))	{
+					JOptionPane.showMessageDialog(frame, "Campo ID UTILIZADOR não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else{
-				funcAdmin.inserirInvestigador(nomeUser, eMailUser, passwordText);
+				funcAdmin.inserirInvestigador(nomeUser, eMailUser, passwordText, idUtilizadorText);
 				JOptionPane.showMessageDialog(frame, "Criação com sucesso");
 				frame.dispose();
 				}

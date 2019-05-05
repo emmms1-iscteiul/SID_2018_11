@@ -65,13 +65,14 @@ public class FuncionalidadesAdmin {
 
 
 	@SuppressWarnings("deprecation")
-	public void inserirInvestigador(JTextField utilNameText, JTextField utilEmailText, JPasswordField passwordText) {
+	public void inserirInvestigador(JTextField utilNameText, JTextField utilEmailText, JPasswordField passwordText, JTextField idUtilizadorText) {
 
 		try {
-			CallableStatement cs = myConn.prepareCall("{call inserirInvestigador(?,?,?)}");
+			CallableStatement cs = myConn.prepareCall("{call inserirInvestigador(?,?,?,?)}");
 			cs.setString(1, utilEmailText.getText());
 			cs.setString(2, utilNameText.getText());
 			cs.setString(3, passwordText.getText());
+			cs.setString(4, idUtilizadorText.getText());
 			cs.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -79,11 +80,12 @@ public class FuncionalidadesAdmin {
 		}
 	}
 
-	public void inserirVariavel(JTextField nomeVariavelText) {
+	public void inserirVariavel(JTextField nomeVariavelText, JTextField idVariavelText) {
 
 		try {
-			CallableStatement cs = myConn.prepareCall("{call inserirVariavel(?)}");			
+			CallableStatement cs = myConn.prepareCall("{call inserirVariavel(?,?)}");			
 			cs.setString(1, nomeVariavelText.getText());
+			cs.setString(2, idVariavelText.getText());
 			cs.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

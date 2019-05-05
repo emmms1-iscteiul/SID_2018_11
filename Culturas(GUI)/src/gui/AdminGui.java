@@ -133,7 +133,9 @@ public class AdminGui {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				funcAdmin.logout();
-				System.exit(0);
+				frame.dispose();
+				LoginGui login = new LoginGui("Monotorização de Culturas");
+				login.open();
 			}
 		});
 

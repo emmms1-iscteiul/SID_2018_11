@@ -26,7 +26,7 @@ public class JTableCulturaAdminModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return 10;
+		return 20;
 	}
 
 	@Override
@@ -39,36 +39,46 @@ public class JTableCulturaAdminModel extends AbstractTableModel {
 		switch (columnIndex) {
 		case 0:
 			//return "Nome Cultura";
-			
-			ResultSet cultura = funcAdmin.consultarCulturas();
-			try {
-				while(cultura.next()) {
-					int idC = Integer.valueOf(cultura.getObject("IdCultura").toString());
-					if (idC == rowIndex) {
-						return cultura.getObject("NomeCultura").toString();
+			if (rowIndex == 0) {
+				return "Não existe cultura para este id";
+			} else {
+				ResultSet cultura = funcAdmin.consultarCulturas();
+				try {
+					while(cultura.next()) {
+						int idC = Integer.valueOf(cultura.getObject("IdCultura").toString());
+						if (idC == rowIndex) {
+							return cultura.getObject("NomeCultura").toString();
+						} else {
+							return "";
+						}					
 					}
-					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		case 1:
 			//return "Descrição Cultura";
-			ResultSet culturaD = funcAdmin.consultarCulturas();
-			try {
-				while(culturaD.next()) {
-					int idC = Integer.valueOf(culturaD.getObject("IdCultura").toString());
-					if (idC == rowIndex) {
-						return culturaD.getObject("DescricaoCultura").toString();
+			if (rowIndex == 0) {
+				return "Não existe descrição para este id";
+			} else {
+				ResultSet culturaD = funcAdmin.consultarCulturas();
+				try {
+					while(culturaD.next()) {
+						int idC = Integer.valueOf(culturaD.getObject("IdCultura").toString());
+						if (idC == rowIndex) {
+							return culturaD.getObject("DescricaoCultura").toString();
+						} else {
+							return "";
+						}
 					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		default:
-			return "Vazio";
+			return "";
 		}
 	}
 }

@@ -7,37 +7,40 @@ import javax.swing.table.AbstractTableModel;
 
 import gui.FuncionalidadesInvestigador;
 
-	public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
-		private static final long serialVersionUID = 1L;
-		private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medição",	"Valor Medição", "Nome Cultura", "Nome Variavel"};
-		
-		FuncionalidadesInvestigador funcInv;
+public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
+	private static final long serialVersionUID = 1L;
+	private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medição",	"Valor Medição", "Nome Cultura", "Nome Variavel"};
 
-		public JTableMedicaoInvestigadorModel(FuncionalidadesInvestigador funcInv) {
-			// TODO Auto-generated constructor stub
-			this.funcInv = funcInv;
-		}
+	FuncionalidadesInvestigador funcInv;
 
-		@Override
-		public int getColumnCount() {
-			return COLUMN_NAMES.length;
-		}
+	public JTableMedicaoInvestigadorModel(FuncionalidadesInvestigador funcInv) {
+		// TODO Auto-generated constructor stub
+		this.funcInv = funcInv;
+	}
 
-		@Override
-		public int getRowCount() {
-			return 10;
-		}
+	@Override
+	public int getColumnCount() {
+		return COLUMN_NAMES.length;
+	}
 
-		@Override
-		public String getColumnName(int columnIndex) {
-			return COLUMN_NAMES[columnIndex];
-		}
+	@Override
+	public int getRowCount() {
+		return 10;
+	}
 
-		@Override
-		public Object getValueAt(final int rowIndex, final int columnIndex) {
-			switch (columnIndex) {
-			case 0:
-//				return "Data e Hora Medição";
+	@Override
+	public String getColumnName(int columnIndex) {
+		return COLUMN_NAMES[columnIndex];
+	}
+
+	@Override
+	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		switch (columnIndex) {
+		case 0:
+			//				return "Data e Hora Medição";
+			if (rowIndex == 0) {
+				return "Não existe data e hora para este id";
+			} else {
 				ResultSet medicoesDH = funcInv.filtrarMedicaoTudo();
 				try {
 					while (medicoesDH.next()) {
@@ -53,8 +56,12 @@ import gui.FuncionalidadesInvestigador;
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			case 1:
-//				return "Valor Medição";
+			}
+		case 1:
+			//				return "Valor Medição";
+			if (rowIndex == 0) {
+				return "Não existe valor para este id";
+			} else {
 				ResultSet medicoesVM = funcInv.filtrarMedicaoTudo();
 				try {
 					while (medicoesVM.next()) {
@@ -70,8 +77,12 @@ import gui.FuncionalidadesInvestigador;
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			case 2:
-//				return "Nome Cultura";
+			}
+		case 2:
+			//				return "Nome Cultura";
+			if (rowIndex == 0) {
+				return "Não existe cultura para este id";
+			} else {
 				ResultSet medicoesC = funcInv.filtrarMedicaoTudo();
 				try {
 					while (medicoesC.next()) {
@@ -87,8 +98,12 @@ import gui.FuncionalidadesInvestigador;
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			case 3:
-//				return "Nome Variavel";
+			}
+		case 3:
+			//				return "Nome Variavel";
+			if (rowIndex == 0) {
+				return "Não existe variável para este id";
+			} else {
 				ResultSet medicoesV = funcInv.filtrarMedicaoTudo();
 				try {
 					while (medicoesV.next()) {
@@ -104,8 +119,9 @@ import gui.FuncionalidadesInvestigador;
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			default:
-				return "Vazio";
 			}
+		default:
+			return "";
 		}
+	}
 }

@@ -49,11 +49,14 @@ public class CriarVariavelGUI {
 		registerLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 30));
 
 		topPanel.add(registerLabel);
-
 		
 		JLabel nomeVariavel = new JLabel("Nome Variável:");
 		nomeVariavel.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField nomeVariavelText = new JTextField("",10);
+		
+		JLabel idVariavel = new JLabel("ID Variável:");
+		idVariavel.setFont(new Font("Arial", Font.BOLD, 13));
+		JTextField idVariavelText = new JTextField("",10);
 		
 		
 		Font font = nomeVariavel.getFont();
@@ -62,6 +65,9 @@ public class CriarVariavelGUI {
 
 		centerPanel.add(nomeVariavel);
 		centerPanel.add(nomeVariavelText);
+		
+		centerPanel.add(idVariavel);
+		centerPanel.add(idVariavelText);
 	
 
 		JButton registerButton = new JButton("Criar");
@@ -71,8 +77,11 @@ public class CriarVariavelGUI {
 			public void actionPerformed(ActionEvent e) {
 				if(nomeVariavelText.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "Campo NOME VARIAVEL não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
-				}else{
-				funcAdmin.inserirVariavel(nomeVariavelText);
+				} else if(idVariavelText.getText().equals("")) {
+					JOptionPane.showMessageDialog(frame, "Campo ID VARIAVEL não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
+				}
+				else{
+				funcAdmin.inserirVariavel(nomeVariavelText, idVariavelText);
 				JOptionPane.showMessageDialog(frame, "Criação com sucesso");
 				frame.dispose();
 				}

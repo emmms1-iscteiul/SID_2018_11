@@ -15,6 +15,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura","Editar", "Apagar" };
 	private FuncionalidadesInvestigador funcInv;
+	int id = 0;
 
 	public JTableCulturaInvestigadorModel(FuncionalidadesInvestigador funcInv) {
 		// TODO Auto-generated constructor stub
@@ -38,46 +39,54 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		ResultSet cultura = funcInv.filtrarCulturaTudo();
 		switch (columnIndex) {
 		case 0:
-//			return "Nome Cultura";
-			ResultSet cultura = funcInv.filtrarCulturaTudo();
-			try {
-				while (cultura.next()) {
-					int idC = Integer.valueOf(cultura.getObject("IdCultura").toString());
-					if (idC == rowIndex) {
-						return cultura.getObject("NomeCultura").toString();
+			//			return "Nome Cultura";
+			if (rowIndex == 0) {
+				return "Não existe cultura para este id";
+			} else {
+				try {
+					while (cultura.next()) {
+						id = Integer.valueOf(cultura.getObject("IdCultura").toString());
+						if (cultura.getRow() == rowIndex) {
+							return cultura.getObject("NomeCultura").toString();
+						} else {
+							return "";
+						}
 					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
 				}
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		case 1:
-//			return "Descrição Cultura";
-			ResultSet culturaD = funcInv.filtrarCulturaTudo();
-			try {
-				while (culturaD.next()) {
-					int idC = Integer.valueOf(culturaD.getObject("IdCultura").toString());
-					if (idC == rowIndex) {
-						return culturaD.getObject("DescricaoCultura").toString();
+			//			return "Descrição Cultura";
+			if (rowIndex == 0) {
+				return "Não existe descrição de cultura para este id";
+			} else {
+				try {
+					while (cultura.next()) {
+						if (cultura.getRow() == rowIndex) {
+							return cultura.getObject("DescricaoCultura").toString();
+						} else {
+							return "";
+						}
 					}
-				}
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
 			}
 		case 2:
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					EditarCulturaGUI frameE = new EditarCulturaGUI("Editar Cultura", funcInv, rowIndex);
+					EditarCulturaGUI frameE = new EditarCulturaGUI("Editar Cultura", funcInv, id);
 					frameE.open();
 				}
 			});
@@ -86,12 +95,12 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 			final JButton botaoApagar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					funcInv.apagarCultura(rowIndex);
+					funcInv.apagarCultura(id);
 				}
 			});
 			return botaoApagar;	
 		default:
-			return "Vazio";
+			return "";
 		}
 	}
 }

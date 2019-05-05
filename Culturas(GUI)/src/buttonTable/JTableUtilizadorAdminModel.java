@@ -52,6 +52,8 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 						int id = Integer.valueOf(utilizadores.getObject("IdUtilizador").toString());
 						if (id == rowIndex) {
 							return utilizadores.getObject("NomeUtilizador").toString();
+						} else {
+							return "";
 						}
 					}
 				} catch (NumberFormatException e) {
@@ -65,7 +67,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 		case 1:
 			//			return "Mail";
 			if (rowIndex == 0) {
-				return "Não existe utilizador para este id";
+				return "Não existe mail para este id";
 			} else {
 				ResultSet utilizadoresM = funcAdmin.consultarUtilizadores();
 				try {
@@ -73,6 +75,8 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 						int id = Integer.valueOf(utilizadoresM.getObject("IdUtilizador").toString());
 						if (id == rowIndex) {
 							return utilizadoresM.getObject("Email").toString();
+						} else {
+							return "";
 						}
 					}
 				} catch (NumberFormatException e) {
@@ -86,7 +90,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 		case 2:
 			//			return "Password";
 			if (rowIndex == 0) {
-				return "Não existe utilizador para este id";
+				return "Não existe password para este id";
 			} else {
 				ResultSet utilizadoresP = funcAdmin.consultarUtilizadores();
 				try {
@@ -94,6 +98,8 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 						int id = Integer.valueOf(utilizadoresP.getObject("IdUtilizador").toString());
 						if (id == rowIndex) {
 							return utilizadoresP.getObject("Passwor").toString();
+						} else {
+							return "";
 						}
 					}
 				} catch (NumberFormatException e) {
@@ -122,7 +128,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			});
 			return botaoApagar;
 		default:
-			return "Vazio";
+			return "";
 		}
 	}
 }
