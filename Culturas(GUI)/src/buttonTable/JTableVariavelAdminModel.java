@@ -39,6 +39,7 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		ResultSet variaveis = funcAdmin.consultarVariaveis();
 		switch (columnIndex) {
 		case 0:
 			//			return "Nome Variável";
@@ -46,14 +47,10 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 				return "Não existe variável para este id";
 			}
 			else {
-				ResultSet variaveis = funcAdmin.consultarVariaveis();
 				try {
 					while (variaveis.next()) {
-						int id = Integer.valueOf(variaveis.getObject("IdVariavel").toString());
-						if (id == rowIndex) {
+						if (variaveis.getRow() == rowIndex) {
 							return variaveis.getObject("NomeVariavel").toString();
-						} else {
-							return "";
 						}
 					}
 				} catch (NumberFormatException e) {

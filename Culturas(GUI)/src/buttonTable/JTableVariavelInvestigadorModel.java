@@ -36,17 +36,16 @@ public class JTableVariavelInvestigadorModel  extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		ResultSet variaveis = funcInv.consultarVariaveisInvestigador();
 		switch (columnIndex) {
 		case 0:
 			//			return "Nome Variável";
 			if (rowIndex == 0) {
 				return "Não existe variável para este id";
 			} else {
-				ResultSet variaveis = funcInv.consultarVariaveisInvestigador();
 				try {
 					while (variaveis.next()) {
-						int id = Integer.valueOf(variaveis.getObject("IdVariavel").toString());
-						if (id == rowIndex) {
+						if (variaveis.getRow() == rowIndex) {
 							return variaveis.getObject("NomeVariavel").toString();
 						}
 					}

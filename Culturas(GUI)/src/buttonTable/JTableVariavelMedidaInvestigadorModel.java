@@ -15,6 +15,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior", "Nome Cultura", "Nome Variavel","Editar" };
 	FuncionalidadesInvestigador funcInv;
+	int id = 0;
 
 	public JTableVariavelMedidaInvestigadorModel(FuncionalidadesInvestigador funcInv) {
 		// TODO Auto-generated constructor stub
@@ -38,18 +39,18 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		ResultSet variaveisMedidas = funcInv.filtrarVariaveisMedidasTudo();
 		switch (columnIndex) {
 		case 0:
 			//				return "LimiteInferior"	;
 			if (rowIndex == 0) {
 				return "Não existe limite inferior para este id";
 			} else {
-				ResultSet variaveisMedidasLI = funcInv.filtrarVariaveisMedidasTudo();
 				try {
-					while (variaveisMedidasLI.next()) {
-						int idVM = Integer.valueOf(variaveisMedidasLI.getObject("IdVariavelMedida").toString());
-						if (idVM == rowIndex) {
-							return variaveisMedidasLI.getObject("LimiteInferior").toString();
+					while (variaveisMedidas.next()) {
+						id = Integer.valueOf(variaveisMedidas.getObject("IdVariavelMedida").toString());
+						if (variaveisMedidas.getRow() == rowIndex) {
+							return variaveisMedidas.getObject("LimiteInferior").toString();
 						}
 					}
 				} catch (SQLException e) {
@@ -62,12 +63,10 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 			if (rowIndex == 0) {
 				return "Não existe limite superior para este id";
 			} else {
-				ResultSet variaveisMedidasLS = funcInv.filtrarVariaveisMedidasTudo();
 				try {
-					while (variaveisMedidasLS.next()) {
-						int idVM = Integer.valueOf(variaveisMedidasLS.getObject("IdVariavelMedida").toString());
-						if (idVM == rowIndex) {
-							return variaveisMedidasLS.getObject("LimiteSuperior").toString();
+					while (variaveisMedidas.next()) {
+						if (variaveisMedidas.getRow() == rowIndex) {
+							return variaveisMedidas.getObject("LimiteSuperior").toString();
 						}
 					}
 				} catch (SQLException e) {
@@ -80,12 +79,10 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 			if (rowIndex == 0) {
 				return "Não existe cultura para este id";
 			} else {
-				ResultSet variaveisMedidasC = funcInv.filtrarVariaveisMedidasTudo();
 				try {
-					while (variaveisMedidasC.next()) {
-						int idVM = Integer.valueOf(variaveisMedidasC.getObject("IdVariavelMedida").toString());
-						if (idVM == rowIndex) {
-							return variaveisMedidasC.getObject("NomeCultura").toString();
+					while (variaveisMedidas.next()) {
+						if (variaveisMedidas.getRow() == rowIndex) {
+							return variaveisMedidas.getObject("NomeCultura").toString();
 						}
 					}
 				} catch (SQLException e) {
@@ -98,12 +95,10 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 			if (rowIndex == 0) {
 				return "Não existe variável para este id";
 			} else {
-				ResultSet variaveisMedidasV = funcInv.filtrarVariaveisMedidasTudo();
 				try {
-					while (variaveisMedidasV.next()) {
-						int idVM = Integer.valueOf(variaveisMedidasV.getObject("IdVariavelMedida").toString());
-						if (idVM == rowIndex) {
-							return variaveisMedidasV.getObject("NomeCultura").toString();
+					while (variaveisMedidas.next()) {
+						if (variaveisMedidas.getRow() == rowIndex) {
+							return variaveisMedidas.getObject("NomeCultura").toString();
 						}
 					}
 				} catch (SQLException e) {

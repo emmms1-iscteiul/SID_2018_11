@@ -35,14 +35,13 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		ResultSet variaveisMedidas = funcAdmin.consultarVariaveisMedidas();
 		switch (columnIndex) {
 		case 0:
 //			return "LimiteInferior"	;
-			ResultSet variaveisMedidas = funcAdmin.consultarVariaveisMedidas();
 			try {
 				while (variaveisMedidas.next()) {
-					int id = Integer.valueOf(variaveisMedidas.getObject("IdVariavelMedida").toString());
-					if (id == rowIndex) {
+					if (variaveisMedidas.getRow() == rowIndex) {
 						return variaveisMedidas.getObject("LimiteInferior").toString();
 					}
 				}
@@ -55,12 +54,10 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 			}
 		case 1:
 //			return "LimiteSuperior";
-			ResultSet variaveisMedidasLS = funcAdmin.consultarVariaveisMedidas();
 			try {
-				while (variaveisMedidasLS.next()) {
-					int id = Integer.valueOf(variaveisMedidasLS.getObject("IdVariavelMedida").toString());
-					if (id == rowIndex) {
-						return variaveisMedidasLS.getObject("LimiteSuperior").toString();
+				while (variaveisMedidas.next()) {
+					if (variaveisMedidas.getRow() == rowIndex) {
+						return variaveisMedidas.getObject("LimiteSuperior").toString();
 					}
 				}
 			} catch (NumberFormatException e) {
@@ -72,12 +69,10 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 			}
 		case 2:
 //			return "Nome Cultura";
-			ResultSet variaveisMedidasC = funcAdmin.consultarVariaveisMedidas();
 			try {
-				while (variaveisMedidasC.next()) {
-					int id = Integer.valueOf(variaveisMedidasC.getObject("IdVariavelMedida").toString());
-					if (id == rowIndex) {
-						return variaveisMedidasC.getObject("NomeCultura").toString();
+				while (variaveisMedidas.next()) {
+					if (variaveisMedidas.getRow() == rowIndex) {
+						return variaveisMedidas.getObject("NomeCultura").toString();
 					}
 				}
 			} catch (NumberFormatException e) {
@@ -89,12 +84,10 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 			}
 		case 3:
 //			return "Nome Variavel";
-			ResultSet variaveisMedidasV = funcAdmin.consultarVariaveisMedidas();
 			try {
-				while (variaveisMedidasV.next()) {
-					int id = Integer.valueOf(variaveisMedidasV.getObject("IdVariavelMedida").toString());
-					if (id == rowIndex) {
-						return variaveisMedidasV.getObject("NomeVariavel").toString();
+				while (variaveisMedidas.next()) {
+					if (variaveisMedidas.getRow() == rowIndex) {
+						return variaveisMedidas.getObject("NomeVariavel").toString();
 					}
 				}
 			} catch (NumberFormatException e) {
@@ -105,7 +98,7 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 				e.printStackTrace();
 			}
 		default:
-			return "Vazio";
+			return "";
 		}
 	}
 }

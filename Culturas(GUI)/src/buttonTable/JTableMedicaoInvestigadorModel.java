@@ -12,6 +12,7 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 	private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medição",	"Valor Medição", "Nome Cultura", "Nome Variavel"};
 
 	FuncionalidadesInvestigador funcInv;
+	int id = 0;
 
 	public JTableMedicaoInvestigadorModel(FuncionalidadesInvestigador funcInv) {
 		// TODO Auto-generated constructor stub
@@ -35,18 +36,18 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		ResultSet medicoes = funcInv.filtrarMedicaoTudo();
 		switch (columnIndex) {
 		case 0:
 			//				return "Data e Hora Medição";
 			if (rowIndex == 0) {
 				return "Não existe data e hora para este id";
 			} else {
-				ResultSet medicoesDH = funcInv.filtrarMedicaoTudo();
 				try {
-					while (medicoesDH.next()) {
-						int id = Integer.valueOf(medicoesDH.getObject("IdMedicao").toString());
-						if (id == rowIndex) {
-							return medicoesDH.getObject("DataHoraMedicao").toString();
+					while (medicoes.next()) {
+						id = Integer.valueOf(medicoes.getObject("IdMedicao").toString());
+						if (medicoes.getRow() == rowIndex) {
+							return medicoes.getObject("DataHoraMedicao").toString();
 						}
 					}
 				} catch (NumberFormatException e) {
@@ -62,12 +63,10 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 			if (rowIndex == 0) {
 				return "Não existe valor para este id";
 			} else {
-				ResultSet medicoesVM = funcInv.filtrarMedicaoTudo();
 				try {
-					while (medicoesVM.next()) {
-						int id = Integer.valueOf(medicoesVM.getObject("IdMedicao").toString());
-						if (id == rowIndex) {
-							return medicoesVM.getObject("ValorMedicao").toString();
+					while (medicoes.next()) {
+						if (medicoes.getRow() == rowIndex) {
+							return medicoes.getObject("ValorMedicao").toString();
 						}
 					}
 				} catch (NumberFormatException e) {
@@ -83,12 +82,10 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 			if (rowIndex == 0) {
 				return "Não existe cultura para este id";
 			} else {
-				ResultSet medicoesC = funcInv.filtrarMedicaoTudo();
 				try {
-					while (medicoesC.next()) {
-						int id = Integer.valueOf(medicoesC.getObject("IdMedicao").toString());
-						if (id == rowIndex) {
-							return medicoesC.getObject("NomeCultura").toString();
+					while (medicoes.next()) {
+						if (medicoes.getRow() == rowIndex) {
+							return medicoes.getObject("NomeCultura").toString();
 						}
 					}
 				} catch (NumberFormatException e) {
@@ -104,12 +101,10 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 			if (rowIndex == 0) {
 				return "Não existe variável para este id";
 			} else {
-				ResultSet medicoesV = funcInv.filtrarMedicaoTudo();
 				try {
-					while (medicoesV.next()) {
-						int id = Integer.valueOf(medicoesV.getObject("IdMedicao").toString());
-						if (id == rowIndex) {
-							return medicoesV.getObject("NomeVariavel").toString();
+					while (medicoes.next()) {
+						if (medicoes.getRow() == rowIndex) {
+							return medicoes.getObject("NomeVariavel").toString();
 						}
 					}
 				} catch (NumberFormatException e) {

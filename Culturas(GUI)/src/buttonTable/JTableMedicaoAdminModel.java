@@ -36,14 +36,14 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		ResultSet medicoes = funcAdmin.consultarMedicoes();
 		switch (columnIndex) {
 		case 0:
 //			return "Data e Hora Medição";
-			ResultSet medicoes = funcAdmin.consultarMedicoes();
+			
 			try {
 				while (medicoes.next()) {
-					int id = Integer.valueOf(medicoes.getObject("IdMedicao").toString());
-					if (id == rowIndex) {
+					if (medicoes.getRow() == rowIndex) {
 						return medicoes.getObject("DataHoraMedicao").toString();
 					}
 				}
@@ -56,12 +56,10 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 			}
 		case 1:
 //			return "Valor Medição";
-			ResultSet medicoesVM = funcAdmin.consultarMedicoes();
 			try {
-				while (medicoesVM.next()) {
-					int id = Integer.valueOf(medicoesVM.getObject("IdMedicao").toString());
-					if (id == rowIndex) {
-						return medicoesVM.getObject("ValorMedicao").toString();
+				while (medicoes.next()) {
+					if (medicoes.getRow() == rowIndex) {
+						return medicoes.getObject("ValorMedicao").toString();
 					}
 				}
 			} catch (NumberFormatException e) {
@@ -73,12 +71,10 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 			}
 		case 2:
 //			return "Nome Cultura";
-			ResultSet medicoesC = funcAdmin.consultarMedicoes();
 			try {
-				while (medicoesC.next()) {
-					int id = Integer.valueOf(medicoesC.getObject("IdMedicao").toString());
-					if (id == rowIndex) {
-						return medicoesC.getObject("NomeCultura").toString();
+				while (medicoes.next()) {
+					if (medicoes.getRow()== rowIndex) {
+						return medicoes.getObject("NomeCultura").toString();
 					}
 				}
 			} catch (NumberFormatException e) {
@@ -90,12 +86,10 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 			}
 		case 3:
 //			return "Nome Variavel";
-			ResultSet medicoesV = funcAdmin.consultarMedicoes();
 			try {
-				while (medicoesV.next()) {
-					int id = Integer.valueOf(medicoesV.getObject("IdMedicao").toString());
-					if (id == rowIndex) {
-						return medicoesV.getObject("NomeVariavel").toString();
+				while (medicoes.next()) {
+					if (medicoes.getRow() == rowIndex) {
+						return medicoes.getObject("NomeVariavel").toString();
 					}
 				}
 			} catch (NumberFormatException e) {
@@ -106,7 +100,7 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 				e.printStackTrace();
 			}
 		default:
-			return "Vazio";
+			return "";
 		}
 	}
 }
