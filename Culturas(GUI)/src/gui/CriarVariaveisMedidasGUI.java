@@ -42,7 +42,7 @@ public class CriarVariaveisMedidasGUI {
 		frame.setLayout(new BorderLayout());
 
 		JPanel topPanel = new JPanel();
-		JPanel centerPanel = new JPanel(new GridLayout(5,1));
+		JPanel centerPanel = new JPanel(new GridLayout(4,1));
 		JPanel bottomPanel = new JPanel();
 
 		JLabel registerLabel = new JLabel("Inserir");
@@ -66,10 +66,6 @@ public class CriarVariaveisMedidasGUI {
 		NomeVariavel.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField NomeVariavelText = new JTextField("", 10);
 		
-		JLabel idVariavelMedida = new JLabel("ID Variável Medida:");
-		idVariavelMedida.setFont(new Font("Arial", Font.BOLD, 13));
-		JTextField idVariavelMedidaText = new JTextField("", 10);
-		
 		
 		Font font = LimiteInferiorText.getFont();
 		float size = font.getSize() + 1.0f;
@@ -77,7 +73,6 @@ public class CriarVariaveisMedidasGUI {
 		LimiteSuperiorText.setFont( font.deriveFont(size) );
 		NomeCulturaText.setFont( font.deriveFont(size) );
 		NomeVariavelText.setFont( font.deriveFont(size) );
-		idVariavelMedidaText.setFont( font.deriveFont(size) );
 
 		centerPanel.add(LimiteInferior);
 		centerPanel.add(LimiteInferiorText);
@@ -90,9 +85,7 @@ public class CriarVariaveisMedidasGUI {
 		
 		centerPanel.add(NomeVariavel);
 		centerPanel.add(NomeVariavelText);
-		
-		centerPanel.add(idVariavelMedida);
-		centerPanel.add(idVariavelMedidaText);	
+			
 
 		JButton registerButton = new JButton("inserir");
 		registerButton.addActionListener(new ActionListener() {
@@ -107,10 +100,8 @@ public class CriarVariaveisMedidasGUI {
 					JOptionPane.showMessageDialog(frame, "Campo NOME CULTURA não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else if(NomeVariavelText.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "Campo NOME VARIÁVEL não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
-				}else if(NomeVariavelText.getText().equals("")) {
-					JOptionPane.showMessageDialog(frame, "Campo ID VARIÁVEL MEDIDA não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else{
-				funcInv.inserirVariavelMedida(LimiteInferiorText, LimiteSuperiorText, NomeCulturaText, NomeVariavelText, idVariavelMedidaText, frame);
+				funcInv.inserirVariavelMedida(LimiteInferiorText, LimiteSuperiorText, NomeCulturaText, NomeVariavelText, frame);
 				}
 			}
 		});

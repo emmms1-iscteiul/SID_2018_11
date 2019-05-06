@@ -10,7 +10,7 @@ import gui.FuncionalidadesAdmin;
 
 public class JTableCulturaAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura" };
+	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura", "Nome Utilizador Responsável" };
 	
 	FuncionalidadesAdmin funcAdmin;
 
@@ -63,6 +63,21 @@ public class JTableCulturaAdminModel extends AbstractTableModel {
 					while(cultura.next()) {
 						if (cultura.getRow() == rowIndex) {
 							return cultura.getObject("DescricaoCultura").toString();
+						}
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		case 2:
+			if (rowIndex == 0) {
+				return "Não existe descrição para este id";
+			} else {
+				try {
+					while(cultura.next()) {
+						if (cultura.getRow() == rowIndex) {
+							return cultura.getObject("NomeUtilizador").toString();
 						}
 					}
 				} catch (SQLException e) {

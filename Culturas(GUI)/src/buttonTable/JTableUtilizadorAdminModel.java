@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 import gui.EditarUtilizadorGUI;
@@ -17,10 +19,12 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			"Password", "Editar", "Apagar" };
 	FuncionalidadesAdmin funcAdmin;
 	int id = 0;
+	JFrame frame;
 
-	public JTableUtilizadorAdminModel(FuncionalidadesAdmin funcAdmin) {
+	public JTableUtilizadorAdminModel(FuncionalidadesAdmin funcAdmin, JFrame frame) {
 		// TODO Auto-generated constructor stub
 		this.funcAdmin=funcAdmin;
+		this.frame=frame;
 	}
 
 	@Override
@@ -119,6 +123,8 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					funcAdmin.apagarUtilizador(rowIndex);
+					JOptionPane.showMessageDialog(frame, "Apagado com sucesso");
+					frame.dispose();
 				}
 			});
 			return botaoApagar;

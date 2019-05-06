@@ -57,11 +57,6 @@ public class CriarCulturaGUI {
 		DescricaoCultura.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField DescricaoCulturaText = new JTextField("",100);
 		
-		JLabel idCultura = new JLabel("ID Cultura:");
-		idCultura.setFont(new Font("Arial", Font.BOLD, 13));
-		JTextField idCulturaText = new JTextField("",10);
-		
-		
 		Font font = NomeCulturaText.getFont();
 		float size = font.getSize() + 1.0f;
 		NomeCulturaText.setFont( font.deriveFont(size) );
@@ -72,9 +67,6 @@ public class CriarCulturaGUI {
 		
 		centerPanel.add(DescricaoCultura);
 		centerPanel.add(DescricaoCulturaText);
-		
-		centerPanel.add(idCultura);
-		centerPanel.add(idCulturaText);
 
 		JButton registerButton = new JButton("Criar");
 		registerButton.addActionListener(new ActionListener() {
@@ -85,10 +77,10 @@ public class CriarCulturaGUI {
 					JOptionPane.showMessageDialog(frame, "Campo NOME CULTURA não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
 				}else if(DescricaoCulturaText.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "Campo DESCRIÇÃO CULTURA não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
-				}else if(DescricaoCulturaText.getText().equals("")) {
-					JOptionPane.showMessageDialog(frame, "Campo ID CULTURA não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else{
-				funcInv.inserirCultura(NomeCulturaText, DescricaoCulturaText, idCulturaText, frame);
+				funcInv.inserirCultura(NomeCulturaText, DescricaoCulturaText);
+				JOptionPane.showMessageDialog(frame, "Criação com sucesso");
+				frame.dispose();
 				}
 			}
 		});

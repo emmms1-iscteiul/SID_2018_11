@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 import gui.EditarCulturaGUI;
@@ -16,10 +18,12 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura","Editar", "Apagar" };
 	private FuncionalidadesInvestigador funcInv;
 	int id = 0;
+	JFrame frame;
 
-	public JTableCulturaInvestigadorModel(FuncionalidadesInvestigador funcInv) {
+	public JTableCulturaInvestigadorModel(FuncionalidadesInvestigador funcInv, JFrame frame) {
 		// TODO Auto-generated constructor stub
 		this.funcInv = funcInv;
+		this.frame = frame;
 	}
 
 	@Override
@@ -93,6 +97,8 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					funcInv.apagarCultura(id);
+					JOptionPane.showMessageDialog(frame, "Apagado com sucesso");
+					frame.dispose();
 				}
 			});
 			return botaoApagar;	

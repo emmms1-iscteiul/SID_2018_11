@@ -86,7 +86,6 @@ public class EditarCulturaGUI {
 				if(!descricaoC.getText().isEmpty()) {
 					funcInv.alterarCulturaDescricao(descricaoC, idC);
 				}
-
 				if(!nomeC.getText().isEmpty()) {
 					funcInv.alterarCulturaNome(nomeC, idC);
 				}
