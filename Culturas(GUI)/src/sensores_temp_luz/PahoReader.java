@@ -1,5 +1,8 @@
 package sensores_temp_luz;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -8,42 +11,144 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.MongoClientURI;
-import com.mongodb.MongoClient;
-
 public class PahoReader extends Thread {
 
-	private static final String TOPIC = "iscte_sid_lab_2019";
+	private static final String TOPIC = "sid_lab_2019";
 	private static final String BROKER = "tcp://broker.mqtt-dashboard.com:1883";
 	private static final String CLIENTID = "sid_lab_2019";
 	private static final MemoryPersistence persistence = new MemoryPersistence();
 	private boolean exported = false; //
 
-
 	public void run() {
 		read();
 	}
 
-	//{"tmp":"22.40","hum":"61.30","dat":"9/4/2019","tim":"14:59:32","cell":"3138""sens":"wifi"}
+	// {"tmp":"22.40","hum":"61.30","dat":"9/4/2019","tim":"14:59:32","cell":"3138""sens":"wifi"}
 
-	public boolean checkParametersOfMessage(MqttMessage message)	{
-		boolean fiveParamters=true;
+	public boolean checkNumberOfParameters(MqttMessage message) {
+		boolean fiveParameters = true;
 		String messageString = String.valueOf(message);
 		String[] messageSplitted = messageString.split(",");
-		System.out.println(messageSplitted.length);
-		if(messageSplitted.length!=5)	{
-			fiveParamters=false;
+		System.out.println(messageSplitted.length + " parameters!");
+		if (messageSplitted.length != 5) {
+			fiveParameters = false;
 		}
-		return fiveParamters;
+		return fiveParameters;
 	}
 
-	public boolean checkFormatOfMessage(MqttMessage message)	{
-		boolean formatIsCorrect=false;
+	public boolean checkIfEachParameterIsValid(MqttMessage message) {
+		boolean parameterValid = true;
 		String messageString = String.valueOf(message);
-		return formatIsCorrect;
+		String[] messageSplitted = messageString.split(",");
+
+		String temperatura = messageSplitted[0];
+		int indexTemp = temperatura.indexOf(":");
+		String subStringTemp = "";
+		if (indexTemp != -1) {
+			subStringTemp = temperatura.substring(2, indexTemp);
+		}
+		subStringTemp = subStringTemp.replace(subStringTemp.substring(subStringTemp.length() - 1), "");
+
+		String humidade = messageSplitted[1];
+		int indexHum = humidade.indexOf(":");
+		String subStringHum = "";
+		if (indexHum != -1) {
+			subStringHum = humidade.substring(1, indexHum);
+		}
+		subStringHum = subStringHum.replace(subStringHum.substring(subStringHum.length() - 1), "");
+		
+
+		String data = messageSplitted[2];
+		int indexData = data.indexOf(":");
+		String subStringData = "";
+		if (indexData != -1) {
+			subStringData = data.substring(1, indexData);
+		}
+		subStringData = subStringData.replace(subStringData.substring(subStringData.length() - 1), "");
+		
+
+		String hora = messageSplitted[3];
+		int indexHora = hora.indexOf(":");
+		String subStringHora = "";
+		if (indexHora != -1) {
+			subStringHora = hora.substring(1, indexHora);
+		}
+		subStringHora = subStringHora.replace(subStringHora.substring(subStringHora.length() - 1), "");
+		
+
+		String luminosidade = messageSplitted[4];
+		int indexLum = luminosidade.indexOf(":");
+		String subStringLum = "";
+		if (indexLum != -1) {
+			subStringLum = luminosidade.substring(1, indexLum);
+		}
+		subStringLum = subStringLum.replace(subStringLum.substring(subStringLum.length() - 1), "");
+
+		
+		if(!subStringTemp.equals("tmp")||!subStringHum.equals("hum")||!subStringData.equals("dat")||!subStringHora.equals("tim")||!subStringLum.equals("cell"))	{
+			parameterValid=false;
+		}
+		
+		System.out.println(parameterValid);
+		return parameterValid;
+	}
+	
+	public boolean checkValueOfEachParameter(MqttMessage message)	{
+		boolean valueIsValid=true;
+		String messageString = String.valueOf(message);
+		String[] messageSplitted = messageString.split(",");
+
+		String temperatura = messageSplitted[0];
+		String[] temperaturaSplitted=temperatura.split(":");
+		temperatura=temperaturaSplitted[1];
+		temperatura = temperatura.replace(temperatura.substring(temperatura.length() - 1), "");
+		
+	//	System.out.println(temperatura);
+		
+		String humidade = messageSplitted[1];
+		String[] humidadeSplitted=humidade.split(":");
+		humidade=humidadeSplitted[1];
+		humidade = humidade.replace(humidade.substring(humidade.length() - 1), "");
+		
+	//	System.out.println(humidade);
+		
+		String data = messageSplitted[2];
+		String[] dataSplitted=data.split(":");
+		data=dataSplitted[1];
+		data = data.replace(data.substring(data.length() - 1), "");
+		
+	//	System.out.println(data);
+		
+		String tempo = messageSplitted[3];
+		int indexTemp = tempo.length();
+		if (indexTemp != -1) {
+			 tempo = tempo.substring(6, indexTemp);
+		}
+		tempo = tempo.replace(tempo.substring(tempo.length() - 1), "");
+		
+	//	System.out.println(tempo);
+		
+		String luminosidade = messageSplitted[4];
+		String[] luminosidadeSplitted=luminosidade.split(":");
+		luminosidade=luminosidadeSplitted[1];
+		int indexLum = luminosidade.indexOf("s");
+		if (indexLum != -1) {
+			 luminosidade = luminosidade.substring(1, indexLum);
+		}
+		 luminosidade =  luminosidade.replace( luminosidade.substring( luminosidade.length() - 1), "");
+	
+	//	System.out.println(luminosidade);
+		
+		 
+		 
+		 String currentData = new SimpleDateFormat("d/M/yyyy").format(Calendar.getInstance().getTime());
+		 String currentTime= new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
+		 
+		 System.out.println(currentData);
+		 System.out.println(currentTime);
+		 
+		 
+		return valueIsValid;
 	}
 
 	public void read() {
@@ -70,44 +175,41 @@ public class PahoReader extends Thread {
 				@Override
 				public void messageArrived(String topic, MqttMessage message) throws Exception {
 
-					sleep(3000);
-					MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
+//					sleep(3000);
+//					MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
 
 					String smsString = String.valueOf(message);
-					checkParametersOfMessage(message);
 
-					System.out.println("Mensagem: "+smsString);
+					System.out.println("Mensagem: " + smsString);
+
+					checkNumberOfParameters(message);
+					checkIfEachParameterIsValid(message);
+					checkValueOfEachParameter(message);
+
 					String[] stringSplitted = smsString.split(",");
 					String[] temp = stringSplitted[0].split(":");
 
 					String tempV = "";
 					if (temp[1].length() == 7) {
 						tempV = temp[1].substring(1, 6);
-					}
-					else if (temp[1].length() == 6) {
+					} else if (temp[1].length() == 6) {
 						tempV = temp[1].substring(1, 5);
-					}
-					else if(temp[1].length() == 8)	{
+					} else if (temp[1].length() == 8) {
 						tempV = temp[1].substring(1, 7);
 					}
 
 					double temperatura = Double.parseDouble(tempV);
 
-
 					String cellV = "";
 					if (stringSplitted[4].length() == 29) {
 						cellV = stringSplitted[4].substring(8, 13);
-					}
-					else if (stringSplitted[4].length() == 28) {
+					} else if (stringSplitted[4].length() == 28) {
 						cellV = stringSplitted[4].substring(8, 12);
-					}
-					else if (stringSplitted[4].length() == 27) {
+					} else if (stringSplitted[4].length() == 27) {
 						cellV = stringSplitted[4].substring(8, 11);
-					}
-					else if(stringSplitted[4].length() == 26)	{
+					} else if (stringSplitted[4].length() == 26) {
 						cellV = stringSplitted[4].substring(8, 10);
-					}
-					else if(stringSplitted[4].length() == 25) {
+					} else if (stringSplitted[4].length() == 25) {
 						cellV = stringSplitted[4].substring(8, 9);
 					}
 
@@ -122,17 +224,17 @@ public class PahoReader extends Thread {
 
 					String data = dateFF + " " + timeV;
 
-					DB db = mongoClient.getDB("Sensores");
-					DBCollection table = db.getCollection("Medicoes");
-
-					BasicDBObject document = new BasicDBObject();
-					document.append("DataHoraMedicao", data);
-					document.append("Temperatura", temperatura);
-					document.append("Luminosidade", cell);
-					document.append("Exportado", exported);
-					try { table.insert(document); System.out.println("Insert success.");} catch (Exception e) {}
-
-					mongoClient.close();
+//					DB db = mongoClient.getDB("Sensores");
+//					DBCollection table = db.getCollection("Medicoes");
+//
+//					BasicDBObject document = new BasicDBObject();
+//					document.append("DataHoraMedicao", data);
+//					document.append("Temperatura", temperatura);
+//					document.append("Luminosidade", cell);
+//					document.append("Exportado", exported);
+//					try { table.insert(document); System.out.println("Insert success.");} catch (Exception e) {}
+//
+//					mongoClient.close();
 				}
 
 				@Override
@@ -151,12 +253,9 @@ public class PahoReader extends Thread {
 
 	}
 
-
-
 	public static void main(String[] args) {
 		PahoReader reader = new PahoReader();
 		reader.read();
-
 
 	}
 
