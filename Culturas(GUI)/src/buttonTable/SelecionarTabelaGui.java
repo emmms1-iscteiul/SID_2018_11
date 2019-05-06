@@ -79,13 +79,15 @@ public class SelecionarTabelaGui {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
+
 					CriarUtilizadorGUI frameC = new CriarUtilizadorGUI("Criar Utilizador", funcAdmin);
 					frameC.open();
+
 				}
 			});
 		}
 
-		if (frameTitle == "Tabela Vari·vel") {
+		if (frameTitle == "Tabela Vari√°vel") {
 			frame.setSize(500, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
@@ -100,6 +102,7 @@ public class SelecionarTabelaGui {
 
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
 
+
 			table.getColumn("Editar").setCellRenderer(buttonRenderer);
 			table.getColumn("Apagar").setCellRenderer(buttonRenderer);
 			table.addMouseListener(new JTableButtonMouseListener(table));
@@ -113,8 +116,10 @@ public class SelecionarTabelaGui {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
+
 					CriarVariavelGUI frameC = new CriarVariavelGUI("Criar Variavel", funcAdmin);
 					frameC.open();
+
 				}
 			});
 		}
@@ -146,13 +151,15 @@ public class SelecionarTabelaGui {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
+
 					CriarCulturaGUI frameC = new CriarCulturaGUI("Criar Cultura", funcInv);
 					frameC.open();
+
 				}
 			});
 		}
 
-		if (frameTitle == "Tabela MediÁ„o") {
+		if (frameTitle == "Tabela Medi√ß√£o") {
 			frame.setSize(500, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
@@ -165,6 +172,7 @@ public class SelecionarTabelaGui {
 			scrollPane.setPreferredSize(new Dimension(400, 400));
 			table.setFillsViewportHeight(true);
 
+
 			centerPanel.add(scrollPane);
 			
 
@@ -175,13 +183,15 @@ public class SelecionarTabelaGui {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
+
 					CriarMedicaoGUI frameC = new CriarMedicaoGUI("Criar Medicao", funcInv);
 					frameC.open();
+
 				}
 			});
 		}
 
-		if (frameTitle == "Tabela Vari·vel Medida") {
+		if (frameTitle == "Tabela Vari√°vel Medida") {
 			frame.setSize(500, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
@@ -208,8 +218,10 @@ public class SelecionarTabelaGui {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
+
 					CriarVariaveisMedidasGUI frameC = new CriarVariaveisMedidasGUI("Criar Variavel Medida", funcInv);
 					frameC.open();
+
 				}
 			});
 			
@@ -232,7 +244,7 @@ public class SelecionarTabelaGui {
 			centerPanel.add(scrollPane);
 		}
 		
-		if (frameTitle == "Tabela MediÁ„o-Admin") {
+		if (frameTitle == "Tabela Medi√ß√£o-Admin") {
 			frame.setSize(500, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);

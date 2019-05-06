@@ -5,11 +5,13 @@ import java.sql.SQLException;
 
 import javax.swing.table.AbstractTableModel;
 
+
 import gui.FuncionalidadesInvestigador;
+
 
 public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "Data e Hora MediÁ„o",	"Valor MediÁ„o", "Nome Cultura", "Nome Variavel"};
+	private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medi√ß√£o",	"Valor Medi√ß√£o", "Nome Cultura", "Nome Variavel"};
 
 	FuncionalidadesInvestigador funcInv;
 	int id = 0;
@@ -18,7 +20,7 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 		// TODO Auto-generated constructor stub
 		this.funcInv = funcInv;
 	}
-
+  
 	@Override
 	public int getColumnCount() {
 		return COLUMN_NAMES.length;
@@ -39,9 +41,9 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 		ResultSet medicoes = funcInv.filtrarMedicaoTudo();
 		switch (columnIndex) {
 		case 0:
-			//				return "Data e Hora MediÁ„o";
+			//				return "Data e Hora Medi√ß√£o";
 			if (rowIndex == 0) {
-				return "N„o existe data e hora para este id";
+				return "N√£o existe data e hora para este id";
 			} else {
 				try {
 					while (medicoes.next()) {
@@ -59,9 +61,9 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 				}
 			}
 		case 1:
-			//				return "Valor MediÁ„o";
+			//				return "Valor Medi√ß√£o";
 			if (rowIndex == 0) {
-				return "N„o existe valor para este id";
+				return "N√£o existe valor para este id";
 			} else {
 				try {
 					while (medicoes.next()) {
@@ -80,7 +82,7 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 		case 2:
 			//				return "Nome Cultura";
 			if (rowIndex == 0) {
-				return "N„o existe cultura para este id";
+				return "N√£o existe cultura para este id";
 			} else {
 				try {
 					while (medicoes.next()) {
@@ -99,7 +101,7 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 		case 3:
 			//				return "Nome Variavel";
 			if (rowIndex == 0) {
-				return "N„o existe vari·vel para este id";
+				return "N√£o existe vari√°vel para este id";
 			} else {
 				try {
 					while (medicoes.next()) {

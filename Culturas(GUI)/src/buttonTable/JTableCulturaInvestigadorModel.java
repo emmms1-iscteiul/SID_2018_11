@@ -15,7 +15,8 @@ import gui.FuncionalidadesInvestigador;
 
 public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura","Editar", "Apagar" };
+
+	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "DescriÃ§Ã£o Cultura","Editar", "Apagar" };
 	private FuncionalidadesInvestigador funcInv;
 	int id = 0;
 	JFrame frame;
@@ -25,6 +26,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 		this.funcInv = funcInv;
 		this.frame = frame;
 	}
+
 
 	@Override
 	public int getColumnCount() {
@@ -47,7 +49,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 		case 0:
 			//			return "Nome Cultura";
 			if (rowIndex == 0) {
-				return "Não existe cultura para este id";
+				return "NÃ£o existe cultura para este id";
 			} else {
 				try {
 					ResultSet cultura = funcInv.filtrarCulturaTudo();
@@ -64,9 +66,9 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 				}
 			}
 		case 1:
-			//			return "Descrição Cultura";
+			//			return "DescriÃ§Ã£o Cultura";
 			if (rowIndex == 0) {
-				return "Não existe descrição de cultura para este id";
+				return "NÃ£o existe descriÃ§Ã£o de cultura para este id";
 			} else {
 				try {
 					ResultSet culturaD = funcInv.filtrarCulturaTudo();

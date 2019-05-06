@@ -9,13 +9,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
-
 import gui.EditarVariaveisGUI;
 import gui.FuncionalidadesAdmin;
 
 public class JTableVariavelAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "Nome Vari·vel","Editar","Apagar" };
+	private static final String[] COLUMN_NAMES = new String[] { "Nome Vari√°vel","Editar","Apagar" };
 	JFrame frame;
 	FuncionalidadesAdmin funcAdmin;
 
@@ -45,9 +44,9 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 		ResultSet variaveis = funcAdmin.consultarVariaveis();
 		switch (columnIndex) {
 		case 0:
-			//			return "Nome Vari·vel";
+			//			return "Nome Vari√°vel";
 			if (rowIndex == 0) {
-				return "N„o existe vari·vel para este id";
+				return "N√£o existe vari√°vel para este id";
 			}
 			else {
 				try {

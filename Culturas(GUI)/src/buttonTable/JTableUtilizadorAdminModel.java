@@ -15,8 +15,10 @@ import gui.FuncionalidadesAdmin;
 
 public class JTableUtilizadorAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
+
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Utilizador", "Mail",
 			"Password", "Editar", "Apagar" };
+  
 	FuncionalidadesAdmin funcAdmin;
 	int id = 0;
 	JFrame frame;
@@ -26,6 +28,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 		this.funcAdmin=funcAdmin;
 		this.frame=frame;
 	}
+
 
 	@Override
 	public int getColumnCount() {
@@ -49,7 +52,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 		case 0:
 			//			return "Nome Utilizador";
 			if (rowIndex == 0) {
-				return "Não existe utilizador para este id";
+				return "NÃ£o existe utilizador para este id";
 			}
 			else {
 				try {
@@ -70,7 +73,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 		case 1:
 			//			return "Mail";
 			if (rowIndex == 0) {
-				return "Não existe mail para este id";
+				return "NÃ£o existe mail para este id";
 			} else {
 				try {
 					while (utilizadores.next()) {
@@ -91,7 +94,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 		case 2:
 			//			return "Password";
 			if (rowIndex == 0) {
-				return "Não existe password para este id";
+				return "NÃ£o existe password para este id";
 			} else {
 				try {
 					while (utilizadores.next()) {

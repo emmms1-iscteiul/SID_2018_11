@@ -12,10 +12,12 @@ import gui.EditarVariaveisMedidasGUI;
 import gui.FuncionalidadesInvestigador;
 
 public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
+
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior", "Nome Cultura", "Nome Variavel","Editar" };
 	FuncionalidadesInvestigador funcInv;
 	int id = 0;
+
 
 	public JTableVariavelMedidaInvestigadorModel(FuncionalidadesInvestigador funcInv) {
 		// TODO Auto-generated constructor stub
@@ -32,6 +34,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		return 10;
 	}
 
+
 	@Override
 	public String getColumnName(int columnIndex) {
 		return COLUMN_NAMES[columnIndex];
@@ -44,7 +47,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		case 0:
 			//				return "LimiteInferior"	;
 			if (rowIndex == 0) {
-				return "N„o existe limite inferior para este id";
+				return "N√£o existe limite inferior para este id";
 			} else {
 				try {
 					while (variaveisMedidas.next()) {
@@ -61,7 +64,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		case 1:
 			//				return "LimiteSuperior";
 			if (rowIndex == 0) {
-				return "N„o existe limite superior para este id";
+				return "N√£o existe limite superior para este id";
 			} else {
 				try {
 					while (variaveisMedidas.next()) {
@@ -77,7 +80,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		case 2:
 			//				return "Nome Cultura";
 			if (rowIndex == 0) {
-				return "N„o existe cultura para este id";
+				return "N√£o existe cultura para este id";
 			} else {
 				try {
 					while (variaveisMedidas.next()) {
@@ -93,7 +96,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		case 3:
 			//				return "Nome Variavel";
 			if (rowIndex == 0) {
-				return "N„o existe vari·vel para este id";
+				return "N√£o existe vari√°vel para este id";
 			} else {
 				try {
 					while (variaveisMedidas.next()) {

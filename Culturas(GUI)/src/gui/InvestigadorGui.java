@@ -47,7 +47,7 @@ public class InvestigadorGui {
 
 		JPanel topPanel=new JPanel();
 
-		JLabel frameLabel = new JLabel("Manutenção De Culturas e Medições");
+		JLabel frameLabel = new JLabel("ManutenÃ§Ã£o De Culturas e MediÃ§Ãµes");
 		frameLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
 
 		topPanel.add(frameLabel);
@@ -59,9 +59,9 @@ public class InvestigadorGui {
 		JComboBox<String> consultarComboBox=new JComboBox<String>();
 		consultarComboBox.addItem("");
 		consultarComboBox.addItem("Cultura");
-		consultarComboBox.addItem("Medição");
-		consultarComboBox.addItem("Variável");
-		consultarComboBox.addItem("Variável Medida");
+		consultarComboBox.addItem("MediÃ§Ã£o");
+		consultarComboBox.addItem("VariÃ¡vel");
+		consultarComboBox.addItem("VariÃ¡vel Medida");
 
 		consultarComboBox.addActionListener(new ActionListener() {
 
@@ -82,8 +82,8 @@ public class InvestigadorGui {
 						}
 					});
 					break;
-				case "Medição":
-					final SelecionarTabelaGui guiMedicao = new SelecionarTabelaGui("Tabela Medição", funcAdmin, funcInv);
+				case "MediÃ§Ã£o":
+					final SelecionarTabelaGui guiMedicao = new SelecionarTabelaGui("Tabela MediÃ§Ã£o", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiMedicao.addContent();
@@ -91,8 +91,8 @@ public class InvestigadorGui {
 						}
 					});
 					break;	
-				case "Variável Medida":
-					final SelecionarTabelaGui guiVariavelMedida = new SelecionarTabelaGui("Tabela Variável Medida", funcAdmin, funcInv);
+				case "VariÃ¡vel Medida":
+					final SelecionarTabelaGui guiVariavelMedida = new SelecionarTabelaGui("Tabela VariÃ¡vel Medida", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiVariavelMedida.addContent();
@@ -100,7 +100,7 @@ public class InvestigadorGui {
 						}
 					});
 					break;
-				case "Variável":
+				case "VariÃ¡vel":
 					final SelecionarTabelaGui guiVariavel = new SelecionarTabelaGui("Tabela Variavel-Investigador", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
@@ -126,7 +126,7 @@ public class InvestigadorGui {
 			public void actionPerformed(ActionEvent e) {
 				funcInv.logout();
 				frame.dispose();
-				LoginGui login = new LoginGui("Monotorização de Culturas");
+				LoginGui login = new LoginGui("MonotorizaÃ§Ã£o de Culturas");
 				login.open();
 			}
 		});
@@ -149,4 +149,6 @@ public class InvestigadorGui {
 	public void open() {
 		frame.setVisible(true);
 	}
+
 }
+
