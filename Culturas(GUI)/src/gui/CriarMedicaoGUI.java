@@ -19,8 +19,10 @@ import javax.swing.WindowConstants;
 public class CriarMedicaoGUI {
 
 	private JFrame frame;
+	FuncionalidadesInvestigador funcInv;
 
-	public CriarMedicaoGUI(String frameTitle) {
+	public CriarMedicaoGUI(String frameTitle, FuncionalidadesInvestigador funcInv) {
+		this.funcInv=funcInv;
 		frame = new JFrame(frameTitle);
 		frame.setSize(250, 240);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -46,7 +48,6 @@ public class CriarMedicaoGUI {
 		registerLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 30));
 
 		topPanel.add(registerLabel);
-
 		
 		JLabel ValorMedicao = new JLabel("Valor Medição:");
 		ValorMedicao.setFont(new Font("Arial", Font.BOLD, 13));
@@ -88,11 +89,7 @@ public class CriarMedicaoGUI {
 				}else if(NomeVariavelText.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "Campo NOME VARIÁVEL não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else{
-				FuncionalidadesInvestigador func = new FuncionalidadesInvestigador();
-				func.inserirMedicao(ValorMedicaoText, NomeCulturaText, NomeVariavelText);
-				JOptionPane.showMessageDialog(frame, "Inserção com sucesso");
-				frame.dispose();
-
+				funcInv.inserirMedicao(ValorMedicaoText, NomeCulturaText, NomeVariavelText, frame);
 				}
 			}
 		});
@@ -109,10 +106,4 @@ public class CriarMedicaoGUI {
 		frame.setVisible(true);
 	}
 
-	public static void main(String[] args) {
-		CriarMedicaoGUI frame = new CriarMedicaoGUI("Inserir Medição");
-		frame.open();
-	}
-	
-	
 }

@@ -1,48 +1,124 @@
 package buttonTable;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-	public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
-		private static final long serialVersionUID = 1L;
-		private static final String[] COLUMN_NAMES = new String[] { "Data e Hora MediÁ„o",	"Valor MediÁ„o", "Editar" };
 
-		@Override
-		public int getColumnCount() {
-			return COLUMN_NAMES.length;
-		}
+import gui.FuncionalidadesInvestigador;
 
-		@Override
-		public int getRowCount() {
-			return 10;
-		}
 
-		@Override
-		public String getColumnName(int columnIndex) {
-			return COLUMN_NAMES[columnIndex];
-		}
+public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
+	private static final long serialVersionUID = 1L;
+	private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medi√ß√£o",	"Valor Medi√ß√£o", "Nome Cultura", "Nome Variavel"};
 
-		@Override
-		public Object getValueAt(final int rowIndex, final int columnIndex) {
-			switch (columnIndex) {
-			case 0:
-				return "Data e Hora MediÁ„o";	
-			case 1:
-				return "Valor MediÁ„o";
-			case 2:
-				final JButton bot„oApagar = new JButton(COLUMN_NAMES[columnIndex]);
-				bot„oApagar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						System.out.println("Linha " + rowIndex + " editada!");
+	FuncionalidadesInvestigador funcInv;
+	int id = 0;
 
+	public JTableMedicaoInvestigadorModel(FuncionalidadesInvestigador funcInv) {
+		// TODO Auto-generated constructor stub
+		this.funcInv = funcInv;
+	}
+  
+	@Override
+	public int getColumnCount() {
+		return COLUMN_NAMES.length;
+	}
+
+	@Override
+	public int getRowCount() {
+		return 10;
+	}
+
+	@Override
+	public String getColumnName(int columnIndex) {
+		return COLUMN_NAMES[columnIndex];
+	}
+
+	@Override
+	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		ResultSet medicoes = funcInv.filtrarMedicaoTudo();
+		switch (columnIndex) {
+		case 0:
+			//				return "Data e Hora Medi√ß√£o";
+			if (rowIndex == 0) {
+				return "N√£o existe data e hora para este id";
+			} else {
+				try {
+					while (medicoes.next()) {
+						id = Integer.valueOf(medicoes.getObject("IdMedicao").toString());
+						if (medicoes.getRow() == rowIndex) {
+							return medicoes.getObject("DataHoraMedicao").toString();
+						}
 					}
-				});
-				return bot„oApagar;
-			default:
-				return "Error";
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+		case 1:
+			//				return "Valor Medi√ß√£o";
+			if (rowIndex == 0) {
+				return "N√£o existe valor para este id";
+			} else {
+				try {
+					while (medicoes.next()) {
+						if (medicoes.getRow() == rowIndex) {
+							return medicoes.getObject("ValorMedicao").toString();
+						}
+					}
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		case 2:
+			//				return "Nome Cultura";
+			if (rowIndex == 0) {
+				return "N√£o existe cultura para este id";
+			} else {
+				try {
+					while (medicoes.next()) {
+						if (medicoes.getRow() == rowIndex) {
+							return medicoes.getObject("NomeCultura").toString();
+						}
+					}
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		case 3:
+			//				return "Nome Variavel";
+			if (rowIndex == 0) {
+				return "N√£o existe vari√°vel para este id";
+			} else {
+				try {
+					while (medicoes.next()) {
+						if (medicoes.getRow() == rowIndex) {
+							return medicoes.getObject("NomeVariavel").toString();
+						}
+					}
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		default:
+			return "";
 		}
+	}
 }

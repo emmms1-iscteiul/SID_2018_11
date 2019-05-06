@@ -49,7 +49,6 @@ public class CriarVariaveisMedidasGUI {
 		registerLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 30));
 
 		topPanel.add(registerLabel);
-
 		
 		JLabel LimiteInferior = new JLabel("Limite Inferior:");
 		LimiteInferior.setFont(new Font("Arial", Font.BOLD, 13));
@@ -86,7 +85,7 @@ public class CriarVariaveisMedidasGUI {
 		
 		centerPanel.add(NomeVariavel);
 		centerPanel.add(NomeVariavelText);
-	
+			
 
 		JButton registerButton = new JButton("inserir");
 		registerButton.addActionListener(new ActionListener() {
@@ -102,11 +101,7 @@ public class CriarVariaveisMedidasGUI {
 				}else if(NomeVariavelText.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "Campo NOME VARIÁVEL não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else{
-				funcInv.inserirVariavelMedida(LimiteInferiorText, LimiteSuperiorText, NomeCulturaText, NomeVariavelText);
-				JOptionPane.showMessageDialog(frame, "Inserção com sucesso");
-				frame.dispose();
-				InvestigadorGui frame = new InvestigadorGui("Monotorização de Culturas", funcInv);
-				frame.open();
+				funcInv.inserirVariavelMedida(LimiteInferiorText, LimiteSuperiorText, NomeCulturaText, NomeVariavelText, frame);
 				}
 			}
 		});

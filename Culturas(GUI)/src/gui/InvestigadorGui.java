@@ -44,37 +44,37 @@ public class InvestigadorGui {
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
-		
+
 		JPanel topPanel=new JPanel();
-		
-		JLabel frameLabel = new JLabel("Manuten��o De Culturas e Medi��es");
+
+		JLabel frameLabel = new JLabel("Manutenção De Culturas e Medições");
 		frameLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
 
 		topPanel.add(frameLabel);
-	
+
 		JPanel centerPanel=new JPanel(new GridLayout(4,1));
-		
+
 		JLabel selecionarTabela=new JLabel("Selecionar Tabela ");
-		
+
 		JComboBox<String> consultarComboBox=new JComboBox<String>();
 		consultarComboBox.addItem("");
 		consultarComboBox.addItem("Cultura");
-		consultarComboBox.addItem("Medi��o");
-		consultarComboBox.addItem("Vari�vel");
-		consultarComboBox.addItem("Vari�vel Medida");
-		
+		consultarComboBox.addItem("Medição");
+		consultarComboBox.addItem("Variável");
+		consultarComboBox.addItem("Variável Medida");
+
 		consultarComboBox.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 String option = (String) consultarComboBox.getSelectedItem();
-				 
-				 switch (option) {
-				 case "":
-					 JOptionPane.showMessageDialog(null, "Tem que escolher umas das tabelas definidas!");
-						break;
+				String option = (String) consultarComboBox.getSelectedItem();
+
+				switch (option) {
+				case "":
+					JOptionPane.showMessageDialog(null, "Tem que escolher umas das tabelas definidas!");
+					break;
 				case "Cultura":
-					final SelecionarTabelaGui guiConsulta = new SelecionarTabelaGui("Tabela Cultura-Investigador",null,null);
+					final SelecionarTabelaGui guiConsulta = new SelecionarTabelaGui("Tabela Cultura-Investigador", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiConsulta.addContent();
@@ -82,8 +82,8 @@ public class InvestigadorGui {
 						}
 					});
 					break;
-				case "Medi��o":
-					final SelecionarTabelaGui guiMedicao = new SelecionarTabelaGui("Tabela Medi��o",null,null);
+				case "Medição":
+					final SelecionarTabelaGui guiMedicao = new SelecionarTabelaGui("Tabela Medição", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiMedicao.addContent();
@@ -91,8 +91,8 @@ public class InvestigadorGui {
 						}
 					});
 					break;	
-				case "Vari�vel Medida":
-					final SelecionarTabelaGui guiVariavelMedida = new SelecionarTabelaGui("Tabela Vari�vel Medida",null,null);
+				case "Variável Medida":
+					final SelecionarTabelaGui guiVariavelMedida = new SelecionarTabelaGui("Tabela Variável Medida", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiVariavelMedida.addContent();
@@ -100,8 +100,8 @@ public class InvestigadorGui {
 						}
 					});
 					break;
-				case "Vari�vel":
-					final SelecionarTabelaGui guiVariavel = new SelecionarTabelaGui("Tabela Variavel-Investigador",null,null);
+				case "Variável":
+					final SelecionarTabelaGui guiVariavel = new SelecionarTabelaGui("Tabela Variavel-Investigador", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiVariavel.addContent();
@@ -113,31 +113,33 @@ public class InvestigadorGui {
 					System.out.println("Erro");
 					break;
 				}
-				
+
 			}
 		});
-		
 
-	JButton logoutButton = new JButton("Logout");
-		
+
+		JButton logoutButton = new JButton("Logout");
+
 		logoutButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Investigador Logout");
-				System.exit(0);
+				funcInv.logout();
+				frame.dispose();
+				LoginGui login = new LoginGui("Monotorização de Culturas");
+				login.open();
 			}
 		});
-		
+
 		centerPanel.add(selecionarTabela);
 		centerPanel.add(consultarComboBox);
-		
-		
+
+
 		JPanel bottomPanel = new JPanel();
 
 		bottomPanel.add(logoutButton);
-		
-		
+
+
 		frame.add(topPanel,BorderLayout.NORTH);
 		frame.add(centerPanel,BorderLayout.CENTER);
 		frame.add(bottomPanel, BorderLayout.SOUTH);
@@ -148,10 +150,5 @@ public class InvestigadorGui {
 		frame.setVisible(true);
 	}
 
-	public static void main(String[] args) {
-		InvestigadorGui gui=new InvestigadorGui("Investigador", null);
-		gui.open();
-	}
-
-
 }
+

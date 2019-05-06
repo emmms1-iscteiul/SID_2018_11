@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -22,17 +24,8 @@ public class FuncionalidadesInvestigador {
 	public void login(JTextField usernameText, JPasswordField passwordText) {
 
 		try {
-
 			Class.forName("com.mysql.jdbc.Driver");
-
-			String userU = usernameText.getText();
-			String password = passwordText.getText();
-
-			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/monotorizacao_de_culturas?noAccessToProcedureBodies=true", userU, password);
-
-			System.out.println("Connected successfully!");
-
-
+			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/monotorizacao_de_culturas?noAccessToProcedureBodies=true", usernameText.getText(), passwordText.getText());
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,70 +47,51 @@ public class FuncionalidadesInvestigador {
 	public void inserirCultura(JTextField nomeCultura, JTextField descricaoCultura) {
 
 		try {
-
-			String nomeCult = nomeCultura.getText();
-			String descricaoCult = descricaoCultura.getText();
-
 			CallableStatement cs = myConn.prepareCall("{call inserirCultura(?,?)}");
-			cs.setString(1, nomeCult);
-			cs.setString(2, descricaoCult);
-
+			cs.setString(1, nomeCultura.getText());
+			cs.setString(2, descricaoCultura.getText());
 			cs.execute();
-			System.out.println("Insert success!");
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 
-	public void inserirMedicao(JTextField valorMedicaoText, JTextField nomeCulturaText, JTextField nomeVariavelText) {
+	public void inserirMedicao(JTextField valorMedicaoText, JTextField nomeCulturaText, JTextField nomeVariavelText, JFrame frame) {
 
 		try {
-
 			CallableStatement cs = myConn.prepareCall("{call inserirMedicao(?,?,?)}");
 			cs.setString(1, valorMedicaoText.getText());
 			cs.setString(2, nomeCulturaText.getText());
 			cs.setString(3, nomeVariavelText.getText());
-
 			cs.execute();
-			System.out.println("Insert success!");
-
+			JOptionPane.showMessageDialog(frame, "Inserção com sucesso");
+			frame.dispose();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("cultura não existe");
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Tem de ter uma variável medida com a respetiva cultura e variável", "ERRO - NECESSÁRIO PREENCHER UMA VARIAVEL MEDIDA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
 
-	public void apagarCultura(String nomeCult) {
+	public void apagarCultura(int rowIndex) {
 
 		try {
-
 			CallableStatement cs = myConn.prepareCall("{call apagarCultura(?)}");
-			cs.setString(1, nomeCult);
-
+			cs.setInt(1, rowIndex);
 			cs.execute();
-			System.out.println("Delete success!");
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public void alterarCulturaNome(JTextField nomeCA,  JTextField nomeC) {
+	public void alterarCulturaNome(JTextField nomeC, int idC) {
 
 		try {
-
-			CallableStatement cs = myConn.prepareCall("{call alterarCulturaNome(?)}");
+			CallableStatement cs = myConn.prepareCall("{call alterarCulturaNome(?,?)}");
 			cs.setString(1, nomeC.getText());
-			cs.setString(2, nomeCA.getText());
-
+			cs.setInt(2, idC);
 			cs.execute();
-			System.out.println("Change success!");
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -125,17 +99,13 @@ public class FuncionalidadesInvestigador {
 
 	}
 
-	public void alterarCulturaDescricao(JTextField nomeC,  JTextField descrC) {
+	public void alterarCulturaDescricao(JTextField descrC, int idC) {
 
 		try {
-
 			CallableStatement cs = myConn.prepareCall("{call alterarCulturaDescricao(?,?)}");
-			cs.setString(1, nomeC.getText());
-			cs.setString(2, descrC.getText());
-
+			cs.setString(1, descrC.getText());
+			cs.setInt(2, idC);
 			cs.execute();
-			System.out.println("Change success!");
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -143,17 +113,13 @@ public class FuncionalidadesInvestigador {
 
 	}
 
-	public void alterarCulturaUtilizador(JTextField nomeC,  JTextField utilNome) {
+	public void alterarCulturaUtilizador(JTextField utilNome, int idC) {
 
 		try {
-
 			CallableStatement cs = myConn.prepareCall("{call alterarCulturaUtilizador(?,?)}");
 			cs.setString(1, utilNome.getText());
-			cs.setString(2, nomeC.getText());
-
+			cs.setInt(2, idC);
 			cs.execute();
-			System.out.println("Change success!");
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -161,107 +127,56 @@ public class FuncionalidadesInvestigador {
 
 	}
 
-	public void inserirVariavelMedida(JTextField limiteInferiorText, JTextField limiteSuperiorText, JTextField nomeCulturaText, JTextField nomeVariavelText) {
+	public void inserirVariavelMedida(JTextField limiteInferiorText, JTextField limiteSuperiorText, JTextField nomeCulturaText, JTextField nomeVariavelText, JFrame frame) {
 
 		try {
-
 			CallableStatement cs = myConn.prepareCall("{call inserirVariavelMedida(?,?,?,?)}");
-			cs.setString(1, nomeVariavelText.getText());
-			cs.setString(2, nomeCulturaText.getText());
-			cs.setString(3, limiteInferiorText.getText());
-			cs.setString(4, limiteSuperiorText.getText());
-
+			cs.setString(1, limiteInferiorText.getText());
+			cs.setString(2, limiteSuperiorText.getText());
+			cs.setString(3, nomeVariavelText.getText());
+			cs.setString(4, nomeCulturaText.getText());
 			cs.execute();
-			System.out.println("Insert success!");
-
+			JOptionPane.showMessageDialog(frame, "Inserção com sucesso");
+			frame.dispose();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Precisa existir cultura e variável primeiro", "ERRO - NECESSÁRIO EXISTENCIA DE VARIAVEL E CULTURA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
-	public void apagarVariavelMedida(JTextField nomeC, JTextField nomeV) {
+	public void alterarVariavelMedidaLimiteInferior(JTextField limiteIText, int idVM) {
 
 		try {
-
-			CallableStatement cs = myConn.prepareCall("{call apagarVariavelMedida(?,?)}");
-			cs.setString(1, nomeV.getText());
-			cs.setString(2, nomeC.getText());
-
-			cs.execute();
-			System.out.println("Insert success!");
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public void apagarMedicao(JTextField nomeC, JTextField nomeV) {
-
-		try {
-
-			CallableStatement cs = myConn.prepareCall("{call apagarMedicao(?,?)}");
-			cs.setString(1, nomeV.getText());
-			cs.setString(2, nomeC.getText());
-
-			cs.execute();
-			System.out.println("Insert success!");
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public void alterarVariavelMedidaLimiteInferior(JTextField limiteIText, JTextField nomeC, JTextField nomeV) {
-
-		try {
-
-			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaLimiteInferior(?,?,?)}");
+			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaLimiteInferior(?,?)}");
 			cs.setString(1, limiteIText.getText());
-			cs.setString(2, nomeC.getText());
-			cs.setString(3, nomeV.getText());
-
+			cs.setInt(2, idVM);
 			cs.execute();
-			System.out.println("Change success!");
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public void alterarVariavelMedidaLimiteSuperior(JTextField limiteSText, JTextField nomeC, JTextField nomeV) {
+	public void alterarVariavelMedidaLimiteSuperior(JTextField limiteSText, int idVM) {
 
 		try {
-
-			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaLimiteSuperior(?,?,?)}");
+			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaLimiteSuperior(?,?)}");
 			cs.setString(1, limiteSText.getText());
-			cs.setString(2, nomeC.getText());
-			cs.setString(3, nomeV.getText());
-
+			cs.setInt(2, idVM);
 			cs.execute();
-			System.out.println("Change success!");
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void alterarVariavelMedidaCultura(JTextField nomeCA, JTextField nomeC, JTextField nomeV) {
+	public void alterarVariavelMedidaCultura(JTextField nomeCA, int idVM) {
 
 		try {
-
-			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaCultura(?,?,?)}");
-			cs.setString(1, nomeC.getText());
-			cs.setString(2, nomeCA.getText());
-			cs.setString(3, nomeV.getText());
-
+			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaCultura(?,?)}");
+			cs.setString(1, nomeCA.getText());
+			cs.setInt(2, idVM);
 			cs.execute();
-			System.out.println("Change success!");
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -269,35 +184,27 @@ public class FuncionalidadesInvestigador {
 	}
 	
 	
-	public void alterarVariavelMedidaVariavel(JTextField nomeVA, JTextField nomeC, JTextField nomeV) {
+	public void alterarVariavelMedidaVariavel(JTextField nomeVA, int idVM) {
 
 		try {
-
-			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaVariavel(?,?,?)}");
-			cs.setString(1, nomeV.getText());
-			cs.setString(2, nomeVA.getText());
-			cs.setString(3, nomeC.getText());
-
-			cs.execute();
-			System.out.println("Change success!");
-
+			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaVariavel(?,?)}");
+			cs.setString(1, nomeVA.getText());
+			cs.setInt(2, idVM);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
 	
 	public ResultSet filtrarVariaveisMedidasTudo() {
 
 		ResultSet variaveisMedidasT = null;
 		
 		try {
-
 			CallableStatement cs = myConn.prepareCall("{call filtrarVariaveisMedidasTudo()}");
 			cs.execute();
-
 			variaveisMedidasT = cs.getResultSet();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -311,14 +218,11 @@ public class FuncionalidadesInvestigador {
 		ResultSet variaveisMedidas = null;
 		
 		try {
-
 			CallableStatement cs = myConn.prepareCall("{call filtrarVariaveisMedidas(?,?)}");
 			cs.setString(1, nomeC.getText());
 			cs.setString(2, nomeVar.getText());
 			cs.execute();
-
 			variaveisMedidas = cs.getResultSet();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -331,12 +235,9 @@ public class FuncionalidadesInvestigador {
 		ResultSet variaveisInv = null;
 		
 		try {
-
-			CallableStatement cs = myConn.prepareCall("{call consultarVariaveisInv()}");
+			CallableStatement cs = myConn.prepareCall("{call consultarVariaveisInvestigador()}");
 			cs.execute();
-
 			variaveisInv = cs.getResultSet();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -349,12 +250,9 @@ public class FuncionalidadesInvestigador {
 		ResultSet culturaT = null;
 		
 		try {
-			
 			CallableStatement cs = myConn.prepareCall("{call filtrarCulturaTudo()}");
 			cs.execute();
-
 			culturaT = cs.getResultSet();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -367,13 +265,10 @@ public class FuncionalidadesInvestigador {
 		ResultSet cultura = null;
 		
 		try {
-
 			CallableStatement cs = myConn.prepareCall("{call filtrarCultura(?)}");
 			cs.setString(1, nomeC.getText());
 			cs.execute();
-
 			cultura = cs.getResultSet();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -386,12 +281,9 @@ public class FuncionalidadesInvestigador {
 		ResultSet medicaoT = null;
 		
 		try {
-
 			CallableStatement cs = myConn.prepareCall("{call filtrarMedicaoTudo()}");
 			cs.execute();
-
 			medicaoT = cs.getResultSet();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -405,14 +297,11 @@ public class FuncionalidadesInvestigador {
 		ResultSet medicao = null;
 		
 		try {
-
 			CallableStatement cs = myConn.prepareCall("{call filtrarMedicao(?,?)}");
 			cs.setString(1, nomeC.getText());
 			cs.setString(2, nomeVar.getText());
 			cs.execute();
-
 			medicao = cs.getResultSet();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -1,11 +1,22 @@
 package buttonTable;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.table.AbstractTableModel;
+
+import gui.FuncionalidadesAdmin;
 
 public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior" };
+	private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior", "Nome Cultura", "Nome Variavel" };
+	FuncionalidadesAdmin funcAdmin;
+
+	public JTableVariavelMedidaAdminModel(FuncionalidadesAdmin funcAdmin) {
+		// TODO Auto-generated constructor stub
+		this.funcAdmin = funcAdmin;
+	}
 
 	@Override
 	public int getColumnCount() {
@@ -24,13 +35,70 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		ResultSet variaveisMedidas = funcAdmin.consultarVariaveisMedidas();
 		switch (columnIndex) {
 		case 0:
-			return "LimiteInferior"	;	
+//			return "LimiteInferior"	;
+			try {
+				while (variaveisMedidas.next()) {
+					if (variaveisMedidas.getRow() == rowIndex) {
+						return variaveisMedidas.getObject("LimiteInferior").toString();
+					}
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		case 1:
-			return "LimiteSuperior";
+//			return "LimiteSuperior";
+			try {
+				while (variaveisMedidas.next()) {
+					if (variaveisMedidas.getRow() == rowIndex) {
+						return variaveisMedidas.getObject("LimiteSuperior").toString();
+					}
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		case 2:
+//			return "Nome Cultura";
+			try {
+				while (variaveisMedidas.next()) {
+					if (variaveisMedidas.getRow() == rowIndex) {
+						return variaveisMedidas.getObject("NomeCultura").toString();
+					}
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		case 3:
+//			return "Nome Variavel";
+			try {
+				while (variaveisMedidas.next()) {
+					if (variaveisMedidas.getRow() == rowIndex) {
+						return variaveisMedidas.getObject("NomeVariavel").toString();
+					}
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		default:
-			return "Error";
+			return "";
 		}
 	}
 }
