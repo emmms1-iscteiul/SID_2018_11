@@ -108,5 +108,5 @@ public class EditarCulturaGUI {
 		frame.setVisible(true);
 	}
 
-
+	
 }

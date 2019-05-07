@@ -11,10 +11,16 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+
 public class PahoReader extends Thread {
 
-	private static final String TOPIC = "sid_lab_2019";
-	private static final String BROKER = "tcp://broker.mqtt-dashboard.com:1883";
+	private static final String TOPIC = "/sid_lab_2019_2";
+	private static final String BROKER = "tcp://iot.eclipse.org:1883";// "tcp://broker.mqtt-dashboard.com:1883";
 	private static final String CLIENTID = "sid_lab_2019";
 	private static final MemoryPersistence persistence = new MemoryPersistence();
 	private boolean exported = false; //
@@ -56,7 +62,6 @@ public class PahoReader extends Thread {
 			subStringHum = humidade.substring(1, indexHum);
 		}
 		subStringHum = subStringHum.replace(subStringHum.substring(subStringHum.length() - 1), "");
-		
 
 		String data = messageSplitted[2];
 		int indexData = data.indexOf(":");
@@ -65,7 +70,6 @@ public class PahoReader extends Thread {
 			subStringData = data.substring(1, indexData);
 		}
 		subStringData = subStringData.replace(subStringData.substring(subStringData.length() - 1), "");
-		
 
 		String hora = messageSplitted[3];
 		int indexHora = hora.indexOf(":");
@@ -74,7 +78,6 @@ public class PahoReader extends Thread {
 			subStringHora = hora.substring(1, indexHora);
 		}
 		subStringHora = subStringHora.replace(subStringHora.substring(subStringHora.length() - 1), "");
-		
 
 		String luminosidade = messageSplitted[4];
 		int indexLum = luminosidade.indexOf(":");
@@ -84,70 +87,122 @@ public class PahoReader extends Thread {
 		}
 		subStringLum = subStringLum.replace(subStringLum.substring(subStringLum.length() - 1), "");
 
-		
-		if(!subStringTemp.equals("tmp")||!subStringHum.equals("hum")||!subStringData.equals("dat")||!subStringHora.equals("tim")||!subStringLum.equals("cell"))	{
-			parameterValid=false;
+		if (!subStringTemp.equals("tmp") || !subStringHum.equals("hum") || !subStringData.equals("dat")
+				|| !subStringHora.equals("tim") || !subStringLum.equals("cell")) {
+			parameterValid = false;
 		}
-		
+
 		System.out.println(parameterValid);
 		return parameterValid;
 	}
-	
-	public boolean checkValueOfEachParameter(MqttMessage message)	{
-		boolean valueIsValid=true;
+
+	public boolean checkValueOfEachParameter(MqttMessage message) {
+		boolean valueIsValid = false;
+		boolean dataIsOk=true;
+		boolean timeIsOk=true;
 		String messageString = String.valueOf(message);
 		String[] messageSplitted = messageString.split(",");
 
 		String temperatura = messageSplitted[0];
-		String[] temperaturaSplitted=temperatura.split(":");
-		temperatura=temperaturaSplitted[1];
+		String[] temperaturaSplitted = temperatura.split(":");
+		temperatura = temperaturaSplitted[1];
 		temperatura = temperatura.replace(temperatura.substring(temperatura.length() - 1), "");
-		
-	//	System.out.println(temperatura);
-		
+
+		// System.out.println(temperatura);
+
 		String humidade = messageSplitted[1];
-		String[] humidadeSplitted=humidade.split(":");
-		humidade=humidadeSplitted[1];
+		String[] humidadeSplitted = humidade.split(":");
+		humidade = humidadeSplitted[1];
 		humidade = humidade.replace(humidade.substring(humidade.length() - 1), "");
-		
-	//	System.out.println(humidade);
-		
+
+		// System.out.println(humidade);
+
 		String data = messageSplitted[2];
-		String[] dataSplitted=data.split(":");
-		data=dataSplitted[1];
+		String[] dataSplitted = data.split(":");
+		data = dataSplitted[1];
 		data = data.replace(data.substring(data.length() - 1), "");
-		
-	//	System.out.println(data);
-		
+
+		// System.out.println(data);
+
 		String tempo = messageSplitted[3];
 		int indexTemp = tempo.length();
 		if (indexTemp != -1) {
-			 tempo = tempo.substring(6, indexTemp);
+			tempo = tempo.substring(6, indexTemp);
 		}
 		tempo = tempo.replace(tempo.substring(tempo.length() - 1), "");
-		
-	//	System.out.println(tempo);
-		
+
+		// System.out.println(tempo);
+
 		String luminosidade = messageSplitted[4];
-		String[] luminosidadeSplitted=luminosidade.split(":");
-		luminosidade=luminosidadeSplitted[1];
+		String[] luminosidadeSplitted = luminosidade.split(":");
+		luminosidade = luminosidadeSplitted[1];
 		int indexLum = luminosidade.indexOf("s");
 		if (indexLum != -1) {
-			 luminosidade = luminosidade.substring(1, indexLum);
+			luminosidade = luminosidade.substring(1, indexLum);
 		}
-		 luminosidade =  luminosidade.replace( luminosidade.substring( luminosidade.length() - 1), "");
-	
-	//	System.out.println(luminosidade);
+		luminosidade = luminosidade.replace(luminosidade.substring(luminosidade.length() - 1), "");
+
+		// System.out.println(luminosidade);
+
+		String currentData = new SimpleDateFormat("d/M/yyyy").format(Calendar.getInstance().getTime());
+		String currentTime = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
+
+		String[] currentDataSplitted = currentData.split("/");
+
+		String currentYear = currentDataSplitted[2];
+		// System.out.println(currentYear);
+		String currentMonth = currentDataSplitted[1];
+		// System.out.println(currentMonth);
+		String currentDay = currentDataSplitted[0];
+		// System.out.println(currentDay);
+
+		String[] sensorDataSplitted = data.split("/");
+
+		String sensorDataYear = sensorDataSplitted[2];
+		// System.out.println(sensorDataYear);
+		String sensorDataMonth = sensorDataSplitted[1];
+		// System.out.println(sensorDataMonth);
+		String sensorDataDay = sensorDataSplitted[0];
+		// System.out.println(sensorDataDay);
+
+		int currentDayInt = Integer.parseInt(currentDay);
+		int dataDayInt = Integer.parseInt(sensorDataDay);
+
+//		System.out.println(currentDayInt);
+//		System.out.println(dataDayInt);
+
+		int dataIsValid = -1;
+
+		if (currentYear.equals(sensorDataYear) && currentMonth.equals(sensorDataMonth)) {
+			dataIsValid = dataDayInt - currentDayInt;
+		}
+
+		if (dataIsValid != 0) {
+			System.out.println("Data Error!");
+			dataIsOk = false;
+		}
+
+		String[] currentTimeSplitted = currentTime.split(":");
+
+		String currentHour = currentTimeSplitted[0];
+		String currentMinutes = currentTimeSplitted[1];
+
+		String[] sensorTimeSplitted = tempo.split(":");
+
+		String sensorHour = sensorTimeSplitted[0];
+		String sensorMinutes = sensorTimeSplitted[1];
+
+		if (!currentHour.equals(sensorHour) && !currentMinutes.equals(sensorMinutes)) {
+			System.out.println("Time Error!");
+			timeIsOk = false;
+		}
+
+		if(dataIsOk&&timeIsOk)	{
+			valueIsValid=true;
+		}
 		
-		 
-		 
-		 String currentData = new SimpleDateFormat("d/M/yyyy").format(Calendar.getInstance().getTime());
-		 String currentTime= new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
-		 
-		 System.out.println(currentData);
-		 System.out.println(currentTime);
-		 
-		 
+		System.out.println(valueIsValid);
+		
 		return valueIsValid;
 	}
 
@@ -175,8 +230,8 @@ public class PahoReader extends Thread {
 				@Override
 				public void messageArrived(String topic, MqttMessage message) throws Exception {
 
-//					sleep(3000);
-//					MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
+					sleep(3000);
+					MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
 
 					String smsString = String.valueOf(message);
 
@@ -224,17 +279,17 @@ public class PahoReader extends Thread {
 
 					String data = dateFF + " " + timeV;
 
-//					DB db = mongoClient.getDB("Sensores");
-//					DBCollection table = db.getCollection("Medicoes");
-//
-//					BasicDBObject document = new BasicDBObject();
-//					document.append("DataHoraMedicao", data);
-//					document.append("Temperatura", temperatura);
-//					document.append("Luminosidade", cell);
-//					document.append("Exportado", exported);
-//					try { table.insert(document); System.out.println("Insert success.");} catch (Exception e) {}
-//
-//					mongoClient.close();
+					DB db = mongoClient.getDB("Sensores");
+					DBCollection table = db.getCollection("Medicoes");
+
+					BasicDBObject document = new BasicDBObject();
+					document.append("DataHoraMedicao", data);
+					document.append("Temperatura", temperatura);
+					document.append("Luminosidade", cell);
+					document.append("Exportado", exported);
+					try { table.insert(document); System.out.println("Insert success.");} catch (Exception e) {}
+
+					mongoClient.close();
 				}
 
 				@Override
