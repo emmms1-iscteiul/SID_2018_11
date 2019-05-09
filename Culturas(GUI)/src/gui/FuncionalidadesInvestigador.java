@@ -212,24 +212,6 @@ public class FuncionalidadesInvestigador {
 		return variaveisMedidasT;
 	}
 	
-
-	public ResultSet filtrarVariaveisMedidas(JTextField nomeC, JTextField nomeVar) {
-
-		ResultSet variaveisMedidas = null;
-		
-		try {
-			CallableStatement cs = myConn.prepareCall("{call filtrarVariaveisMedidas(?,?)}");
-			cs.setString(1, nomeC.getText());
-			cs.setString(2, nomeVar.getText());
-			cs.execute();
-			variaveisMedidas = cs.getResultSet();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return variaveisMedidas;
-	}
-	
 	public ResultSet consultarVariaveisInvestigador() {
 
 		ResultSet variaveisInv = null;
@@ -260,22 +242,6 @@ public class FuncionalidadesInvestigador {
 		return culturaT;
 	}
 	
-	public ResultSet filtrarCultura(JTextField nomeC) {
-
-		ResultSet cultura = null;
-		
-		try {
-			CallableStatement cs = myConn.prepareCall("{call filtrarCultura(?)}");
-			cs.setString(1, nomeC.getText());
-			cs.execute();
-			cultura = cs.getResultSet();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return cultura;
-	}
-	
 	public ResultSet filtrarMedicaoTudo() {
 
 		ResultSet medicaoT = null;
@@ -289,24 +255,6 @@ public class FuncionalidadesInvestigador {
 		}
 		
 		return medicaoT;
-	}
-	
-	
-	public ResultSet filtrarMedicao(JTextField nomeC, JTextField nomeVar) {
-
-		ResultSet medicao = null;
-		
-		try {
-			CallableStatement cs = myConn.prepareCall("{call filtrarMedicao(?,?)}");
-			cs.setString(1, nomeC.getText());
-			cs.setString(2, nomeVar.getText());
-			cs.execute();
-			medicao = cs.getResultSet();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return medicao;
 	}
 	
 }

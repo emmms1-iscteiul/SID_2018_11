@@ -17,44 +17,9 @@ public class MongoMigration extends Thread {
 	
 	private ArrayList<Double> valoresTemperatura=new ArrayList<Double>();
 	private ArrayList<Double> valoresLuminosidade=new ArrayList<Double>();
-	private ArrayList<Double> medias=new ArrayList<Double>();
-	private double valorSuperiorTemperatura=0;
-	private double valorInferiorTemperatura=0;
-	private double valorSuperiorLuminosidade=0;
-	private double valorInferiorLuminosidade=0;
+//	private ArrayList<Double> medias=new ArrayList<Double>();
 	
-	Connection myConn;
-	
-
-
-	public void media(ArrayList<Double> medicoes) {
-		for(int i=0;i<medicoes.size();i++)	{
-			if(i == 0){
-				medias.set(i, medicoes.get(i));
-			}else{
-				double mediaIterativa=(medicoes.get(i)+medias.get(i))/2;
-				medias.set(i, mediaIterativa);
-			}
-		}
-	}
-	
-	public void checkAlerta(double limite) {
-		for(int i=0;i < medias.size();i++)	{
-			if(medias.get(medias.size()-1)>=valorSuperiorTemperatura-3) {
-				
-			}
-			if(medias.get(medias.size()-1)>=valorSuperiorLuminosidade-3) {
-				
-			}
-			if(medias.get(medias.size()-1)<=valorInferiorTemperatura+3) {
-				
-			}
-			if(medias.get(medias.size()-1)<=valorInferiorLuminosidade+3) {
-				
-			}
-		}
-	}
-	
+	Connection myConn;	
 	
 	@SuppressWarnings("deprecation")
 	public void run() {
@@ -84,7 +49,7 @@ public class MongoMigration extends Thread {
 				System.out.println("Temperatura: " + temperat + " Luminosidade: " + lumin + " DataHoraMedicao: " + dateS + " Exportado: " + exported);
 
 				if (!exported) {
-					String sqlQuery = "insert into medicoes_luminosidade_e_temperatura(DataHoraMedicaoLuminosidadeTemperatura, ValorMedicaoTemperatura, ValorMedicaoLuminosidade) values (?, "+temperat+", "+lumin+")";
+					String sqlQuery = "insert into medicoes_temperatura_luminosidade(DataHoraMedicao, ValorMedicaoTemperatura, ValorMedicaoLuminosidade) values (?, "+temperat+", "+lumin+")";
 
 					PreparedStatement stmt = myConn.prepareStatement(sqlQuery);
 					java.sql.Timestamp dateSS = Timestamp.valueOf(dateS);
