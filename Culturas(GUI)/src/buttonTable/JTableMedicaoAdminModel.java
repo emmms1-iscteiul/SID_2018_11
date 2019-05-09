@@ -15,7 +15,6 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 	FuncionalidadesAdmin funcAdmin;
 
 	public JTableMedicaoAdminModel(FuncionalidadesAdmin funcAdmin) {
-		// TODO Auto-generated constructor stub
 		this.funcAdmin=funcAdmin;
 	}
 
@@ -26,7 +25,7 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return 10;
+		return 20;
 	}
 
 	@Override
@@ -39,29 +38,29 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 		ResultSet medicoes = funcAdmin.consultarMedicoes();
 		switch (columnIndex) {
 		case 0:
-//			return "Data e Hora Medição";
-			
 			try {
 				while (medicoes.next()) {
-					if (medicoes.getRow() == rowIndex) {
+					if (medicoes.getRow()-1 == rowIndex) {
 						return medicoes.getObject("DataHoraMedicao").toString();
 					}
 				}
+				return "";
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
 		case 1:
 //			return "Valor Medição";
 			try {
 				while (medicoes.next()) {
-					if (medicoes.getRow() == rowIndex) {
+					if (medicoes.getRow()-1 == rowIndex) {
 						return medicoes.getObject("ValorMedicao").toString();
 					}
 				}
+				return "";
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -73,10 +72,11 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 //			return "Nome Cultura";
 			try {
 				while (medicoes.next()) {
-					if (medicoes.getRow()== rowIndex) {
+					if (medicoes.getRow()-1== rowIndex) {
 						return medicoes.getObject("NomeCultura").toString();
 					}
 				}
+				return "";
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -88,10 +88,11 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 //			return "Nome Variavel";
 			try {
 				while (medicoes.next()) {
-					if (medicoes.getRow() == rowIndex) {
+					if (medicoes.getRow()-1 == rowIndex) {
 						return medicoes.getObject("NomeVariavel").toString();
 					}
 				}
+				return "";
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

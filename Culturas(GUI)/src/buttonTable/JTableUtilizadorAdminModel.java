@@ -37,7 +37,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return 10;
+		return 20;
 	}
 
 	@Override
@@ -50,18 +50,14 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 		ResultSet utilizadores = funcAdmin.consultarUtilizadores();
 		switch (columnIndex) {
 		case 0:
-			//			return "Nome Utilizador";
-			if (rowIndex == 0) {
-				return "NÃ£o existe utilizador para este id";
-			}
-			else {
 				try {
 					while (utilizadores.next()) {
 						id = Integer.valueOf(utilizadores.getObject("IdUtilizador").toString());
-						if (utilizadores.getRow() == rowIndex) {
+						if (utilizadores.getRow()-1 == rowIndex) {
 							return utilizadores.getObject("NomeUtilizador").toString();
 						}
 					}
+					return "";
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -69,20 +65,15 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
 		case 1:
 			//			return "Mail";
-			if (rowIndex == 0) {
-				return "NÃ£o existe mail para este id";
-			} else {
 				try {
 					while (utilizadores.next()) {
-						if (utilizadores.getRow() == rowIndex) {
+						if (utilizadores.getRow()-1 == rowIndex) {
 							return utilizadores.getObject("Email").toString();
-						} else {
-							return "";
 						}
 					}
+					return "";
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -90,20 +81,15 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
 		case 2:
 			//			return "Password";
-			if (rowIndex == 0) {
-				return "NÃ£o existe password para este id";
-			} else {
 				try {
 					while (utilizadores.next()) {
-						if (utilizadores.getRow() == rowIndex) {
+						if (utilizadores.getRow()-1 == rowIndex) {
 							return utilizadores.getObject("Passwor").toString();
-						} else {
-							return "";
 						}
 					}
+					return "";
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -111,13 +97,18 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
 		case 3:
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					EditarUtilizadorGUI frameE = new EditarUtilizadorGUI("Editar Utilizador", funcAdmin, rowIndex);
-					frameE.open();
+					if(!getValueAt(rowIndex, 0).toString().equals(""))	{
+						EditarUtilizadorGUI frameE = new EditarUtilizadorGUI("Editar Utilizador", funcAdmin, rowIndex);
+						frameE.open();	
+					}
+					else	{
+						JOptionPane.showMessageDialog(null, "Este campo está vazio logo não pode ser editado!");
+					}
+					
 				}
 			});
 			return botaoEditar;
@@ -125,9 +116,14 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			final JButton botaoApagar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					funcAdmin.apagarUtilizador(rowIndex);
-					JOptionPane.showMessageDialog(frame, "Apagado com sucesso");
-					frame.dispose();
+					if(!getValueAt(rowIndex, 0).toString().equals(""))	{
+						funcAdmin.apagarUtilizador(rowIndex);
+						JOptionPane.showMessageDialog(frame, "Apagado com sucesso");
+						frame.dispose();	
+					}
+					else	{
+						JOptionPane.showMessageDialog(null, "Este campo está vazio logo não pode ser apagado!");
+					}
 				}
 			});
 			return botaoApagar;

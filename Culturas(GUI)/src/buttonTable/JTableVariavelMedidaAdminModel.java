@@ -25,7 +25,7 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 
 	@Override
 	public int getRowCount() {
-		return 10;
+		return 20;
 	}
 
 	@Override
@@ -41,10 +41,11 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 //			return "LimiteInferior"	;
 			try {
 				while (variaveisMedidas.next()) {
-					if (variaveisMedidas.getRow() == rowIndex) {
+					if (variaveisMedidas.getRow()-1 == rowIndex) {
 						return variaveisMedidas.getObject("LimiteInferior").toString();
 					}
 				}
+				return "";
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -56,10 +57,11 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 //			return "LimiteSuperior";
 			try {
 				while (variaveisMedidas.next()) {
-					if (variaveisMedidas.getRow() == rowIndex) {
+					if (variaveisMedidas.getRow()-1 == rowIndex) {
 						return variaveisMedidas.getObject("LimiteSuperior").toString();
 					}
 				}
+				return "";
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -71,10 +73,11 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 //			return "Nome Cultura";
 			try {
 				while (variaveisMedidas.next()) {
-					if (variaveisMedidas.getRow() == rowIndex) {
+					if (variaveisMedidas.getRow()-1 == rowIndex) {
 						return variaveisMedidas.getObject("NomeCultura").toString();
 					}
 				}
+				return "";
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -86,10 +89,11 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 //			return "Nome Variavel";
 			try {
 				while (variaveisMedidas.next()) {
-					if (variaveisMedidas.getRow() == rowIndex) {
+					if (variaveisMedidas.getRow()-1 == rowIndex) {
 						return variaveisMedidas.getObject("NomeVariavel").toString();
 					}
 				}
+				return "";
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

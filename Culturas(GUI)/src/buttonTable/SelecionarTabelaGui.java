@@ -87,7 +87,7 @@ public class SelecionarTabelaGui {
 			});
 		}
 
-		if (frameTitle == "Tabela Variável") {
+		if (frameTitle == "Tabela Variavel") {
 			frame.setSize(500, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
@@ -159,7 +159,7 @@ public class SelecionarTabelaGui {
 			});
 		}
 
-		if (frameTitle == "Tabela Medição") {
+		if (frameTitle == "Tabela Medicao") {
 			frame.setSize(500, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
@@ -191,7 +191,7 @@ public class SelecionarTabelaGui {
 			});
 		}
 
-		if (frameTitle == "Tabela Variável Medida") {
+		if (frameTitle == "Tabela Variavel Medida") {
 			frame.setSize(500, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
@@ -244,7 +244,7 @@ public class SelecionarTabelaGui {
 			centerPanel.add(scrollPane);
 		}
 		
-		if (frameTitle == "Tabela Medição-Admin") {
+		if (frameTitle == "Tabela Medicao-Admin") {
 			frame.setSize(500, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);

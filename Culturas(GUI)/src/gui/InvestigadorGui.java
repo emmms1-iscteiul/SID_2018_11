@@ -47,7 +47,7 @@ public class InvestigadorGui {
 
 		JPanel topPanel=new JPanel();
 
-		JLabel frameLabel = new JLabel("Manutenção De Culturas e Medições");
+		JLabel frameLabel = new JLabel("Manuten��o De Culturas e Medi��es");
 		frameLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
 
 		topPanel.add(frameLabel);
@@ -59,9 +59,9 @@ public class InvestigadorGui {
 		JComboBox<String> consultarComboBox=new JComboBox<String>();
 		consultarComboBox.addItem("");
 		consultarComboBox.addItem("Cultura");
-		consultarComboBox.addItem("Medição");
-		consultarComboBox.addItem("Variável");
-		consultarComboBox.addItem("Variável Medida");
+		consultarComboBox.addItem("Medi��o");
+		consultarComboBox.addItem("Vari�vel");
+		consultarComboBox.addItem("Vari�vel Medida");
 
 		consultarComboBox.addActionListener(new ActionListener() {
 
@@ -82,8 +82,8 @@ public class InvestigadorGui {
 						}
 					});
 					break;
-				case "Medição":
-					final SelecionarTabelaGui guiMedicao = new SelecionarTabelaGui("Tabela Medição", funcAdmin, funcInv);
+				case "Medi��o":
+					final SelecionarTabelaGui guiMedicao = new SelecionarTabelaGui("Tabela Medicao", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiMedicao.addContent();
@@ -91,8 +91,8 @@ public class InvestigadorGui {
 						}
 					});
 					break;	
-				case "Variável Medida":
-					final SelecionarTabelaGui guiVariavelMedida = new SelecionarTabelaGui("Tabela Variável Medida", funcAdmin, funcInv);
+				case "Vari�vel Medida":
+					final SelecionarTabelaGui guiVariavelMedida = new SelecionarTabelaGui("Tabela Variavel Medida", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiVariavelMedida.addContent();
@@ -100,7 +100,7 @@ public class InvestigadorGui {
 						}
 					});
 					break;
-				case "Variável":
+				case "Vari�vel":
 					final SelecionarTabelaGui guiVariavel = new SelecionarTabelaGui("Tabela Variavel-Investigador", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {

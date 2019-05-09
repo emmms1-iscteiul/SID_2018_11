@@ -26,7 +26,7 @@ public class JTableVariavelInvestigadorModel  extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return 10;
+		return 20;
 	}
 
 	@Override
@@ -39,16 +39,13 @@ public class JTableVariavelInvestigadorModel  extends AbstractTableModel {
 		ResultSet variaveis = funcInv.consultarVariaveisInvestigador();
 		switch (columnIndex) {
 		case 0:
-			//			return "Nome Variável";
-			if (rowIndex == 0) {
-				return "Não existe variável para este id";
-			} else {
 				try {
 					while (variaveis.next()) {
-						if (variaveis.getRow() == rowIndex) {
+						if (variaveis.getRow()-1 == rowIndex) {
 							return variaveis.getObject("NomeVariavel").toString();
 						}
 					}
+					return "";
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -56,7 +53,6 @@ public class JTableVariavelInvestigadorModel  extends AbstractTableModel {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
 		default:
 			return "";
 		}

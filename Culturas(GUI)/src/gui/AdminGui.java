@@ -45,7 +45,7 @@ public class AdminGui {
 
 		JPanel topPanel = new JPanel();
 
-		JLabel frameLabel = new JLabel("Manutenção De Variáveis e Utilizadores");
+		JLabel frameLabel = new JLabel("Manuten��o de Vari�veis e Utilizadores");
 		frameLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
 
 		topPanel.add(frameLabel);
@@ -58,9 +58,9 @@ public class AdminGui {
 		JComboBox<String> consultarComboBox = new JComboBox<String>();
 		consultarComboBox.addItem("");
 		consultarComboBox.addItem("Cultura");
-		consultarComboBox.addItem("Medição");
-		consultarComboBox.addItem("Variável");
-		consultarComboBox.addItem("Variável Medida");
+		consultarComboBox.addItem("Medi��o");
+		consultarComboBox.addItem("Vari�vel");
+		consultarComboBox.addItem("Vari�vel Medida");
 		consultarComboBox.addItem("Utilizador");
 
 		consultarComboBox.addActionListener(new ActionListener() {
@@ -82,8 +82,8 @@ public class AdminGui {
 						}
 					});
 					break;
-				case "Variável":
-					final SelecionarTabelaGui guiVariavel = new SelecionarTabelaGui("Tabela Variável", funcAdmin, funcInv);
+				case "Vari�vel":
+					final SelecionarTabelaGui guiVariavel = new SelecionarTabelaGui("Tabela Variavel", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiVariavel.addContent();
@@ -100,8 +100,8 @@ public class AdminGui {
 						}
 					});
 					break;
-				case "Medição":
-					final SelecionarTabelaGui guiMedicaoAdmin = new SelecionarTabelaGui("Tabela Medição-Admin", funcAdmin, funcInv);
+				case "Medi��o":
+					final SelecionarTabelaGui guiMedicaoAdmin = new SelecionarTabelaGui("Tabela Medicao-Admin", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
 							guiMedicaoAdmin.addContent();
@@ -109,7 +109,7 @@ public class AdminGui {
 						}
 					});
 					break;
-				case "Variável Medida":
+				case "Vari�vel Medida":
 					final SelecionarTabelaGui guiVariavelMedidaAdmin = new SelecionarTabelaGui("Tabela Variavel Medida-Admin", funcAdmin, funcInv);
 					javax.swing.SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
@@ -134,7 +134,7 @@ public class AdminGui {
 			public void actionPerformed(ActionEvent e) {
 				funcAdmin.logout();
 				frame.dispose();
-				LoginGui login = new LoginGui("Monotorização de Culturas");
+				LoginGui login = new LoginGui("Monotoriza��o de Culturas");
 				login.open();
 			}
 		});

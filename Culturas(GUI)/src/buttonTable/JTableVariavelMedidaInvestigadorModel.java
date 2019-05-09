@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
+
 
 import gui.EditarVariaveisMedidasGUI;
 import gui.FuncionalidadesInvestigador;
@@ -31,7 +33,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 
 	@Override
 	public int getRowCount() {
-		return 10;
+		return 20;
 	}
 
 
@@ -45,76 +47,67 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		ResultSet variaveisMedidas = funcInv.filtrarVariaveisMedidasTudo();
 		switch (columnIndex) {
 		case 0:
-			//				return "LimiteInferior"	;
-			if (rowIndex == 0) {
-				return "Não existe limite inferior para este id";
-			} else {
 				try {
 					while (variaveisMedidas.next()) {
-						id = Integer.valueOf(variaveisMedidas.getObject("IdVariavelMedida").toString());
-						if (variaveisMedidas.getRow() == rowIndex) {
+						if (variaveisMedidas.getRow()-1 == rowIndex) {
 							return variaveisMedidas.getObject("LimiteInferior").toString();
 						}
 					}
+					return "";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
 		case 1:
 			//				return "LimiteSuperior";
-			if (rowIndex == 0) {
-				return "Não existe limite superior para este id";
-			} else {
 				try {
 					while (variaveisMedidas.next()) {
-						if (variaveisMedidas.getRow() == rowIndex) {
+						if (variaveisMedidas.getRow()-1 == rowIndex) {
 							return variaveisMedidas.getObject("LimiteSuperior").toString();
 						}
 					}
+					return "";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
 		case 2:
 			//				return "Nome Cultura";
-			if (rowIndex == 0) {
-				return "Não existe cultura para este id";
-			} else {
 				try {
 					while (variaveisMedidas.next()) {
-						if (variaveisMedidas.getRow() == rowIndex) {
+						if (variaveisMedidas.getRow()-1 == rowIndex) {
 							return variaveisMedidas.getObject("NomeCultura").toString();
 						}
 					}
+					return "";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
 		case 3:
 			//				return "Nome Variavel";
-			if (rowIndex == 0) {
-				return "Não existe variável para este id";
-			} else {
 				try {
 					while (variaveisMedidas.next()) {
-						if (variaveisMedidas.getRow() == rowIndex) {
+						if (variaveisMedidas.getRow()-1 == rowIndex) {
 							return variaveisMedidas.getObject("NomeCultura").toString();
 						}
 					}
+					return "";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
 		case 4:
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					EditarVariaveisMedidasGUI frameE = new EditarVariaveisMedidasGUI("Editar Variavel Medida", funcInv, rowIndex);
-					frameE.open();
+					if(!getValueAt(rowIndex, 0).toString().equals(""))	{
+						EditarVariaveisMedidasGUI frameE = new EditarVariaveisMedidasGUI("Editar Variavel Medida", funcInv, rowIndex);
+						frameE.open();
+					}
+					else	{
+						JOptionPane.showMessageDialog(null, "Este campo est� vazio logo n�o pode ser editado!");
+					}
 				}
 			});
 			return botaoEditar;

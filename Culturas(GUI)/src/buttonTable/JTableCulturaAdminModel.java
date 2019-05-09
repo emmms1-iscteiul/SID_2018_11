@@ -39,52 +39,43 @@ public class JTableCulturaAdminModel extends AbstractTableModel {
 		ResultSet cultura = funcAdmin.consultarCulturas();
 		switch (columnIndex) {
 		case 0:
-			//return "Nome Cultura";
-			if (rowIndex == 0) {
-				return "Não existe cultura para este id";
-			} else {
 				try {
 					while(cultura.next()) {
-						if (cultura.getRow() == rowIndex) {
+						if (cultura.getRow()-1 == rowIndex) {
 							return cultura.getObject("NomeCultura").toString();
 						}				
 					}
+					return "";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
 		case 1:
 			//return "Descrição Cultura";
-			if (rowIndex == 0) {
-				return "Não existe descrição para este id";
-			} else {
 				try {
 					while(cultura.next()) {
-						if (cultura.getRow() == rowIndex) {
+						if (cultura.getRow()-1 == rowIndex) {
 							return cultura.getObject("DescricaoCultura").toString();
 						}
 					}
+					return "";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
+			
 		case 2:
-			if (rowIndex == 0) {
-				return "Não existe descrição para este id";
-			} else {
 				try {
 					while(cultura.next()) {
-						if (cultura.getRow() == rowIndex) {
+						if (cultura.getRow()-1 == rowIndex) {
 							return cultura.getObject("NomeUtilizador").toString();
 						}
 					}
+					return "";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
 		default:
 			return "";
 		}
