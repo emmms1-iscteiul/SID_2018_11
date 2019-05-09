@@ -17,13 +17,17 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import buttonTable.JTableUtilizadorAdminModel;
+
 public class CriarUtilizadorGUI {
 
 	private JFrame frame;
 	FuncionalidadesAdmin funcAdmin;
+	private JTableUtilizadorAdminModel utilizadorModel;
 
-	public CriarUtilizadorGUI(String frameTitle, FuncionalidadesAdmin funcAdmin) {
+	public CriarUtilizadorGUI(String frameTitle, FuncionalidadesAdmin funcAdmin,JTableUtilizadorAdminModel utilizadorModel) {
 		this.funcAdmin=funcAdmin;
+		this.utilizadorModel=utilizadorModel;
 		frame = new JFrame(frameTitle);
 		frame.setSize(250, 240);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -104,6 +108,7 @@ public class CriarUtilizadorGUI {
 					JOptionPane.showMessageDialog(frame, "Password não coincidem", "ERRO - PASSWORDS DO NOT MATCH", JOptionPane.ERROR_MESSAGE);
 				}else{
 				funcAdmin.inserirInvestigador(nomeUser, eMailUser, passwordText);
+				utilizadorModel.fireTableDataChanged();
 				JOptionPane.showMessageDialog(frame, "Criação com sucesso");
 				frame.dispose();
 				}

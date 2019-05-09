@@ -59,7 +59,8 @@ public class SelecionarTabelaGui {
 		JPanel bottomPanel = new JPanel();
 
 		if (frameTitle == "Tabela Utilizador") {
-			JTable table = new JTable(new JTableUtilizadorAdminModel(funcAdmin, frame));
+			JTableUtilizadorAdminModel utilizadorModel=new JTableUtilizadorAdminModel(funcAdmin, frame);
+			JTable table = new JTable(utilizadorModel);
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(700, 400));
 			table.setFillsViewportHeight(true);
@@ -80,7 +81,7 @@ public class SelecionarTabelaGui {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 
-					CriarUtilizadorGUI frameC = new CriarUtilizadorGUI("Criar Utilizador", funcAdmin);
+					CriarUtilizadorGUI frameC = new CriarUtilizadorGUI("Criar Utilizador", funcAdmin,utilizadorModel);
 					frameC.open();
 
 				}
@@ -95,7 +96,8 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableVariavelAdminModel(funcAdmin, frame));
+			JTableVariavelAdminModel variavelModel=new JTableVariavelAdminModel(funcAdmin, frame);
+			JTable table = new JTable(variavelModel);
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(400, 400));
 			table.setFillsViewportHeight(true);
@@ -117,7 +119,7 @@ public class SelecionarTabelaGui {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 
-					CriarVariavelGUI frameC = new CriarVariavelGUI("Criar Variavel", funcAdmin);
+					CriarVariavelGUI frameC = new CriarVariavelGUI("Criar Variavel", funcAdmin,variavelModel);
 					frameC.open();
 
 				}

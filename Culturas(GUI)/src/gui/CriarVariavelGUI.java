@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import buttonTable.JTableVariavelAdminModel;
+
 
 
 public class CriarVariavelGUI {
@@ -23,10 +25,12 @@ public class CriarVariavelGUI {
 	private JFrame frame;
 
 	FuncionalidadesAdmin funcAdmin;
+	private JTableVariavelAdminModel variavelModel;
 	
 	
-	public CriarVariavelGUI(String frameTitle, FuncionalidadesAdmin funcAdmin) {
+	public CriarVariavelGUI(String frameTitle, FuncionalidadesAdmin funcAdmin,JTableVariavelAdminModel variavelModel) {
 		this.funcAdmin = funcAdmin;
+		this.variavelModel=variavelModel;
 		frame = new JFrame(frameTitle);
 		frame.setSize(250, 240);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -74,6 +78,7 @@ public class CriarVariavelGUI {
 					JOptionPane.showMessageDialog(frame, "Campo NOME VARIAVEL não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
 				}else{
 				funcAdmin.inserirVariavel(nomeVariavelText);
+				variavelModel.fireTableDataChanged();
 				JOptionPane.showMessageDialog(frame, "Criação com sucesso");
 				frame.dispose();
 				}
