@@ -16,20 +16,24 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import buttonTable.JTableCulturaInvestigadorModel;
+
 public class CriarCulturaGUI {
 
 	private JFrame frame;
 	FuncionalidadesInvestigador funcInv;
+	private JTableCulturaInvestigadorModel culturaModel;
 
-	public CriarCulturaGUI(String frameTitle, FuncionalidadesInvestigador funcInv) {
+	public CriarCulturaGUI(String frameTitle, FuncionalidadesInvestigador funcInv,JTableCulturaInvestigadorModel culturaModel) {
 		this.funcInv = funcInv;
+		this.culturaModel=culturaModel;
 		frame = new JFrame(frameTitle);
 		frame.setSize(250, 240);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 		frame.setLocation(x, y);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
 
@@ -80,6 +84,7 @@ public class CriarCulturaGUI {
 				}else{
 				funcInv.inserirCultura(NomeCulturaText, DescricaoCulturaText);
 				JOptionPane.showMessageDialog(frame, "Criação com sucesso");
+				culturaModel.fireTableDataChanged();
 				frame.dispose();
 				}
 			}

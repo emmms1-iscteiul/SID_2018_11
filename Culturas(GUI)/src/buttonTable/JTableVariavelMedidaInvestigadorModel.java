@@ -33,7 +33,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 
 	@Override
 	public int getRowCount() {
-		return 20;
+		return 100;
 	}
 
 
@@ -89,7 +89,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 				try {
 					while (variaveisMedidas.next()) {
 						if (variaveisMedidas.getRow()-1 == rowIndex) {
-							return variaveisMedidas.getObject("NomeCultura").toString();
+							return variaveisMedidas.getObject("NomeVariavel").toString();
 						}
 					}
 					return "";

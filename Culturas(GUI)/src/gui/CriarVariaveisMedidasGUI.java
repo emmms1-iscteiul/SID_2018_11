@@ -16,21 +16,25 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import buttonTable.JTableVariavelMedidaInvestigadorModel;
+
 public class CriarVariaveisMedidasGUI {
 
 	private JFrame frame;
 	
 	FuncionalidadesInvestigador funcInv;
+	private JTableVariavelMedidaInvestigadorModel variavelMedidaModel;
 
-	public CriarVariaveisMedidasGUI(String frameTitle, FuncionalidadesInvestigador funcInv) {
+	public CriarVariaveisMedidasGUI(String frameTitle, FuncionalidadesInvestigador funcInv,JTableVariavelMedidaInvestigadorModel variavelMedidaModel) {
 		this.funcInv = funcInv;
+		this.variavelMedidaModel=variavelMedidaModel;
 		frame = new JFrame(frameTitle);
 		frame.setSize(250, 240);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 		frame.setLocation(x, y);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
 
@@ -102,6 +106,7 @@ public class CriarVariaveisMedidasGUI {
 					JOptionPane.showMessageDialog(frame, "Campo NOME VARIÁVEL não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else{
 				funcInv.inserirVariavelMedida(LimiteInferiorText, LimiteSuperiorText, NomeCulturaText, NomeVariavelText, frame);
+				variavelMedidaModel.fireTableDataChanged();
 				}
 			}
 		});

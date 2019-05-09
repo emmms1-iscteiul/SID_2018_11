@@ -16,20 +16,24 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import buttonTable.JTableMedicaoInvestigadorModel;
+
 public class CriarMedicaoGUI {
 
 	private JFrame frame;
 	FuncionalidadesInvestigador funcInv;
+	private JTableMedicaoInvestigadorModel medicaoModel;
 
-	public CriarMedicaoGUI(String frameTitle, FuncionalidadesInvestigador funcInv) {
+	public CriarMedicaoGUI(String frameTitle, FuncionalidadesInvestigador funcInv,JTableMedicaoInvestigadorModel medicaoModel) {
 		this.funcInv=funcInv;
+		this.medicaoModel=medicaoModel;
 		frame = new JFrame(frameTitle);
 		frame.setSize(250, 240);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 		frame.setLocation(x, y);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
 
@@ -90,6 +94,7 @@ public class CriarMedicaoGUI {
 					JOptionPane.showMessageDialog(frame, "Campo NOME VARIÁVEL não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else{
 				funcInv.inserirMedicao(ValorMedicaoText, NomeCulturaText, NomeVariavelText, frame);
+				medicaoModel.fireTableDataChanged();
 				}
 			}
 		});

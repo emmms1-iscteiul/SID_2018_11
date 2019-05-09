@@ -132,7 +132,8 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableCulturaInvestigadorModel(funcInv, frame));
+			JTableCulturaInvestigadorModel culturaModel=new JTableCulturaInvestigadorModel(funcInv, frame);
+			JTable table = new JTable(culturaModel);
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(500, 400));
 			table.setFillsViewportHeight(true);
@@ -152,7 +153,7 @@ public class SelecionarTabelaGui {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 
-					CriarCulturaGUI frameC = new CriarCulturaGUI("Criar Cultura", funcInv);
+					CriarCulturaGUI frameC = new CriarCulturaGUI("Criar Cultura", funcInv,culturaModel);
 					frameC.open();
 
 				}
@@ -167,7 +168,8 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableMedicaoInvestigadorModel(funcInv));
+			JTableMedicaoInvestigadorModel medicaoModel=new JTableMedicaoInvestigadorModel(funcInv);
+			JTable table = new JTable(medicaoModel);
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(400, 400));
 			table.setFillsViewportHeight(true);
@@ -184,7 +186,7 @@ public class SelecionarTabelaGui {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 
-					CriarMedicaoGUI frameC = new CriarMedicaoGUI("Criar Medicao", funcInv);
+					CriarMedicaoGUI frameC = new CriarMedicaoGUI("Criar Medicao", funcInv,medicaoModel);
 					frameC.open();
 
 				}
@@ -199,7 +201,8 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableVariavelMedidaInvestigadorModel(funcInv));
+			JTableVariavelMedidaInvestigadorModel variavelMedidaModel=new JTableVariavelMedidaInvestigadorModel(funcInv);
+			JTable table = new JTable(variavelMedidaModel);
 			JScrollPane scrollPane = new JScrollPane(table);
 			scrollPane.setPreferredSize(new Dimension(400, 400));
 			table.setFillsViewportHeight(true);
@@ -219,7 +222,7 @@ public class SelecionarTabelaGui {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 
-					CriarVariaveisMedidasGUI frameC = new CriarVariaveisMedidasGUI("Criar Variavel Medida", funcInv);
+					CriarVariaveisMedidasGUI frameC = new CriarVariaveisMedidasGUI("Criar Variavel Medida", funcInv,variavelMedidaModel);
 					frameC.open();
 
 				}

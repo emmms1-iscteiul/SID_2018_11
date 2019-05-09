@@ -16,11 +16,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+
+
 public class CriarVariavelGUI {
 
 	private JFrame frame;
 
 	FuncionalidadesAdmin funcAdmin;
+	
 	
 	public CriarVariavelGUI(String frameTitle, FuncionalidadesAdmin funcAdmin) {
 		this.funcAdmin = funcAdmin;
@@ -30,7 +33,7 @@ public class CriarVariavelGUI {
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 		frame.setLocation(x, y);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
 

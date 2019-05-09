@@ -28,7 +28,7 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 
 	@Override
 	public int getRowCount() {
-		return 20;
+		return 100;
 	}
 
 	@Override
