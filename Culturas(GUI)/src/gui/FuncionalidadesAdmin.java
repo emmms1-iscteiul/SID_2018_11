@@ -246,4 +246,8 @@ public class FuncionalidadesAdmin {
 		
 		return culturas;
 	}
+	
+	public Connection getConnection() {
+		return myConn;
+	}
 }

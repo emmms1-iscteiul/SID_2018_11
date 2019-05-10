@@ -301,4 +301,8 @@ public class FuncionalidadesInvestigador {
 		return alertasC;
 	}
 	
+	public Connection getConnection() {
+		return myConn;
+	}
+	
 }
