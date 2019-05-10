@@ -68,7 +68,8 @@ public class FuncionalidadesInvestigador {
 			frame.dispose();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(frame, "Tem de ter uma variável medida com a respetiva cultura e variável", "ERRO - NECESSÁRIO PREENCHER UMA VARIAVEL MEDIDA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Verificar as Variáveis e Culturas que existem antes de inserir uma medição", "ERRO - NECESSÁRIO PREENCHER UMA VARIAVEL MEDIDA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -127,20 +128,22 @@ public class FuncionalidadesInvestigador {
 
 	}
 
-	public void inserirVariavelMedida(JTextField limiteInferiorText, JTextField limiteSuperiorText, JTextField nomeCulturaText, JTextField nomeVariavelText, JFrame frame) {
+	public void inserirVariavelMedida(JTextField limiteInferiorText, JTextField limiteSuperiorText, JTextField regularidadeLimiteInferiorText, JTextField regularidadeLimiteSuperiorText, JTextField nomeCulturaText, JTextField nomeVariavelText, JFrame frame) {
 
 		try {
-			CallableStatement cs = myConn.prepareCall("{call inserirVariavelMedida(?,?,?,?)}");
+			CallableStatement cs = myConn.prepareCall("{call inserirVariavelMedida(?,?,?,?,?,?)}");
 			cs.setString(1, limiteInferiorText.getText());
 			cs.setString(2, limiteSuperiorText.getText());
 			cs.setString(3, nomeVariavelText.getText());
 			cs.setString(4, nomeCulturaText.getText());
+			cs.setString(5, regularidadeLimiteInferiorText.getText());
+			cs.setString(6, regularidadeLimiteSuperiorText.getText());
 			cs.execute();
 			JOptionPane.showMessageDialog(frame, "Inserção com sucesso");
 			frame.dispose();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(frame, "Precisa existir cultura e variável primeiro", "ERRO - NECESSÁRIO EXISTENCIA DE VARIAVEL E CULTURA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frame, "Verifique as Culturas e Variáveis que existem nas suas tabelas antes de inserir", "ERRO - NECESSÁRIO EXISTENCIA DE VARIAVEL E CULTURA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -162,6 +165,32 @@ public class FuncionalidadesInvestigador {
 		try {
 			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaLimiteSuperior(?,?)}");
 			cs.setString(1, limiteSText.getText());
+			cs.setInt(2, idVM);
+			cs.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void alterarVariavelMedidaAlertaLimiteSuperior(JTextField regularidadeLimiteSText, int idVM) {
+
+		try {
+			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaLimiteSuperior(?,?)}");
+			cs.setString(1, regularidadeLimiteSText.getText());
+			cs.setInt(2, idVM);
+			cs.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void alterarVariavelMedidaAlertaLimiteInferior(JTextField regularidadeLimiteIText, int idVM) {
+
+		try {
+			CallableStatement cs = myConn.prepareCall("{call alterarVariavelMedidaLimiteSuperior(?,?)}");
+			cs.setString(1, regularidadeLimiteIText.getText());
 			cs.setInt(2, idVM);
 			cs.execute();
 		} catch (SQLException e) {
@@ -255,6 +284,21 @@ public class FuncionalidadesInvestigador {
 		}
 		
 		return medicaoT;
+	}
+	
+	public ResultSet filtrarAlertasCultura() {
+
+		ResultSet alertasC = null;
+		
+		try {
+			CallableStatement cs = myConn.prepareCall("{call filtrarAlertasCultura()}");
+			cs.execute();
+			alertasC = cs.getResultSet();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return alertasC;
 	}
 	
 }

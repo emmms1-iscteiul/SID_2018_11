@@ -54,19 +54,27 @@ public class EditarVariaveisMedidasGUI {
 
 		topPanel.add(registerLabel);
 
-		JLabel newVI = new JLabel("Limite Inferior:");
+		JLabel newVI = new JLabel("Novo Limite Inferior:");
 		newVI.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField newInf = new JTextField("",10);
 
-		JLabel newVS = new JLabel("Limite Superior:");
+		JLabel newVS = new JLabel("Novo Limite Superior:");
 		newVS.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField newSup = new JTextField("",10);
+		
+		JLabel newVAI = new JLabel("Nova Regularidade Alertas do Limite Inferior:");
+		newVAI.setFont(new Font("Arial", Font.BOLD, 13));
+		JTextField newAInf = new JTextField("",10);
+		
+		JLabel newVAS = new JLabel("Nova Regularidade Alertas do Limite Superior:");
+		newVS.setFont(new Font("Arial", Font.BOLD, 13));
+		JTextField newASup = new JTextField("",10);
 
-		JLabel newVariavel = new JLabel("Novo nome variavel a modificar:");
+		JLabel newVariavel = new JLabel("Novo Nome Variavel:");
 		newVariavel.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField newV = new JTextField("",10);
 
-		JLabel newCultura = new JLabel("Novo nome variavel a modificar:");
+		JLabel newCultura = new JLabel("Novo Nome Cultura:");
 		newCultura.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField newC = new JTextField("",10);
 
@@ -82,6 +90,12 @@ public class EditarVariaveisMedidasGUI {
 
 		centerPanel.add(newVS);
 		centerPanel.add(newSup);
+		
+		centerPanel.add(newVAI);
+		centerPanel.add(newAInf);
+		
+		centerPanel.add(newVAS);
+		centerPanel.add(newASup);
 
 		centerPanel.add(newCultura);
 		centerPanel.add(newC);
@@ -101,6 +115,12 @@ public class EditarVariaveisMedidasGUI {
 				}
 				if(!newSup.getText().isEmpty()) {
 					funcInv.alterarVariavelMedidaLimiteSuperior(newSup, idVM);
+				}
+				if(!newAInf.getText().isEmpty()) {
+					funcInv.alterarVariavelMedidaAlertaLimiteInferior(newAInf, idVM);
+				}
+				if(!newASup.getText().isEmpty()) {
+					funcInv.alterarVariavelMedidaAlertaLimiteSuperior(newASup, idVM);
 				}
 				if(!newC.getText().isEmpty()) {
 					funcInv.alterarVariavelMedidaCultura(newC, idVM);

@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,6 +22,7 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Variável", "Editar", "Apagar" };
 	JFrame frame;
 	FuncionalidadesAdmin funcAdmin;
+	List<Integer> idsVariavel = new ArrayList<Integer>();
 
 	public JTableVariavelAdminModel(FuncionalidadesAdmin funcAdmin, JFrame frame) {
 		// TODO Auto-generated constructor stub
@@ -49,6 +52,7 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 		case 0:
 			try {
 				while (variaveis.next()) {
+					idsVariavel.add(rowIndex, Integer.valueOf(variaveis.getObject("IdVariavel").toString()));
 					if (variaveis.getRow()-1 == rowIndex) {
 						return variaveis.getObject("NomeVariavel").toString();
 					}
@@ -66,7 +70,8 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if (!getValueAt(rowIndex, 0).toString().equals("")) {
-						EditarVariaveisGUI frameE = new EditarVariaveisGUI("Editar Variavel", funcAdmin, rowIndex,variavelModel);
+						int idAEditar = idsVariavel.get(rowIndex);
+						EditarVariaveisGUI frameE = new EditarVariaveisGUI("Editar Variavel", funcAdmin, idAEditar,variavelModel);
 						frameE.open();
 					} else {
 						JOptionPane.showMessageDialog(null, "Este campo está vazio logo não pode ser editado!");
@@ -79,7 +84,9 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if (!getValueAt(rowIndex, 0).toString().equals("")) {
-						funcAdmin.apagarVariavel(rowIndex);
+						int idAApagar = idsVariavel.get(rowIndex);
+						funcAdmin.apagarVariavel(idAApagar);
+						idsVariavel.remove(rowIndex);
 						JOptionPane.showMessageDialog(frame, "Apagado com sucesso");
 						variavelModel.fireTableDataChanged();
 					} else {

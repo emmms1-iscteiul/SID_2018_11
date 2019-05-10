@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,7 +20,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Cultura", "Descrição Cultura","Editar", "Apagar" };
 	private FuncionalidadesInvestigador funcInv;
-	int id = 0;
+	List<Integer> idsCultura = new ArrayList<Integer>();
 	JFrame frame;
 	private JTableCulturaInvestigadorModel culturaModel=this;
 
@@ -51,7 +53,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 				try {
 					ResultSet cultura = funcInv.filtrarCulturaTudo();
 					while (cultura.next()) {
-						id = Integer.valueOf(cultura.getObject("IdCultura").toString());
+						idsCultura.add(rowIndex, Integer.valueOf(cultura.getObject("IdCultura").toString()));
 						if (cultura.getRow()-1 == rowIndex) {
 							return cultura.getObject("NomeCultura").toString();
 						}
@@ -63,7 +65,6 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 					e.printStackTrace();
 				}
 		case 1:
-			//			return "DescriÃ§Ã£o Cultura";
 				try {
 					ResultSet culturaD = funcInv.filtrarCulturaTudo();
 					while (culturaD.next()) {
@@ -84,7 +85,8 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(!getValueAt(rowIndex, 0).toString().equals(""))	{
-						EditarCulturaGUI frameE = new EditarCulturaGUI("Editar Cultura", funcInv, id,culturaModel);
+						int idAEditar = idsCultura.get(rowIndex);
+						EditarCulturaGUI frameE = new EditarCulturaGUI("Editar Cultura", funcInv, idAEditar,culturaModel);
 						frameE.open();
 					}
 					else	{
@@ -97,9 +99,10 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 			final JButton botaoApagar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					
-					if(!getValueAt(rowIndex, 0).toString().equals(""))	{
-						funcInv.apagarCultura(id);
+					if(!getValueAt(rowIndex, 0).toString().equals("")) {
+						int idAApagar = idsCultura.get(rowIndex);
+						funcInv.apagarCultura(idAApagar);
+						idsCultura.remove(rowIndex);
 						JOptionPane.showMessageDialog(frame, "Apagado com sucesso");
 						culturaModel.fireTableDataChanged();	
 					}

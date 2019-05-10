@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,7 +23,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			"Password", "Editar", "Apagar" };
   
 	FuncionalidadesAdmin funcAdmin;
-	int id = 0;
+	List<Integer> idsUtilizador = new ArrayList<Integer>();
 	JFrame frame;
 
 	public JTableUtilizadorAdminModel(FuncionalidadesAdmin funcAdmin, JFrame frame) {
@@ -53,7 +55,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 		case 0:
 				try {
 					while (utilizadores.next()) {
-						id = Integer.valueOf(utilizadores.getObject("IdUtilizador").toString());
+						idsUtilizador.add(rowIndex, Integer.valueOf(utilizadores.getObject("IdUtilizador").toString()));
 						if (utilizadores.getRow()-1 == rowIndex) {
 							return utilizadores.getObject("NomeUtilizador").toString();
 						}
@@ -67,7 +69,6 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 					e.printStackTrace();
 				}
 		case 1:
-			//			return "Mail";
 				try {
 					while (utilizadores.next()) {
 						if (utilizadores.getRow()-1 == rowIndex) {
@@ -83,7 +84,6 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 					e.printStackTrace();
 				}
 		case 2:
-			//			return "Password";
 				try {
 					while (utilizadores.next()) {
 						if (utilizadores.getRow()-1 == rowIndex) {
@@ -103,13 +103,13 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(!getValueAt(rowIndex, 0).toString().equals(""))	{
-						EditarUtilizadorGUI frameE = new EditarUtilizadorGUI("Editar Utilizador", funcAdmin, rowIndex,utilizadorModel);
+						int idAEditar = idsUtilizador.get(rowIndex);
+						EditarUtilizadorGUI frameE = new EditarUtilizadorGUI("Editar Utilizador", funcAdmin, idAEditar,utilizadorModel);
 						frameE.open();	
 					}
-					else	{
+					else {
 						JOptionPane.showMessageDialog(null, "Este campo está vazio logo não pode ser editado!");
 					}
-					
 				}
 			});
 			return botaoEditar;
@@ -118,7 +118,9 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			botaoApagar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(!getValueAt(rowIndex, 0).toString().equals(""))	{
-						funcAdmin.apagarUtilizador(rowIndex);
+						int idAApagar = idsUtilizador.get(rowIndex);
+						funcAdmin.apagarUtilizador(idAApagar);
+						idsUtilizador.remove(rowIndex);
 						JOptionPane.showMessageDialog(frame, "Apagado com sucesso");
 						utilizadorModel.fireTableDataChanged();	
 					}

@@ -14,7 +14,6 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 	private static final String[] COLUMN_NAMES = new String[] { "Data e Hora Medição",	"Valor Medição", "Nome Cultura", "Nome Variavel"};
 
 	FuncionalidadesInvestigador funcInv;
-	int id = 0;
 
 	public JTableMedicaoInvestigadorModel(FuncionalidadesInvestigador funcInv) {
 		// TODO Auto-generated constructor stub
@@ -56,7 +55,6 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 					e.printStackTrace();
 				}
 		case 1:
-			//				return "Valor MediÃ§Ã£o";
 				try {
 					while (medicoes.next()) {
 						if (medicoes.getRow()-1 == rowIndex) {
@@ -72,7 +70,6 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 					e.printStackTrace();
 				}
 		case 2:
-			//				return "Nome Cultura";
 				try {
 					while (medicoes.next()) {
 						if (medicoes.getRow()-1 == rowIndex) {
@@ -88,7 +85,6 @@ public class JTableMedicaoInvestigadorModel  extends AbstractTableModel{
 					e.printStackTrace();
 				}
 		case 3:
-			//				return "Nome Variavel";
 				try {
 					while (medicoes.next()) {
 						if (medicoes.getRow()-1 == rowIndex) {

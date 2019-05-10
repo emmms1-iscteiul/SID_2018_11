@@ -58,21 +58,17 @@ public class EditarUtilizadorGUI {
 
 		topPanel.add(registerLabel);
 
-		JLabel eMail = new JLabel("New Email:");
+		JLabel eMail = new JLabel("Novo Email:");
 		eMail.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField eMailUser = new JTextField("",10);
 
-		JLabel nomeUtilizador = new JLabel("New NomeUtilizador:");
+		JLabel nomeUtilizador = new JLabel("Novo Nome Utilizador:");
 		nomeUtilizador.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField nomeUser = new JTextField("",10);
 
-		JLabel userPass = new JLabel("New Password:");
+		JLabel userPass = new JLabel("Novo Password:");
 		userPass.setFont(new Font("Arial", Font.BOLD, 13));
 		JPasswordField passwordText = new JPasswordField("",10);
-
-		JLabel userPassConf = new JLabel("Confirm Pass:");
-		userPassConf.setFont(new Font("Arial", Font.BOLD, 13));
-		JPasswordField passwordConfText = new JPasswordField("", 10);
 
 
 		Font font = eMailUser.getFont();
@@ -80,7 +76,6 @@ public class EditarUtilizadorGUI {
 		eMailUser.setFont( font.deriveFont(size) );
 		passwordText.setFont( font.deriveFont(size) );
 		nomeUser.setFont( font.deriveFont(size) );
-		passwordConfText.setFont( font.deriveFont(size) );
 
 		centerPanel.add(eMail);
 		centerPanel.add(eMailUser);
@@ -90,9 +85,6 @@ public class EditarUtilizadorGUI {
 
 		centerPanel.add(userPass);
 		centerPanel.add(passwordText);
-
-		centerPanel.add(userPassConf);
-		centerPanel.add(passwordConfText);
 
 
 		JButton registerButton = new JButton("Editar");
@@ -107,7 +99,7 @@ public class EditarUtilizadorGUI {
 					if(!nomeUser.getText().isEmpty()) {
 						funcAdmin.alterarUtilizadorNome(nomeUser, idU);
 					}
-					if(!passwordText.getText().isEmpty() && nomeUtilizador.getText().isEmpty()) {
+					if(!passwordText.getText().isEmpty()) {
 						funcAdmin.alterarUtilizadorPass(passwordText, idU);
 					}
 					JOptionPane.showMessageDialog(frame, "Alterado com sucesso");

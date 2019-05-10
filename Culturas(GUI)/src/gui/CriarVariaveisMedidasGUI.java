@@ -46,7 +46,7 @@ public class CriarVariaveisMedidasGUI {
 		frame.setLayout(new BorderLayout());
 
 		JPanel topPanel = new JPanel();
-		JPanel centerPanel = new JPanel(new GridLayout(4,1));
+		JPanel centerPanel = new JPanel(new GridLayout(6,1));
 		JPanel bottomPanel = new JPanel();
 
 		JLabel registerLabel = new JLabel("Inserir");
@@ -61,6 +61,14 @@ public class CriarVariaveisMedidasGUI {
 		JLabel LimiteSuperior = new JLabel("Limite Superior:");
 		LimiteSuperior.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField LimiteSuperiorText = new JTextField("",10);
+		
+		JLabel RegularidadeLimiteInferior = new JLabel("Regularidade Alertas do Limite Inferior:");
+		RegularidadeLimiteInferior.setFont(new Font("Arial", Font.BOLD, 13));
+		JTextField RegularidadeLimiteInferiorText = new JTextField("",10);
+		
+		JLabel RegularidadeLimiteSuperior = new JLabel("Regularidade Alertas do Limite Superior:");
+		RegularidadeLimiteSuperior.setFont(new Font("Arial", Font.BOLD, 13));
+		JTextField RegularidadeLimiteSuperiorText = new JTextField("",10);
 		
 		JLabel NomeCultura = new JLabel("Nome Cultura:");
 		NomeCultura.setFont(new Font("Arial", Font.BOLD, 13));
@@ -77,12 +85,20 @@ public class CriarVariaveisMedidasGUI {
 		LimiteSuperiorText.setFont( font.deriveFont(size) );
 		NomeCulturaText.setFont( font.deriveFont(size) );
 		NomeVariavelText.setFont( font.deriveFont(size) );
+		RegularidadeLimiteInferiorText.setFont( font.deriveFont(size) );
+		RegularidadeLimiteSuperiorText.setFont( font.deriveFont(size) );
 
 		centerPanel.add(LimiteInferior);
 		centerPanel.add(LimiteInferiorText);
 		
 		centerPanel.add(LimiteSuperior);
 		centerPanel.add(LimiteSuperiorText);
+		
+		centerPanel.add(RegularidadeLimiteInferior);
+		centerPanel.add(RegularidadeLimiteInferiorText);
+		
+		centerPanel.add(RegularidadeLimiteSuperior);
+		centerPanel.add(RegularidadeLimiteSuperiorText);
 		
 		centerPanel.add(NomeCultura);
 		centerPanel.add(NomeCulturaText);
@@ -100,12 +116,16 @@ public class CriarVariaveisMedidasGUI {
 					JOptionPane.showMessageDialog(frame, "Campo LIMITE INFERIOR não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);  
 				}else if(LimiteSuperiorText.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "Campo LIMITE SUPERIOR não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
+				}else if(RegularidadeLimiteInferiorText.getText().equals("")) {
+					JOptionPane.showMessageDialog(frame, "Campo REGULARIDADE ALERTAS LIMITE INFERIOR não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
+				}else if(RegularidadeLimiteSuperiorText.getText().equals("")) {
+					JOptionPane.showMessageDialog(frame, "Campo REGULARIDADE ALERTAS LIMITE SUPERIOR não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else if(NomeCulturaText.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "Campo NOME CULTURA não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else if(NomeVariavelText.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "Campo NOME VARIÁVEL não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else{
-				funcInv.inserirVariavelMedida(LimiteInferiorText, LimiteSuperiorText, NomeCulturaText, NomeVariavelText, frame);
+				funcInv.inserirVariavelMedida(LimiteInferiorText, LimiteSuperiorText, RegularidadeLimiteInferiorText, RegularidadeLimiteSuperiorText, NomeCulturaText, NomeVariavelText, frame);
 				variavelMedidaModel.fireTableDataChanged();
 				}
 			}

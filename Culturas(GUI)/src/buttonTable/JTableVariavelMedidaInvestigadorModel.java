@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -16,10 +18,10 @@ import gui.FuncionalidadesInvestigador;
 public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior", "Nome Cultura", "Nome Variavel","Editar" };
+	private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior", "LimiteSuperior", "Regularidade Alerta Limite Inferior", "Regularidade Alerta Limite Superior" ,"Nome Cultura", "Nome Variavel","Editar" };
 	FuncionalidadesInvestigador funcInv;
 	private JTableVariavelMedidaInvestigadorModel variavelMedidaModel=this;
-	int id = 0;
+	List<Integer> idsVariavelMedida = new ArrayList<Integer>();
 
 
 	public JTableVariavelMedidaInvestigadorModel(FuncionalidadesInvestigador funcInv) {
@@ -50,6 +52,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 		case 0:
 				try {
 					while (variaveisMedidas.next()) {
+						idsVariavelMedida.add(rowIndex, Integer.valueOf(variaveisMedidas.getObject("IdVariavelMedida").toString()));
 						if (variaveisMedidas.getRow()-1 == rowIndex) {
 							return variaveisMedidas.getObject("LimiteInferior").toString();
 						}
@@ -73,6 +76,30 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 					e.printStackTrace();
 				}
 		case 2:
+			try {
+				while (variaveisMedidas.next()) {
+					if (variaveisMedidas.getRow()-1 == rowIndex) {
+						return variaveisMedidas.getObject("LimiteRegularidadeAlertasInferior").toString();
+					}
+				}
+				return "";
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		case 3:
+			try {
+				while (variaveisMedidas.next()) {
+					if (variaveisMedidas.getRow()-1 == rowIndex) {
+						return variaveisMedidas.getObject("LimiteRegularidadeAlertasSuperior").toString();
+					}
+				}
+				return "";
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		case 4:
 			//				return "Nome Cultura";
 				try {
 					while (variaveisMedidas.next()) {
@@ -85,7 +112,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		case 3:
+		case 5:
 			//				return "Nome Variavel";
 				try {
 					while (variaveisMedidas.next()) {
@@ -98,12 +125,13 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		case 4:
+		case 6:
 			final JButton botaoEditar = new JButton(COLUMN_NAMES[columnIndex]);
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(!getValueAt(rowIndex, 0).toString().equals(""))	{
-						EditarVariaveisMedidasGUI frameE = new EditarVariaveisMedidasGUI("Editar Variavel Medida", funcInv, rowIndex,variavelMedidaModel);
+						int idAEditar = idsVariavelMedida.get(rowIndex);
+						EditarVariaveisMedidasGUI frameE = new EditarVariaveisMedidasGUI("Editar Variavel Medida", funcInv, idAEditar,variavelMedidaModel);
 						frameE.open();
 					}
 					else	{

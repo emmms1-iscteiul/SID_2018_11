@@ -10,7 +10,7 @@ import gui.FuncionalidadesAdmin;
 
 public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior", "Nome Cultura", "Nome Variavel" };
+	private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior", "LimiteRegularidadeAlertasInferior", "LimiteRegularidadeAlertasSuperior", "Nome Cultura", "Nome Variavel" };
 	FuncionalidadesAdmin funcAdmin;
 
 	public JTableVariavelMedidaAdminModel(FuncionalidadesAdmin funcAdmin) {
@@ -38,7 +38,6 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 		ResultSet variaveisMedidas = funcAdmin.consultarVariaveisMedidas();
 		switch (columnIndex) {
 		case 0:
-//			return "LimiteInferior"	;
 			try {
 				while (variaveisMedidas.next()) {
 					if (variaveisMedidas.getRow()-1 == rowIndex) {
@@ -54,7 +53,6 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 				e.printStackTrace();
 			}
 		case 1:
-//			return "LimiteSuperior";
 			try {
 				while (variaveisMedidas.next()) {
 					if (variaveisMedidas.getRow()-1 == rowIndex) {
@@ -70,7 +68,36 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 				e.printStackTrace();
 			}
 		case 2:
-//			return "Nome Cultura";
+			try {
+				while (variaveisMedidas.next()) {
+					if (variaveisMedidas.getRow()-1 == rowIndex) {
+						return variaveisMedidas.getObject("LimiteRegularidadeAlertasInferior").toString();
+					}
+				}
+				return "";
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		case 3:
+			try {
+				while (variaveisMedidas.next()) {
+					if (variaveisMedidas.getRow()-1 == rowIndex) {
+						return variaveisMedidas.getObject("LimiteRegularidadeAlertasSuperior").toString();
+					}
+				}
+				return "";
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		case 4:
 			try {
 				while (variaveisMedidas.next()) {
 					if (variaveisMedidas.getRow()-1 == rowIndex) {
@@ -85,8 +112,7 @@ public class JTableVariavelMedidaAdminModel extends AbstractTableModel{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		case 3:
-//			return "Nome Variavel";
+		case 5:
 			try {
 				while (variaveisMedidas.next()) {
 					if (variaveisMedidas.getRow()-1 == rowIndex) {

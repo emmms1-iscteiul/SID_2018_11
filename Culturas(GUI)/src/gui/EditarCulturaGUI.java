@@ -55,15 +55,15 @@ public class EditarCulturaGUI {
 
 		topPanel.add(registerLabel);
 
-		JLabel nomeUtilizador = new JLabel("Nome do Utilizador:");
+		JLabel nomeUtilizador = new JLabel("Novo Nome Utilizador:");
 		nomeUtilizador.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField nomeUtil = new JTextField("",10);
 
-		JLabel nomeCultura = new JLabel("Novo nome da Cultura:");
+		JLabel nomeCultura = new JLabel("Novo Nome Cultura:");
 		nomeCultura.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField nomeC = new JTextField("",10);
 
-		JLabel descricaoCultura = new JLabel("Descricao nova:");
+		JLabel descricaoCultura = new JLabel("Nova Descricao:");
 		descricaoCultura.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField descricaoC = new JTextField("",10);
 

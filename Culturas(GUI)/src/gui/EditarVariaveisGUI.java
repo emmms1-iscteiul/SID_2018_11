@@ -54,7 +54,7 @@ public class EditarVariaveisGUI {
 		
 		topPanel.add(registerLabel);
 		
-		JLabel newV = new JLabel("Nome Variavel nova:");
+		JLabel newV = new JLabel("Nome Variavel Nova:");
 		newV.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField newVar = new JTextField("",10);
 		
@@ -73,7 +73,7 @@ public class EditarVariaveisGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {					
 					if(!newVar.getText().isEmpty()) {
-						funcAdmin.alterarVariavelNome(newVar, idV+1);
+						funcAdmin.alterarVariavelNome(newVar, idV);
 					}
 					JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
 					variavelModel.fireTableDataChanged();

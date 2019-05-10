@@ -53,7 +53,6 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 				e.printStackTrace();
 			} 
 		case 1:
-//			return "Valor Medição";
 			try {
 				while (medicoes.next()) {
 					if (medicoes.getRow()-1 == rowIndex) {
@@ -69,7 +68,6 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 				e.printStackTrace();
 			}
 		case 2:
-//			return "Nome Cultura";
 			try {
 				while (medicoes.next()) {
 					if (medicoes.getRow()-1== rowIndex) {
@@ -85,7 +83,6 @@ public class JTableMedicaoAdminModel  extends AbstractTableModel {
 				e.printStackTrace();
 			}
 		case 3:
-//			return "Nome Variavel";
 			try {
 				while (medicoes.next()) {
 					if (medicoes.getRow()-1 == rowIndex) {
