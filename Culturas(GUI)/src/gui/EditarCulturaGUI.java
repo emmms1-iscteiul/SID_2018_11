@@ -16,15 +16,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import buttonTable.JTableCulturaInvestigadorModel;
+
 public class EditarCulturaGUI {
 
 	private JFrame frame;
 
 	FuncionalidadesInvestigador funcInv;
+	private JTableCulturaInvestigadorModel culturaModel;
 	int idC = 0;
 
-	public EditarCulturaGUI(String frameTitle, FuncionalidadesInvestigador funcInv, int rowIndex) {
+	public EditarCulturaGUI(String frameTitle, FuncionalidadesInvestigador funcInv, int rowIndex,JTableCulturaInvestigadorModel culturaModel) {
 		this.funcInv = funcInv;
+		this.culturaModel=culturaModel;
 		this.idC = rowIndex;
 		frame = new JFrame(frameTitle);
 		frame.setSize(350, 240);
@@ -32,7 +36,7 @@ public class EditarCulturaGUI {
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 		frame.setLocation(x, y);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
 
@@ -93,6 +97,7 @@ public class EditarCulturaGUI {
 					funcInv.alterarCulturaUtilizador(nomeUtil, idC);
 				}
 				JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
+				culturaModel.fireTableDataChanged();
 				frame.dispose();
 			}
 		});

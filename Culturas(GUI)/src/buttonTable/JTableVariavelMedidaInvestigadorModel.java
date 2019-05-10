@@ -18,6 +18,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
 	private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior",	"LimiteSuperior", "Nome Cultura", "Nome Variavel","Editar" };
 	FuncionalidadesInvestigador funcInv;
+	private JTableVariavelMedidaInvestigadorModel variavelMedidaModel=this;
 	int id = 0;
 
 
@@ -102,7 +103,7 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(!getValueAt(rowIndex, 0).toString().equals(""))	{
-						EditarVariaveisMedidasGUI frameE = new EditarVariaveisMedidasGUI("Editar Variavel Medida", funcInv, rowIndex);
+						EditarVariaveisMedidasGUI frameE = new EditarVariaveisMedidasGUI("Editar Variavel Medida", funcInv, rowIndex,variavelMedidaModel);
 						frameE.open();
 					}
 					else	{

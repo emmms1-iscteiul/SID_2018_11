@@ -15,6 +15,7 @@ import gui.FuncionalidadesAdmin;
 
 public class JTableUtilizadorAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
+	private JTableUtilizadorAdminModel utilizadorModel=this;
 
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Utilizador", "Mail",
 			"Password", "Editar", "Apagar" };
@@ -102,7 +103,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(!getValueAt(rowIndex, 0).toString().equals(""))	{
-						EditarUtilizadorGUI frameE = new EditarUtilizadorGUI("Editar Utilizador", funcAdmin, rowIndex);
+						EditarUtilizadorGUI frameE = new EditarUtilizadorGUI("Editar Utilizador", funcAdmin, rowIndex,utilizadorModel);
 						frameE.open();	
 					}
 					else	{
@@ -119,7 +120,7 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 					if(!getValueAt(rowIndex, 0).toString().equals(""))	{
 						funcAdmin.apagarUtilizador(rowIndex);
 						JOptionPane.showMessageDialog(frame, "Apagado com sucesso");
-						frame.dispose();	
+						utilizadorModel.fireTableDataChanged();	
 					}
 					else	{
 						JOptionPane.showMessageDialog(null, "Este campo está vazio logo não pode ser apagado!");

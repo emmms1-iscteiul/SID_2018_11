@@ -16,6 +16,7 @@ import gui.FuncionalidadesAdmin;
 
 public class JTableVariavelAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
+	private JTableVariavelAdminModel variavelModel=this;
 	private static final String[] COLUMN_NAMES = new String[] { "Nome Variável", "Editar", "Apagar" };
 	JFrame frame;
 	FuncionalidadesAdmin funcAdmin;
@@ -65,7 +66,7 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if (!getValueAt(rowIndex, 0).toString().equals("")) {
-						EditarVariaveisGUI frameE = new EditarVariaveisGUI("Editar Variavel", funcAdmin, rowIndex);
+						EditarVariaveisGUI frameE = new EditarVariaveisGUI("Editar Variavel", funcAdmin, rowIndex,variavelModel);
 						frameE.open();
 					} else {
 						JOptionPane.showMessageDialog(null, "Este campo está vazio logo não pode ser editado!");
@@ -80,7 +81,7 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 					if (!getValueAt(rowIndex, 0).toString().equals("")) {
 						funcAdmin.apagarVariavel(rowIndex);
 						JOptionPane.showMessageDialog(frame, "Apagado com sucesso");
-						frame.dispose();
+						variavelModel.fireTableDataChanged();
 					} else {
 						JOptionPane.showMessageDialog(null, "Este campo está vazio logo não pode ser apagado!");
 					}

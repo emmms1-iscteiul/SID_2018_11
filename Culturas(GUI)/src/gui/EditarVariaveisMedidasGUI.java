@@ -16,22 +16,26 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import buttonTable.JTableVariavelMedidaInvestigadorModel;
+
 public class EditarVariaveisMedidasGUI {
 	private JFrame frame;
 
 	FuncionalidadesInvestigador funcInv;
+	private JTableVariavelMedidaInvestigadorModel variavelMedidaModel;
 	int idVM = 0;
 
-	public EditarVariaveisMedidasGUI(String frameTitle, FuncionalidadesInvestigador funcInv, int rowIndex) {
+	public EditarVariaveisMedidasGUI(String frameTitle, FuncionalidadesInvestigador funcInv, int rowIndex,JTableVariavelMedidaInvestigadorModel variavelMedidaModel) {
 		this.funcInv = funcInv;
 		this.idVM = rowIndex;
+		this.variavelMedidaModel=variavelMedidaModel;
 		frame = new JFrame(frameTitle);
 		frame.setSize(450, 300);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 		frame.setLocation(x, y);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
 
@@ -105,6 +109,7 @@ public class EditarVariaveisMedidasGUI {
 					funcInv.alterarVariavelMedidaVariavel(newV, idVM);
 				}
 				JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
+				variavelMedidaModel.fireTableDataChanged();
 				frame.dispose();
 			}
 		});

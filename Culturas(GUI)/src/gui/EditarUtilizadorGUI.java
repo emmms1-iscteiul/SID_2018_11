@@ -17,16 +17,20 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import buttonTable.JTableUtilizadorAdminModel;
+
 
 public class EditarUtilizadorGUI {
 
 	private JFrame frame;
 	FuncionalidadesAdmin funcAdmin;
+	private JTableUtilizadorAdminModel utilizadorModel;
 	int idU = 0;
 
-	public EditarUtilizadorGUI(String frameTitle, FuncionalidadesAdmin funcAdmin, int rowIndex) {
+	public EditarUtilizadorGUI(String frameTitle, FuncionalidadesAdmin funcAdmin, int rowIndex,JTableUtilizadorAdminModel utilizadorModel) {
 		this.funcAdmin=funcAdmin;
 		this.idU = rowIndex;
+		this.utilizadorModel=utilizadorModel;
 		frame = new JFrame(frameTitle);
 		frame.setSize(400, 300);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -91,7 +95,7 @@ public class EditarUtilizadorGUI {
 		centerPanel.add(passwordConfText);
 
 
-		JButton registerButton = new JButton("Criar");
+		JButton registerButton = new JButton("Editar");
 		registerButton.addActionListener(new ActionListener() {
 
 			@SuppressWarnings("deprecation")
@@ -107,6 +111,7 @@ public class EditarUtilizadorGUI {
 						funcAdmin.alterarUtilizadorPass(passwordText, idU);
 					}
 					JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
+					utilizadorModel.fireTableDataChanged();
 					frame.dispose();
 			}
 		});

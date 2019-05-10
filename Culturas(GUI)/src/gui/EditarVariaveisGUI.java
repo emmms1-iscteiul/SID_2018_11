@@ -16,22 +16,26 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import buttonTable.JTableVariavelAdminModel;
+
 public class EditarVariaveisGUI {
 	private JFrame frame;
 	
 	FuncionalidadesAdmin funcAdmin;
+	private JTableVariavelAdminModel variavelModel;
 	int idV = 0;
 
-	public EditarVariaveisGUI(String frameTitle, FuncionalidadesAdmin funcAdmin, int rowIndex) {
+	public EditarVariaveisGUI(String frameTitle, FuncionalidadesAdmin funcAdmin, int rowIndex,JTableVariavelAdminModel variavelModel) {
 		this.funcAdmin = funcAdmin;
 		this.idV = rowIndex;
+		this.variavelModel=variavelModel;
 		frame = new JFrame(frameTitle);
 		frame.setSize(350, 200);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 		frame.setLocation(x, y);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
 
@@ -69,9 +73,10 @@ public class EditarVariaveisGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {					
 					if(!newVar.getText().isEmpty()) {
-						funcAdmin.alterarVariavelNome(newVar, idV);
+						funcAdmin.alterarVariavelNome(newVar, idV+1);
 					}
 					JOptionPane.showMessageDialog(frame, "Alterado com sucesso");
+					variavelModel.fireTableDataChanged();
 					frame.dispose();	
 			}
 		});

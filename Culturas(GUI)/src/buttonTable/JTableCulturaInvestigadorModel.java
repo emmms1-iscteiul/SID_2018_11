@@ -20,6 +20,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 	private FuncionalidadesInvestigador funcInv;
 	int id = 0;
 	JFrame frame;
+	private JTableCulturaInvestigadorModel culturaModel=this;
 
 	public JTableCulturaInvestigadorModel(FuncionalidadesInvestigador funcInv, JFrame frame) {
 		// TODO Auto-generated constructor stub
@@ -83,7 +84,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 			botaoEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(!getValueAt(rowIndex, 0).toString().equals(""))	{
-						EditarCulturaGUI frameE = new EditarCulturaGUI("Editar Cultura", funcInv, id);
+						EditarCulturaGUI frameE = new EditarCulturaGUI("Editar Cultura", funcInv, id,culturaModel);
 						frameE.open();
 					}
 					else	{
@@ -100,7 +101,7 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 					if(!getValueAt(rowIndex, 0).toString().equals(""))	{
 						funcInv.apagarCultura(id);
 						JOptionPane.showMessageDialog(frame, "Apagado com sucesso");
-						frame.dispose();	
+						culturaModel.fireTableDataChanged();	
 					}
 					else	{
 						JOptionPane.showMessageDialog(null, "Este campo está vazio logo não pode ser apagado!");
