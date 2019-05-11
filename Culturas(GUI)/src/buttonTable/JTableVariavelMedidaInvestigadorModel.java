@@ -18,7 +18,7 @@ import gui.FuncionalidadesInvestigador;
 public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior", "LimiteSuperior", "Regularidade Alerta Limite Inferior", "Regularidade Alerta Limite Superior" ,"Nome Cultura", "Nome Variavel","Editar" };
+	private static final String[] COLUMN_NAMES = new String[] { "LimiteInferior", "LimiteSuperior", "Regularidade Alerta Lim. Inf.", "Regularidade Alerta Lim. Sup." ,"Nome Cultura", "Nome Variavel","Editar" };
 	FuncionalidadesInvestigador funcInv;
 	private JTableVariavelMedidaInvestigadorModel variavelMedidaModel=this;
 	List<Integer> idsVariavelMedida = new ArrayList<Integer>();

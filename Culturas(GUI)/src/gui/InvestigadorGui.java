@@ -126,7 +126,7 @@ public class InvestigadorGui {
 			public void actionPerformed(ActionEvent e) {
 				funcInv.logout();
 				frame.dispose();
-				LoginGui login = new LoginGui("MonotorizaÃ§Ã£o de Culturas");
+				LoginGui login = new LoginGui("Monotorização de Culturas");
 				login.open();
 			}
 		});

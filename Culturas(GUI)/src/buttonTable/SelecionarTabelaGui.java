@@ -163,7 +163,7 @@ public class SelecionarTabelaGui {
 		}
 
 		if (frameTitle == "Tabela Medicao") {
-			frame.setSize(500, 500);
+			frame.setSize(650, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
@@ -173,7 +173,7 @@ public class SelecionarTabelaGui {
 			JTableMedicaoInvestigadorModel medicaoModel=new JTableMedicaoInvestigadorModel(funcInv);
 			JTable table = new JTable(medicaoModel);
 			JScrollPane scrollPane = new JScrollPane(table);
-			scrollPane.setPreferredSize(new Dimension(400, 400));
+			scrollPane.setPreferredSize(new Dimension(600, 400));
 			table.setFillsViewportHeight(true);
 
 
@@ -196,7 +196,7 @@ public class SelecionarTabelaGui {
 		}
 
 		if (frameTitle == "Tabela Variavel Medida") {
-			frame.setSize(500, 500);
+			frame.setSize(1350, 600);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
@@ -206,7 +206,7 @@ public class SelecionarTabelaGui {
 			JTableVariavelMedidaInvestigadorModel variavelMedidaModel=new JTableVariavelMedidaInvestigadorModel(funcInv);
 			JTable table = new JTable(variavelMedidaModel);
 			JScrollPane scrollPane = new JScrollPane(table);
-			scrollPane.setPreferredSize(new Dimension(400, 400));
+			scrollPane.setPreferredSize(new Dimension(1300, 500));
 			table.setFillsViewportHeight(true);
 
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
@@ -234,7 +234,7 @@ public class SelecionarTabelaGui {
 		}
 		
 		if (frameTitle == "Tabela Cultura-Admin") {
-			frame.setSize(500, 500);
+			frame.setSize(650, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
@@ -243,14 +243,14 @@ public class SelecionarTabelaGui {
 
 			JTable table = new JTable(new JTableCulturaAdminModel(funcAdmin));
 			JScrollPane scrollPane = new JScrollPane(table);
-			scrollPane.setPreferredSize(new Dimension(400, 400));
+			scrollPane.setPreferredSize(new Dimension(600, 400));
 			table.setFillsViewportHeight(true);
 
 			centerPanel.add(scrollPane);
 		}
 		
 		if (frameTitle == "Tabela Medicao-Admin") {
-			frame.setSize(500, 500);
+			frame.setSize(700, 500);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
@@ -259,14 +259,14 @@ public class SelecionarTabelaGui {
 
 			JTable table = new JTable(new JTableMedicaoAdminModel(funcAdmin));
 			JScrollPane scrollPane = new JScrollPane(table);
-			scrollPane.setPreferredSize(new Dimension(400, 400));
+			scrollPane.setPreferredSize(new Dimension(650, 400));
 			table.setFillsViewportHeight(true);
 
 			centerPanel.add(scrollPane);
 		}
 		
 		if (frameTitle == "Tabela Variavel Medida-Admin") {
-			frame.setSize(500, 500);
+			frame.setSize(1350, 600);
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
@@ -275,7 +275,7 @@ public class SelecionarTabelaGui {
 
 			JTable table = new JTable(new JTableVariavelMedidaAdminModel(funcAdmin));
 			JScrollPane scrollPane = new JScrollPane(table);
-			scrollPane.setPreferredSize(new Dimension(400, 400));
+			scrollPane.setPreferredSize(new Dimension(1300, 500));
 			table.setFillsViewportHeight(true);
 
 			centerPanel.add(scrollPane);
