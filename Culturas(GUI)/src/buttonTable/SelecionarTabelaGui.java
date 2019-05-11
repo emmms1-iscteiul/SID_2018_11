@@ -297,6 +297,23 @@ public class SelecionarTabelaGui {
 			centerPanel.add(scrollPane);
 		}
 		
+		if (frameTitle == "Tabela Alertas-Investigador") {
+			frame.setSize(1000, 600);
+			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+			frame.setLocation(x, y);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			JTable table = new JTable(new JTableAlertasInvestigadorModel(funcInv));
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setPreferredSize(new Dimension(950, 500));
+			table.setFillsViewportHeight(true);
+
+			centerPanel.add(scrollPane);
+		}
+		
+		
 		frame.add(topPanel, BorderLayout.NORTH);
 		frame.add(centerPanel, BorderLayout.CENTER);
 		frame.add(bottomPanel,BorderLayout.SOUTH);

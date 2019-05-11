@@ -62,6 +62,8 @@ public class InvestigadorGui {
 		consultarComboBox.addItem("Medição");
 		consultarComboBox.addItem("Variável");
 		consultarComboBox.addItem("Variável Medida");
+		consultarComboBox.addItem("Alertas");
+		
 
 		consultarComboBox.addActionListener(new ActionListener() {
 
@@ -109,6 +111,15 @@ public class InvestigadorGui {
 						}
 					});
 					break;
+				case "Alertas":
+					final SelecionarTabelaGui guiAlertas = new SelecionarTabelaGui("Tabela Alertas-Investigador", funcAdmin, funcInv);
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							guiAlertas.addContent();
+							guiAlertas.open();
+						}
+					});
+					break;	
 				default:
 					System.out.println("Erro");
 					break;
