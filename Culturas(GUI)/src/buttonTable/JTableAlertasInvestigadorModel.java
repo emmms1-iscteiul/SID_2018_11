@@ -2,6 +2,9 @@ package buttonTable;
 
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.table.AbstractTableModel;
 
 
@@ -10,7 +13,7 @@ import gui.FuncionalidadesInvestigador;
 public class JTableAlertasInvestigadorModel extends AbstractTableModel{
 
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = new String[] { "Id Alerta", "Data e Hora do Alerta", "Nome Variável","Limite Superior","Limite Inferior","Valor Medição","Descrição" };
+	private static final String[] COLUMN_NAMES = new String[] { "Data e Hora do Alerta", "Nome Variável","Limite Superior","Limite Inferior","Valor Medição","Descrição" };
 	
 	FuncionalidadesInvestigador funcInv;
 
@@ -35,22 +38,80 @@ public class JTableAlertasInvestigadorModel extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		ResultSet alertas = funcInv.filtrarAlertasCultura();
 		switch (columnIndex) {
 		case 0:
-			return "Id";
+			try {
+				while(alertas.next()) {
+					if (alertas.getRow()-1 == rowIndex) {
+						return alertas.getObject("DataHoraAlerta").toString();
+					}				
+				}
+				return "";
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		case 1:
-			return "DataHora";
-			
+			try {
+				while(alertas.next()) {
+					if (alertas.getRow()-1 == rowIndex) {
+						return alertas.getObject("NomeVariavel").toString();
+					}				
+				}
+				return "";
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		case 2:
-			return "Nome Variável";
+			try {
+				while(alertas.next()) {
+					if (alertas.getRow()-1 == rowIndex) {
+						return alertas.getObject("LimiteSuperior").toString();
+					}				
+				}
+				return "";
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		case 3:
-			return "Limite Superior";
+			try {
+				while(alertas.next()) {
+					if (alertas.getRow()-1 == rowIndex) {
+						return alertas.getObject("LimiteInferior").toString();
+					}				
+				}
+				return "";
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		case 4:
-			return "Limite Inferior";
+			try {
+				while(alertas.next()) {
+					if (alertas.getRow()-1 == rowIndex) {
+						return alertas.getObject("ValorMedicao").toString();
+					}				
+				}
+				return "";
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		case 5:
-			return "Valor Medição";
-		case 6:
-			return "Descrição";
+			try {
+				while(alertas.next()) {
+					if (alertas.getRow()-1 == rowIndex) {
+						return alertas.getObject("Descricao").toString();
+					}				
+				}
+				return "";
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		default:
 			return "";
 		}
