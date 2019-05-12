@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -19,7 +21,7 @@ public class FuncionalidadesAdmin {
 
 
 	@SuppressWarnings("deprecation")
-	public void login(JTextField usernameText, JPasswordField passwordText) {
+	public void login(JTextField usernameText, JPasswordField passwordText, JFrame frame) {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -29,7 +31,8 @@ public class FuncionalidadesAdmin {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Password errada", "ERRO - TENTE OUTRA PASSWORD", JOptionPane.ERROR_MESSAGE);
+			
 		}
 	}
 
@@ -65,7 +68,7 @@ public class FuncionalidadesAdmin {
 
 
 	@SuppressWarnings("deprecation")
-	public void inserirInvestigador(JTextField utilNameText, JTextField utilEmailText, JPasswordField passwordText) {
+	public void inserirInvestigador(JTextField utilNameText, JTextField utilEmailText, JPasswordField passwordText, JFrame frame) {
 
 		try {
 			CallableStatement cs = myConn.prepareCall("{call inserirInvestigador(?,?,?)}");
@@ -75,7 +78,7 @@ public class FuncionalidadesAdmin {
 			cs.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Email ou UserName já existem", "ERRO - TENTE OUTRO USER OU EMAIL", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

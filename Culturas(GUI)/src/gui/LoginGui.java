@@ -77,19 +77,24 @@ public class LoginGui {
 
 		loginButton.addActionListener(new ActionListener() {
 
+			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (checkUser(usernameText).equals("Administrador")) {
-					funcAdmin.login(usernameText, passwordText);
-					AdminGui adminFrame = new AdminGui("Monotorização de Culturas", funcAdmin);
-					frame.dispose();
-					adminFrame.open();
+					funcAdmin.login(usernameText, passwordText, frame);
+					if (checkUserPass(usernameText).equals(passwordText.getText())) {
+						frame.dispose();
+						AdminGui adminFrame = new AdminGui("Monotorização de Culturas", funcAdmin);
+						adminFrame.open();
+					}
 				}
 				else if (checkUser(usernameText).equals("Investigador")) {
-					funcInv.login(usernameText, passwordText);
-					InvestigadorGui investigadorFrame = new InvestigadorGui("Monotorização de Culturas", funcInv);
-					frame.dispose();
-					investigadorFrame.open();
+					funcInv.login(usernameText, passwordText, frame);
+					if (checkUserPass(usernameText).equals(passwordText.getText())) {
+						frame.dispose();
+						InvestigadorGui investigadorFrame = new InvestigadorGui("Monotorização de Culturas", funcInv);
+						investigadorFrame.open();
+					}
 				}
 				else {
 					JOptionPane.showMessageDialog(frame, "Utilizador não existe", "ERRO - NECESSÁRIO REGISTAR PRIMEIRO", JOptionPane.ERROR_MESSAGE);
@@ -108,7 +113,6 @@ public class LoginGui {
 				RegistGui registFrame = new RegistGui("Monotorização de Culturas", funcAdmin);
 				frame.dispose();
 				registFrame.open();
-
 			}
 		});
 
@@ -148,6 +152,32 @@ public class LoginGui {
 
 		return tipo;
 	}
+	
+	public String checkUserPass(JTextField usernameText) {
+
+		String pass = "";
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/monotorizacao_de_culturas", "root", "root");
+			CallableStatement cs = myConn.prepareCall("{call obterPassword(?)}");
+			cs.setString(1, usernameText.getText());
+			cs.execute();
+			ResultSet passU = cs.getResultSet();
+			while (passU.next()) {
+				pass = passU.getString("Passwor");
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return pass;
+	}
+
 
 	public static void main(String[] args) {
 		LoginGui frame = new LoginGui("Monotorização de Culturas");

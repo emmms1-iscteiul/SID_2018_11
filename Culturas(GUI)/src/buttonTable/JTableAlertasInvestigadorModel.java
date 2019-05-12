@@ -56,7 +56,7 @@ public class JTableAlertasInvestigadorModel extends AbstractTableModel{
 			try {
 				while(alertas.next()) {
 					if (alertas.getRow()-1 == rowIndex) {
-						return alertas.getObject("NomeVariavel").toString();
+						return alertas.getObject("NomeVariavelAlerta").toString();
 					}				
 				}
 				return "";
@@ -68,7 +68,7 @@ public class JTableAlertasInvestigadorModel extends AbstractTableModel{
 			try {
 				while(alertas.next()) {
 					if (alertas.getRow()-1 == rowIndex) {
-						return alertas.getObject("LimiteSuperior").toString();
+						return alertas.getObject("LimiteSuperiorAlerta").toString();
 					}				
 				}
 				return "";
@@ -80,7 +80,7 @@ public class JTableAlertasInvestigadorModel extends AbstractTableModel{
 			try {
 				while(alertas.next()) {
 					if (alertas.getRow()-1 == rowIndex) {
-						return alertas.getObject("LimiteInferior").toString();
+						return alertas.getObject("LimiteInferiorAlerta").toString();
 					}				
 				}
 				return "";
@@ -92,7 +92,7 @@ public class JTableAlertasInvestigadorModel extends AbstractTableModel{
 			try {
 				while(alertas.next()) {
 					if (alertas.getRow()-1 == rowIndex) {
-						return alertas.getObject("ValorMedicao").toString();
+						return alertas.getObject("ValorMedicaoAlerta").toString();
 					}				
 				}
 				return "";

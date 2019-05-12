@@ -106,8 +106,8 @@ public class RegistGui {
 				}else if(!passwordText.getText().equals(passwordConfText.getText()))	{
 					JOptionPane.showMessageDialog(frame, "Password não coincidem", "ERRO - PASSWORDS DO NOT MATCH", JOptionPane.ERROR_MESSAGE);
 				}else{
-					JOptionPane.showMessageDialog(frame, "Registo com sucesso");
 					func.inserirAdmin(adminNameText, adminEmailText, passwordText);
+					JOptionPane.showMessageDialog(frame, "Registo com sucesso");
 					frame.dispose();
 					LoginGui frame = new LoginGui("Monotorização de Culturas");
 					frame.open();

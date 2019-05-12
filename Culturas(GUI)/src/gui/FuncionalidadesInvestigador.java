@@ -21,7 +21,7 @@ public class FuncionalidadesInvestigador {
 
 
 	@SuppressWarnings("deprecation")
-	public void login(JTextField usernameText, JPasswordField passwordText) {
+	public void login(JTextField usernameText, JPasswordField passwordText, JFrame frame) {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -31,7 +31,7 @@ public class FuncionalidadesInvestigador {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Password errada", "ERRO - TENTE OUTRA PASSWORD", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
