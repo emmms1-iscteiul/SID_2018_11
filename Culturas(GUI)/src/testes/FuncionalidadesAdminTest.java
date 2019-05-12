@@ -10,11 +10,17 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import gui.FuncionalidadesAdmin;
-
+/**
+ * Teste Funcionalidades Admin
+ * @author Eduardo
+ *
+ */
 public class FuncionalidadesAdminTest {
 
 	FuncionalidadesAdmin test = new FuncionalidadesAdmin();
-	
+/**
+ * Teste login	
+ */
 	@Test
 	public void testLogin() {
 		JTextField usernameText = new JTextField("root");
@@ -23,7 +29,9 @@ public class FuncionalidadesAdminTest {
 		test.login(usernameText, passwordText, frameL );
 		Assert.assertNotNull(test.getConnection());
 	}
-	
+/**
+ * Teste logout	
+ */
 	@Test
 	public void testLogout() {
 		JTextField usernameText = new JTextField("root");
@@ -34,7 +42,9 @@ public class FuncionalidadesAdminTest {
 		test.logout();
 		Assert.assertNotNull(test.getConnection());
 	}
-	
+/**
+ * Test inserir admin	
+ */
 	@Test
 	public void testInserirAdmin() {
 		JTextField usernameText = new JTextField("root");
@@ -50,7 +60,9 @@ public class FuncionalidadesAdminTest {
 		Assert.assertNotNull(adminEmailText.getText());
 		Assert.assertNotNull(passwordTextN.getPassword());
 	}
-
+/**
+ * Teste inserir investigador
+ */
 	@Test
 	public void testInserirInvestigador() {
 		JTextField usernameText = new JTextField("root");
@@ -69,7 +81,9 @@ public class FuncionalidadesAdminTest {
 		Assert.assertNotNull(passwordTextI.getPassword());
 		Assert.assertNotNull(frame);
 	}
-	
+/**
+ * Teste inserir variavel	
+ */
 	@Test
 	public void testInserirVariavel() {
 		JTextField usernameText = new JTextField("root");
@@ -81,7 +95,9 @@ public class FuncionalidadesAdminTest {
 		test.inserirVariavel(nomeVariavelText);
 		Assert.assertNotNull(nomeVariavelText.getText());
 	}
-	
+/**
+ * Teste alterar email utilizador	
+ */
 	@Test
 	public void testAlterarUtilizadorEmail() {
 		JTextField usernameText = new JTextField("root");
@@ -96,7 +112,9 @@ public class FuncionalidadesAdminTest {
 		Assert.assertNotNull(idU);
 		Assert.assertNotEquals(0, idU);
 	}
-	
+/**
+ * Teste alterar nome utilizador	
+ */
 	@Test
 	public void testAlterarUtilizadorNome() {
 		JTextField usernameText = new JTextField("root");
@@ -111,7 +129,9 @@ public class FuncionalidadesAdminTest {
 		Assert.assertNotNull(idU);
 		Assert.assertNotEquals(0, idU);
 	}
-	
+/**
+ * Teste alterar pass utilizador 
+ */
 	@Test
 	public void testAlterarUtilizadorPass() {
 		JTextField usernameText = new JTextField("root");
@@ -126,7 +146,9 @@ public class FuncionalidadesAdminTest {
 		Assert.assertNotNull(idU);
 		Assert.assertNotEquals(0, idU);
 	}
-	
+/**
+ * Teste apagar utilizador	
+ */
 	@Test
 	public void testApagarUtilizador() {
 		JTextField usernameText = new JTextField("root");
@@ -139,7 +161,9 @@ public class FuncionalidadesAdminTest {
 		Assert.assertNotNull(rowIndex);
 		Assert.assertNotEquals(0, rowIndex);
 	}
-	
+/**
+ * Teste apagar variavel	
+ */
 	@Test
 	public void testApagarVariavel() {
 		JTextField usernameText = new JTextField("root");
@@ -152,7 +176,9 @@ public class FuncionalidadesAdminTest {
 		Assert.assertNotNull(rowIndex);
 		Assert.assertNotEquals(0, rowIndex);
 	}
-	
+/**
+ * Teste alterar nome variavel	
+ */
 	@Test
 	public void testAlterarVariavelNome() {
 		JTextField usernameText = new JTextField("root");
@@ -167,7 +193,9 @@ public class FuncionalidadesAdminTest {
 		Assert.assertNotNull(idV);
 		Assert.assertNotEquals(0, idV);
 	}
-	
+/**
+ * Teste consultar utilizadores	
+ */
 	@Test
 	public void testConsultarUtilizadores() {
 		JTextField usernameText = new JTextField("root");
@@ -178,7 +206,9 @@ public class FuncionalidadesAdminTest {
 		ResultSet output = test.consultarUtilizadores();
 		Assert.assertNotNull(output);
 	}
-	
+/**
+ * Teste consultar variaveis	
+ */
 	@Test
 	public void testConsultarVariaveis() {
 		JTextField usernameText = new JTextField("root");
@@ -189,7 +219,9 @@ public class FuncionalidadesAdminTest {
 		ResultSet output = test.consultarVariaveis();
 		Assert.assertNotNull(output);
 	}
-	
+/**
+ * Teste consultar variaveis medidas	
+ */
 	@Test
 	public void testConsultarVariaveisMedidas() {
 		JTextField usernameText = new JTextField("root");
@@ -200,7 +232,9 @@ public class FuncionalidadesAdminTest {
 		ResultSet output = test.consultarVariaveisMedidas();
 		Assert.assertNotNull(output);
 	}
-	
+/**
+ * Teste consultar medições	
+ */
 	@Test
 	public void testConsultarMedicoes() {
 		JTextField usernameText = new JTextField("root");
@@ -211,7 +245,9 @@ public class FuncionalidadesAdminTest {
 		ResultSet output = test.consultarMedicoes();
 		Assert.assertNotNull(output);
 	}
-	
+/**
+ * Teste consultar culturas	
+ */
 	@Test
 	public void testConsultarCulturas() {
 		JTextField usernameText = new JTextField("root");

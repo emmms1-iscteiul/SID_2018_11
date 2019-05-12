@@ -16,7 +16,11 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-
+/**
+ * Leitor PAHO
+ * @author Eduardo
+ *
+ */
 public class PahoReader extends Thread {
 
 	private static final String TOPIC = "/sid_lab_2019_2";
@@ -24,13 +28,19 @@ public class PahoReader extends Thread {
 	private static final String CLIENTID = "sid_lab_2019";
 	private static final MemoryPersistence persistence = new MemoryPersistence();
 	private boolean exported = false; //
-
+/**
+ * Run
+ */
 	public void run() {
 		read();
 	}
 
 	// {"tmp":"22.40","hum":"61.30","dat":"9/4/2019","tim":"14:59:32","cell":"3138""sens":"wifi"}
-
+/**
+ * Verificar número de parâmetros
+ * @param message
+ * @return
+ */
 	public boolean checkNumberOfParameters(MqttMessage message) {
 		boolean fiveParameters = true;
 		String messageString = String.valueOf(message);
@@ -41,7 +51,11 @@ public class PahoReader extends Thread {
 		}
 		return fiveParameters;
 	}
-
+/**
+ * Verificar validade dos parâmetros
+ * @param message
+ * @return
+ */
 	public boolean checkIfEachParameterIsValid(MqttMessage message) {
 		boolean parameterValid = true;
 		String messageString = String.valueOf(message);
@@ -95,7 +109,11 @@ public class PahoReader extends Thread {
 		System.out.println(parameterValid);
 		return parameterValid;
 	}
-
+/**
+ * Verificar valor de parâmetros
+ * @param message
+ * @return
+ */
 	public boolean checkValueOfEachParameter(MqttMessage message) {
 		boolean valueIsValid = false;
 		boolean dataIsOk=true;
@@ -205,7 +223,9 @@ public class PahoReader extends Thread {
 		
 		return valueIsValid;
 	}
-
+/**
+ * Leitura 
+ */
 	public void read() {
 		try {
 
@@ -307,7 +327,10 @@ public class PahoReader extends Thread {
 		}
 
 	}
-
+/**
+ * Main
+ * @param args
+ */
 	public static void main(String[] args) {
 		PahoReader reader = new PahoReader();
 		reader.read();

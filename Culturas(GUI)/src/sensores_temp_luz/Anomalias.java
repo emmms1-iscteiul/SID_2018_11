@@ -2,7 +2,11 @@ package sensores_temp_luz;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Algoritmo deteção de anomalias
+ * @author Eduardo
+ *
+ */
 public class Anomalias {
 
 	private int medicoes[] = {21, 29, 21, 50, 50, 23, 27};
@@ -10,7 +14,11 @@ public class Anomalias {
 
 	private int contadorDiferencas = 0;
 	private int contadorMedicoes = 0;
-
+/**
+ * Algoritmo
+ * @param limiteS
+ * @param limiteI
+ */
 	public void algoritmo(int limiteS, int limiteI) {
 
 		int dif = (limiteS - limiteI)/2;
@@ -81,7 +89,10 @@ public class Anomalias {
 		}
 	}
 	
-
+/**
+ * Main
+ * @param args
+ */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Anomalias a = new Anomalias();

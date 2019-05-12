@@ -17,14 +17,23 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import buttonTable.JTableVariavelMedidaInvestigadorModel;
-
+/**
+ * GUI Criar Variaveis Medidas
+ * @author Eduardo
+ *
+ */
 public class CriarVariaveisMedidasGUI {
 
 	private JFrame frame;
 	
 	FuncionalidadesInvestigador funcInv;
 	private JTableVariavelMedidaInvestigadorModel variavelMedidaModel;
-
+/**
+ * GUI criar variaveis medidas
+ * @param frameTitle
+ * @param funcInv
+ * @param variavelMedidaModel
+ */
 	public CriarVariaveisMedidasGUI(String frameTitle, FuncionalidadesInvestigador funcInv,JTableVariavelMedidaInvestigadorModel variavelMedidaModel) {
 		this.funcInv = funcInv;
 		this.variavelMedidaModel=variavelMedidaModel;
@@ -37,11 +46,16 @@ public class CriarVariaveisMedidasGUI {
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
-
+/**
+ * Frame
+ * @return
+ */
 	public JFrame getFrame() {
 		return frame;
 	}
-
+/**
+ * Adicionar conteúdo à frame
+ */
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
@@ -138,7 +152,9 @@ public class CriarVariaveisMedidasGUI {
 		frame.add(bottomPanel,BorderLayout.SOUTH);
 
 	}
-
+/**
+ * Abrir frame
+ */
 	public void open() {
 		frame.setVisible(true);
 	}

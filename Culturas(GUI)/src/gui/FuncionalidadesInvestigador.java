@@ -10,7 +10,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
+/**
+ * Funcionalidades Investigador
+ * @author Eduardo
+ *
+ */
 public class FuncionalidadesInvestigador {
 
 	Connection myConn = null;
@@ -19,7 +23,12 @@ public class FuncionalidadesInvestigador {
 
 	}
 
-
+/**
+ * Login Investigador
+ * @param usernameText
+ * @param passwordText
+ * @param frame
+ */
 	@SuppressWarnings("deprecation")
 	public void login(JTextField usernameText, JPasswordField passwordText, JFrame frame) {
 
@@ -34,7 +43,9 @@ public class FuncionalidadesInvestigador {
 			JOptionPane.showMessageDialog(frame, "Password errada", "ERRO - TENTE OUTRA PASSWORD", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+/**
+ * Logout Investigador	
+ */
 	public void logout() {
 		
 		try {
@@ -43,7 +54,11 @@ public class FuncionalidadesInvestigador {
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * Inserir Cultura
+ * @param nomeCultura
+ * @param descricaoCultura
+ */
 	public void inserirCultura(JTextField nomeCultura, JTextField descricaoCultura) {
 
 		try {
@@ -55,7 +70,13 @@ public class FuncionalidadesInvestigador {
 			// TODO Auto-generated catch block
 		}
 	}
-
+/**
+ * Inserir Medição
+ * @param valorMedicaoText
+ * @param nomeCulturaText
+ * @param nomeVariavelText
+ * @param frame
+ */
 	public void inserirMedicao(JTextField valorMedicaoText, JTextField nomeCulturaText, JTextField nomeVariavelText, JFrame frame) {
 
 		try {
@@ -73,7 +94,10 @@ public class FuncionalidadesInvestigador {
 		}
 	}
 
-
+/**
+ * Apagar cultura
+ * @param rowIndex
+ */
 	public void apagarCultura(int rowIndex) {
 
 		try {
@@ -85,7 +109,11 @@ public class FuncionalidadesInvestigador {
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * Alterar nome cultura
+ * @param nomeC
+ * @param idC
+ */
 	public void alterarCulturaNome(JTextField nomeC, int idC) {
 
 		try {
@@ -99,7 +127,11 @@ public class FuncionalidadesInvestigador {
 		}
 
 	}
-
+/**
+ * Alterar descrição cultura
+ * @param descrC
+ * @param idC
+ */
 	public void alterarCulturaDescricao(JTextField descrC, int idC) {
 
 		try {
@@ -113,7 +145,11 @@ public class FuncionalidadesInvestigador {
 		}
 
 	}
-
+/**
+ * Alterar cultura utilizador
+ * @param utilNome
+ * @param idC
+ */
 	public void alterarCulturaUtilizador(JTextField utilNome, int idC) {
 
 		try {
@@ -127,7 +163,16 @@ public class FuncionalidadesInvestigador {
 		}
 
 	}
-
+/**
+ * Inserir variavel medida
+ * @param limiteInferiorText
+ * @param limiteSuperiorText
+ * @param regularidadeLimiteInferiorText
+ * @param regularidadeLimiteSuperiorText
+ * @param nomeCulturaText
+ * @param nomeVariavelText
+ * @param frame
+ */
 	public void inserirVariavelMedida(JTextField limiteInferiorText, JTextField limiteSuperiorText, JTextField regularidadeLimiteInferiorText, JTextField regularidadeLimiteSuperiorText, JTextField nomeCulturaText, JTextField nomeVariavelText, JFrame frame) {
 
 		try {
@@ -146,7 +191,11 @@ public class FuncionalidadesInvestigador {
 			JOptionPane.showMessageDialog(frame, "Verifique as Culturas e Variáveis que existem nas suas tabelas antes de inserir", "ERRO - NECESSÁRIO EXISTENCIA DE VARIAVEL E CULTURA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
+/**
+ * Alterar limite inferior variavel medida
+ * @param limiteIText
+ * @param idVM
+ */
 	public void alterarVariavelMedidaLimiteInferior(JTextField limiteIText, int idVM) {
 
 		try {
@@ -159,7 +208,11 @@ public class FuncionalidadesInvestigador {
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * Alterar limite superior variavel medida
+ * @param limiteSText
+ * @param idVM
+ */
 	public void alterarVariavelMedidaLimiteSuperior(JTextField limiteSText, int idVM) {
 
 		try {
@@ -172,7 +225,11 @@ public class FuncionalidadesInvestigador {
 			e.printStackTrace();
 		}
 	}
-	
+/**
+ * Alterar limite superior de alerta variavel medida	
+ * @param regularidadeLimiteSText
+ * @param idVM
+ */
 	public void alterarVariavelMedidaAlertaLimiteSuperior(JTextField regularidadeLimiteSText, int idVM) {
 
 		try {
@@ -185,7 +242,11 @@ public class FuncionalidadesInvestigador {
 			e.printStackTrace();
 		}
 	}
-	
+/**
+ * Alterar limite inferior alerta variavel medida	
+ * @param regularidadeLimiteIText
+ * @param idVM
+ */
 	public void alterarVariavelMedidaAlertaLimiteInferior(JTextField regularidadeLimiteIText, int idVM) {
 
 		try {
@@ -198,7 +259,11 @@ public class FuncionalidadesInvestigador {
 			e.printStackTrace();
 		}
 	}
-	
+/**
+ * Alterar cultura variavel medida	
+ * @param nomeCA
+ * @param idVM
+ */
 	public void alterarVariavelMedidaCultura(JTextField nomeCA, int idVM) {
 
 		try {
@@ -212,7 +277,11 @@ public class FuncionalidadesInvestigador {
 		}
 	}
 	
-	
+/**
+ * Alterar variavel medida variavel	
+ * @param nomeVA
+ * @param idVM
+ */
 	public void alterarVariavelMedidaVariavel(JTextField nomeVA, int idVM) {
 
 		try {
@@ -225,7 +294,10 @@ public class FuncionalidadesInvestigador {
 		}
 	}
 
-	
+/**
+ * Filtrar variaveis medidas todas	
+ * @return
+ */
 	public ResultSet filtrarVariaveisMedidasTudo() {
 
 		ResultSet variaveisMedidasT = null;
@@ -240,7 +312,10 @@ public class FuncionalidadesInvestigador {
 		
 		return variaveisMedidasT;
 	}
-	
+/**
+ * Consultar variaveis investigador	
+ * @return
+ */
 	public ResultSet consultarVariaveisInvestigador() {
 
 		ResultSet variaveisInv = null;
@@ -255,7 +330,10 @@ public class FuncionalidadesInvestigador {
 		
 		return variaveisInv;
 	}
-	
+/**
+ * Filtrar culturas todas	
+ * @return
+ */
 	public ResultSet filtrarCulturaTudo() {
 
 		ResultSet culturaT = null;
@@ -270,7 +348,10 @@ public class FuncionalidadesInvestigador {
 		
 		return culturaT;
 	}
-	
+/**
+ * Filtrar medições todas	
+ * @return
+ */
 	public ResultSet filtrarMedicaoTudo() {
 
 		ResultSet medicaoT = null;
@@ -285,7 +366,10 @@ public class FuncionalidadesInvestigador {
 		
 		return medicaoT;
 	}
-	
+/**
+ * Filtrar alertas cultura	
+ * @return
+ */
 	public ResultSet filtrarAlertasCultura() {
 
 		ResultSet alertasC = null;
@@ -300,7 +384,10 @@ public class FuncionalidadesInvestigador {
 		
 		return alertasC;
 	}
-	
+/**
+ * Conexão	
+ * @return
+ */
 	public Connection getConnection() {
 		return myConn;
 	}

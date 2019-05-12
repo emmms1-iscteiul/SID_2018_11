@@ -20,13 +20,20 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-
+/**
+ * GUI Login
+ * @author Eduardo
+ *
+ */
 public class LoginGui {
 
 	private JFrame frame;
 	FuncionalidadesAdmin funcAdmin = new FuncionalidadesAdmin();
 	FuncionalidadesInvestigador funcInv = new FuncionalidadesInvestigador();
-
+/**
+ * GUI Login
+ * @param frameTitle
+ */
 	public LoginGui(String frameTitle) {
 		frame = new JFrame(frameTitle);
 		frame.setSize(550, 170);
@@ -37,11 +44,16 @@ public class LoginGui {
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		addContent();
 	}
-
+/**
+ * Frame
+ * @return
+ */
 	public JFrame getFrame() {
 		return frame;
 	}
-
+/**
+ * Adicionar conteúdo à frame
+ */
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
@@ -178,7 +190,10 @@ public class LoginGui {
 		return pass;
 	}
 
-
+/**
+ * Main
+ * @param args
+ */
 	public static void main(String[] args) {
 		LoginGui frame = new LoginGui("Monotorização de Culturas");
 		frame.open();

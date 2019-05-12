@@ -17,13 +17,22 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import buttonTable.JTableCulturaInvestigadorModel;
-
+/**
+ * GUI Criar Cultura
+ * @author Eduardo
+ *
+ */
 public class CriarCulturaGUI {
 
 	private JFrame frame;
 	FuncionalidadesInvestigador funcInv;
 	private JTableCulturaInvestigadorModel culturaModel;
-
+/**
+ * GUI criação de cultura
+ * @param frameTitle
+ * @param funcInv
+ * @param culturaModel
+ */
 	public CriarCulturaGUI(String frameTitle, FuncionalidadesInvestigador funcInv,JTableCulturaInvestigadorModel culturaModel) {
 		this.funcInv = funcInv;
 		this.culturaModel=culturaModel;
@@ -36,11 +45,16 @@ public class CriarCulturaGUI {
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
-
+/**
+ * Frame
+ * @return
+ */
 	public JFrame getFrame() {
 		return frame;
 	}
-
+/**
+ * Adicionar conteúdo à frame
+ */
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
@@ -97,7 +111,9 @@ public class CriarCulturaGUI {
 		frame.add(bottomPanel,BorderLayout.SOUTH);
 
 	}
-
+/**
+ * Abrir frame
+ */
 	public void open() {
 		frame.setVisible(true);
 	}

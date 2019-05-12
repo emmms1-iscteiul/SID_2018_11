@@ -10,11 +10,17 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import gui.FuncionalidadesInvestigador;
-
+/**
+ * Teste Funcionalidades Investigador
+ * @author Eduardo
+ *
+ */
 public class FuncionalidadesInvestigadorTest {
 
 	FuncionalidadesInvestigador test = new FuncionalidadesInvestigador();
-	
+/**
+ * Teste login	
+ */
 	@Test
 	public void testLogin() {
 		JTextField usernameText = new JTextField("user");
@@ -23,7 +29,9 @@ public class FuncionalidadesInvestigadorTest {
 		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 	}
-	
+/**
+ * Teste logout	
+ */
 	@Test
 	public void testLogout() {
 		JTextField usernameText = new JTextField("user");
@@ -34,7 +42,9 @@ public class FuncionalidadesInvestigadorTest {
 		test.logout();
 		Assert.assertNotNull(test.getConnection());
 	}
-
+/**
+ * Teste inserir cultura
+ */
 	@Test
 	public void testInserirCultura() {
 		JTextField usernameText = new JTextField("user");
@@ -48,7 +58,9 @@ public class FuncionalidadesInvestigadorTest {
 		Assert.assertNotNull(nomeCultura.getText());
 		Assert.assertNotNull(descricaoCultura.getText());
 	}
-	
+/**
+ * Teste inserir medição	
+ */
 	@Test
 	public void testInserirMedicao() {
 		JTextField usernameText = new JTextField("user");
@@ -66,7 +78,9 @@ public class FuncionalidadesInvestigadorTest {
 		Assert.assertNotNull(nomeVariavelText.getText());
 		Assert.assertNotNull(frame);
 	}
-	
+/**
+ * Teste apagar cultura	
+ */
 	@Test
 	public void testApagarCultura() {
 		JTextField usernameText = new JTextField("user");
@@ -79,7 +93,9 @@ public class FuncionalidadesInvestigadorTest {
 		Assert.assertNotNull(rowIndex);
 		Assert.assertNotEquals(0, rowIndex);
 	}
-	
+/**
+ * Teste alterar nome cultura	
+ */
 	@Test
 	public void testAlterarCulturaNome() {
 		JTextField usernameText = new JTextField("user");
@@ -94,7 +110,9 @@ public class FuncionalidadesInvestigadorTest {
 		Assert.assertNotNull(idC);
 		Assert.assertNotEquals(0, idC);
 	}
-	
+/**
+ * Teste alterar descrição cultura	
+ */
 	@Test
 	public void testAlterarCulturaDescricao() {
 		JTextField usernameText = new JTextField("user");
@@ -109,7 +127,9 @@ public class FuncionalidadesInvestigadorTest {
 		Assert.assertNotNull(idC);
 		Assert.assertNotEquals(0, idC);
 	}
-	
+/**
+ * Teste alterar utilizador cultura	
+ */
 	@Test
 	public void testAlterarCulturaUtilizador() {
 		JTextField usernameText = new JTextField("user");
@@ -124,7 +144,9 @@ public class FuncionalidadesInvestigadorTest {
 		Assert.assertNotNull(idC);
 		Assert.assertNotEquals(0, idC);
 	}
-	
+/**
+ * Teste inserir variavel medida	
+ */
 	@Test
 	public void testInserirVariavelMedida() {
 		JTextField usernameText = new JTextField("user");
@@ -148,7 +170,9 @@ public class FuncionalidadesInvestigadorTest {
 		Assert.assertNotNull(nomeVariavelText.getText());
 		Assert.assertNotNull(frame);
 	}
-	
+/**
+ * Teste alterar limite inferior variavel medida	
+ */
 	@Test
 	public void testAlterarVariavelMedidaLimiteInfeior() {
 		JTextField usernameText = new JTextField("user");
@@ -163,7 +187,9 @@ public class FuncionalidadesInvestigadorTest {
 		Assert.assertNotNull(idVM);
 		Assert.assertNotEquals(0, idVM);
 	}
-	
+/**
+ * Teste alterar limite superior variavel medida	
+ */
 	@Test
 	public void testAlterarVariavelMedidaLimiteSuperior() {
 		JTextField usernameText = new JTextField("user");
@@ -178,7 +204,9 @@ public class FuncionalidadesInvestigadorTest {
 		Assert.assertNotNull(idVM);
 		Assert.assertNotEquals(0, idVM);
 	}
-	
+/**
+ * Teste alterar limite superior alerta variavel medida	
+ */
 	@Test
 	public void testAlterarVariavelMedidaAlertaLimiteSuperior() {
 		JTextField usernameText = new JTextField("user");
@@ -193,7 +221,9 @@ public class FuncionalidadesInvestigadorTest {
 		Assert.assertNotNull(idVM);
 		Assert.assertNotEquals(0, idVM);
 	}
-	
+/**
+ * Teste alterar limite inferior alerta variavel medida	
+ */
 	@Test
 	public void testAlterarVariavelMedidaAlertaLimiteInferior() {
 		JTextField usernameText = new JTextField("user");
@@ -208,7 +238,9 @@ public class FuncionalidadesInvestigadorTest {
 		Assert.assertNotNull(idVM);
 		Assert.assertNotEquals(0, idVM);
 	}
-	
+/**
+ * Teste alterar variavel medida cultura	
+ */
 	@Test
 	public void testAlterarVariavelMedidaCultura() {
 		JTextField usernameText = new JTextField("user");
@@ -223,7 +255,9 @@ public class FuncionalidadesInvestigadorTest {
 		Assert.assertNotNull(idVM);
 		Assert.assertNotEquals(0, idVM);
 	}
-	
+/**
+ * Teste alterar variavel medida variavel	
+ */
 	@Test
 	public void testAlterarVariavelMedidaVariavel() {
 		JTextField usernameText = new JTextField("user");
@@ -238,7 +272,9 @@ public class FuncionalidadesInvestigadorTest {
 		Assert.assertNotNull(idVM);
 		Assert.assertNotEquals(0, idVM);
 	}
-	
+/**
+ * Teste filtrar variaveis medidas todas	
+ */
 	@Test
 	public void testFiltrarVariaveisMedidasTudo() {
 		JTextField usernameText = new JTextField("user");
@@ -249,7 +285,9 @@ public class FuncionalidadesInvestigadorTest {
 		ResultSet output = test.filtrarVariaveisMedidasTudo();
 		Assert.assertNotNull(output);
 	}
-	
+/**
+ * Teste consultar variaveis investigador	
+ */
 	@Test
 	public void testConsultarVariaveisInvestigador() {
 		JTextField usernameText = new JTextField("user");
@@ -260,7 +298,9 @@ public class FuncionalidadesInvestigadorTest {
 		ResultSet output = test.consultarVariaveisInvestigador();
 		Assert.assertNotNull(output);
 	}
-	
+/**
+ * Teste filtrar culturas todas	
+ */
 	@Test
 	public void testFiltrarCulturaTudo() {
 		JTextField usernameText = new JTextField("user");
@@ -271,7 +311,9 @@ public class FuncionalidadesInvestigadorTest {
 		ResultSet output = test.filtrarCulturaTudo();
 		Assert.assertNotNull(output);
 	}
-	
+/**
+ * Teste filtrar medições todas	
+ */
 	@Test
 	public void testFiltrarMedicaoTudo() {
 		JTextField usernameText = new JTextField("user");
@@ -282,7 +324,9 @@ public class FuncionalidadesInvestigadorTest {
 		ResultSet output = test.filtrarMedicaoTudo();
 		Assert.assertNotNull(output);
 	}
-	
+/**
+ * Teste filtrar alertas cultura	
+ */
 	@Test
 	public void testFiltrarAlertasCultura() {
 		JTextField usernameText = new JTextField("user");

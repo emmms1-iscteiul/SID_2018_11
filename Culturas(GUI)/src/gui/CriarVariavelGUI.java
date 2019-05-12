@@ -19,7 +19,11 @@ import javax.swing.WindowConstants;
 import buttonTable.JTableVariavelAdminModel;
 
 
-
+/**
+ * GUI Criar Variavel
+ * @author Eduardo
+ *
+ */
 public class CriarVariavelGUI {
 
 	private JFrame frame;
@@ -27,7 +31,12 @@ public class CriarVariavelGUI {
 	FuncionalidadesAdmin funcAdmin;
 	private JTableVariavelAdminModel variavelModel;
 	
-	
+/**
+ * GUI criar variavel	
+ * @param frameTitle
+ * @param funcAdmin
+ * @param variavelModel
+ */
 	public CriarVariavelGUI(String frameTitle, FuncionalidadesAdmin funcAdmin,JTableVariavelAdminModel variavelModel) {
 		this.funcAdmin = funcAdmin;
 		this.variavelModel=variavelModel;
@@ -40,11 +49,16 @@ public class CriarVariavelGUI {
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
-
+/**
+ * Frame
+ * @return
+ */
 	public JFrame getFrame() {
 		return frame;
 	}
-
+/**
+ * Adicionar conteúdo à frame
+ */
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
@@ -92,7 +106,9 @@ public class CriarVariavelGUI {
 		frame.add(bottomPanel,BorderLayout.SOUTH);
 
 	}
-
+/**
+ * Abrir frame
+ */
 	public void open() {
 		frame.setVisible(true);
 	}

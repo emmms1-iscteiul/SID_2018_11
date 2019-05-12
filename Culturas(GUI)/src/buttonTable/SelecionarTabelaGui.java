@@ -22,7 +22,11 @@ import gui.CriarVariaveisMedidasGUI;
 import gui.CriarVariavelGUI;
 import gui.FuncionalidadesAdmin;
 import gui.FuncionalidadesInvestigador;
-
+/**
+ * Selecionar Tabela
+ * @author Eduardo
+ *
+ */
 public class SelecionarTabelaGui {
 
 	private JFrame frame;
@@ -30,7 +34,12 @@ public class SelecionarTabelaGui {
 	
 	FuncionalidadesAdmin funcAdmin;
 	FuncionalidadesInvestigador funcInv;
-
+/**
+ * Selecionar tabela
+ * @param frameTitle
+ * @param funcAdmin
+ * @param funcInv
+ */
 	public SelecionarTabelaGui(String frameTitle, FuncionalidadesAdmin funcAdmin, FuncionalidadesInvestigador funcInv) {
 		this.funcAdmin=funcAdmin;
 		this.funcInv=funcInv;
@@ -43,7 +52,9 @@ public class SelecionarTabelaGui {
 		frame.setLocation(x, y);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
-
+/**
+ * Adicionar content à frame
+ */
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
@@ -319,7 +330,9 @@ public class SelecionarTabelaGui {
 		frame.add(bottomPanel,BorderLayout.SOUTH);
 
 	}
-
+/**
+ * Abrir frame
+ */
 	public void open() {
 		frame.setVisible(true);
 	}

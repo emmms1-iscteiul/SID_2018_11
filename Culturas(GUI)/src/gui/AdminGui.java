@@ -17,13 +17,19 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import buttonTable.SelecionarTabelaGui;
-
+/*
+ * GUI Admin
+ */
 public class AdminGui {
 
 	private JFrame frame;
 	FuncionalidadesAdmin funcAdmin;
 	FuncionalidadesInvestigador funcInv = null;
-
+/**
+ * GUI Admin
+ * @param frameTitle
+ * @param funcAdmin
+ */
 	public AdminGui(String frameTitle, FuncionalidadesAdmin funcAdmin) {
 		this.funcAdmin=funcAdmin;
 		frame = new JFrame(frameTitle);
@@ -35,11 +41,16 @@ public class AdminGui {
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		addContent();
 	}
-
+/**
+ * Frame
+ * @return
+ */
 	public JFrame getFrame() {
 		return frame;
 	}
-
+/**
+ * Adicionar content à frame
+ */
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
@@ -151,7 +162,9 @@ public class AdminGui {
 		frame.add(bottomPanel, BorderLayout.SOUTH);
 
 	}
-
+/**
+ * Abrir frame
+ */
 	public void open() {
 		frame.setVisible(true);
 	}

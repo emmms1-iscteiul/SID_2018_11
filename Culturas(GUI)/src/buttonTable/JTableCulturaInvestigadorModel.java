@@ -14,7 +14,11 @@ import javax.swing.table.AbstractTableModel;
 
 import gui.EditarCulturaGUI;
 import gui.FuncionalidadesInvestigador;
-
+/**
+ * Tabela Cultura Investigador
+ * @author Eduardo
+ *
+ */
 public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
 
@@ -23,29 +27,41 @@ public class JTableCulturaInvestigadorModel  extends AbstractTableModel{
 	List<Integer> idsCultura = new ArrayList<Integer>();
 	JFrame frame;
 	private JTableCulturaInvestigadorModel culturaModel=this;
-
+/**
+ * Janela de Funcionalidades do Investigador
+ * @param funcInv
+ * @param frame
+ */
 	public JTableCulturaInvestigadorModel(FuncionalidadesInvestigador funcInv, JFrame frame) {
 		// TODO Auto-generated constructor stub
 		this.funcInv = funcInv;
 		this.frame = frame;
 	}
 
-
+/**
+ * Número de Colunas
+ */
 	@Override
 	public int getColumnCount() {
 		return COLUMN_NAMES.length;
 	}
-
+/**
+ * Número de linhas
+ */
 	@Override
 	public int getRowCount() {
 		return 100;
 	}
-
+/**
+ * Nome das colunas
+ */
 	@Override
 	public String getColumnName(int columnIndex) {
 		return COLUMN_NAMES[columnIndex];
 	}
-
+/**
+ * Valor da célula
+ */
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		switch (columnIndex) {

@@ -10,7 +10,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
+/**
+ * Funcionalidades Admin
+ * @author Eduardo
+ *
+ */
 public class FuncionalidadesAdmin {
 
 	Connection myConn = null;
@@ -19,7 +23,12 @@ public class FuncionalidadesAdmin {
 
 	}
 
-
+/**
+ * Login Admin
+ * @param usernameText
+ * @param passwordText
+ * @param frame
+ */
 	@SuppressWarnings("deprecation")
 	public void login(JTextField usernameText, JPasswordField passwordText, JFrame frame) {
 
@@ -35,7 +44,9 @@ public class FuncionalidadesAdmin {
 			
 		}
 	}
-
+/**
+ * Logout Admin
+ */
 	public void logout() {
 
 		try {
@@ -45,7 +56,12 @@ public class FuncionalidadesAdmin {
 		}
 	}
 
-
+/**
+ * Inserir Admin
+ * @param usernameText
+ * @param adminEmailText
+ * @param passwordText
+ */
 	@SuppressWarnings("deprecation")
 	public void inserirAdmin(JTextField usernameText, JTextField adminEmailText, JPasswordField passwordText) {
 
@@ -66,7 +82,13 @@ public class FuncionalidadesAdmin {
 		}
 	}
 
-
+/**
+ * Inserir Investigador
+ * @param utilNameText
+ * @param utilEmailText
+ * @param passwordText
+ * @param frame
+ */
 	@SuppressWarnings("deprecation")
 	public void inserirInvestigador(JTextField utilNameText, JTextField utilEmailText, JPasswordField passwordText, JFrame frame) {
 
@@ -81,7 +103,10 @@ public class FuncionalidadesAdmin {
 			JOptionPane.showMessageDialog(frame, "Email ou UserName já existem", "ERRO - TENTE OUTRO USER OU EMAIL", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
+/**
+ * Inserir Variavel
+ * @param nomeVariavelText
+ */
 	public void inserirVariavel(JTextField nomeVariavelText) {
 
 		try {
@@ -93,7 +118,11 @@ public class FuncionalidadesAdmin {
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * Alterar Email Utilizador
+ * @param nomeUser
+ * @param idU
+ */
 	public void alterarUtilizadorEmail(JTextField nomeUser, int idU) {
 
 		try {
@@ -107,7 +136,11 @@ public class FuncionalidadesAdmin {
 		}
 	}
 
-
+/**
+ * Alterar Nome Utilizador
+ * @param nomeUserA
+ * @param idU
+ */
 	public void alterarUtilizadorNome(JTextField nomeUserA, int idU) {
 
 		try {
@@ -121,7 +154,11 @@ public class FuncionalidadesAdmin {
 		}
 	}
 
-
+/**
+ * Alterar Pass Utilizador
+ * @param pass
+ * @param idU
+ */
 	public void alterarUtilizadorPass(JTextField pass, int idU) {
 
 		try {
@@ -135,7 +172,10 @@ public class FuncionalidadesAdmin {
 		}
 	}
 
-
+/**
+ * Apagar Utilizador
+ * @param rowIndex
+ */
 	public void apagarUtilizador(int rowIndex) {
 
 		try {
@@ -148,7 +188,10 @@ public class FuncionalidadesAdmin {
 		}
 	}
 
-
+/**
+ * Apagar variavel
+ * @param rowIndex
+ */
 	public void apagarVariavel(int rowIndex) {
 
 		try {
@@ -160,7 +203,11 @@ public class FuncionalidadesAdmin {
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * ALterar nome variavel
+ * @param nomeVarA
+ * @param idV
+ */
 	public void alterarVariavelNome(JTextField nomeVarA, int idV) {
 
 		try {
@@ -174,7 +221,10 @@ public class FuncionalidadesAdmin {
 		}
 	}
 
-
+/**
+ * Consultar utilizadores
+ * @return
+ */
 	public ResultSet consultarUtilizadores() {
 
 		ResultSet utilizadores = null;
@@ -189,7 +239,10 @@ public class FuncionalidadesAdmin {
 
 		return utilizadores;
 	}
-
+/**
+ * Consultar variaveis
+ * @return
+ */
 	public ResultSet consultarVariaveis() {
 
 		ResultSet variaveis = null;
@@ -204,7 +257,10 @@ public class FuncionalidadesAdmin {
 		
 		return variaveis;
 	}
-
+/**
+ * COnsultar variaveis medidas
+ * @return
+ */
 	public ResultSet consultarVariaveisMedidas() {
 
 		ResultSet variaveisMedidas = null;
@@ -219,7 +275,10 @@ public class FuncionalidadesAdmin {
 		
 		return variaveisMedidas;
 	}
-
+/**
+ * Consultar medições
+ * @return
+ */
 	public ResultSet consultarMedicoes() {
 		
 		ResultSet medicoes = null;
@@ -234,7 +293,10 @@ public class FuncionalidadesAdmin {
 		
 		return medicoes;
 	}
-
+/**
+ * Consultar Culturas
+ * @return
+ */
 	public ResultSet consultarCulturas() {
 
 		ResultSet culturas = null;
@@ -249,7 +311,10 @@ public class FuncionalidadesAdmin {
 		
 		return culturas;
 	}
-	
+/**
+ * Conexão
+ * @return
+ */
 	public Connection getConnection() {
 		return myConn;
 	}

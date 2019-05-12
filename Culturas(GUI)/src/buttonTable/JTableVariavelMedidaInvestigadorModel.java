@@ -14,7 +14,9 @@ import javax.swing.table.AbstractTableModel;
 
 import gui.EditarVariaveisMedidasGUI;
 import gui.FuncionalidadesInvestigador;
-
+/*
+ * Tabela Variavel Medida Investigador
+ */
 public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 
 	private static final long serialVersionUID = 1L;
@@ -23,28 +25,39 @@ public class JTableVariavelMedidaInvestigadorModel  extends AbstractTableModel{
 	private JTableVariavelMedidaInvestigadorModel variavelMedidaModel=this;
 	List<Integer> idsVariavelMedida = new ArrayList<Integer>();
 
-
+/**
+ * Funcionalidades Investigador
+ * @param funcInv
+ */
 	public JTableVariavelMedidaInvestigadorModel(FuncionalidadesInvestigador funcInv) {
 		// TODO Auto-generated constructor stub
 		this.funcInv = funcInv;
 	}
-
+/**
+ * Número de colunas
+ */
 	@Override
 	public int getColumnCount() {
 		return COLUMN_NAMES.length;
 	}
-
+/**
+ * Número de linhas
+ */
 	@Override
 	public int getRowCount() {
 		return 100;
 	}
 
-
+/**
+ * Nome das colunas
+ */
 	@Override
 	public String getColumnName(int columnIndex) {
 		return COLUMN_NAMES[columnIndex];
 	}
-
+/**
+ * Valor da célula
+ */
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		ResultSet variaveisMedidas = funcInv.filtrarVariaveisMedidasTudo();

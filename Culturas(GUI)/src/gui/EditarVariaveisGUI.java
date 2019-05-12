@@ -17,14 +17,20 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import buttonTable.JTableVariavelAdminModel;
-
+/**
+ * GUI Editar Variaveis
+ * @author Eduardo
+ *
+ */
 public class EditarVariaveisGUI {
 	private JFrame frame;
 	
 	FuncionalidadesAdmin funcAdmin;
 	private JTableVariavelAdminModel variavelModel;
 	int idV = 0;
-
+/*
+ * GUI editar variaveis
+ */
 	public EditarVariaveisGUI(String frameTitle, FuncionalidadesAdmin funcAdmin, int rowIndex,JTableVariavelAdminModel variavelModel) {
 		this.funcAdmin = funcAdmin;
 		this.idV = rowIndex;
@@ -38,11 +44,16 @@ public class EditarVariaveisGUI {
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
-
+/**
+ * Frame
+ * @return
+ */
 	public JFrame getFrame() {
 		return frame;
 	}
-	
+/**
+ * Adicionar conteúdo à frame	
+ */
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
@@ -88,7 +99,9 @@ public class EditarVariaveisGUI {
 		frame.add(bottomPanel,BorderLayout.SOUTH);
 
 	}
-
+/**
+ * Abrir a frame
+ */
 	public void open() {
 		frame.setVisible(true);
 	}
