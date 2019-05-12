@@ -19,7 +19,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testLogin() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 	}
 	
@@ -27,7 +28,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testLogout() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		test.logout();
 		Assert.assertNotNull(test.getConnection());
@@ -37,7 +39,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testInserirCultura() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		JTextField nomeCultura = new JTextField("nomeC");
 		JTextField descricaoCultura = new JTextField("descricaoC");
@@ -50,7 +53,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testInserirMedicao() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frameL = new JFrame();
+		test.login(usernameText, passwordText, frameL);
 		Assert.assertNotNull(test.getConnection());
 		JTextField valorMedicaoText = new JTextField("valorM");
 		JTextField nomeCulturaText = new JTextField("nomeC");
@@ -67,7 +71,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testApagarCultura() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		int rowIndex = 1;
 		test.apagarCultura(rowIndex);
@@ -79,7 +84,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testAlterarCulturaNome() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		JTextField nomeC = new JTextField("novoNomeC");
 		int idC = 2;
@@ -93,7 +99,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testAlterarCulturaDescricao() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		JTextField descrC = new JTextField("novaDescricaoC");
 		int idC = 2;
@@ -107,7 +114,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testAlterarCulturaUtilizador() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		JTextField utilNome = new JTextField("novoUtilizadorC");
 		int idC = 2;
@@ -121,7 +129,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testInserirVariavelMedida() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frameL = new JFrame();
+		test.login(usernameText, passwordText, frameL);
 		Assert.assertNotNull(test.getConnection());
 		JTextField limiteInferiorText = new JTextField("10");
 		JTextField limiteSuperiorText = new JTextField("30");
@@ -144,7 +153,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testAlterarVariavelMedidaLimiteInfeior() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		JTextField limiteIText = new JTextField("15");
 		int idVM = 2;
@@ -158,7 +168,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testAlterarVariavelMedidaLimiteSuperior() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		JTextField limiteSText = new JTextField("35");
 		int idVM = 2;
@@ -172,7 +183,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testAlterarVariavelMedidaAlertaLimiteSuperior() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		JTextField regularidadeLimiteSText = new JTextField("0.9");
 		int idVM = 2;
@@ -186,7 +198,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testAlterarVariavelMedidaAlertaLimiteInferior() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		JTextField regularidadeLimiteIText = new JTextField("0.1");
 		int idVM = 2;
@@ -200,7 +213,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testAlterarVariavelMedidaCultura() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		JTextField nomeCA = new JTextField("novoNomeVMC");
 		int idVM = 2;
@@ -214,7 +228,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testAlterarVariavelMedidaVariavel() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		JTextField nomeVA = new JTextField("novoNomeVMV");
 		int idVM = 2;
@@ -228,7 +243,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testFiltrarVariaveisMedidasTudo() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		ResultSet output = test.filtrarVariaveisMedidasTudo();
 		Assert.assertNotNull(output);
@@ -238,7 +254,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testConsultarVariaveisInvestigador() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		ResultSet output = test.consultarVariaveisInvestigador();
 		Assert.assertNotNull(output);
@@ -248,7 +265,8 @@ public class FuncionalidadesInvestigadorTest {
 	public void testFiltrarCulturaTudo() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		ResultSet output = test.filtrarCulturaTudo();
 		Assert.assertNotNull(output);
@@ -258,10 +276,22 @@ public class FuncionalidadesInvestigadorTest {
 	public void testFiltrarMedicaoTudo() {
 		JTextField usernameText = new JTextField("user");
 		JPasswordField passwordText = new JPasswordField("password");
-		test.login(usernameText, passwordText);
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
 		Assert.assertNotNull(test.getConnection());
 		ResultSet output = test.filtrarMedicaoTudo();
 		Assert.assertNotNull(output);
+	}
+	
+	@Test
+	public void testFiltrarAlertasCultura() {
+		JTextField usernameText = new JTextField("user");
+		JPasswordField passwordText = new JPasswordField("password");
+		JFrame frame = new JFrame();
+		test.login(usernameText, passwordText, frame );
+		Assert.assertNotNull(test.getConnection());
+		ResultSet output = test.filtrarAlertasCultura();
+		Assert.assertNull(output);
 	}
 	
 }
