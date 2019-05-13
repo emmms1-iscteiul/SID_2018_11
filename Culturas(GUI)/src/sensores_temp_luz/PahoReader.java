@@ -58,49 +58,11 @@ public class PahoReader extends Thread {
  */
 	public boolean checkIfEachParameterIsValid(MqttMessage message) {
 		boolean parameterValid = true;
-		String messageString = String.valueOf(message);
-		String[] messageSplitted = messageString.split(",");
-
-		String temperatura = messageSplitted[0];
-		int indexTemp = temperatura.indexOf(":");
-		String subStringTemp = "";
-		if (indexTemp != -1) {
-			subStringTemp = temperatura.substring(2, indexTemp);
-		}
-		subStringTemp = subStringTemp.replace(subStringTemp.substring(subStringTemp.length() - 1), "");
-
-		String humidade = messageSplitted[1];
-		int indexHum = humidade.indexOf(":");
-		String subStringHum = "";
-		if (indexHum != -1) {
-			subStringHum = humidade.substring(1, indexHum);
-		}
-		subStringHum = subStringHum.replace(subStringHum.substring(subStringHum.length() - 1), "");
-
-		String data = messageSplitted[2];
-		int indexData = data.indexOf(":");
-		String subStringData = "";
-		if (indexData != -1) {
-			subStringData = data.substring(1, indexData);
-		}
-		subStringData = subStringData.replace(subStringData.substring(subStringData.length() - 1), "");
-
-		String hora = messageSplitted[3];
-		int indexHora = hora.indexOf(":");
-		String subStringHora = "";
-		if (indexHora != -1) {
-			subStringHora = hora.substring(1, indexHora);
-		}
-		subStringHora = subStringHora.replace(subStringHora.substring(subStringHora.length() - 1), "");
-
-		String luminosidade = messageSplitted[4];
-		int indexLum = luminosidade.indexOf(":");
-		String subStringLum = "";
-		if (indexLum != -1) {
-			subStringLum = luminosidade.substring(1, indexLum);
-		}
-		subStringLum = subStringLum.replace(subStringLum.substring(subStringLum.length() - 1), "");
-
+		String subStringLum = subStringLum(message);
+		String subStringHora = subStringHora(message);
+		String subStringData = subStringData(message);
+		String subStringHum = subStringHum(message);
+		String subStringTemp = subStringTemp(message);
 		if (!subStringTemp.equals("tmp") || !subStringHum.equals("hum") || !subStringData.equals("dat")
 				|| !subStringHora.equals("tim") || !subStringLum.equals("cell")) {
 			parameterValid = false;
@@ -109,6 +71,71 @@ public class PahoReader extends Thread {
 		System.out.println(parameterValid);
 		return parameterValid;
 	}
+
+private String subStringTemp(MqttMessage message) {
+	String messageString = String.valueOf(message);
+	String[] messageSplitted = messageString.split(",");
+	String temperatura = messageSplitted[0];
+	int indexTemp = temperatura.indexOf(":");
+	String subStringTemp = "";
+	if (indexTemp != -1) {
+		subStringTemp = temperatura.substring(2, indexTemp);
+	}
+	subStringTemp = subStringTemp.replace(subStringTemp.substring(subStringTemp.length() - 1), "");
+	return subStringTemp;
+}
+
+private String subStringHum(MqttMessage message) {
+	String messageString = String.valueOf(message);
+	String[] messageSplitted = messageString.split(",");
+	String humidade = messageSplitted[1];
+	int indexHum = humidade.indexOf(":");
+	String subStringHum = "";
+	if (indexHum != -1) {
+		subStringHum = humidade.substring(1, indexHum);
+	}
+	subStringHum = subStringHum.replace(subStringHum.substring(subStringHum.length() - 1), "");
+	return subStringHum;
+}
+
+private String subStringData(MqttMessage message) {
+	String messageString = String.valueOf(message);
+	String[] messageSplitted = messageString.split(",");
+	String data = messageSplitted[2];
+	int indexData = data.indexOf(":");
+	String subStringData = "";
+	if (indexData != -1) {
+		subStringData = data.substring(1, indexData);
+	}
+	subStringData = subStringData.replace(subStringData.substring(subStringData.length() - 1), "");
+	return subStringData;
+}
+
+private String subStringHora(MqttMessage message) {
+	String messageString = String.valueOf(message);
+	String[] messageSplitted = messageString.split(",");
+	String hora = messageSplitted[3];
+	int indexHora = hora.indexOf(":");
+	String subStringHora = "";
+	if (indexHora != -1) {
+		subStringHora = hora.substring(1, indexHora);
+	}
+	subStringHora = subStringHora.replace(subStringHora.substring(subStringHora.length() - 1), "");
+	return subStringHora;
+}
+
+private String subStringLum(MqttMessage message) {
+	String messageString = String.valueOf(message);
+	String[] messageSplitted = messageString.split(",");
+	String luminosidade = messageSplitted[4];
+	int indexLum = luminosidade.indexOf(":");
+	String subStringLum = "";
+	if (indexLum != -1) {
+		subStringLum = luminosidade.substring(1, indexLum);
+	}
+	subStringLum = subStringLum.replace(subStringLum.substring(subStringLum.length() - 1), "");
+	return subStringLum;
+}
 /**
  * Verificar valor de parâmetros
  * @param message
@@ -118,88 +145,44 @@ public class PahoReader extends Thread {
 		boolean valueIsValid = false;
 		boolean dataIsOk=true;
 		boolean timeIsOk=true;
-		String messageString = String.valueOf(message);
-		String[] messageSplitted = messageString.split(",");
-
-		String temperatura = messageSplitted[0];
-		String[] temperaturaSplitted = temperatura.split(":");
-		temperatura = temperaturaSplitted[1];
-		temperatura = temperatura.replace(temperatura.substring(temperatura.length() - 1), "");
+		int dataIsValid = dataIsValid(message);
+		String luminosidade = luminosidade(message);
+		String tempo = tempo(message);
+		String humidade = humidade(message);
+		String temperatura = temperatura(message);
+		
 
 		// System.out.println(temperatura);
 
-		String humidade = messageSplitted[1];
-		String[] humidadeSplitted = humidade.split(":");
-		humidade = humidadeSplitted[1];
-		humidade = humidade.replace(humidade.substring(humidade.length() - 1), "");
+		
 
 		// System.out.println(humidade);
 
-		String data = messageSplitted[2];
-		String[] dataSplitted = data.split(":");
-		data = dataSplitted[1];
-		data = data.replace(data.substring(data.length() - 1), "");
+		
 
 		// System.out.println(data);
 
-		String tempo = messageSplitted[3];
-		int indexTemp = tempo.length();
-		if (indexTemp != -1) {
-			tempo = tempo.substring(6, indexTemp);
-		}
-		tempo = tempo.replace(tempo.substring(tempo.length() - 1), "");
+		
 
 		// System.out.println(tempo);
 
-		String luminosidade = messageSplitted[4];
-		String[] luminosidadeSplitted = luminosidade.split(":");
-		luminosidade = luminosidadeSplitted[1];
-		int indexLum = luminosidade.indexOf("s");
-		if (indexLum != -1) {
-			luminosidade = luminosidade.substring(1, indexLum);
-		}
-		luminosidade = luminosidade.replace(luminosidade.substring(luminosidade.length() - 1), "");
+		
 
 		// System.out.println(luminosidade);
 
-		String currentData = new SimpleDateFormat("d/M/yyyy").format(Calendar.getInstance().getTime());
 		String currentTime = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
 
-		String[] currentDataSplitted = currentData.split("/");
-
-		String currentYear = currentDataSplitted[2];
-		// System.out.println(currentYear);
-		String currentMonth = currentDataSplitted[1];
-		// System.out.println(currentMonth);
-		String currentDay = currentDataSplitted[0];
-		// System.out.println(currentDay);
-
-		String[] sensorDataSplitted = data.split("/");
-
-		String sensorDataYear = sensorDataSplitted[2];
-		// System.out.println(sensorDataYear);
-		String sensorDataMonth = sensorDataSplitted[1];
-		// System.out.println(sensorDataMonth);
-		String sensorDataDay = sensorDataSplitted[0];
-		// System.out.println(sensorDataDay);
-
-		int currentDayInt = Integer.parseInt(currentDay);
-		int dataDayInt = Integer.parseInt(sensorDataDay);
+		
 
 //		System.out.println(currentDayInt);
 //		System.out.println(dataDayInt);
-
-		int dataIsValid = -1;
-
-		if (currentYear.equals(sensorDataYear) && currentMonth.equals(sensorDataMonth)) {
-			dataIsValid = dataDayInt - currentDayInt;
-		}
 
 		if (dataIsValid != 0) {
 			System.out.println("Data Error!");
 			dataIsOk = false;
 		}
 
+		timeIsOk = timeIsOk(timeIsOk, tempo, currentTime);
 		String[] currentTimeSplitted = currentTime.split(":");
 
 		String currentHour = currentTimeSplitted[0];
@@ -212,7 +195,6 @@ public class PahoReader extends Thread {
 
 		if (!currentHour.equals(sensorHour) && !currentMinutes.equals(sensorMinutes)) {
 			System.out.println("Time Error!");
-			timeIsOk = false;
 		}
 
 		if(dataIsOk&&timeIsOk)	{
@@ -223,6 +205,95 @@ public class PahoReader extends Thread {
 		
 		return valueIsValid;
 	}
+
+private String temperatura(MqttMessage message) {
+	String messageString = String.valueOf(message);
+	String[] messageSplitted = messageString.split(",");
+	String temperatura = messageSplitted[0];
+	String[] temperaturaSplitted = temperatura.split(":");
+	temperatura = temperaturaSplitted[1];
+	temperatura = temperatura.replace(temperatura.substring(temperatura.length() - 1), "");
+	return temperatura;
+}
+
+private boolean timeIsOk(boolean timeIsOk, String tempo, String currentTime) {
+	String[] currentTimeSplitted = currentTime.split(":");
+	String currentHour = currentTimeSplitted[0];
+	String currentMinutes = currentTimeSplitted[1];
+	String[] sensorTimeSplitted = tempo.split(":");
+	String sensorHour = sensorTimeSplitted[0];
+	String sensorMinutes = sensorTimeSplitted[1];
+	if (!currentHour.equals(sensorHour) && !currentMinutes.equals(sensorMinutes)) {
+		timeIsOk = false;
+	}
+	return timeIsOk;
+}
+
+private String humidade(MqttMessage message) {
+	String messageString = String.valueOf(message);
+	String[] messageSplitted = messageString.split(",");
+	String humidade = messageSplitted[1];
+	String[] humidadeSplitted = humidade.split(":");
+	humidade = humidadeSplitted[1];
+	humidade = humidade.replace(humidade.substring(humidade.length() - 1), "");
+	return humidade;
+}
+
+private String tempo(MqttMessage message) {
+	String messageString = String.valueOf(message);
+	String[] messageSplitted = messageString.split(",");
+	String tempo = messageSplitted[3];
+	int indexTemp = tempo.length();
+	if (indexTemp != -1) {
+		tempo = tempo.substring(6, indexTemp);
+	}
+	tempo = tempo.replace(tempo.substring(tempo.length() - 1), "");
+	return tempo;
+}
+
+private String luminosidade(MqttMessage message) {
+	String messageString = String.valueOf(message);
+	String[] messageSplitted = messageString.split(",");
+	String luminosidade = messageSplitted[4];
+	String[] luminosidadeSplitted = luminosidade.split(":");
+	luminosidade = luminosidadeSplitted[1];
+	int indexLum = luminosidade.indexOf("s");
+	if (indexLum != -1) {
+		luminosidade = luminosidade.substring(1, indexLum);
+	}
+	luminosidade = luminosidade.replace(luminosidade.substring(luminosidade.length() - 1), "");
+	return luminosidade;
+}
+
+private int dataIsValid(MqttMessage message) throws java.lang.NumberFormatException {
+	String data = data(message);
+	String currentData = new SimpleDateFormat("d/M/yyyy").format(Calendar.getInstance().getTime());
+	String[] currentDataSplitted = currentData.split("/");
+	String currentYear = currentDataSplitted[2];
+	String currentMonth = currentDataSplitted[1];
+	String currentDay = currentDataSplitted[0];
+	String[] sensorDataSplitted = data.split("/");
+	String sensorDataYear = sensorDataSplitted[2];
+	String sensorDataMonth = sensorDataSplitted[1];
+	String sensorDataDay = sensorDataSplitted[0];
+	int currentDayInt = Integer.parseInt(currentDay);
+	int dataDayInt = Integer.parseInt(sensorDataDay);
+	int dataIsValid = -1;
+	if (currentYear.equals(sensorDataYear) && currentMonth.equals(sensorDataMonth)) {
+		dataIsValid = dataDayInt - currentDayInt;
+	}
+	return dataIsValid;
+}
+
+private String data(MqttMessage message) {
+	String messageString = String.valueOf(message);
+	String[] messageSplitted = messageString.split(",");
+	String data = messageSplitted[2];
+	String[] dataSplitted = data.split(":");
+	data = dataSplitted[1];
+	data = data.replace(data.substring(data.length() - 1), "");
+	return data;
+}
 /**
  * Leitura 
  */
