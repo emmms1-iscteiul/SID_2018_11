@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -52,19 +54,19 @@ public class CriarMedicaoGUI {
 		registerLabel.setFont(new Font("Arial", Font.CENTER_BASELINE, 30));
 
 		topPanel.add(registerLabel);
-		
+
 		JLabel ValorMedicao = new JLabel("Valor Medição:");
 		ValorMedicao.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField ValorMedicaoText = new JTextField("",10);
-		
+
 		JLabel NomeCultura = new JLabel("Nome Cultura:");
 		NomeCultura.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField NomeCulturaText = new JTextField("",10);
-		
+
 		JLabel NomeVariavel = new JLabel("Nome Variavel:");
 		NomeVariavel.setFont(new Font("Arial", Font.BOLD, 13));
 		JTextField NomeVariavelText = new JTextField("",10);
-		
+
 		Font font = ValorMedicaoText.getFont();
 		float size = font.getSize() + 1.0f;
 		ValorMedicaoText.setFont( font.deriveFont(size) );
@@ -73,17 +75,17 @@ public class CriarMedicaoGUI {
 
 		centerPanel.add(ValorMedicao);
 		centerPanel.add(ValorMedicaoText);
-		
+
 		centerPanel.add(NomeCultura);
 		centerPanel.add(NomeCulturaText);
-		
+
 		centerPanel.add(NomeVariavel);
 		centerPanel.add(NomeVariavelText);
-	
+
 
 		JButton registerButton = new JButton("Inserir");
 		registerButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(ValorMedicaoText.getText().equals("")) {
@@ -93,12 +95,27 @@ public class CriarMedicaoGUI {
 				}else if(NomeVariavelText.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "Campo NOME VARIÁVEL não foi preenchido", "ERRO - NECESSÁRIO PREENCHER TODOS OS CAMPOS", JOptionPane.ERROR_MESSAGE);
 				}else{
-				funcInv.inserirMedicao(ValorMedicaoText, NomeCulturaText, NomeVariavelText, frame);
-				medicaoModel.fireTableDataChanged();
+					funcInv.inserirMedicao(ValorMedicaoText, NomeCulturaText, NomeVariavelText, frame);
+					medicaoModel.fireTableDataChanged();
+					ResultSet alertas = funcInv.filtrarAlertasCultura();
+					try {
+						while (alertas.next()) {
+							String valorMedicaoAlerta = alertas.getObject("ValorMedicaoALerta").toString();
+							System.out.println("Valor Medicao Alerta: " + valorMedicaoAlerta);
+							String nomeVariavelAlerta = alertas.getObject("NomeVariavelAlerta").toString();
+							System.out.println("Nome Variavel Alerta: " + nomeVariavelAlerta);
+							if (alertas.isLast()) {
+								JOptionPane.showMessageDialog(frame, "Tem um alerta, verifique tabela de Alertas", "ALERTA", JOptionPane.ERROR_MESSAGE);
+							}
+						}
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
-		
+
 		bottomPanel.add(registerButton);
 
 		frame.add(topPanel, BorderLayout.PAGE_START);
