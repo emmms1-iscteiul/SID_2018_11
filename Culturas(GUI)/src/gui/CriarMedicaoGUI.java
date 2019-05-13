@@ -115,9 +115,7 @@ public class CriarMedicaoGUI {
 					try {
 						while (alertas.next()) {
 							String valorMedicaoAlerta = alertas.getObject("ValorMedicaoALerta").toString();
-							System.out.println("Valor Medicao Alerta: " + valorMedicaoAlerta);
 							String nomeVariavelAlerta = alertas.getObject("NomeVariavelAlerta").toString();
-							System.out.println("Nome Variavel Alerta: " + nomeVariavelAlerta);
 							if (alertas.isLast()) {
 								JOptionPane.showMessageDialog(frame, "Tem um alerta, verifique tabela de Alertas", "ALERTA", JOptionPane.ERROR_MESSAGE);
 							}
