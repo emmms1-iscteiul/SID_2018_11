@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import gui.FuncionalidadesAdmin;
 /**
- * Teste Funcionalidades Admin
+ * Teste Funcionalidades do Admin
  * @author Eduardo
  *
  */
