@@ -5,14 +5,23 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JTable;
-
+/**
+ * Listener Clique Rato
+ * @author Eduardo
+ *
+ */
 class JTableButtonMouseListener extends MouseAdapter {
 	private final JTable table;
-	
+/**
+ * Tabela
+ * @param table
+ */
 	public JTableButtonMouseListener(JTable table) {
 		this.table = table;
 	}
-
+/**
+ * Clique do rato
+ */
 	public void mouseClicked(MouseEvent e) {
 		int column = table.getColumnModel().getColumnIndexAtX(e.getX());
 		int row    = e.getY()/table.getRowHeight(); 

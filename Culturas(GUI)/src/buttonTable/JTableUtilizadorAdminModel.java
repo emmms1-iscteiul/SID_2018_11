@@ -14,7 +14,11 @@ import javax.swing.table.AbstractTableModel;
 
 import gui.EditarUtilizadorGUI;
 import gui.FuncionalidadesAdmin;
-
+/**
+ * Tabela Utilizador Admin
+ * @author Eduardo
+ *
+ */
 public class JTableUtilizadorAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	private JTableUtilizadorAdminModel utilizadorModel=this;
@@ -25,29 +29,41 @@ public class JTableUtilizadorAdminModel extends AbstractTableModel {
 	FuncionalidadesAdmin funcAdmin;
 	List<Integer> idsUtilizador = new ArrayList<Integer>();
 	JFrame frame;
-
+/**
+ * Frame Funcionalidades Admin
+ * @param funcAdmin
+ * @param frame
+ */
 	public JTableUtilizadorAdminModel(FuncionalidadesAdmin funcAdmin, JFrame frame) {
 		// TODO Auto-generated constructor stub
 		this.funcAdmin=funcAdmin;
 		this.frame=frame;
 	}
 
-
+/**
+ * N+umero de colunas
+ */
 	@Override
 	public int getColumnCount() {
 		return COLUMN_NAMES.length;
 	}
-
+/**
+ * Número de linhas
+ */
 	@Override
 	public int getRowCount() {
 		return 100;
 	}
-
+/**
+ * Nome das colunas
+ */
 	@Override
 	public String getColumnName(int columnIndex) {
 		return COLUMN_NAMES[columnIndex];
 	}
-
+/**
+ * Valor da célula
+ */
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		ResultSet utilizadores = funcAdmin.consultarUtilizadores();

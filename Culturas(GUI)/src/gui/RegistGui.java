@@ -15,12 +15,20 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-
+/**
+ * GUI Registo
+ * @author Eduardo
+ *
+ */
 public class RegistGui {
 
 	private JFrame frame;
 	FuncionalidadesAdmin func;
-
+/**
+ * GUI Registo
+ * @param frameTitle
+ * @param func
+ */
 	public RegistGui(String frameTitle, FuncionalidadesAdmin func) {
 		this.func=func;
 		frame = new JFrame(frameTitle);
@@ -32,11 +40,16 @@ public class RegistGui {
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		addContent();
 	}
-
+/**
+ * Frame
+ * @return
+ */
 	public JFrame getFrame() {
 		return frame;
 	}
-
+/**
+ * Adiciona conteúdo à frame
+ */
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
@@ -123,7 +136,9 @@ public class RegistGui {
 		frame.add(bottomPanel,BorderLayout.SOUTH);
 
 	}
-
+/**
+ * Abrir frame
+ */
 	public void open() {
 		frame.setVisible(true);
 	}

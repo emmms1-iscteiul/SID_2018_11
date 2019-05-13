@@ -19,13 +19,22 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import buttonTable.JTableMedicaoInvestigadorModel;
-
+/**
+ * GUI Criar Medição
+ * @author Eduardo
+ *
+ */
 public class CriarMedicaoGUI {
 
 	private JFrame frame;
 	FuncionalidadesInvestigador funcInv;
 	private JTableMedicaoInvestigadorModel medicaoModel;
-
+/**
+ * Criar medição GUI
+ * @param frameTitle
+ * @param funcInv
+ * @param medicaoModel
+ */
 	public CriarMedicaoGUI(String frameTitle, FuncionalidadesInvestigador funcInv,JTableMedicaoInvestigadorModel medicaoModel) {
 		this.funcInv=funcInv;
 		this.medicaoModel=medicaoModel;
@@ -38,11 +47,16 @@ public class CriarMedicaoGUI {
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
-
+/**
+ * Frame
+ * @return
+ */
 	public JFrame getFrame() {
 		return frame;
 	}
-
+/**
+ * Adicionar conteúdo à frame
+ */
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
@@ -123,7 +137,9 @@ public class CriarMedicaoGUI {
 		frame.add(bottomPanel,BorderLayout.SOUTH);
 
 	}
-
+/**
+ * Abrir frame
+ */
 	public void open() {
 		frame.setVisible(true);
 	}

@@ -18,13 +18,22 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import buttonTable.JTableUtilizadorAdminModel;
-
+/**
+ * GUI Criar Utilizador
+ * @author Eduardo
+ *
+ */
 public class CriarUtilizadorGUI {
 
 	private JFrame frame;
 	FuncionalidadesAdmin funcAdmin;
 	private JTableUtilizadorAdminModel utilizadorModel;
-
+/**
+ * GUI Criar user
+ * @param frameTitle
+ * @param funcAdmin
+ * @param utilizadorModel
+ */
 	public CriarUtilizadorGUI(String frameTitle, FuncionalidadesAdmin funcAdmin,JTableUtilizadorAdminModel utilizadorModel) {
 		this.funcAdmin=funcAdmin;
 		this.utilizadorModel=utilizadorModel;
@@ -37,11 +46,16 @@ public class CriarUtilizadorGUI {
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
-
+/**
+ * Frame
+ * @return
+ */
 	public JFrame getFrame() {
 		return frame;
 	}
-
+/**
+ * Adicionar conteúdo à frame
+ */
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
@@ -122,7 +136,9 @@ public class CriarUtilizadorGUI {
 		frame.add(bottomPanel,BorderLayout.SOUTH);
 
 	}
-
+/**
+ * Abrir frame
+ */
 	public void open() {
 		frame.setVisible(true);
 	}

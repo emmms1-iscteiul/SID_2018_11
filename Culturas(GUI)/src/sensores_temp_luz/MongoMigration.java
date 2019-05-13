@@ -12,7 +12,11 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-
+/**
+ * Migração Mongo
+ * @author Eduardo
+ *
+ */
 public class MongoMigration extends Thread {
 	
 	private ArrayList<Double> valoresTemperatura=new ArrayList<Double>();
@@ -20,7 +24,9 @@ public class MongoMigration extends Thread {
 //	private ArrayList<Double> medias=new ArrayList<Double>();
 	
 	Connection myConn;	
-	
+/**
+ * Run	
+ */
 	@SuppressWarnings("deprecation")
 	public void run() {
 		

@@ -19,14 +19,24 @@ import javax.swing.WindowConstants;
 
 import buttonTable.JTableUtilizadorAdminModel;
 
-
+/**
+ * GUI Editar Utilizador
+ * @author Eduardo
+ *
+ */
 public class EditarUtilizadorGUI {
 
 	private JFrame frame;
 	FuncionalidadesAdmin funcAdmin;
 	private JTableUtilizadorAdminModel utilizadorModel;
 	int idU = 0;
-
+/**
+ * GUI editar user
+ * @param frameTitle
+ * @param funcAdmin
+ * @param rowIndex
+ * @param utilizadorModel
+ */
 	public EditarUtilizadorGUI(String frameTitle, FuncionalidadesAdmin funcAdmin, int rowIndex,JTableUtilizadorAdminModel utilizadorModel) {
 		this.funcAdmin=funcAdmin;
 		this.idU = rowIndex;
@@ -40,11 +50,16 @@ public class EditarUtilizadorGUI {
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
-
+/**
+ * Frame
+ * @return
+ */
 	public JFrame getFrame() {
 		return frame;
 	}
-
+/**
+ * Adicionar conteúdo à frame
+ */
 	public void addContent() {
 
 		frame.setLayout(new BorderLayout());
@@ -115,7 +130,9 @@ public class EditarUtilizadorGUI {
 		frame.add(bottomPanel,BorderLayout.SOUTH);
 
 	}
-
+/**
+ * Abrir frame
+ */
 	public void open() {
 		frame.setVisible(true);
 	}

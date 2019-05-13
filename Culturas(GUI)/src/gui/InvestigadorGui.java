@@ -18,13 +18,21 @@ import javax.swing.WindowConstants;
 
 import buttonTable.SelecionarTabelaGui;
 
-
+/**
+ * GUI Investigador
+ * @author Eduardo
+ *
+ */
 public class InvestigadorGui {
 
 	private JFrame frame;
 	FuncionalidadesInvestigador funcInv;
 	FuncionalidadesAdmin funcAdmin = null;
-
+/**
+ * GUI Investigador
+ * @param frameTitle
+ * @param funcInv
+ */
 	public InvestigadorGui(String frameTitle, FuncionalidadesInvestigador funcInv) {
 		this.funcInv = funcInv;
 		frame = new JFrame(frameTitle);
@@ -36,11 +44,16 @@ public class InvestigadorGui {
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		addContent();
 	}
-
+/**
+ * Frame
+ * @return
+ */
 	public JFrame getFrame() {
 		return frame;
 	}
-
+/**
+ * Adicionar conteúdo à frame
+ */
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
@@ -156,7 +169,9 @@ public class InvestigadorGui {
 		frame.add(bottomPanel, BorderLayout.SOUTH);
 
 	}
-
+/**
+ * Abrir frame
+ */
 	public void open() {
 		frame.setVisible(true);
 	}

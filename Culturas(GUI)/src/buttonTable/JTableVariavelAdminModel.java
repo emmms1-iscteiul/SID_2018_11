@@ -15,7 +15,11 @@ import javax.swing.table.AbstractTableModel;
 
 import gui.EditarVariaveisGUI;
 import gui.FuncionalidadesAdmin;
-
+/**
+ * Tabea Variavel Admin
+ * @author Eduardo
+ *
+ */
 public class JTableVariavelAdminModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	private JTableVariavelAdminModel variavelModel=this;
@@ -23,28 +27,40 @@ public class JTableVariavelAdminModel extends AbstractTableModel {
 	JFrame frame;
 	FuncionalidadesAdmin funcAdmin;
 	List<Integer> idsVariavel = new ArrayList<Integer>();
-
+/**
+ * Frame funcionalidades admin
+ * @param funcAdmin
+ * @param frame
+ */
 	public JTableVariavelAdminModel(FuncionalidadesAdmin funcAdmin, JFrame frame) {
 		// TODO Auto-generated constructor stub
 		this.funcAdmin = funcAdmin;
 		this.frame = frame;
 	}
-
+/**
+ * Número de colunas
+ */
 	@Override
 	public int getColumnCount() {
 		return COLUMN_NAMES.length;
 	}
-
+/**
+ * Número de linhas
+ */
 	@Override
 	public int getRowCount() {
 		return 100;
 	}
-
+/**
+ * Nome das colunas
+ */
 	@Override
 	public String getColumnName(int columnIndex) {
 		return COLUMN_NAMES[columnIndex];
 	}
-
+/**
+ * Valor da célula
+ */
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		ResultSet variaveis = funcAdmin.consultarVariaveis();
