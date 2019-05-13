@@ -111,17 +111,20 @@ public class CriarMedicaoGUI {
 				}else{
 					funcInv.inserirMedicao(ValorMedicaoText, NomeCulturaText, NomeVariavelText, frame);
 					medicaoModel.fireTableDataChanged();
+					double valorMedicao = Double.valueOf(ValorMedicaoText.getText());
 					ResultSet alertas = funcInv.filtrarAlertasCultura();
-					try {
-						while (alertas.next()) {
-							if (alertas.isLast()) {
-								JOptionPane.showMessageDialog(frame, "Tem um alerta, verifique tabela de Alertas", "ALERTA", JOptionPane.ERROR_MESSAGE);
+						try {
+							while(alertas.next()) {
+								double valorMedicaoAlerta = Double.valueOf(alertas.getObject("ValorMedicaoAlerta").toString());
+								String nomeVariavelAlerta = alertas.getObject("NomeVariavelAlerta").toString();
+								if(alertas.isLast() && valorMedicao == valorMedicaoAlerta && nomeVariavelAlerta.equals(NomeVariavelText.getText())) {
+									JOptionPane.showMessageDialog(frame, "Tem um alerta, verifique a Tabela de Alertas!", "ALERTA!", JOptionPane.ERROR_MESSAGE);
+								}
 							}
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
 				}
 			}
 		});

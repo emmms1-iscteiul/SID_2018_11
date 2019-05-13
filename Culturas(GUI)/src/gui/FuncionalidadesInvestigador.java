@@ -90,7 +90,7 @@ public class FuncionalidadesInvestigador {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(frame, "Verificar as Variáveis e Culturas que existem antes de inserir uma medição", "ERRO - NECESSÁRIO PREENCHER UMA VARIAVEL MEDIDA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frame, "Verificar as Variáveis e Culturas (que lhe pertencem) que existem antes de inserir uma medição", "ERRO - NECESSÁRIO PREENCHER UMA VARIAVEL MEDIDA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -188,7 +188,7 @@ public class FuncionalidadesInvestigador {
 			frame.dispose();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(frame, "Verifique as Culturas e Variáveis que existem nas suas tabelas antes de inserir", "ERRO - NECESSÁRIO EXISTENCIA DE VARIAVEL E CULTURA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frame, "Verifique as Culturas (que lhe pertencem) e Variáveis que existem nas suas tabelas antes de inserir", "ERRO - NECESSÁRIO EXISTENCIA DE VARIAVEL E CULTURA PRIMEIRO", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 /**

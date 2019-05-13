@@ -1,0 +1,9 @@
+Guia para correr o .jar:
+
+- Primeiro colocar o ficheiro .jar e o ficheiro run.bat no Desktop;
+- Em seguida, correr o XAMPP e dar Start em "Apache" e "MySql";
+- Depois clicar em Admin em "MySql" que irá abrir um separador no browser;
+- Se necessário fazer o login com as credênciais "root" "root";
+- Clicar em "New", dar o nome "monotorizacao_de_culturas" e criar uma nova BD;
+- Depois clicar em import e importar o ficheiro .sql corresponde à base de dados;
+- Finalmente correr o ficheiro run.bat que inicia a aplicação;
