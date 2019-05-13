@@ -114,8 +114,6 @@ public class CriarMedicaoGUI {
 					ResultSet alertas = funcInv.filtrarAlertasCultura();
 					try {
 						while (alertas.next()) {
-							String valorMedicaoAlerta = alertas.getObject("ValorMedicaoALerta").toString();
-							String nomeVariavelAlerta = alertas.getObject("NomeVariavelAlerta").toString();
 							if (alertas.isLast()) {
 								JOptionPane.showMessageDialog(frame, "Tem um alerta, verifique tabela de Alertas", "ALERTA", JOptionPane.ERROR_MESSAGE);
 							}
