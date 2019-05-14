@@ -16,31 +16,35 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+
 /**
  * Leitor PAHO
+ * 
  * @author Eduardo
  *
  */
 public class PahoReader extends Thread {
 
-	private static final String TOPIC = "/sid_lab_2019_2";
-	private static final String BROKER = "tcp://iot.eclipse.org:1883";// "tcp://broker.mqtt-dashboard.com:1883";
-	private static final String CLIENTID = "sid_lab_2019";
+	private static final String TOPIC = "/sid_lab_2019";
+	private static final String BROKER = "tcp://iot.eclipse.org";// "tcp://broker.mqtt-dashboard.com:1883";
+	private static final String CLIENTID = "/sid_lab_2019";
 	private static final MemoryPersistence persistence = new MemoryPersistence();
 	private boolean exported = false; //
-/**
- * Run
- */
+
+	/**
+	 * Run
+	 */
 	public void run() {
 		read();
 	}
 
 	// {"tmp":"22.40","hum":"61.30","dat":"9/4/2019","tim":"14:59:32","cell":"3138""sens":"wifi"}
-/**
- * Verificar número de parâmetros
- * @param message
- * @return
- */
+	/**
+	 * Verificar número de parâmetros
+	 * 
+	 * @param message
+	 * @return
+	 */
 	public boolean checkNumberOfParameters(MqttMessage message) {
 		boolean fiveParameters = true;
 		String messageString = String.valueOf(message);
@@ -51,11 +55,13 @@ public class PahoReader extends Thread {
 		}
 		return fiveParameters;
 	}
-/**
- * Verificar validade dos parâmetros
- * @param message
- * @return
- */
+
+	/**
+	 * Verificar validade dos parâmetros
+	 * 
+	 * @param message
+	 * @return
+	 */
 	public boolean checkIfEachParameterIsValid(MqttMessage message) {
 		boolean parameterValid = true;
 		String messageString = String.valueOf(message);
@@ -109,15 +115,17 @@ public class PahoReader extends Thread {
 		System.out.println(parameterValid);
 		return parameterValid;
 	}
-/**
- * Verificar valor de parâmetros
- * @param message
- * @return
- */
+
+	/**
+	 * Verificar valor de parâmetros
+	 * 
+	 * @param message
+	 * @return
+	 */
 	public boolean checkValueOfEachParameter(MqttMessage message) {
 		boolean valueIsValid = false;
-		boolean dataIsOk=true;
-		boolean timeIsOk=true;
+		boolean dataIsOk = true;
+		boolean timeIsOk = true;
 		String messageString = String.valueOf(message);
 		String[] messageSplitted = messageString.split(",");
 
@@ -186,8 +194,8 @@ public class PahoReader extends Thread {
 		int currentDayInt = Integer.parseInt(currentDay);
 		int dataDayInt = Integer.parseInt(sensorDataDay);
 
-//		System.out.println(currentDayInt);
-//		System.out.println(dataDayInt);
+//			System.out.println(currentDayInt);
+//			System.out.println(dataDayInt);
 
 		int dataIsValid = -1;
 
@@ -215,17 +223,18 @@ public class PahoReader extends Thread {
 			timeIsOk = false;
 		}
 
-		if(dataIsOk&&timeIsOk)	{
-			valueIsValid=true;
+		if (dataIsOk && timeIsOk) {
+			valueIsValid = true;
 		}
-		
+
 		System.out.println(valueIsValid);
-		
+
 		return valueIsValid;
 	}
-/**
- * Leitura 
- */
+
+	/**
+	 * Leitura
+	 */
 	public void read() {
 		try {
 
@@ -250,66 +259,79 @@ public class PahoReader extends Thread {
 				@Override
 				public void messageArrived(String topic, MqttMessage message) throws Exception {
 
-					sleep(3000);
-					MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
+					// sleep(3000);
+					// MongoClient mongoClient = new MongoClient(new
+					// MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
 
 					String smsString = String.valueOf(message);
 
 					System.out.println("Mensagem: " + smsString);
 
-					checkNumberOfParameters(message);
-					checkIfEachParameterIsValid(message);
-					checkValueOfEachParameter(message);
+					if (checkNumberOfParameters(message)) {
+						if (checkIfEachParameterIsValid(message)) {
+							if (checkValueOfEachParameter(message)) {
+//
+								String[] stringSplitted = smsString.split(",");
+								String[] temp = stringSplitted[0].split(":");
 
-					String[] stringSplitted = smsString.split(",");
-					String[] temp = stringSplitted[0].split(":");
+								String tempV = "";
+								if (temp[1].length() == 7) {
+									tempV = temp[1].substring(1, 6);
+									System.out.println(tempV);
+								}
+								if (temp[1].length() == 6) {
+									tempV = temp[1].substring(1, 5);
+									System.out.println(tempV);
+								}
+								if (temp[1].length() == 8) {
+									tempV = temp[1].substring(1, 7);
+									System.out.println(tempV);
+								}
 
-					String tempV = "";
-					if (temp[1].length() == 7) {
-						tempV = temp[1].substring(1, 6);
-					} else if (temp[1].length() == 6) {
-						tempV = temp[1].substring(1, 5);
-					} else if (temp[1].length() == 8) {
-						tempV = temp[1].substring(1, 7);
+								double temperatura = Double.parseDouble(tempV);
+
+								String cellV = "";
+								if (stringSplitted[4].length() == 29) {
+									cellV = stringSplitted[4].substring(8, 13);
+									System.out.println(cellV);
+								} else if (stringSplitted[4].length() == 28) {
+									cellV = stringSplitted[4].substring(8, 12);
+									System.out.println(cellV);
+								} else if (stringSplitted[4].length() == 27) {
+									cellV = stringSplitted[4].substring(8, 12);
+									System.out.println(cellV);
+								} else if (stringSplitted[4].length() == 26) {
+									cellV = stringSplitted[4].substring(8, 11);
+									System.out.println(cellV);
+								} else if (stringSplitted[4].length() == 25) {
+									cellV = stringSplitted[4].substring(8, 10);
+									System.out.println(cellV);
+								}
+
+								double cell = Double.parseDouble(cellV);
+
+								String[] date = stringSplitted[2].split(":");
+								String dateV = date[1].substring(1, 9);
+								String[] dateF = dateV.split("/");
+								String dateFF = dateF[2] + "-" + dateF[1] + "-" + dateF[0];
+
+								String timeV = stringSplitted[3].substring(7, 15);
+
+								String data = dateFF + " " + timeV;
+							}
+						}
 					}
-
-					double temperatura = Double.parseDouble(tempV);
-
-					String cellV = "";
-					if (stringSplitted[4].length() == 29) {
-						cellV = stringSplitted[4].substring(8, 13);
-					} else if (stringSplitted[4].length() == 28) {
-						cellV = stringSplitted[4].substring(8, 12);
-					} else if (stringSplitted[4].length() == 27) {
-						cellV = stringSplitted[4].substring(8, 11);
-					} else if (stringSplitted[4].length() == 26) {
-						cellV = stringSplitted[4].substring(8, 10);
-					} else if (stringSplitted[4].length() == 25) {
-						cellV = stringSplitted[4].substring(8, 9);
-					}
-
-					double cell = Double.parseDouble(cellV);
-
-					String[] date = stringSplitted[2].split(":");
-					String dateV = date[1].substring(1, 9);
-					String[] dateF = dateV.split("/");
-					String dateFF = dateF[2] + "-" + dateF[1] + "-" + dateF[0];
-
-					String timeV = stringSplitted[3].substring(7, 15);
-
-					String data = dateFF + " " + timeV;
-
-					DB db = mongoClient.getDB("Sensores");
-					DBCollection table = db.getCollection("Medicoes");
-
-					BasicDBObject document = new BasicDBObject();
-					document.append("DataHoraMedicao", data);
-					document.append("Temperatura", temperatura);
-					document.append("Luminosidade", cell);
-					document.append("Exportado", exported);
-					try { table.insert(document); System.out.println("Insert success.");} catch (Exception e) {}
-
-					mongoClient.close();
+//					DB db = mongoClient.getDB("Sensores");
+//					DBCollection table = db.getCollection("Medicoes");
+//
+//					BasicDBObject document = new BasicDBObject();
+//					document.append("DataHoraMedicao", data);
+//					document.append("Temperatura", temperatura);
+//					document.append("Luminosidade", cell);
+//					document.append("Exportado", exported);
+//					try { table.insert(document); System.out.println("Insert success.");} catch (Exception e) {}
+//
+//					mongoClient.close();
 				}
 
 				@Override
@@ -320,17 +342,19 @@ public class PahoReader extends Thread {
 
 			});
 
-			sampleClient.subscribe(TOPIC, 1);
+			sampleClient.subscribe(TOPIC, 0);
 
 		} catch (MqttException e) {
-			System.out.println("Error in read");
+			e.printStackTrace();
 		}
 
 	}
-/**
- * Main
- * @param args
- */
+
+	/**
+	 * Main
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		PahoReader reader = new PahoReader();
 		reader.read();
