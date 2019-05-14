@@ -30,6 +30,8 @@ public class MongoMigration extends Thread {
 	@SuppressWarnings("deprecation")
 	public void run() {
 		
+		valoresLuminosidade();
+		valoresTemperatura();
 		try {
 			sleep(4000);
 			
@@ -47,9 +49,7 @@ public class MongoMigration extends Thread {
 			while(cursor.hasNext()) {
 				
 				double temperat = (double) cursor.curr().get("Temperatura");
-				valoresTemperatura.add(temperat);
 				double lumin = (double) cursor.curr().get("Luminosidade");
-				valoresLuminosidade.add(lumin);
 				String dateS = (String) cursor.curr().get("DataHoraMedicao");
 				boolean exported = (boolean) cursor.curr().get("Exportado");
 				System.out.println("Temperatura: " + temperat + " Luminosidade: " + lumin + " DataHoraMedicao: " + dateS + " Exportado: " + exported);
@@ -78,6 +78,40 @@ public class MongoMigration extends Thread {
 			e.printStackTrace();
 		} 
 	}
+private void valoresTemperatura() {
+	MongoClient mongoClient = new MongoClient(
+			new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
+	DB db = mongoClient.getDB("Sensores");
+	DBCollection table = db.getCollection("Medicoes");
+	DBCursor cursor = table.find();
+	valoresTemperatura2(cursor);
+}
+private void valoresTemperatura2(DBCursor cursor) {
+	while (cursor.hasNext()) {
+		valoresTemperatura3(cursor);
+	}
+}
+private void valoresTemperatura3(DBCursor cursor) {
+	double temperat = (double) cursor.curr().get("Temperatura");
+	valoresTemperatura.add(temperat);
+}
+private void valoresLuminosidade() {
+	MongoClient mongoClient = new MongoClient(
+			new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
+	DB db = mongoClient.getDB("Sensores");
+	DBCollection table = db.getCollection("Medicoes");
+	DBCursor cursor = table.find();
+	valoresLuminosidade2(cursor);
+}
+private void valoresLuminosidade2(DBCursor cursor) {
+	while (cursor.hasNext()) {
+		valoresLuminosidade3(cursor);
+	}
+}
+private void valoresLuminosidade3(DBCursor cursor) {
+	double lumin = (double) cursor.curr().get("Luminosidade");
+	valoresLuminosidade.add(lumin);
+}
 }
 
 

@@ -29,12 +29,12 @@ public class CriarMedicaoGUI {
 	private JFrame frame;
 	FuncionalidadesInvestigador funcInv;
 	private JTableMedicaoInvestigadorModel medicaoModel;
-/**
- * Criar medição GUI
- * @param frameTitle
- * @param funcInv
- * @param medicaoModel
- */
+	/**
+	 * Criar medição GUI
+	 * @param frameTitle
+	 * @param funcInv
+	 * @param medicaoModel
+	 */
 	public CriarMedicaoGUI(String frameTitle, FuncionalidadesInvestigador funcInv,JTableMedicaoInvestigadorModel medicaoModel) {
 		this.funcInv=funcInv;
 		this.medicaoModel=medicaoModel;
@@ -47,16 +47,16 @@ public class CriarMedicaoGUI {
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addContent();
 	}
-/**
- * Frame
- * @return
- */
+	/**
+	 * Frame
+	 * @return
+	 */
 	public JFrame getFrame() {
 		return frame;
 	}
-/**
- * Adicionar conteúdo à frame
- */
+	/**
+	 * Adicionar conteúdo à frame
+	 */
 	public void addContent() {
 		frame.setLayout(new BorderLayout());
 
@@ -113,18 +113,18 @@ public class CriarMedicaoGUI {
 					medicaoModel.fireTableDataChanged();
 					double valorMedicao = Double.valueOf(ValorMedicaoText.getText());
 					ResultSet alertas = funcInv.filtrarAlertasCultura();
-						try {
-							while(alertas.next()) {
-								double valorMedicaoAlerta = Double.valueOf(alertas.getObject("ValorMedicaoAlerta").toString());
-								String nomeVariavelAlerta = alertas.getObject("NomeVariavelAlerta").toString();
-								if(alertas.isLast() && valorMedicao == valorMedicaoAlerta && nomeVariavelAlerta.equals(NomeVariavelText.getText())) {
-									JOptionPane.showMessageDialog(frame, "Tem um alerta, verifique a Tabela de Alertas!", "ALERTA!", JOptionPane.ERROR_MESSAGE);
-								}
+					try {
+						while (alertas.next()) {
+							double valorMedicaoAlerta = Double.valueOf(alertas.getObject("ValorMedicaoAlerta").toString());
+							String nomeVariavelAlerta = alertas.getObject("NomeVariavelAlerta").toString();
+							if (alertas.isLast() && valorMedicao == valorMedicaoAlerta && nomeVariavelAlerta.equals(NomeVariavelText.getText())) {
+								JOptionPane.showMessageDialog(frame, "Tem um alerta, verifique tabela de Alertas", "ALERTA", JOptionPane.ERROR_MESSAGE);
 							}
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
+						} 
+					}catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
@@ -136,9 +136,9 @@ public class CriarMedicaoGUI {
 		frame.add(bottomPanel,BorderLayout.SOUTH);
 
 	}
-/**
- * Abrir frame
- */
+	/**
+	 * Abrir frame
+	 */
 	public void open() {
 		frame.setVisible(true);
 	}

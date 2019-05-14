@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JTable;
 /**
- * Listener Clique Rato
+ * Listener Clique do Rato
  * @author Eduardo
  *
  */

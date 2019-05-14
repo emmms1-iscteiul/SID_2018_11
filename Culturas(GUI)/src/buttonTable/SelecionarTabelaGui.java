@@ -252,11 +252,7 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableCulturaAdminModel(funcAdmin));
-			JScrollPane scrollPane = new JScrollPane(table);
-			scrollPane.setPreferredSize(new Dimension(600, 400));
-			table.setFillsViewportHeight(true);
-
+			JScrollPane scrollPane = scrollPane();
 			centerPanel.add(scrollPane);
 		}
 		
@@ -268,11 +264,7 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableMedicaoAdminModel(funcAdmin));
-			JScrollPane scrollPane = new JScrollPane(table);
-			scrollPane.setPreferredSize(new Dimension(650, 400));
-			table.setFillsViewportHeight(true);
-
+			JScrollPane scrollPane = scrollPane2();
 			centerPanel.add(scrollPane);
 		}
 		
@@ -284,11 +276,7 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableVariavelMedidaAdminModel(funcAdmin));
-			JScrollPane scrollPane = new JScrollPane(table);
-			scrollPane.setPreferredSize(new Dimension(1300, 500));
-			table.setFillsViewportHeight(true);
-
+			JScrollPane scrollPane = scrollPane3();
 			centerPanel.add(scrollPane);
 		}		
 
@@ -300,11 +288,7 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableVariavelInvestigadorModel(funcInv));
-			JScrollPane scrollPane = new JScrollPane(table);
-			scrollPane.setPreferredSize(new Dimension(200, 400));
-			table.setFillsViewportHeight(true);
-
+			JScrollPane scrollPane = scrollPane4();
 			centerPanel.add(scrollPane);
 		}
 		
@@ -316,11 +300,7 @@ public class SelecionarTabelaGui {
 			frame.setLocation(x, y);
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-			JTable table = new JTable(new JTableAlertasInvestigadorModel(funcInv));
-			JScrollPane scrollPane = new JScrollPane(table);
-			scrollPane.setPreferredSize(new Dimension(950, 500));
-			table.setFillsViewportHeight(true);
-
+			JScrollPane scrollPane = scrollPane5();
 			centerPanel.add(scrollPane);
 		}
 		
@@ -330,6 +310,41 @@ public class SelecionarTabelaGui {
 		frame.add(bottomPanel,BorderLayout.SOUTH);
 
 	}
+private JScrollPane scrollPane5() {
+	JTable table = new JTable(new JTableAlertasInvestigadorModel(funcInv));
+	JScrollPane scrollPane = new JScrollPane(table);
+	scrollPane.setPreferredSize(new Dimension(950, 500));
+	table.setFillsViewportHeight(true);
+	return scrollPane;
+}
+private JScrollPane scrollPane4() {
+	JTable table = new JTable(new JTableVariavelInvestigadorModel(funcInv));
+	JScrollPane scrollPane = new JScrollPane(table);
+	scrollPane.setPreferredSize(new Dimension(200, 400));
+	table.setFillsViewportHeight(true);
+	return scrollPane;
+}
+private JScrollPane scrollPane3() {
+	JTable table = new JTable(new JTableVariavelMedidaAdminModel(funcAdmin));
+	JScrollPane scrollPane = new JScrollPane(table);
+	scrollPane.setPreferredSize(new Dimension(1300, 500));
+	table.setFillsViewportHeight(true);
+	return scrollPane;
+}
+private JScrollPane scrollPane2() {
+	JTable table = new JTable(new JTableMedicaoAdminModel(funcAdmin));
+	JScrollPane scrollPane = new JScrollPane(table);
+	scrollPane.setPreferredSize(new Dimension(650, 400));
+	table.setFillsViewportHeight(true);
+	return scrollPane;
+}
+private JScrollPane scrollPane() {
+	JTable table = new JTable(new JTableCulturaAdminModel(funcAdmin));
+	JScrollPane scrollPane = new JScrollPane(table);
+	scrollPane.setPreferredSize(new Dimension(600, 400));
+	table.setFillsViewportHeight(true);
+	return scrollPane;
+}
 /**
  * Abrir frame
  */
