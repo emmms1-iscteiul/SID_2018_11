@@ -12,10 +12,6 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
 
 /**
  * Leitor PAHO
@@ -30,6 +26,11 @@ public class PahoReader extends Thread {
 	private static final String CLIENTID = "/sid_lab_2019";
 	private static final MemoryPersistence persistence = new MemoryPersistence();
 	private boolean exported = false; //
+	private MyBlockingQueue<BasicDBObject> queue;
+	
+	public PahoReader(MyBlockingQueue<BasicDBObject> queue) {
+		this.queue=queue;
+	}
 
 	/**
 	 * Run
@@ -125,7 +126,7 @@ public class PahoReader extends Thread {
 	public boolean checkValueOfEachParameter(MqttMessage message) {
 		boolean valueIsValid = false;
 		boolean dataIsOk = true;
-		boolean timeIsOk = true;
+		boolean timeIsOk = false;
 		String messageString = String.valueOf(message);
 		String[] messageSplitted = messageString.split(",");
 
@@ -208,26 +209,44 @@ public class PahoReader extends Thread {
 			dataIsOk = false;
 		}
 
+		boolean hourOK=false;
+		boolean minutesOk=false;
+		
 		String[] currentTimeSplitted = currentTime.split(":");
 
 		String currentHour = currentTimeSplitted[0];
+		System.out.println("Pc Hour: "+currentHour);
 		String currentMinutes = currentTimeSplitted[1];
 
 		String[] sensorTimeSplitted = tempo.split(":");
 
 		String sensorHour = sensorTimeSplitted[0];
+		int sensorIncrementedHour=Integer.parseInt(sensorHour);
+		sensorIncrementedHour++;
+		sensorHour=String.valueOf(sensorIncrementedHour);
+		System.out.println("Sensor Hour: "+sensorHour);
 		String sensorMinutes = sensorTimeSplitted[1];
 
-		if (!currentHour.equals(sensorHour) && !currentMinutes.equals(sensorMinutes)) {
+		if (currentHour.equals(sensorHour) /*&& !currentMinutes.equals(sensorMinutes)*/) {
+			hourOK=true;
+		}
+		
+		if (currentMinutes.equals(sensorMinutes) /*&& !currentMinutes.equals(sensorMinutes)*/) {
+			minutesOk=true;
+		}
+		
+		if(hourOK && minutesOk)	{
+			timeIsOk=true;
+			System.out.println("Time it´s fine");
+		}else	{
 			System.out.println("Time Error!");
-			timeIsOk = false;
 		}
 
 		if (dataIsOk && timeIsOk) {
 			valueIsValid = true;
 		}
 
-		System.out.println(valueIsValid);
+		System.out.println("DeH: "+valueIsValid);
 
 		return valueIsValid;
 	}
@@ -245,7 +264,7 @@ public class PahoReader extends Thread {
 
 			sampleClient.connect(connOpts);
 
-			System.out.println("PahoRead is Connected");
+			System.out.println("PahoRead is Connected");			
 
 			sampleClient.setCallback(new MqttCallback() {
 
@@ -255,14 +274,11 @@ public class PahoReader extends Thread {
 
 				}
 
-				@SuppressWarnings("deprecation")
 				@Override
 				public void messageArrived(String topic, MqttMessage message) throws Exception {
 
-					// sleep(3000);
-					// MongoClient mongoClient = new MongoClient(new
-					// MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
-
+					System.out.println("thread paho");
+					
 					String smsString = String.valueOf(message);
 
 					System.out.println("Mensagem: " + smsString);
@@ -311,27 +327,48 @@ public class PahoReader extends Thread {
 								double cell = Double.parseDouble(cellV);
 
 								String[] date = stringSplitted[2].split(":");
-								String dateV = date[1].substring(1, 9);
+								System.out.println(date[1]);
+								String dateV = "";
+								if (date[1].length() == 11) {
+									dateV = date[1].substring(1, 10);
+									System.out.println(dateV);
+								}
+								if (date[1].length() == 10) {
+									dateV = date[1].substring(1, 9);
+								}
 								String[] dateF = dateV.split("/");
 								String dateFF = dateF[2] + "-" + dateF[1] + "-" + dateF[0];
-
-								String timeV = stringSplitted[3].substring(7, 15);
-
+								System.out.println(dateFF);
+								
+								String timeV = "";
+								if (stringSplitted[3].length() == 15) {
+									timeV = stringSplitted[3].substring(7, 14);
+									System.out.println(timeV);
+								}
+								if (stringSplitted[3].length() == 16) {
+									timeV = stringSplitted[3].substring(7, 15);
+									System.out.println(timeV);
+								}
+								
 								String data = dateFF + " " + timeV;
+								System.out.println(data);
+//								
+//								DB db = mongoClient.getDB("Sensores");
+//								DBCollection table = db.getCollection("Medicoes");
+//			
+								BasicDBObject document = new BasicDBObject();
+								document.append("DataHoraMedicao", data);
+								document.append("Temperatura", temperatura);
+								document.append("Luminosidade", cell);
+								document.append("Exportado", exported);
+								queue.enqueue(document);
+								System.out.println("Inseriu na blocking queue!");
+//								try { table.insert(document); System.out.println("Insert success.");} catch (Exception e) {}
+			
 							}
 						}
 					}
-//					DB db = mongoClient.getDB("Sensores");
-//					DBCollection table = db.getCollection("Medicoes");
-//
-//					BasicDBObject document = new BasicDBObject();
-//					document.append("DataHoraMedicao", data);
-//					document.append("Temperatura", temperatura);
-//					document.append("Luminosidade", cell);
-//					document.append("Exportado", exported);
-//					try { table.insert(document); System.out.println("Insert success.");} catch (Exception e) {}
-//
-//					mongoClient.close();
+					
 				}
 
 				@Override
@@ -347,17 +384,6 @@ public class PahoReader extends Thread {
 		} catch (MqttException e) {
 			e.printStackTrace();
 		}
-
-	}
-
-	/**
-	 * Main
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		PahoReader reader = new PahoReader();
-		reader.read();
 
 	}
 
