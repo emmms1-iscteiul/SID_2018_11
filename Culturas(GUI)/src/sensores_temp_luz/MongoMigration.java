@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.concurrent.Semaphore;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -21,16 +22,13 @@ import com.mongodb.MongoClientURI;
  */
 public class MongoMigration extends Thread {
 
-//	private ArrayList<Double> valoresTemperatura=new ArrayList<Double>();
-//	private ArrayList<Double> valoresLuminosidade=new ArrayList<Double>();
-//	private ArrayList<Double> medias=new ArrayList<Double>();
 
 	Connection myConn;
-	private MyBlockingQueue<BasicDBObject> queue;
+	private Semaphore sem;
 	//private int contadorMongo = 0;
 
-	public MongoMigration(MyBlockingQueue<BasicDBObject> queue) {
-		this.queue=queue;
+	public MongoMigration(Semaphore sem) {
+		this.sem=sem;
 	}
 
 	/**
@@ -54,43 +52,15 @@ public class MongoMigration extends Thread {
 
 			DB db = mongoClient.getDB("Sensores");
 			DBCollection table = db.getCollection("Medicoes");
-
+			
 			try {
-				table.insert(queue.dequeue());
+				//table.insert(queue.dequeue());
 				System.out.println("Insert success e removeu da blocking queue.");
 			} catch (Exception e) {
 				System.out.println("fila vazia");
 			}
 
-			DBCursor cursor = table.find();
-
-			while (cursor.hasNext()) {
-
-				String dateS = (String) cursor.next().get("DataHoraMedicao");
-				double temp = (double) cursor.curr().get("Temperatura");
-				double lumin = (double) cursor.curr().get("Luminosidade");
-				boolean exported = (boolean) cursor.curr().get("Exportado");
-				System.out.println("Temperatura: " + temp + " Luminosidade: " + lumin + " DataHoraMedicao: " + dateS
-						+ " Exportado: " + exported);
-
-				if (!exported) {
-					String sqlQuery = "insert into medicao_temperatura_luminosidade(DataHoraMedicao, ValorMedicaoTemperatura, ValorMedicaoLuminosidade) values (?, "
-							+ temp + ", " + lumin + ")";
-
-					PreparedStatement stmt = myConn.prepareStatement(sqlQuery);
-					java.sql.Timestamp dateSS = Timestamp.valueOf(dateS);
-					stmt.setTimestamp(1, dateSS);
-					stmt.executeUpdate();
-
-					System.out.println("Insert success!");
-					exported = true;
-
-					cursor.curr().put("Exportado", exported);
-					if (table.count() == 3) {
-						table.drop();
-					}
-				}
-			}
+			
 
 		} catch (ClassNotFoundException e) {
 

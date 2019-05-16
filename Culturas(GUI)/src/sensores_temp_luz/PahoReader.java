@@ -2,6 +2,7 @@ package sensores_temp_luz;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.concurrent.Semaphore;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -26,10 +27,10 @@ public class PahoReader extends Thread {
 	private static final String CLIENTID = "/sid_lab_2019";
 	private static final MemoryPersistence persistence = new MemoryPersistence();
 	private boolean exported = false; //
-	private MyBlockingQueue<BasicDBObject> queue;
+	private Semaphore sem;
 	
-	public PahoReader(MyBlockingQueue<BasicDBObject> queue) {
-		this.queue=queue;
+	public PahoReader(Semaphore sem) {
+		this.sem=sem;
 	}
 
 	/**
@@ -279,6 +280,8 @@ public class PahoReader extends Thread {
 
 					System.out.println("thread paho");
 					
+					sem.acquire();
+					
 					String smsString = String.valueOf(message);
 
 					System.out.println("Mensagem: " + smsString);
@@ -361,8 +364,9 @@ public class PahoReader extends Thread {
 								document.append("Temperatura", temperatura);
 								document.append("Luminosidade", cell);
 								document.append("Exportado", exported);
-								queue.enqueue(document);
+								
 								System.out.println("Inseriu na blocking queue!");
+								sem.release();
 //								try { table.insert(document); System.out.println("Insert success.");} catch (Exception e) {}
 			
 							}

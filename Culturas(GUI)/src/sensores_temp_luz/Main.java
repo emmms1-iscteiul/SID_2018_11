@@ -1,5 +1,7 @@
 package sensores_temp_luz;
 
+import java.util.concurrent.Semaphore;
+
 import com.mongodb.BasicDBObject;
 
 /**
@@ -16,14 +18,16 @@ public class Main {
  */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		MyBlockingQueue<BasicDBObject> queue = new MyBlockingQueue<BasicDBObject>();
-		PahoReader pahoR = new PahoReader(queue);
-		MongoMigration mongoM = new MongoMigration(queue);
-		
-		
+		//MyBlockingQueue<BasicDBObject> queue = new MyBlockingQueue<BasicDBObject>();
+		Semaphore sem = new Semaphore(1);
+		PahoReader pahoR = new PahoReader(sem);
+		MongoMigration mongoM = new MongoMigration(sem);
+		MySQLMigration mySQLM = new MySQLMigration(sem);
 		
 		pahoR.start();
 		mongoM.start();
+		mySQLM.start();
+		
 	}
 
 }
