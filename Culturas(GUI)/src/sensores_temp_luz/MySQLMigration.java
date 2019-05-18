@@ -5,14 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.concurrent.Semaphore;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
 
 /**
  * Migração Mongo
@@ -22,71 +17,112 @@ import com.mongodb.MongoClientURI;
  */
 public class MySQLMigration extends Thread {
 
-
+	private MongoMigration mongoM;
 	Connection myConn;
-	private Semaphore sem;
-	//private int contadorMongo = 0;
+	private MySemaphore semaphore;
 
-	public MySQLMigration(Semaphore sem) {
-		this.sem=sem;
+	public MySQLMigration(MongoMigration mongoM,MySemaphore semaphore) {
+		this.mongoM = mongoM;
+		this.semaphore=semaphore;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/monotorizacao_de_culturas", "root",
+					"root");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Connected successfully!");
 	}
 
 	/**
 	 * Run
 	 */
-	@SuppressWarnings("deprecation")
 	public void run() {
+		semaphore.acquire();
+		while(!interrupted())	{
 
-//		valoresLuminosidade();
-//		valoresTemperatura();
-		try {
-			System.out.println("thread Mongo");
-
-			Class.forName("com.mysql.jdbc.Driver");
-
-			MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
-
-			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/monotorizacao_de_culturas", "root", "root");
-			System.out.println("Connected successfully!");
-
-			DB db = mongoClient.getDB("Sensores");
-			DBCollection table = db.getCollection("Medicoes");
-
-			DBCursor cursor = table.find();
+			DBCursor cursor = mongoM.getValuesMongoMedicoes();
+			DBCursor cursorSuccess = mongoM.getValuesMongoSuccess();
 
 			while (cursor.hasNext()) {
-
-				String dateS = (String) cursor.next().get("DataHoraMedicao");
+				String date = (String) cursor.next().get("DataHoraMedicao");
 				double temp = (double) cursor.curr().get("Temperatura");
-				double lumin = (double) cursor.curr().get("Luminosidade");
-				boolean exported = (boolean) cursor.curr().get("Exportado");
-				System.out.println("Temperatura: " + temp + " Luminosidade: " + lumin + " DataHoraMedicao: " + dateS
-						+ " Exportado: " + exported);
-
-				if (!exported) {
+				//double lumin = (double) cursor.curr().get("Luminosidade");
+				System.out.println("Temperatura: " + temp + " DataHoraMedicao: " + date);
+				
+				if(!cursorSuccess.hasNext()) {
 					String sqlQuery = "insert into medicao_temperatura_luminosidade(DataHoraMedicao, ValorMedicaoTemperatura, ValorMedicaoLuminosidade) values (?, "
-							+ temp + ", " + lumin + ")";
+							+ temp + ", " + 1 + ")";
 
-					PreparedStatement stmt = myConn.prepareStatement(sqlQuery);
-					java.sql.Timestamp dateSS = Timestamp.valueOf(dateS);
-					stmt.setTimestamp(1, dateSS);
-					stmt.executeUpdate();
-
-					System.out.println("Insert success!");
-					exported = true;
-
-					cursor.curr().put("Exportado", exported);
-					if (table.count() == 3) {
-						table.drop();
+					BasicDBObject exportedDocument = new BasicDBObject();
+					exportedDocument.append("DataHoraMedicao", date);
+					exportedDocument.append("Temperatura", temp);
+					//							exportedDocument.append(Luminosidade, lumin);
+					mongoM.insertValuesMongoSucess(exportedDocument);
+					
+					PreparedStatement stmt;
+					try {
+						stmt = myConn.prepareStatement(sqlQuery);
+						java.sql.Timestamp dateS = Timestamp.valueOf(date);
+						stmt.setTimestamp(1, dateS);
+						stmt.executeUpdate();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
+					
+					System.out.println("My sql Insert success!");
+				}
+
+				while (cursorSuccess.hasNext()) {
+					if (cursorSuccess.itcount()==3) {
+						System.out.println("Foi tudo exportado");
+						break;
+					}
+					String dateS = (String) cursor.next().get("DataHoraMedicao");
+					double tempS = (double) cursor.curr().get("Temperatura");
+					//double luminS = (double) cursor.curr().get("Luminosidade");
+					System.out.println("Temperatura: " + tempS + " DataHoraMedicao: " + dateS);
+					
+					if (!date.equals(dateS)&&temp!=tempS /*lumin!=luminS*/)	{
+						String sqlQuery = "insert into medicao_temperatura_luminosidade(DataHoraMedicao, ValorMedicaoTemperatura, ValorMedicaoLuminosidade) values (?, "
+								+ tempS + ", " + 1 + ")";
+
+						BasicDBObject exportedDocument = new BasicDBObject();
+						exportedDocument.append("DataHoraMedicao", dateS);
+						exportedDocument.append("Temperatura", tempS);
+						//							exportedDocument.append(Luminosidade, luminS);
+						mongoM.insertValuesMongoSucess(exportedDocument);
+						
+						PreparedStatement stmt;
+						try {
+							stmt = myConn.prepareStatement(sqlQuery);
+							java.sql.Timestamp dateSS = Timestamp.valueOf(dateS);
+							stmt.setTimestamp(1, dateSS);
+							stmt.executeUpdate();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+						}
+					
+						System.out.println("My sql Insert success!");
+
+						//					
+					}	
+
+				}
+				semaphore.release();
+				try {
+					sleep(7000);
+				} catch (InterruptedException e) {
+					System.out.println("Erro no sleep");
 				}
 			}
-
-		} catch (ClassNotFoundException e) {
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
+
+
 }

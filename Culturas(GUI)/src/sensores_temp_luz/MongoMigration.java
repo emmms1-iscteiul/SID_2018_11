@@ -1,12 +1,5 @@
 package sensores_temp_luz;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.concurrent.Semaphore;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -20,53 +13,57 @@ import com.mongodb.MongoClientURI;
  * @author Eduardo
  *
  */
-public class MongoMigration extends Thread {
+public class MongoMigration {
 
 
-	Connection myConn;
-	private Semaphore sem;
-	//private int contadorMongo = 0;
+	MongoClient mongoClient;
+	DBCollection collectionGeneric;
+	DBCollection collectionSucess;
+	DB db;
+	//boolean isEmpty;
 
-	public MongoMigration(Semaphore sem) {
-		this.sem=sem;
+	@SuppressWarnings("deprecation")
+	public MongoMigration() {
+		mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
+		db = mongoClient.getDB("Sensores");
+		collectionGeneric = db.getCollection("Medicoes");
+		collectionSucess = db.getCollection("MedicoesExportadas");
+		//isEmpty=true;
 	}
 
 	/**
 	 * Run
+	 * @param document 
 	 */
-	@SuppressWarnings("deprecation")
-	public void run() {
+	public synchronized void insertValuesMongo(BasicDBObject document) {
 
-//		valoresLuminosidade();
-//		valoresTemperatura();
-		try {
-			System.out.println("thread Mongo");
-
-			Class.forName("com.mysql.jdbc.Driver");
-
-			MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
-
-			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/monotorizacao_de_culturas",
-					"root", "root");
-			System.out.println("Connected successfully!");
-
-			DB db = mongoClient.getDB("Sensores");
-			DBCollection table = db.getCollection("Medicoes");
-			
-			try {
-				//table.insert(queue.dequeue());
-				System.out.println("Insert success e removeu da blocking queue.");
-			} catch (Exception e) {
-				System.out.println("fila vazia");
-			}
-
-			
-
-		} catch (ClassNotFoundException e) {
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		try { 
+			collectionGeneric.insert(document);  
+			System.out.println("Insert success.");
+		} catch (Exception e) {}
 	}
+
+
+	public synchronized DBCursor getValuesMongoMedicoes() {
+		return collectionGeneric.find();
+
+	}
+
+	public synchronized void insertValuesMongoSucess(BasicDBObject exportedDocument) {
+		try { 
+			collectionSucess.insert(exportedDocument);  
+			System.out.println("Insert success.");
+		} catch (Exception e) {}
+		
+	}
+
+	public synchronized DBCursor getValuesMongoSuccess() {
+		return collectionSucess.find();
+	}
+	
+//	public void notEmpty()	{
+//		isEmpty=false;
+//	}
+
+
 }
