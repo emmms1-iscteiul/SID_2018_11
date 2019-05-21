@@ -23,7 +23,7 @@ import com.mongodb.BasicDBObject;
 public class PahoReader extends Thread {
 
 	private static final String TOPIC = "/sid_lab_2019";
-	private static final String BROKER = "tcp://iot.eclipse.org";// "tcp://broker.mqtt-dashboard.com:1883";
+	private static final String BROKER = "tcp://iot.eclipse.org:1883";// "tcp://broker.mqtt-dashboard.com:1883";
 	private static final String CLIENTID = "/sid_lab_2019";
 	private static final MemoryPersistence persistence = new MemoryPersistence();
 	private MongoMigration mongoM;
@@ -50,12 +50,23 @@ public class PahoReader extends Thread {
 	 * @param message
 	 * @return
 	 */
+//	public boolean checkNumberOfParameters(MqttMessage message) {
+//		boolean fiveParameters = false;
+//		String messageString = String.valueOf(message);
+//		String[] messageSplitted = messageString.split(",");
+////		System.out.println(messageSplitted.length + " parameters!");
+//		if (messageSplitted.length == 4) {
+//			fiveParameters = true;
+//		}
+//		return fiveParameters;
+//	}
+	
 	public boolean checkNumberOfParameters(MqttMessage message) {
 		boolean fiveParameters = false;
 		String messageString = String.valueOf(message);
 		String[] messageSplitted = messageString.split(",");
 //		System.out.println(messageSplitted.length + " parameters!");
-		if (messageSplitted.length == 4) {
+		if (messageSplitted.length == 5) {
 			fiveParameters = true;
 		}
 		return fiveParameters;
@@ -105,18 +116,18 @@ public class PahoReader extends Thread {
 		}
 		subStringHora = subStringHora.replace(subStringHora.substring(subStringHora.length() - 1), "");
 
-//		String luminosidade = messageSplitted[4];
-//		int indexLum = luminosidade.indexOf(":");
-//		String subStringLum = "";
-//		if (indexLum != -1) {
-//			subStringLum = luminosidade.substring(1, indexLum);
-//		}
-//		subStringLum = subStringLum.replace(subStringLum.substring(subStringLum.length() - 1), "");
-//
-//		if (!subStringTemp.equals("tmp") || !subStringHum.equals("hum") || !subStringData.equals("dat")
-//				|| !subStringHora.equals("tim") /*|| !subStringLum.equals("cell")*/) {
-//			parameterValid = false;
-//		}
+		String luminosidade = messageSplitted[4];
+		int indexLum = luminosidade.indexOf(":");
+		String subStringLum = "";
+		if (indexLum != -1) {
+			subStringLum = luminosidade.substring(1, indexLum);
+		}
+		subStringLum = subStringLum.replace(subStringLum.substring(subStringLum.length() - 1), "");
+
+		if (!subStringTemp.equals("tmp") || !subStringHum.equals("hum") || !subStringData.equals("dat")
+				|| !subStringHora.equals("tim") /*|| !subStringLum.equals("cell")*/) {
+			parameterValid = false;
+		}
 
 //		System.out.println(parameterValid);
 		return parameterValid;
@@ -143,9 +154,30 @@ public class PahoReader extends Thread {
 		if(temperatura.equals("")||temperatura.equals(null))	{
 			valueNull=true;
 		}
-
+		
+//		String luminosidade = messageSplitted[0];
+//		String[] luminosidadeSplitted = luminosidade.split(":");
+//		luminosidade = luminosidadeSplitted[1];
+//		luminosidade = luminosidade.replace(luminosidade.substring(luminosidade.length() - 1), "");
+//		if(luminosidade.equals("")||luminosidade.equals(null))	{
+//			valueNull=true;
+//		}
+//		System.out.println(luminosidade);
+		
+		
+//		String temperatura1 = messageSplitted[1];
+//		String[] temperaturaSplitted = temperatura1.split(":");
+//		temperatura1 = temperaturaSplitted[1];
+//		temperatura1 = temperatura1.substring(1, temperatura1.length()-2);
+//		temperatura1 = temperatura1.replace(temperatura1.substring(temperatura1.length() - 1), "");
+//		if(temperatura1.equals("")||temperatura1.equals(null))	{
+//			valueNull=true;
+//		}
+//		System.out.println(temperatura1);
+		
+		
 		// System.out.println(temperatura);
-
+//
 		String humidade = messageSplitted[1];
 		String[] humidadeSplitted = humidade.split(":");
 		humidade = humidadeSplitted[1];
@@ -156,7 +188,7 @@ public class PahoReader extends Thread {
 		}
 
 
-		// System.out.println(humidade);
+		 System.out.println(humidade);
 
 		String data = messageSplitted[2];
 		String[] dataSplitted = data.split(":");
@@ -165,7 +197,7 @@ public class PahoReader extends Thread {
 		if(data.equals("")||data.equals(null))	{
 			valueNull=true;
 		}
-		// System.out.println(data);
+		 System.out.println(data);
 
 		String tempo = messageSplitted[3];
 		int indexTemp = tempo.length();
@@ -176,20 +208,19 @@ public class PahoReader extends Thread {
 		if(tempo.equals("")||tempo.equals(null))	{
 			valueNull=true;
 		}
-		// System.out.println(tempo);
+		 System.out.println(tempo);
 
-//		String luminosidade = messageSplitted[4];
-//		String[] luminosidadeSplitted = luminosidade.split(":");
-//		luminosidade = luminosidadeSplitted[1];
-//		int indexLum = luminosidade.indexOf("s");
-//		if (indexLum != -1) {
-//			luminosidade = luminosidade.substring(1, indexLum);
-//		}
-//		luminosidade = luminosidade.replace(luminosidade.substring(luminosidade.length() - 1), "");
-//		if(luminosidade.equals("")||luminosidade.equals(null))	{
-//			valueNull=true;
-//		}
-		// System.out.println(luminosidade);
+		String luminosidade = messageSplitted[4];
+		String[] luminosidadeSplitted = luminosidade.split(":");
+		int indexLum = luminosidade.indexOf("s");
+		if (indexLum != -1) {
+			luminosidade = luminosidade.substring(1, indexLum);
+		}
+		luminosidade = luminosidade.replace(luminosidade.substring(luminosidade.length() - 1), "");
+		if(luminosidade.equals("")||luminosidade.equals(null))	{
+			valueNull=true;
+		}
+		 System.out.println(luminosidade);
 
 		String currentData = new SimpleDateFormat("d/M/yyyy").format(Calendar.getInstance().getTime());
 		String currentTime = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
@@ -213,13 +244,12 @@ public class PahoReader extends Thread {
 //		int sensorDataDayint=Integer.parseInt(sensorDataDay);
 //		sensorDataDayint++;
 //		sensorDataDay=String.valueOf(sensorDataDayint);
-		
 
 		int currentDayInt = Integer.parseInt(currentDay);
 		int dataDayInt = Integer.parseInt(sensorDataDay);
 
-//			System.out.println(currentDayInt);
-//			System.out.println(dataDayInt);
+			System.out.println(currentDayInt);
+			System.out.println(dataDayInt);
 
 		int dataIsValid = -1;
 
@@ -245,19 +275,26 @@ public class PahoReader extends Thread {
 		String[] sensorTimeSplitted = tempo.split(":");
 
 		String sensorHour = sensorTimeSplitted[0];
-		sensorHour=sensorHour.substring(1, sensorHour.length());
+	
+		
 		int sensorIncrementedHour=Integer.parseInt(sensorHour);
 		sensorIncrementedHour++;
 		sensorHour=String.valueOf(sensorIncrementedHour);
-		sensorHour="01";
+		System.out.println("hora sensor"+sensorHour);
 	
 
-		System.out.println("Sensor Hour: "+sensorHour);
 		
-		String sensorMinutes = sensorTimeSplitted[1];
+		String sensorMinutes = "";
+		System.out.println(sensorTimeSplitted[1].length());
+		if (sensorTimeSplitted[1].length() == 1) {
+			sensorMinutes = "0" + sensorTimeSplitted[1];
+		}
+		if (sensorTimeSplitted[1].length() == 2) {
+			sensorMinutes = sensorTimeSplitted[1];
+		}
 		System.out.println(sensorMinutes);
 		System.out.println(currentMinutes);
-		
+//		
 
 		if (currentHour.equals(sensorHour)) {
 			hourOK=true;
@@ -326,11 +363,11 @@ public class PahoReader extends Thread {
 								String tempV = "";
 								if (temp[1].length() == 7) {
 									tempV = temp[1].substring(1, 6);
-	//								System.out.println(tempV);
+//									System.out.println(tempV);
 								}
 								if (temp[1].length() == 6) {
 									tempV = temp[1].substring(1, 5);
-		//							System.out.println(tempV);
+//									System.out.println(tempV);
 								}
 								if (temp[1].length() == 8) {
 									tempV = temp[1].substring(1, 7);
@@ -339,70 +376,73 @@ public class PahoReader extends Thread {
 
 								double temperatura = Double.parseDouble(tempV);
 
-//								String cellV = "";
-//								if (stringSplitted[4].length() == 29) {
-//									cellV = stringSplitted[4].substring(8, 13);
-//				//					System.out.println(cellV);
-//								} else if (stringSplitted[4].length() == 28) {
-//									cellV = stringSplitted[4].substring(8, 12);
-//					//				System.out.println(cellV);
-//								} else if (stringSplitted[4].length() == 27) {
-//									cellV = stringSplitted[4].substring(8, 12);
-//						//			System.out.println(cellV);
-//								} else if (stringSplitted[4].length() == 26) {
-//									cellV = stringSplitted[4].substring(8, 11);
-//							//		System.out.println(cellV);
-//								} else if (stringSplitted[4].length() == 25) {
-//									cellV = stringSplitted[4].substring(8, 10);
-//					//				System.out.println(cellV);
-//								}
+								String cellV = "";
+								System.out.println(stringSplitted[4].length());
+								if (stringSplitted[4].length() == 29) {
+									cellV = stringSplitted[4].substring(8, 14);
+									System.out.println(cellV);
+								} else if (stringSplitted[4].length() == 28) {
+									cellV = stringSplitted[4].substring(8, 13);
+									System.out.println(cellV);
+								} else if (stringSplitted[4].length() == 27) {
+									cellV = stringSplitted[4].substring(8, 12);
+									System.out.println(cellV);
+								} else if (stringSplitted[4].length() == 26) {
+									cellV = stringSplitted[4].substring(8, 11);
+									System.out.println(cellV);
+								} else if (stringSplitted[4].length() == 25) {
+									cellV = stringSplitted[4].substring(8, 10);
+									System.out.println(cellV);
+								}
 //
-//								double cell = Double.parseDouble(cellV);
+								double cell = Double.parseDouble(cellV);
 
 								String[] date = stringSplitted[2].split(":");
 				//				System.out.println(date[1]);
 								String dateV = "";
 								if (date[1].length() == 11) {
 									dateV = date[1].substring(1, 10);
-					//				System.out.println(dateV);
+									System.out.println(dateV);
 								}
 								if (date[1].length() == 10) {
 									dateV = date[1].substring(1, 9);
+									System.out.println(dateV);
+
 								}
 								String[] dateF = dateV.split("/");
 								String dateFF = dateF[2] + "-" + dateF[1] + "-" + dateF[0];
 				//				System.out.println(dateFF);
 								
-								String timeV = "";
-								System.out.println(stringSplitted[3].length());
-								if (stringSplitted[3].length() == 29) {
-									timeV = stringSplitted[3].substring(7, 14);
-				//					System.out.println(timeV);
-								}
-								if (stringSplitted[3].length() == 30) {
-									timeV = stringSplitted[3].substring(7, 15);
-				//					System.out.println(timeV);
-								}
-								if (stringSplitted[3].length() == 28) {
-									timeV = stringSplitted[3].substring(7, 13);
-				//					System.out.println(timeV);
-								}
+								String[] timeV = stringSplitted[3].split(":");
+								String time = timeV[1].substring(1, timeV[1].length());
+								System.out.println(time);
+								int hourS = Integer.valueOf(time);
+								hourS++;
+								String hour = String.valueOf(hourS);
+								System.out.println(hour);
+								String minutes = timeV[2];
+								String seconds = timeV[3].substring(0, timeV[3].length()-1);
+								System.out.println(seconds);
 								
-								String data = dateFF + " " + timeV;
+									
+								
+								
+								
+								String data = dateFF + " " + hour + ":" + minutes + ":" + seconds;
 					//			System.out.println(data);
 			
 								BasicDBObject document = new BasicDBObject();
 								document.append("DataHoraMedicao", data);
 								document.append("Temperatura", temperatura);
-								//document.append("Luminosidade", cell);
+								document.append("Luminosidade", cell);
 								
 								mongoM.insertValuesMongo(document);
 								//sleep(1000);
 								semaphore.release();
-							}	
+								
 						}
 					}
-					
+	}
 				}
 
 				@Override

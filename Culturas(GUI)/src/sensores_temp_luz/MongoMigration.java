@@ -24,7 +24,8 @@ public class MongoMigration {
 
 	@SuppressWarnings("deprecation")
 	public MongoMigration() {
-		mongoClient = new MongoClient(new MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
+		mongoClient = new MongoClient(new 
+		MongoClientURI("mongodb://Pedro:27017,Pedro:27018,Pedro:27019/?replicaSet=replicaDemo"));
 		db = mongoClient.getDB("Sensores");
 		collectionGeneric = db.getCollection("Medicoes");
 		collectionSucess = db.getCollection("MedicoesExportadas");
@@ -48,19 +49,24 @@ public class MongoMigration {
 		return collectionGeneric.find();
 
 	}
+	
+	public synchronized void removeValuesMongo(BasicDBObject document) {
+		
+		try { 
+			collectionGeneric.remove(document);  
+			System.out.println("Remove success.");
+		} catch (Exception e) {}
+		
+	}
 
 	public synchronized void insertValuesMongoSucess(BasicDBObject exportedDocument) {
 		try { 
-			collectionSucess.insert(exportedDocument);  
+			collectionSucess.insert(exportedDocument); 
 			System.out.println("Insert success.");
 		} catch (Exception e) {}
 		
 	}
 
-	public synchronized DBCursor getValuesMongoSuccess() {
-		return collectionSucess.find();
-	}
-	
 //	public void notEmpty()	{
 //		isEmpty=false;
 //	}
